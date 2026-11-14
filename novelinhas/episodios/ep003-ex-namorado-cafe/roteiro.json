@@ -1,0 +1,74 @@
+{
+  "titulo": "Ela humilhou o EX-NAMORADO por ser pobre... mas não imaginava quem ele havia se tornado!",
+  "estilo_visual": "cinematic still from a Brazilian TV telenovela, photorealistic, warm golden light, shallow depth of field, 35mm lens, subtle film grain, 16:9",
+  "personagens": {
+    "lucas": {
+      "nome": "Lucas", "genero": "m", "voz": "Achird",
+      "visual": "brazilian man, 32 years old, light brown skin, short dark wavy hair, neat short beard, calm kind eyes, simple beige apron over a white t-shirt"
+    },
+    "vanessa": {
+      "nome": "Vanessa", "genero": "f", "voz": "Kore",
+      "visual": "brazilian woman, 30 years old, fair skin, long straight light brown hair with highlights, designer sunglasses on her head, white silk blouse, gold jewelry, arrogant expression"
+    },
+    "diego": {
+      "nome": "Diego", "genero": "m", "voz": "Algenib",
+      "visual": "brazilian man, 35 years old, fair skin, slicked back black hair, expensive navy blazer over open-collar shirt, gold watch, smug expression"
+    },
+    "marta": {
+      "nome": "Dona Marta", "genero": "f", "voz": "Gacrux",
+      "visual": "brazilian woman, 65 years old, brown skin, short grey curly hair, reading glasses on a chain, flowered blouse, kind face"
+    }
+  },
+  "musica": "slow dramatic telenovela underscore, tense low strings, soft piano, emotional, cinematic, no vocals",
+  "planos": [
+    {"tipo": "acao", "duracao": 3,
+     "imagem": "a shiny black luxury SUV parking in front of a small cozy neighborhood bakery cafe with warm lights, Brazilian street, late afternoon",
+     "movimento": "the black SUV slowly pulls up and stops in front of the cafe, camera static",
+     "sfx": "car engine idling, tires on asphalt, street ambience"},
+    {"tipo": "acao", "duracao": 3, "personagens": ["vanessa", "diego"],
+     "imagem": "wide shot, a rich arrogant couple entering a small simple bakery cafe through a glass door, looking around with disdain",
+     "movimento": "the couple walks in through the door, the woman takes off her sunglasses and looks around disgusted",
+     "sfx": "door bell chime, footsteps, cafe ambience"},
+    {"tipo": "fala", "quem": "vanessa", "tom": "disgusted, mocking laugh",
+     "texto": "Olha só, esse lugar aqui só tem pé-rapado, né?",
+     "personagens": ["vanessa"],
+     "imagem": "medium close-up of the arrogant woman inside a simple cafe, wrinkling her nose with disgust, warm light"},
+    {"tipo": "fala", "quem": "diego", "tom": "smug, laughing",
+     "texto": "Amor, foi você que quis parar aqui. Eu falei pra gente ir no shopping.",
+     "personagens": ["diego"],
+     "imagem": "medium close-up of the smug man in a navy blazer inside a simple cafe, smirking, warm light"},
+    {"tipo": "acao", "duracao": 3, "personagens": ["lucas"],
+     "imagem": "behind the counter of a cozy bakery cafe, a calm man in a beige apron drying a coffee cup, espresso machine behind him",
+     "movimento": "the man stops drying the cup and slowly looks up towards the door",
+     "sfx": "cup and cloth, espresso machine hiss, quiet cafe ambience"},
+    {"tipo": "fala", "quem": "vanessa", "tom": "surprised, then mocking",
+     "texto": "Não acredito. Lucas? Você ainda tá aqui servindo café?",
+     "personagens": ["vanessa"],
+     "imagem": "close-up of the arrogant woman recognizing someone, eyebrows raised, mocking half smile, cafe background blurred"},
+    {"tipo": "fala", "quem": "lucas", "tom": "calm, polite",
+     "texto": "Oi, Vanessa. Quanto tempo. O que vocês vão querer?",
+     "personagens": ["lucas"],
+     "imagem": "close-up of the calm man in a beige apron behind the cafe counter, serene polite expression, warm light"},
+    {"tipo": "fala", "quem": "diego", "tom": "mocking, condescending",
+     "texto": "Então esse é o ex que você largou? Fez bem, amor. Olha o avental dele.",
+     "personagens": ["diego"],
+     "imagem": "close-up of the smug man pointing with his chin, laughing condescendingly, cafe background blurred"},
+    {"tipo": "fala", "quem": "vanessa", "tom": "cruel laugh",
+     "texto": "Eu te falei. Ele nunca ia passar de balconista.",
+     "personagens": ["vanessa"], "pico": true,
+     "imagem": "close-up of the arrogant woman laughing cruelly, hand on her chest, gold jewelry, warm light"},
+    {"tipo": "acao", "duracao": 3, "personagens": ["marta"],
+     "imagem": "an older woman with grey curly hair sitting at a small cafe table with a cup of coffee, watching the scene with a disapproving frown",
+     "movimento": "the older woman slowly lowers her coffee cup and shakes her head in disapproval",
+     "sfx": "cup on saucer, quiet cafe ambience"},
+    {"tipo": "acao", "duracao": 4, "personagens": ["lucas"], "pico": true,
+     "imagem": "close-up of the calm man in a beige apron looking down at his smartphone on the counter, the screen glowing, a subtle knowing smile",
+     "movimento": "the man glances at a message on his phone, then looks up with a subtle confident smile",
+     "sfx": "phone vibration, quiet cafe ambience"}
+  ],
+  "card_final": {"duracao": 8},
+  "youtube": {
+    "titulos": ["Ela humilhou o EX-NAMORADO por ser pobre... mas não imaginava quem ele havia se tornado!"],
+    "thumbnail": "a calm man in a beige apron with his head down behind a cafe counter, an arrogant rich woman pointing at him and laughing, her smug husband laughing beside her, dramatic contrast, cinematic"
+  }
+}

@@ -155,18 +155,22 @@ def runware(tarefa, campo, opts):
     tarefa = {**tarefa, "taskUUID": tid, "deliveryMethod": "async", "includeCost": True}
 
     def chamar(corpo):
-        for tentativa in range(5):
+        for tentativa in range(60):
             try:
                 r = requests.post(url, headers=cab, json=corpo, timeout=60)
                 j = r.json()
                 if r.status_code < 300 and not j.get("errors"):
                     return j
+                codigos = {e.get("code") for e in j.get("errors", [])}
+                if "concurrentRequestLimitExceeded" in codigos:  # crédito reservado por pedidos em andamento
+                    time.sleep(20)
+                    continue
                 if r.status_code in (400, 401, 402, 403):
                     erro(f"Runware {r.status_code}: {json.dumps(j.get('errors', j), ensure_ascii=False)[:500]}")
             except (requests.RequestException, ValueError):
                 pass
-            time.sleep(2 ** tentativa)
-        erro("Runware não respondeu depois de 5 tentativas")
+            time.sleep(min(30, 2 ** tentativa))
+        erro("Runware não respondeu depois de várias tentativas")
 
     for envio in range(2):  # se ficar preso na fila, reenvia uma vez
         chamar([tarefa])
