@@ -19,16 +19,37 @@
     },
     "elevenlabs": {
       "modelo": "eleven_multilingual_v2",
-      "ajustes": {"stability": 0.45, "similarity_boost": 0.8, "style": 0.3},
+      "ajustes": {
+        "stability": 0.45,
+        "similarity_boost": 0.8,
+        "style": 0.3
+      },
       "vozes": {
         "narrador": "COLOQUE_O_VOICE_ID_AQUI"
       }
     }
   },
   "imagens": {
-    "provedor": "replicate",
-    "replicate": {"modelo": "black-forest-labs/flux-schnell"},
-    "openai": {"modelo": "gpt-image-1", "qualidade": "medium"}
+    "provedor": "runware",
+    "runware": {
+      "modelo": "runware:100@1",
+      "tamanho_horizontal": [
+        1344,
+        768
+      ],
+      "tamanho_vertical": [
+        768,
+        1344
+      ],
+      "espera_maxima_s": 300
+    },
+    "replicate": {
+      "modelo": "black-forest-labs/flux-schnell"
+    },
+    "openai": {
+      "modelo": "gpt-image-1",
+      "qualidade": "medium"
+    }
   },
   "legendas": {
     "queimar": true,

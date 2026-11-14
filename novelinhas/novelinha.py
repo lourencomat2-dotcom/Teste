@@ -245,6 +245,55 @@ def img_replicate(prompt, destino, w, h, cfg):
     destino.write_bytes(requests.get(url, timeout=120).content)
 
 
+def img_runware(prompt, destino, w, h, cfg):
+    """Runware (runware.ai): modo assíncrono — envia a tarefa e consulta até ficar pronta."""
+    import uuid
+    import requests
+    # Na nuvem do Claude a chave é injetada pelo proxy; no seu computador, defina RUNWARE_API_KEY.
+    chave = os.environ.get("RUNWARE_API_KEY", "proxy-injected")
+    opts = cfg["imagens"]["runware"]
+    cab = {"Authorization": f"Bearer {chave}"}
+    url = "https://api.runware.ai/v1"
+    largura, altura = (opts.get("tamanho_vertical", [768, 1344]) if h > w
+                       else opts.get("tamanho_horizontal", [1344, 768]))
+    tid = str(uuid.uuid4())
+    tarefa = {"taskType": "imageInference", "taskUUID": tid, "positivePrompt": prompt,
+              "model": opts.get("modelo", "runware:100@1"), "width": largura, "height": altura,
+              "numberResults": 1, "outputType": "base64Data", "outputFormat": "PNG",
+              "includeCost": True, "deliveryMethod": "async"}
+    tarefa.update(opts.get("extras", {}))
+
+    def chamar(corpo):
+        for tentativa in range(4):
+            try:
+                r = requests.post(url, headers=cab, json=corpo, timeout=60)
+                j = r.json()
+                if r.status_code < 300 and not j.get("errors"):
+                    return j
+                if r.status_code in (400, 401, 402, 403):
+                    erro(f"Runware {r.status_code}: {json.dumps(j.get('errors', j))[:400]}")
+            except (requests.RequestException, ValueError):
+                pass
+            time.sleep(2 ** tentativa)
+        erro("Runware não respondeu depois de 4 tentativas")
+
+    chamar([tarefa])
+    limite = time.time() + opts.get("espera_maxima_s", 300)
+    while time.time() < limite:
+        time.sleep(2)
+        j = chamar([{"taskType": "getResponse", "taskUUID": tid}])
+        item = next((d for d in j.get("data", []) if d.get("taskUUID") == tid), {})
+        if item.get("imageBase64Data"):
+            destino.write_bytes(base64.b64decode(item["imageBase64Data"]))
+            if item.get("cost") is not None:
+                log(f"  custo: US$ {item['cost']}")
+            return
+        if item.get("status") in ("error", "failed"):
+            erro(f"Runware falhou: {json.dumps(item)[:400]}")
+    erro(f"Runware: a imagem não ficou pronta em {opts.get('espera_maxima_s', 300)} s "
+         "(conta de teste sem saldo costuma ficar presa na fila)")
+
+
 def img_provisoria(prompt, destino, w, h, cfg, numero=0):
     """Imagem escura com o prompt escrito — para testar ritmo e montagem sem gastar."""
     from PIL import Image, ImageDraw
@@ -262,7 +311,7 @@ def img_provisoria(prompt, destino, w, h, cfg, numero=0):
     img.save(destino)
 
 
-IMAGENS = {"openai": img_openai, "replicate": img_replicate, "provisoria": img_provisoria}
+IMAGENS = {"openai": img_openai, "replicate": img_replicate, "runware": img_runware, "provisoria": img_provisoria}
 
 
 def gerar_imagens(roteiro, cfg, pasta, w, h):
