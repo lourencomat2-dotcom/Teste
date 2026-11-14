@@ -69,6 +69,7 @@ Para trocar uma imagem gerada: o usuário coloca `imagens/cena_005.png` na pasta
 
 - **Cena = 1 a 3 frases** (≈ 5–12 s de fala). Imagem nova a cada cena mantém retenção. Longo de 10 min ≈ 80–120 cenas.
 - **Prompts de imagem em inglês**, descritivos, sem texto na imagem, sem nomes de pessoas reais, marcas ou logos.
+- **Áudio sempre em português do Brasil, sem sotaque estrangeiro.** Só use vozes pt-BR nativas (Edge: `pt-BR-AntonioNeural`, `pt-BR-FranciscaNeural`, `pt-BR-ThalitaMultilingualNeural`; ElevenLabs: só vozes marcadas como Portuguese (Brazil)). Nunca escolha uma voz em inglês ou de Portugal para um personagem.
 - Narração escrita para ouvir: frases curtas, números por extenso quando soarem melhor, sem emojis, sem parênteses, sem abreviações.
 - Histórias **fictícias e originais**. Nada de pessoas reais, empresas reais, nem "baseado em fatos reais" se não for.
 - Humilhação pode ser dura, mas sem violência gráfica, sem conteúdo sexual e sem atacar grupos (raça, religião, deficiência etc.) — o vilão é arrogante por status/dinheiro. Isso protege a monetização.
