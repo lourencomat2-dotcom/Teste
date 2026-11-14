@@ -31,10 +31,13 @@ CFG = {
     "fala": {"modelo": "klingai:avatar@2.0-standard", "espera_maxima_s": 900},
     "sfx": {"modelo": "mirelo:1@1", "espera_maxima_s": 300, "volume": 0.55},
     "musica": {"modelo": "minimax:music@2.6", "espera_maxima_s": 600, "volume": 0.20, "volume_pico": 0.42},
-    "tts": {"runware": {"modelo": "google:gemini@3.1-flash-tts", "idioma": "pt-BR", "usar_tom": True,
+    "tts": {"runware": {"modelo": "google:gemini@3.1-flash-tts", "idioma": "pt-BR", "usar_tom": False,
                         "espera_maxima_s": 240}},
     "paralelo": 4,
     "folga_fala": 0.25,
+    "velocidade_fala": 1.08,   # acelera levemente a voz (ritmo de novela)
+    # estimativas para o limite de gasto (US$)
+    "estimativa": {"imagem": 0.03, "voz": 0.02, "fala_s": 0.06, "acao_s": 0.06, "sfx": 0.03, "musica": 0.2},
 }
 
 
@@ -100,7 +103,34 @@ def prompt_plano(rot, plano, extra=""):
 
 # --------------------------------------------------------------------------- produção
 
-def produzir(caminho, ate=None, so_quadros=False):
+class Orcamento:
+    def __init__(self, limite):
+        import threading
+        self.limite, self.gasto, self.reservado = limite, 0.0, 0.0
+        self.trava = threading.Lock()
+
+    def reservar(self, valor, oque):
+        with self.trava:
+            if self.limite is not None and self.gasto + self.reservado + valor > self.limite + 1e-9:
+                nv.erro(f"limite de US$ {self.limite:.2f} atingido antes de '{oque}' "
+                        f"(gasto {self.gasto:.2f} + em andamento {self.reservado:.2f} + estimado {valor:.2f})")
+            self.reservado += valor
+
+    def pagar(self, estimado, real):
+        with self.trava:
+            self.reservado -= estimado
+            self.gasto += real if real is not None else estimado
+
+
+def processar_voz(bruto, destino, velocidade):
+    """Corta silêncio do começo/fim e acelera um pouco, sem mudar o tom."""
+    nv.rodar(["ffmpeg", "-v", "error", "-y", "-i", str(bruto), "-af",
+              "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.05,"
+              "areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.08,areverse,"
+              f"atempo={velocidade},aresample=48000", "-c:a", "libmp3lame", "-q:a", "2", str(destino)])
+
+
+def produzir(caminho, ate=None, so_quadros=False, limite=None):
     caminho = Path(caminho).resolve()
     rot = json.loads(caminho.read_text(encoding="utf-8"))
     pasta = caminho.parent
@@ -110,9 +140,21 @@ def produzir(caminho, ate=None, so_quadros=False):
     cache_up_arq = pasta / "uploads.json"
     cache_up = json.loads(cache_up_arq.read_text()) if cache_up_arq.exists() else {}
     custos = {}
+    orc = Orcamento(limite)
+    est = CFG["estimativa"]
 
     def soma(etapa, valor):
         custos[etapa] = custos.get(etapa, 0) + (valor or 0)
+
+    def pago(etapa, estimado, funcao):
+        """Reserva a estimativa no orçamento, roda, e registra o custo real."""
+        orc.reservar(estimado, etapa)
+        real = None
+        try:
+            real = funcao()
+        finally:
+            orc.pagar(estimado, real)
+        soma(etapa, real if real is not None else estimado)
 
     # 1) foto de referência de cada personagem que aparece
     usados = sorted({p for pl in planos for p in pl.get("personagens", [])} |
@@ -125,22 +167,36 @@ def produzir(caminho, ate=None, so_quadros=False):
         arq = pasta / "refs" / f"{p}_{nv.h8(prompt)}.png"
         if not arq.exists():
             pend.append((prompt, arq))
-    nv.paralelo(lambda it: soma("referências", gerar_imagem(it[0], it[1], None, 1024, 1280)), pend,
+    nv.paralelo(lambda it: pago("referências", est["imagem"],
+                                lambda: gerar_imagem(it[0], it[1], None, 1024, 1280)), pend,
                 CFG["paralelo"], "referência")
     ref_arq = {p: next((pasta / "refs").glob(f"{p}_*.png")) for p in usados}
     ref_uuid = {p: subir_imagem(a, cache_up) for p, a in ref_arq.items()}
 
-    # 2) quadro inicial de cada plano (com as referências dos personagens em cena)
-    quadros, pend = [], []
-    for i, pl in enumerate(planos, 1):
-        prompt = prompt_plano(rot, pl)
-        refs = [ref_uuid[p] for p in pl.get("personagens", [])]
-        arq = pasta / "quadros" / f"q{i:03d}_{nv.h8(prompt, *refs)}.png"
-        quadros.append(arq)
-        if not arq.exists():
-            pend.append((prompt, arq, refs))
-    nv.paralelo(lambda it: soma("quadros", gerar_imagem(it[0], it[1], it[2], W, H)), pend,
-                CFG["paralelo"], "quadro")
+    # 2) quadro inicial de cada plano: referências dos personagens + (opcional) o quadro de outro
+    #    plano do mesmo cenário ("continuidade": [n]) para manter mesa, posição, roupa e objetos
+    quadros = [None] * len(planos)
+    feitos = set()
+    restantes = list(range(1, len(planos) + 1))
+    while restantes:
+        nivel = [i for i in restantes
+                 if all(d in feitos for d in planos[i - 1].get("continuidade", []) if d <= len(planos))]
+        if not nivel:
+            nv.erro("dependência circular em 'continuidade'")
+        pend = []
+        for i in nivel:
+            pl = planos[i - 1]
+            prompt = prompt_plano(rot, pl)
+            refs = [ref_uuid[p] for p in pl.get("personagens", [])]
+            refs += [subir_imagem(quadros[d - 1], cache_up) for d in pl.get("continuidade", [])]
+            arq = pasta / "quadros" / f"q{i:03d}_{nv.h8(prompt, *refs)}.png"
+            quadros[i - 1] = arq
+            if not arq.exists():
+                pend.append((prompt, arq, refs))
+        nv.paralelo(lambda it: pago("quadros", est["imagem"], lambda: gerar_imagem(it[0], it[1], it[2], W, H)),
+                    pend, CFG["paralelo"], "quadro")
+        feitos |= set(nivel)
+        restantes = [i for i in restantes if i not in feitos]
 
     # 3) vozes
     falas, pend = {}, []
@@ -148,16 +204,18 @@ def produzir(caminho, ate=None, so_quadros=False):
         if pl["tipo"] != "fala":
             continue
         voz = rot["personagens"][pl["quem"]]["voz"]
-        arq = pasta / "audio" / f"f{i:03d}_{nv.h8(pl['texto'], voz, pl.get('tom'))}.mp3"
+        tom = pl.get("tom") if CFG["tts"]["runware"]["usar_tom"] else None
+        arq = pasta / "audio" / f"f{i:03d}_{nv.h8(pl['texto'], voz, tom, CFG['velocidade_fala'])}.mp3"
         falas[i] = arq
         if not arq.exists():
             pend.append((pl, voz, arq))
 
     def gera_voz(it):
         pl, voz, arq = it
-        tmp = arq.with_suffix(".tmp.mp3")
-        nv.tts_runware(pl["texto"], voz, tmp, CFG, tom=pl.get("tom"))
-        tmp.rename(arq)
+        bruto = arq.with_suffix(".bruto.mp3")
+        tom = pl.get("tom") if CFG["tts"]["runware"]["usar_tom"] else None
+        pago("vozes", est["voz"], lambda: nv.tts_runware(pl["texto"], voz, bruto, CFG, tom=tom))
+        processar_voz(bruto, arq, CFG["velocidade_fala"])
     nv.paralelo(gera_voz, pend, CFG["paralelo"], "voz")
 
     cache_up_arq.write_text(json.dumps(cache_up))
@@ -186,7 +244,9 @@ def produzir(caminho, ate=None, so_quadros=False):
             o = CFG["fala"]
             gesto = pl.get("gesto", "")
             tarefa = {"taskType": "videoInference", "model": o["modelo"],
-                      "positivePrompt": f"{pl['imagem']}. The person speaks with emotion: {pl.get('tom', '')}. {gesto}"[:1400],
+                      "positivePrompt": (f"{pl['imagem']}. The person speaks naturally with emotion: "
+                                         f"{pl.get('tom', '')}. Keep the same eye-line, clothes and objects. "
+                                         f"{gesto}")[:1400],
                       "inputs": {"image": img, "audio": data_uri(falas[i], "audio/mpeg")},
                       "outputType": "URL", "outputFormat": "MP4"}
         else:
@@ -197,10 +257,16 @@ def produzir(caminho, ate=None, so_quadros=False):
                                         f"realistic natural motion, no talking, no text"[:2900],
                       "inputs": {"frameImages": [{"image": img, "frame": "first"}]},
                       "duration": dur, "outputType": "URL", "outputFormat": "MP4"}
-        item = nv.runware(tarefa, "videoURL", o)
-        soma("vídeo " + pl["tipo"], item.get("cost"))
-        baixar(item["videoURL"], arq)
-        (arq.with_suffix(".url")).write_text(item["videoURL"])
+        segundos = nv.duracao(falas[i]) + 1.5 if pl["tipo"] == "fala" else dur
+        estimado = segundos * (est["fala_s"] if pl["tipo"] == "fala" else est["acao_s"])
+        res = {}
+
+        def chama():
+            res["item"] = nv.runware(tarefa, "videoURL", o)
+            return res["item"].get("cost")
+        pago("vídeo " + pl["tipo"], estimado, chama)
+        baixar(res["item"]["videoURL"], arq)
+        (arq.with_suffix(".url")).write_text(res["item"]["videoURL"])
     nv.paralelo(gera_video, pend, CFG.get("paralelo_video", 2), "vídeo")
 
     # 5) efeitos sonoros dos planos de ação
@@ -215,12 +281,21 @@ def produzir(caminho, ate=None, so_quadros=False):
     def gera_sfx(it):
         i, pl, arq = it
         o = CFG["sfx"]
-        url = videos[i].with_suffix(".url").read_text().strip()
-        item = nv.runware({"taskType": "audioInference", "model": o["modelo"], "positivePrompt": pl["sfx"],
-                           "inputs": {"video": url},
-                           "outputType": "URL", "outputFormat": "mp4"}, "videoURL", o)
-        soma("efeitos", item.get("cost"))
-        baixar(item.get("audioURL") or item.get("videoURL"), arq)
+        u = videos[i].with_suffix(".url")
+        if u.exists():
+            entrada = {"inputs": {"video": u.read_text().strip()}, "outputFormat": "mp4"}
+            campo = "videoURL"
+        else:  # sem link do vídeo: gera o som só pela descrição, com a duração do plano
+            entrada = {"duration": max(1, min(10, math.ceil(pl.get("duracao", 3)))), "outputFormat": "MP3"}
+            campo = "audioURL"
+        res = {}
+
+        def chama():
+            res["item"] = nv.runware({"taskType": "audioInference", "model": o["modelo"], "positivePrompt": pl["sfx"],
+                                      "outputType": "URL", **entrada}, campo, o)
+            return res["item"].get("cost")
+        pago("efeitos", est["sfx"], chama)
+        baixar(res["item"].get("audioURL") or res["item"].get("videoURL"), arq)
     nv.paralelo(gera_sfx, pend, CFG["paralelo"], "efeito")
 
     # 6) trilha
@@ -228,11 +303,15 @@ def produzir(caminho, ate=None, so_quadros=False):
     if not musica.exists() and rot.get("musica"):
         nv.log("gerando trilha...")
         o = CFG["musica"]
-        item = nv.runware({"taskType": "audioInference", "model": o["modelo"], "positivePrompt": rot["musica"],
-                           "settings": {"instrumental": True},
-                           "outputType": "URL", "outputFormat": "MP3"}, "audioURL", o)
-        soma("trilha", item.get("cost"))
-        baixar(item["audioURL"], musica)
+        res = {}
+
+        def chama():
+            res["item"] = nv.runware({"taskType": "audioInference", "model": o["modelo"],
+                                      "positivePrompt": rot["musica"], "settings": {"instrumental": True},
+                                      "outputType": "URL", "outputFormat": "MP3"}, "audioURL", o)
+            return res["item"].get("cost")
+        pago("trilha", est["musica"], chama)
+        baixar(res["item"]["audioURL"], musica)
 
     (pasta / "custos.json").write_text(json.dumps(custos, indent=1, ensure_ascii=False))
     montar(rot, planos, pasta, quadros, videos, falas, sfx, musica if musica.exists() else None)
@@ -369,8 +448,9 @@ def main():
     p.add_argument("roteiro")
     p.add_argument("--ate", type=int, default=None, help="só os N primeiros planos (teste)")
     p.add_argument("--so-quadros", action="store_true", help="para antes de gerar os vídeos (conferir imagens)")
+    p.add_argument("--limite", type=float, default=None, help="gasto máximo em US$ nesta rodada")
     a = ap.parse_args()
-    produzir(a.roteiro, a.ate, a.so_quadros)
+    produzir(a.roteiro, a.ate, a.so_quadros, a.limite)
 
 
 if __name__ == "__main__":
