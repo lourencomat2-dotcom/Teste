@@ -242,6 +242,21 @@ def tts_mudo(texto, voz, destino, cfg, tom=None):
 TTS = {"runware": tts_runware, "edge": tts_edge, "elevenlabs": tts_elevenlabs, "mudo": tts_mudo}
 
 
+def paralelo(funcao, itens, n, rotulo):
+    """Roda funcao(item) em até n tarefas ao mesmo tempo (APIs lentas por fila)."""
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    if not itens:
+        return
+    log(f"gerando {len(itens)} {rotulo}(s), {n} por vez...")
+    feitos = 0
+    with ThreadPoolExecutor(max_workers=max(1, n)) as ex:
+        for fut in as_completed([ex.submit(funcao, it) for it in itens]):
+            fut.result()
+            feitos += 1
+            if feitos % 10 == 0 or feitos == len(itens):
+                log(f"  {rotulo}: {feitos}/{len(itens)}")
+
+
 def voz_de(quem, roteiro, cfg, prov):
     """Voz de um personagem: personagens[quem].voz (texto ou {provedor: voz}) >
     roteiro.vozes[provedor][quem] > config tts.<provedor>.vozes[quem] > narrador."""
@@ -271,17 +286,34 @@ def gerar_vozes(roteiro, cfg, pasta):
     (pasta / "audio").mkdir(exist_ok=True)
     resultado = []
     total = len(roteiro["cenas"])
+
+    def arquivo_fala(i, k, f):
+        voz = voz_de(f["quem"], roteiro, cfg, prov)
+        return voz, pasta / "audio" / f"fala_{i:03d}_{k}_{prov}_{h8(f['texto'].strip(), voz, f['tom'], ajustes)}.mp3"
+
+    # 1) gera em paralelo todas as falas que ainda não existem
+    pendentes = []
+    for i, c in enumerate(roteiro["cenas"], 1):
+        for k, f in enumerate(falas_da_cena(c), 1):
+            voz, arq = arquivo_fala(i, k, f)
+            if not arq.exists() or arq.stat().st_size == 0:
+                pendentes.append((i, f, voz, arq))
+
+    def gerar(item):
+        i, f, voz, arq = item
+        tmp = arq.with_suffix(".tmp.mp3")
+        TTS[prov](f["texto"].strip(), voz, tmp, cfg, tom=f["tom"])
+        tmp.rename(arq)
+        return i, f["quem"], voz
+
+    paralelo(gerar, pendentes, cfg["tts"].get("paralelo", 6), "voz")
+
+    # 2) monta o áudio de cada cena
     for i, c in enumerate(roteiro["cenas"], 1):
         arquivos_falas, tempos_falas, t = [], [], 0.0
         for k, f in enumerate(falas_da_cena(c), 1):
-            voz = voz_de(f["quem"], roteiro, cfg, prov)
+            voz, arq = arquivo_fala(i, k, f)
             texto = f["texto"].strip()
-            arq = pasta / "audio" / f"fala_{i:03d}_{k}_{prov}_{h8(texto, voz, f['tom'], ajustes)}.mp3"
-            if not arq.exists() or arq.stat().st_size == 0:
-                log(f"voz cena {i}/{total}: {f['quem']} ({voz})")
-                tmp = arq.with_suffix(".tmp.mp3")
-                TTS[prov](texto, voz, tmp, cfg, tom=f["tom"])
-                tmp.rename(arq)
             d = duracao(arq)
             arquivos_falas.append(arq)
             tempos_falas.append((t, d, f["quem"], texto))
@@ -395,7 +427,7 @@ IMAGENS = {"openai": img_openai, "replicate": img_replicate, "runware": img_runw
 def gerar_imagens(roteiro, cfg, pasta, w, h):
     prov = cfg["imagens"]["provedor"]
     (pasta / "imagens").mkdir(exist_ok=True)
-    arquivos = []
+    arquivos, pendentes = [], []
     for i, c in enumerate(roteiro["cenas"], 1):
         # imagem manual tem prioridade: imagens/cena_005.png (ou .jpg)
         manual = next((pasta / "imagens" / f"cena_{i:03d}{ext}" for ext in (".png", ".jpg", ".jpeg")
@@ -410,11 +442,16 @@ def gerar_imagens(roteiro, cfg, pasta, w, h):
         prompt = montar_prompt(roteiro, c)
         destino = pasta / "imagens" / f"gerada_{i:03d}_{prov}_{h8(prompt, w > h)}.png"
         if not destino.exists():
-            log(f"imagem cena {i}/{len(roteiro['cenas'])}")
-            tmp = destino.with_suffix(".tmp.png")
-            IMAGENS[prov](prompt, tmp, w, h, cfg)
-            tmp.rename(destino)
+            pendentes.append((prompt, destino))
         arquivos.append(destino)
+
+    def gerar(item):
+        prompt, destino = item
+        tmp = destino.with_suffix(".tmp.png")
+        IMAGENS[prov](prompt, tmp, w, h, cfg)
+        tmp.rename(destino)
+
+    paralelo(gerar, pendentes, cfg["imagens"].get("paralelo", 6), "imagem")
     return arquivos
 
 
