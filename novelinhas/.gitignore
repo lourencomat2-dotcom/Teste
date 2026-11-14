@@ -3,4 +3,5 @@ episodios/*/audio/
 episodios/*/imagens/gerada_*
 episodios/*/clipes/
 episodios/*/legendas.ass
-episodios/*/saida/*.mp4
+episodios/*/saida/
+episodios/*/juntado.mp4
