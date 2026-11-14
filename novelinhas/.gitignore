@@ -13,3 +13,4 @@ episodios/*/sfx/
 episodios/*/segmentos/
 episodios/*/uploads.json
 __pycache__/
+episodios/*/custos.json
