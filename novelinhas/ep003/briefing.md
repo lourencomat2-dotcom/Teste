@@ -115,3 +115,51 @@ Som de abertura: ambiente de café (burburinho baixo, máquina de espresso ao lo
 | **Subtotal** | | **≈ 2,01** |
 | Reserva para novas tentativas (teto) | | 0,60 |
 | **Máximo possível** | | **≈ 2,61** (limite rígido na ferramenta: 3,00) |
+
+---
+
+# v4 — o que muda (aprovado pelo Lucas: limite = saldo atual do Runware, US$ 7,58, sem recarga)
+
+Fichas, mapa, eixo, objetos e roteiro dos planos ficam **iguais aos da v3** (as referências e as imagens-mestras da v3 passaram na checagem e são **reaproveitadas sem custo**). Mudam os modelos, a voz e as checagens:
+
+| Item | v3 | **v4** |
+|---|---|---|
+| Fala (sincronia labial) | Kling Avatar 2.0 Standard | **OmniHuman 1.5** (ByteDance), modelo especializado em pessoa falando com sincronia labial e expressão (o Kling Avatar 2.0 Pro foi descartado: exige saldo mínimo de US$ 12,69) |
+| Plano de ação | Wan 2.6 Flash | **Kling 2.6 Pro** (imagem → vídeo, 5 s, sem áudio nativo), cortado na duração do plano |
+| Voz | Gemini 3.1 TTS sem emoção | **MiniMax Speech 2.8** com **parâmetro de emoção** (não vai no texto, então não é lido em voz alta), reforço de idioma `pt` |
+| Checagem de rosto | 3 quadros; qualquer "sem rosto" reprova | **5 quadros**: reprova se um rosto detectado passa do limiar **ou** se o rosto aparece em menos de 3 dos 5 quadros (cabeça virada não reprova sozinha) |
+| Texto inventado na imagem | não checado | revisão visual dos quadros da checagem antes de publicar (não há OCR disponível no ambiente) |
+
+## Vozes e emoção por fala
+
+| Personagem | Voz MiniMax |
+|---|---|
+| Vanessa | `Portuguese_Pompouslady` |
+| Diego | `Portuguese_ToughBoss` |
+| Lucas | `Portuguese_ReliableMan` |
+
+| Plano | Fala | Emoção |
+|---|---|---|
+| 2 | VANESSA: "Olha só, esse lugar aqui só tem pé-rapado, né?" | `disgusted` |
+| 4 | LUCAS: "Boa tarde. O que vocês vão querer?" | `calm` |
+| 5 | VANESSA: "Lucas? Não acredito." → "Você ainda tá servindo mesa? Eu te falei, amor. Ele nunca ia passar disso." | `surprised` → `disgusted` |
+| 6 | DIEGO: "Então esse é o ex? Olha o avental dele." | `happy` (deboche) |
+
+Risco declarado: o MiniMax só tem reforço "pt" (não distingue pt-BR de pt-PT). Eu não consigo ouvir o áudio; o sotaque precisa ser confirmado de ouvido pelo Lucas.
+
+## Correção da v3
+- Plano 3: o prompt passa a exigir que **o casal levante o olhar para o garçom** ao fim do plano (na v3 o Diego continuou lendo o cardápio).
+
+## Custo estimado v4
+| Item | US$ |
+|---|---|
+| Falas OmniHuman 1.5 (~16 s de fala, ~US$ 0,16/s) | ~2,60 |
+| Ação Kling 2.6 Pro (3 × 5 s × ~US$ 0,07) | ~1,05 |
+| Vozes MiniMax (5 trechos) | ~0,15 |
+| Efeitos | ~0,09 |
+| Referências/mestras | 0 (reaproveitadas) |
+| **Base** | **~3,90–4,30** |
+| Pior caso com 1 nova tentativa por plano | ~6,50 |
+| **Limite rígido na ferramenta** | **7,00** (o saldo é 7,58) |
+
+Regra de parada: depois do primeiro plano de fala, o custo real por segundo é medido; se a projeção do total passar de US$ 7,00, a produção para e avisa.
