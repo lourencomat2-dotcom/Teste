@@ -1,0 +1,221 @@
+1
+00:00:00,170 --> 00:00:02,380
+O ChatGPT não sabe nada. Sério.
+
+2
+00:00:02,390 --> 00:00:04,390
+Ele só é muito, muito bom em chutar.
+
+3
+00:00:04,848 --> 00:00:08,478
+Sabe quando você digita "bom"
+no celular e ele sugere "dia"?
+
+4
+00:00:08,488 --> 00:00:12,460
+Pois é. O ChatGPT é isso,
+só que tomou um banho de esteroides.
+
+5
+00:00:12,470 --> 00:00:14,660
+Ele olha tudo que você escreveu e pensa:
+
+6
+00:00:14,670 --> 00:00:17,000
+qual é a próxima palavra mais provável aqui?
+
+7
+00:00:17,010 --> 00:00:19,980
+Escolhe uma. Depois a próxima. Depois a próxima.
+
+8
+00:00:19,990 --> 00:00:22,870
+Palavra por palavra,
+até virar uma resposta inteira.
+
+9
+00:00:22,880 --> 00:00:26,450
+É por isso que o texto aparece aos pouquinhos,
+como se alguém estivesse digitando.
+
+10
+00:00:26,826 --> 00:00:28,356
+Mas como ele chuta tão bem?
+
+11
+00:00:28,366 --> 00:00:30,276
+Leitura. Muita leitura.
+
+12
+00:00:30,286 --> 00:00:33,656
+Imagina alguém que leu uma quantidade absurda
+de texto da internet:
+
+13
+00:00:33,666 --> 00:00:38,466
+livros, sites, fóruns,
+receita de bolo, briga de comentário.
+
+14
+00:00:38,476 --> 00:00:42,866
+Lendo tudo isso, ele foi pegando o jeito
+de como as palavras costumam andar juntas.
+
+15
+00:00:42,876 --> 00:00:46,426
+Depois de "era uma vez",
+ele já reconhece que aquilo é uma história.
+
+16
+00:00:46,436 --> 00:00:50,386
+E depois de "pré-aqueça o forno",
+ele já reconhece que aquilo é uma receita.
+
+17
+00:00:50,396 --> 00:00:52,716
+Ninguém ensinou regra de gramática pra ele.
+
+18
+00:00:52,726 --> 00:00:55,276
+Ele só viu tanto exemplo que aprendeu o padrão.
+
+19
+00:00:55,694 --> 00:00:56,824
+Detalhe curioso:
+
+20
+00:00:56,834 --> 00:00:58,264
+ele nem lê como a gente.
+
+21
+00:00:58,274 --> 00:01:01,234
+Ele corta o texto em pedacinhos,
+tipo picar legume,
+
+22
+00:01:01,244 --> 00:01:03,174
+e transforma cada pedaço em número.
+
+23
+00:01:03,184 --> 00:01:05,924
+Pra ele, sua pergunta é uma fileira de números.
+
+24
+00:01:05,934 --> 00:01:07,704
+É matemática do começo ao fim.
+
+25
+00:01:08,136 --> 00:01:11,726
+E tem um truque:
+ele não olha todas as palavras com o mesmo peso.
+
+26
+00:01:11,736 --> 00:01:16,216
+Se você escreve "o cachorro do meu vizinho
+latiu a noite toda e ele está rouco",
+
+27
+00:01:16,226 --> 00:01:19,176
+ele sacou que "ele" é o cachorro, não o vizinho.
+
+28
+00:01:19,186 --> 00:01:22,646
+Ele liga as palavras que combinam,
+mesmo longe uma da outra.
+
+29
+00:01:22,656 --> 00:01:26,546
+Esse truque é o que fez
+essas inteligências artificiais ficarem tão boas.
+
+30
+00:01:26,978 --> 00:01:28,288
+E onde isso acontece?
+
+31
+00:01:28,298 --> 00:01:29,508
+Não é no seu celular.
+
+32
+00:01:29,518 --> 00:01:33,978
+Sua pergunta viaja pela internet
+até um computador gigante bem longe daqui,
+
+33
+00:01:33,988 --> 00:01:36,490
+e a resposta volta pra você em segundos.
+
+34
+00:01:36,500 --> 00:01:38,550
+Sabe a tal "nuvem"? É só isso:
+
+35
+00:01:38,560 --> 00:01:40,440
+o computador de outra pessoa.
+
+36
+00:01:40,802 --> 00:01:42,452
+E aqui está o pulo do gato.
+
+37
+00:01:42,462 --> 00:01:45,152
+Como ele só chuta
+a próxima palavra mais provável,
+
+38
+00:01:45,162 --> 00:01:47,782
+às vezes o chute soa perfeito e está errado.
+
+39
+00:01:47,792 --> 00:01:49,582
+É o amigo que nunca diz "não sei":
+
+40
+00:01:49,592 --> 00:01:53,022
+responde tudo com a maior confiança,
+até quando está inventando.
+
+41
+00:01:53,032 --> 00:01:56,732
+Por isso ele pode citar um livro
+que não existe com a cara mais lavada do mundo.
+
+42
+00:01:57,137 --> 00:02:00,587
+Resumindo: ele lê muito,
+pica o texto em números,
+
+43
+00:02:00,597 --> 00:02:03,757
+presta atenção no que importa
+e chuta a próxima palavra,
+
+44
+00:02:03,767 --> 00:02:06,417
+uma por vez, nesse computador de outra pessoa.
+
+45
+00:02:06,427 --> 00:02:08,337
+Não é mágica e não é um cérebro.
+
+46
+00:02:08,347 --> 00:02:09,807
+É um chutador profissional.
+
+47
+00:02:09,817 --> 00:02:12,507
+Então usa à vontade, mas confere o que importa.
+
+48
+00:02:12,883 --> 00:02:14,903
+Curtiu descobrir o que tem por dentro?
+
+49
+00:02:14,913 --> 00:02:17,393
+Então deixa o like e se inscreve no FazSense,
+
+50
+00:02:17,403 --> 00:02:20,823
+que o próximo vídeo vai te deixar desconfiado
+do seu próprio celular.
+
