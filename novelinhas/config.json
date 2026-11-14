@@ -3,10 +3,23 @@
     "formato": "horizontal",
     "fps": 30,
     "pausa_entre_cenas": 0.35,
-    "intensidade_movimento": 0.12
+    "intensidade_movimento": 0.12,
+    "escala_zoom": 1.5
   },
   "tts": {
-    "provedor": "edge",
+    "provedor": "runware",
+    "intervalo_entre_falas": 0.3,
+    "runware": {
+      "modelo": "google:gemini@3.1-flash-tts",
+      "idioma": "pt-BR",
+      "usar_tom": true,
+      "espera_maxima_s": 240,
+      "vozes": {
+        "narrador": "Charon",
+        "homem": "Orus",
+        "mulher": "Kore"
+      }
+    },
     "edge": {
       "velocidade": "+8%",
       "tom": "+0Hz",
@@ -59,7 +72,8 @@
     "palavras_por_linha_vertical": 3,
     "palavras_por_linha_horizontal": 7,
     "tamanho_vertical": 0.045,
-    "tamanho_horizontal": 0.055
+    "tamanho_horizontal": 0.055,
+    "mostrar_nome": true
   },
   "musica": {
     "arquivo": null,

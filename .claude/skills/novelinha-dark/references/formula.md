@@ -1,10 +1,12 @@
 # Fórmula da novelinha de vingança
 
+> Formato: **novela dublada** — sem narrador. Onde a tabela fala em "mostrar" ou "contar", faça por falas dos personagens; use `tela` só para tempo, segredo, gancho e moral.
+
 ## Estrutura (vídeo longo, ~10 min)
 
 | % do vídeo | Bloco | O que acontece |
 |---|---|---|
-| 0–3% | **Gancho** | Começa no pior momento ou já promete o final: "Ela riu da roupa dele. Duas horas depois, estava implorando pelo emprego." Nunca comece com apresentação. |
+| 0–3% | **Gancho** | Começa no pior momento, com a fala mais cruel do vilão, + uma `tela` prometendo a virada ("Ela não fazia ideia de quem era aquela mulher."). Depois `tela`: "Seis meses antes". Nunca comece com apresentação. |
 | 3–12% | **Quem é o herói** | Mostra a vida simples/disfarçada e por que ele está ali (testar a empresa, visitar incógnito, cobrir alguém, voltar ao bairro). Uma pista discreta da identidade real. |
 | 12–40% | **Escalada da humilhação** | 3 humilhações crescentes, cada uma pior e mais pública. Uma pessoa boa (aliada) trata o herói bem — ela será recompensada. |
 | 40–50% | **Ponto sem volta** | O vilão passa do limite (expulsa, acusa de roubo, rasga algo, chama segurança). Plateia rindo. |
@@ -14,10 +16,11 @@
 
 **Short (60 s):** gancho (1 frase) → 1 humilhação → revelação → reação → frase final. Ou série: cada parte termina num gancho ("…e foi aí que o telefone tocou. Parte 2 no meu perfil.").
 
-## Ganchos de retenção a cada ~60–90 s
+## Ganchos de retenção a cada ~60–90 s (em `tela`)
 - "Mas o que ela não sabia…" / "E isso ainda não era o pior."
 - Pergunta direta ao público: "O que você faria no lugar dele?"
-- Promessa adiantada: "Guarda o nome desse gerente, porque daqui a pouco…"
+- Promessa adiantada: "Guarda o nome desse gerente."
+- Ou numa fala: um personagem que sussurra um segredo ("Fala baixo! Ninguém pode saber.").
 
 ## Combinações para variar (sorteie e não repita o histórico)
 

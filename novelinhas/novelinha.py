@@ -109,28 +109,93 @@ def validar(roteiro):
     if fmt not in FORMATOS:
         problemas.append(f"formato '{fmt}' inválido (use vertical ou horizontal)")
     personagens = roteiro.get("personagens", {})
-    # papéis de voz: os do config.json + os definidos no roteiro (por provedor)
+    # papéis de voz: personagens + os do config.json + os definidos em "vozes" no roteiro
     cfg = json.loads((AQUI / "config.json").read_text(encoding="utf-8"))
-    vozes = {"narrador"}
+    vozes = {"narrador"} | set(personagens)
     for mapa in list(cfg["tts"].values()) + list(roteiro.get("vozes", {}).values()):
         if isinstance(mapa, dict):
             vozes |= set(mapa.get("vozes", mapa) if "vozes" in mapa else mapa)
     for i, c in enumerate(roteiro.get("cenas", []), 1):
-        if not c.get("narracao", "").strip():
-            problemas.append(f"cena {i}: narração vazia")
-        if not c.get("imagem", "").strip():
+        if not falas_da_cena(c) and not c.get("tela", "").strip():
+            problemas.append(f"cena {i}: precisa de 'falas', 'narracao' ou 'tela'")
+        if not c.get("imagem", "").strip() and not c.get("repetir_imagem"):
             problemas.append(f"cena {i}: sem prompt de imagem")
         for p in c.get("personagens", []):
             if p not in personagens:
                 problemas.append(f"cena {i}: personagem '{p}' não está em 'personagens'")
-        if c.get("voz", "narrador") not in vozes:
-            problemas.append(f"cena {i}: voz '{c.get('voz')}' não está em 'vozes'")
+        for f in falas_da_cena(c):
+            if f["quem"] not in vozes:
+                problemas.append(f"cena {i}: '{f['quem']}' não é personagem nem voz conhecida")
+            if not f["texto"].strip():
+                problemas.append(f"cena {i}: fala vazia de '{f['quem']}'")
     return problemas
+
+
+def falas_da_cena(c):
+    """Formato novo: "falas": [{"quem": "vila", "texto": "...", "tom": "irônica"}].
+    Formato antigo (narrador): "narracao" + "voz" opcional — vira uma fala só."""
+    if c.get("falas"):
+        return [{"quem": f.get("quem", "narrador"), "texto": f.get("texto", ""), "tom": f.get("tom")}
+                for f in c["falas"]]
+    if c.get("narracao", "").strip():
+        return [{"quem": c.get("voz", "narrador"), "texto": c["narracao"], "tom": c.get("tom")}]
+    return []
 
 
 # --------------------------------------------------------------------------- voz
 
-def tts_edge(texto, voz, destino, cfg):
+def runware(tarefa, campo, opts):
+    """Envia uma tarefa ao Runware em modo assíncrono e espera o resultado (campo base64)."""
+    import uuid
+    import requests
+    # Na nuvem do Claude a chave é injetada pelo proxy; no seu computador, defina RUNWARE_API_KEY.
+    cab = {"Authorization": f"Bearer {os.environ.get('RUNWARE_API_KEY', 'proxy-injected')}"}
+    url = "https://api.runware.ai/v1"
+    tid = str(uuid.uuid4())
+    tarefa = {**tarefa, "taskUUID": tid, "deliveryMethod": "async", "includeCost": True}
+
+    def chamar(corpo):
+        for tentativa in range(5):
+            try:
+                r = requests.post(url, headers=cab, json=corpo, timeout=60)
+                j = r.json()
+                if r.status_code < 300 and not j.get("errors"):
+                    return j
+                if r.status_code in (400, 401, 402, 403):
+                    erro(f"Runware {r.status_code}: {json.dumps(j.get('errors', j), ensure_ascii=False)[:500]}")
+            except (requests.RequestException, ValueError):
+                pass
+            time.sleep(2 ** tentativa)
+        erro("Runware não respondeu depois de 5 tentativas")
+
+    for envio in range(2):  # se ficar preso na fila, reenvia uma vez
+        chamar([tarefa])
+        limite = time.time() + opts.get("espera_maxima_s", 240)
+        while time.time() < limite:
+            time.sleep(2)
+            j = chamar([{"taskType": "getResponse", "taskUUID": tid}])
+            item = next((d for d in j.get("data", []) if d.get("taskUUID") == tid), {})
+            if item.get(campo):
+                return item
+            if item.get("status") in ("error", "failed"):
+                erro(f"Runware falhou: {json.dumps(item, ensure_ascii=False)[:400]}")
+        tid = str(uuid.uuid4())
+        tarefa["taskUUID"] = tid
+    erro("Runware: o resultado não ficou pronto (verifique o saldo em my.runware.ai/wallet — "
+         "o mínimo é US$ 0,20)")
+
+
+def tts_runware(texto, voz, destino, cfg, tom=None):
+    opts = cfg["tts"]["runware"]
+    if tom and opts.get("usar_tom", True):
+        texto = f"[{tom}] {texto}"
+    item = runware({"taskType": "audioInference", "model": opts.get("modelo", "google:gemini@3.1-flash-tts"),
+                    "speech": {"text": texto, "voice": voz, "language": opts.get("idioma", "pt-BR")},
+                    "outputType": "base64Data", "outputFormat": "MP3"}, "audioBase64Data", opts)
+    destino.write_bytes(base64.b64decode(item["audioBase64Data"]))
+
+
+def tts_edge(texto, voz, destino, cfg, tom=None):
     try:
         import edge_tts
     except ImportError:
@@ -152,7 +217,7 @@ def tts_edge(texto, voz, destino, cfg):
             time.sleep(2 ** tentativa)
 
 
-def tts_elevenlabs(texto, voz, destino, cfg):
+def tts_elevenlabs(texto, voz, destino, cfg, tom=None):
     import requests
     chave = os.environ.get("ELEVENLABS_API_KEY") or erro("defina ELEVENLABS_API_KEY")
     opts = cfg["tts"]["elevenlabs"]
@@ -167,34 +232,84 @@ def tts_elevenlabs(texto, voz, destino, cfg):
     destino.write_bytes(r.content)
 
 
-def tts_mudo(texto, voz, destino, cfg):
+def tts_mudo(texto, voz, destino, cfg, tom=None):
     """Sem voz: silêncio com a duração aproximada da leitura (≈15 caracteres/s). Só para testar."""
     seg = max(1.5, len(texto) / 15)
     rodar(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
            "-t", f"{seg:.2f}", "-c:a", "libmp3lame", "-q:a", "4", str(destino)])
 
 
-TTS = {"edge": tts_edge, "elevenlabs": tts_elevenlabs, "mudo": tts_mudo}
+TTS = {"runware": tts_runware, "edge": tts_edge, "elevenlabs": tts_elevenlabs, "mudo": tts_mudo}
+
+
+def voz_de(quem, roteiro, cfg, prov):
+    """Voz de um personagem: personagens[quem].voz (texto ou {provedor: voz}) >
+    roteiro.vozes[provedor][quem] > config tts.<provedor>.vozes[quem] > narrador."""
+    info = roteiro.get("personagens", {}).get(quem, {})
+    v = info.get("voz")
+    if isinstance(v, dict):
+        v = v.get(prov)
+    if v:
+        return v
+    vozes = mesclar(cfg["tts"].get(prov, {}).get("vozes", {}), roteiro.get("vozes", {}).get(prov, {}))
+    if quem in vozes:
+        return vozes[quem]
+    genero = info.get("genero", "")
+    if genero.startswith("f") and "mulher" in vozes:
+        return vozes["mulher"]
+    if genero.startswith("m") and "homem" in vozes:
+        return vozes["homem"]
+    return vozes.get("narrador", "")
 
 
 def gerar_vozes(roteiro, cfg, pasta):
+    """Para cada cena: um áudio com as falas em sequência + o tempo de cada fala (para as legendas).
+    Cena só com texto na tela vira silêncio com tempo de leitura."""
     prov = cfg["tts"]["provedor"]
-    vozes_cfg = cfg["tts"][prov].get("vozes", {}) if prov in cfg["tts"] else {}
-    vozes = mesclar(vozes_cfg, roteiro.get("vozes", {}).get(prov, {}))
+    ajustes = json.dumps(cfg["tts"].get(prov, {}), sort_keys=True)
+    intervalo = float(cfg["tts"].get("intervalo_entre_falas", 0.3))
     (pasta / "audio").mkdir(exist_ok=True)
-    arquivos = []
+    resultado = []
+    total = len(roteiro["cenas"])
     for i, c in enumerate(roteiro["cenas"], 1):
-        papel = c.get("voz", "narrador")
-        voz = vozes.get(papel) or vozes.get("narrador", "")
-        texto = c["narracao"].strip()
-        destino = pasta / "audio" / f"cena_{i:03d}_{prov}_{h8(texto, voz, json.dumps(cfg['tts'].get(prov, {}), sort_keys=True))}.mp3"
-        if not destino.exists() or destino.stat().st_size == 0:
-            log(f"voz cena {i}/{len(roteiro['cenas'])} ({papel})")
-            tmp = destino.with_suffix(".tmp.mp3")
-            TTS[prov](texto, voz, tmp, cfg)
-            tmp.rename(destino)
-        arquivos.append(destino)
-    return arquivos
+        arquivos_falas, tempos_falas, t = [], [], 0.0
+        for k, f in enumerate(falas_da_cena(c), 1):
+            voz = voz_de(f["quem"], roteiro, cfg, prov)
+            texto = f["texto"].strip()
+            arq = pasta / "audio" / f"fala_{i:03d}_{k}_{prov}_{h8(texto, voz, f['tom'], ajustes)}.mp3"
+            if not arq.exists() or arq.stat().st_size == 0:
+                log(f"voz cena {i}/{total}: {f['quem']} ({voz})")
+                tmp = arq.with_suffix(".tmp.mp3")
+                TTS[prov](texto, voz, tmp, cfg, tom=f["tom"])
+                tmp.rename(arq)
+            d = duracao(arq)
+            arquivos_falas.append(arq)
+            tempos_falas.append((t, d, f["quem"], texto))
+            t += d + intervalo
+        if arquivos_falas:
+            t -= intervalo
+        tela = c.get("tela", "").strip()
+        if tela:  # garante tempo para ler o texto da tela
+            t = max(t, float(c.get("tempo_tela", max(2.5, len(tela) / 14))))
+
+        destino = pasta / "audio" / f"cena_{i:03d}_{h8(*[a.name for a in arquivos_falas], round(t, 2))}.wav"
+        if not destino.exists():
+            if arquivos_falas:
+                entradas, filtros = [], []
+                for n, a in enumerate(arquivos_falas):
+                    entradas += ["-i", str(a)]
+                    pad = intervalo if n < len(arquivos_falas) - 1 else 0
+                    filtros.append(f"[{n}:a]aresample=48000,aformat=channel_layouts=stereo,"
+                                   f"apad=pad_dur={pad}[f{n}]")
+                junta = "".join(f"[f{n}]" for n in range(len(arquivos_falas)))
+                filtro = ";".join(filtros) + f";{junta}concat=n={len(arquivos_falas)}:v=0:a=1,apad[a]"
+                rodar(["ffmpeg", "-v", "error", "-y", *entradas, "-filter_complex", filtro,
+                       "-map", "[a]", "-t", f"{t:.3f}", "-c:a", "pcm_s16le", str(destino)])
+            else:
+                rodar(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
+                       "-t", f"{t:.3f}", "-c:a", "pcm_s16le", str(destino)])
+        resultado.append((destino, tempos_falas))
+    return resultado
 
 
 # --------------------------------------------------------------------------- imagens
@@ -246,52 +361,15 @@ def img_replicate(prompt, destino, w, h, cfg):
 
 
 def img_runware(prompt, destino, w, h, cfg):
-    """Runware (runware.ai): modo assíncrono — envia a tarefa e consulta até ficar pronta."""
-    import uuid
-    import requests
-    # Na nuvem do Claude a chave é injetada pelo proxy; no seu computador, defina RUNWARE_API_KEY.
-    chave = os.environ.get("RUNWARE_API_KEY", "proxy-injected")
     opts = cfg["imagens"]["runware"]
-    cab = {"Authorization": f"Bearer {chave}"}
-    url = "https://api.runware.ai/v1"
     largura, altura = (opts.get("tamanho_vertical", [768, 1344]) if h > w
                        else opts.get("tamanho_horizontal", [1344, 768]))
-    tid = str(uuid.uuid4())
-    tarefa = {"taskType": "imageInference", "taskUUID": tid, "positivePrompt": prompt,
+    tarefa = {"taskType": "imageInference", "positivePrompt": prompt,
               "model": opts.get("modelo", "runware:100@1"), "width": largura, "height": altura,
               "numberResults": 1, "outputType": "base64Data", "outputFormat": "PNG",
-              "includeCost": True, "deliveryMethod": "async"}
-    tarefa.update(opts.get("extras", {}))
-
-    def chamar(corpo):
-        for tentativa in range(4):
-            try:
-                r = requests.post(url, headers=cab, json=corpo, timeout=60)
-                j = r.json()
-                if r.status_code < 300 and not j.get("errors"):
-                    return j
-                if r.status_code in (400, 401, 402, 403):
-                    erro(f"Runware {r.status_code}: {json.dumps(j.get('errors', j))[:400]}")
-            except (requests.RequestException, ValueError):
-                pass
-            time.sleep(2 ** tentativa)
-        erro("Runware não respondeu depois de 4 tentativas")
-
-    chamar([tarefa])
-    limite = time.time() + opts.get("espera_maxima_s", 300)
-    while time.time() < limite:
-        time.sleep(2)
-        j = chamar([{"taskType": "getResponse", "taskUUID": tid}])
-        item = next((d for d in j.get("data", []) if d.get("taskUUID") == tid), {})
-        if item.get("imageBase64Data"):
-            destino.write_bytes(base64.b64decode(item["imageBase64Data"]))
-            if item.get("cost") is not None:
-                log(f"  custo: US$ {item['cost']}")
-            return
-        if item.get("status") in ("error", "failed"):
-            erro(f"Runware falhou: {json.dumps(item)[:400]}")
-    erro(f"Runware: a imagem não ficou pronta em {opts.get('espera_maxima_s', 300)} s "
-         "(conta de teste sem saldo costuma ficar presa na fila)")
+              **opts.get("extras", {})}
+    item = runware(tarefa, "imageBase64Data", opts)
+    destino.write_bytes(base64.b64decode(item["imageBase64Data"]))
 
 
 def img_provisoria(prompt, destino, w, h, cfg, numero=0):
@@ -345,7 +423,7 @@ def gerar_imagens(roteiro, cfg, pasta, w, h):
 MOVIMENTOS = ["zoom_in", "zoom_out", "pan_direita", "pan_esquerda", "zoom_in", "pan_cima"]
 
 
-def clipe_cena(img, audio, destino, w, h, fps, pausa, movimento, intensidade):
+def clipe_cena(img, audio, destino, w, h, fps, pausa, movimento, intensidade, escala=1.5):
     dur_audio = duracao(audio)
     dur = dur_audio + pausa
     frames = max(2, math.ceil(dur * fps))
@@ -357,7 +435,8 @@ def clipe_cena(img, audio, destino, w, h, fps, pausa, movimento, intensidade):
         "pan_esquerda": (f"1+{z}", f"(iw-iw/zoom)*(1-on/{frames})", "ih/2-(ih/zoom/2)"),
         "pan_cima":     (f"1+{z}", "iw/2-(iw/zoom/2)", f"(ih-ih/zoom)*(1-on/{frames})"),
     }[movimento]
-    W2, H2 = w * 2, h * 2  # escala maior antes do zoompan evita tremedeira
+    # escala maior antes do zoompan evita tremedeira (2.0 = mais suave, 1.5 = ~2x mais rápido)
+    W2, H2 = int(w * escala) // 2 * 2, int(h * escala) // 2 * 2
     vf = (f"scale={W2}:{H2}:force_original_aspect_ratio=increase,crop={W2}:{H2},"
           f"zoompan=z='{expr[0]}':x='{expr[1]}':y='{expr[2]}':d={frames}:s={w}x{h}:fps={fps},"
           f"setsar=1,format=yuv420p")
@@ -398,25 +477,46 @@ def ts_ass(s):
     return f"{cs // 360000}:{cs // 6000 % 60:02d}:{cs // 100 % 60:02d}.{cs % 100:02d}"
 
 
+def ass_cor(rgb_hex):
+    """'#FFD400' -> '&H0000D4FF' (ASS usa BGR)."""
+    r, g, b = rgb_hex.lstrip("#")[0:2], rgb_hex.lstrip("#")[2:4], rgb_hex.lstrip("#")[4:6]
+    return f"&H00{b}{g}{r}".upper()
+
+
 def gerar_legendas(roteiro, tempos, pasta, w, h, cfg):
+    """tempos: por cena, (inicio, duracao_total, [(offset, dur, quem, texto), ...])."""
     lc = cfg["legendas"]
     max_p = lc["palavras_por_linha_vertical"] if h > w else lc["palavras_por_linha_horizontal"]
-    itens = []
-    for cena, (inicio, dur_audio) in zip(roteiro["cenas"], tempos):
-        partes = frases(cena["narracao"], max_p)
-        total = sum(len(p) + 3 for p in partes)
-        t = inicio
-        for p in partes:
-            d = dur_audio * (len(p) + 3) / total
-            itens.append((t, t + d, p))
-            t += d
+    personagens = roteiro.get("personagens", {})
+    falas, telas = [], []
+    for cena, (inicio, dur_cena, tempos_falas) in zip(roteiro["cenas"], tempos):
+        if cena.get("tela", "").strip():
+            telas.append((inicio, inicio + dur_cena, cena["tela"].strip()))
+        for off, dur, quem, texto in tempos_falas:
+            partes = frases(texto, max_p)
+            total = sum(len(p) + 3 for p in partes)
+            t = inicio + off
+            for p in partes:
+                d = dur * (len(p) + 3) / total
+                falas.append((t, t + d, quem, p))
+                t += d
 
-    srt = "\n".join(f"{n}\n{ts_srt(a)} --> {ts_srt(b)}\n{txt}\n" for n, (a, b, txt) in enumerate(itens, 1))
+    def nome(quem):
+        if quem == "narrador" or not lc.get("mostrar_nome", True):
+            return ""
+        return personagens.get(quem, {}).get("nome", quem)
+
+    srt_itens = [(a, b, f"{nome(q)}: {txt}" if nome(q) else txt) for a, b, q, txt in falas]
+    srt_itens += [(a, b, f"[{txt}]") for a, b, txt in telas]
+    srt_itens.sort()
+    srt = "\n".join(f"{n}\n{ts_srt(a)} --> {ts_srt(b)}\n{txt}\n" for n, (a, b, txt) in enumerate(srt_itens, 1))
     (pasta / "saida").mkdir(exist_ok=True)
     (pasta / "saida" / "legendas.srt").write_text(srt, encoding="utf-8")
 
     tam = int(h * (lc["tamanho_vertical"] if h > w else lc["tamanho_horizontal"]))
+    tam_tela = int(tam * 1.25)
     margem = int(h * (0.30 if h > w else 0.07))
+    contorno = max(3, tam // 12)
     ass = [
         "[Script Info]", "ScriptType: v4.00+", f"PlayResX: {w}", f"PlayResY: {h}", "WrapStyle: 0", "",
         "[V4+ Styles]",
@@ -424,12 +524,22 @@ def gerar_legendas(roteiro, tempos, pasta, w, h, cfg):
         "Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, "
         "Alignment, MarginL, MarginR, MarginV, Encoding",
         f"Style: Padrao,{lc['fonte']},{tam},{lc['cor']},&H000000FF,&H00000000,&H80000000,"
-        f"-1,0,0,0,100,100,0,0,1,{max(3, tam // 12)},2,2,{int(w * 0.08)},{int(w * 0.08)},{margem},1",
+        f"-1,0,0,0,100,100,0,0,1,{contorno},2,2,{int(w * 0.08)},{int(w * 0.08)},{margem},1",
+        f"Style: Tela,{lc['fonte']},{tam_tela},&H00FFFFFF,&H000000FF,&H00000000,&HA0000000,"
+        f"-1,0,0,0,100,100,0,0,3,{int(tam * 0.5)},0,5,{int(w * 0.1)},{int(w * 0.1)},0,1",
         "", "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",
     ]
-    for a, b, txt in itens:
-        t = txt.upper() if lc.get("maiusculas") else txt
-        ass.append(f"Dialogue: 0,{ts_ass(a)},{ts_ass(b)},Padrao,,0,0,0,,{{\\fad(60,0)}}{t}")
+    up = (lambda x: x.upper()) if lc.get("maiusculas") else (lambda x: x)
+    for a, b, txt in telas:
+        ass.append(f"Dialogue: 1,{ts_ass(a)},{ts_ass(b)},Tela,,0,0,0,,{{\\fad(250,250)}}{up(txt)}")
+    for a, b, quem, txt in falas:
+        n = nome(quem)
+        cor = personagens.get(quem, {}).get("cor_legenda")
+        rotulo = ""
+        if n:
+            rotulo = (f"{{\\fs{int(tam * 0.7)}\\c{ass_cor(cor) if cor else '&H00FFFFFF'}}}"
+                      f"{up(n)}\\N{{\\r}}")
+        ass.append(f"Dialogue: 0,{ts_ass(a)},{ts_ass(b)},Padrao,,0,0,0,,{{\\fad(60,0)}}{rotulo}{up(txt)}")
     (pasta / "legendas.ass").write_text("\n".join(ass) + "\n", encoding="utf-8")
 
 
@@ -520,20 +630,20 @@ def produzir(caminho, teste=False):
     tempos, lista, t = [], [], 0.0
     capitulos = []
     rnd = random.Random(roteiro["titulo"])
-    for i, (c, img, aud) in enumerate(zip(roteiro["cenas"], imagens, audios), 1):
+    escala = cfg["video"].get("escala_zoom", 1.5)
+    for i, (c, img, (aud, tempos_falas)) in enumerate(zip(roteiro["cenas"], imagens, audios), 1):
         mov = c.get("movimento") or rnd.choice(MOVIMENTOS)
         pausa = float(c.get("pausa", cfg["video"]["pausa_entre_cenas"]))
-        destino = pasta / "clipes" / f"clipe_{i:03d}_{h8(img.name, aud.name, mov, pausa, w, fps)}.mp4"
+        destino = pasta / "clipes" / f"clipe_{i:03d}_{h8(img.name, aud.name, mov, pausa, w, fps, escala)}.mp4"
         if destino.exists():
-            dur_audio = duracao(aud)
             dur = duracao(destino)
         else:
             log(f"montando cena {i}/{len(roteiro['cenas'])} ({mov})")
-            dur_audio, dur = clipe_cena(img, aud, destino, w, h, fps, pausa, mov,
-                                        cfg["video"]["intensidade_movimento"])
+            _, dur = clipe_cena(img, aud, destino, w, h, fps, pausa, mov,
+                                cfg["video"]["intensidade_movimento"], escala)
         if c.get("capitulo"):
             capitulos.append((t, c["capitulo"]))
-        tempos.append((t, dur_audio))
+        tempos.append((t, dur, tempos_falas))
         lista.append(destino)
         t += dur
 
@@ -598,8 +708,12 @@ def main():
         probs = validar(r)
         if probs:
             erro("roteiro inválido:\n  - " + "\n  - ".join(probs))
-        palavras = sum(len(c["narracao"].split()) for c in r["cenas"])
-        log(f"ok — {len(r['cenas'])} cenas, {palavras} palavras (~{palavras / 150:.1f} min de narração)")
+        palavras = sum(len(f["texto"].split()) for c in r["cenas"] for f in falas_da_cena(c))
+        n_falas = sum(len(falas_da_cena(c)) for c in r["cenas"])
+        tela = sum(max(2.5, len(c.get("tela", "")) / 14) for c in r["cenas"] if c.get("tela"))
+        quem = sorted({f["quem"] for c in r["cenas"] for f in falas_da_cena(c)})
+        log(f"ok — {len(r['cenas'])} cenas, {n_falas} falas, {palavras} palavras "
+            f"(~{(palavras / 150) + tela / 60:.1f} min); vozes: {', '.join(quem)}")
     else:
         produzir(a.roteiro, teste=a.teste)
 
