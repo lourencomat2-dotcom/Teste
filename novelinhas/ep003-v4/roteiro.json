@@ -1,0 +1,164 @@
+{
+  "titulo": "Ela humilhou o EX-NAMORADO por ser pobre... mas não imaginava quem ele havia se tornado!",
+  "estilo_visual": "cinematic still from a Brazilian TV telenovela, photorealistic, shallow depth of field, subtle film grain, natural skin texture",
+  "cenario": "small cozy Brazilian neighborhood cafe, cream walls and warm wood, a small round wooden table right against the large front window, late afternoon around 5pm, the ONLY light source is warm golden sunlight coming through the front window behind the characters as soft backlight, gentle warm fill from the camera side, blurred street outside, small potted plants on the windowsill, no other people",
+  "personagens": {
+    "vanessa": {
+      "nome": "Vanessa",
+      "voz": "Kore",
+      "seed": 31001,
+      "fixo": "same woman: fair skin, light brown hair in a sleek low ponytail with a center part, long-sleeve white silk blouse buttoned up, one thin gold necklace, no earrings, no sunglasses, no bag, no watch",
+      "visual": "brazilian woman, 30 years old, fair skin, brown eyes, oval face, thin eyebrows, nude lipstick, light brown straight hair in a sleek low ponytail with a center part, long-sleeve white silk blouse buttoned up, one thin gold necklace, no earrings",
+      "voz_tts": "Portuguese_Pompouslady"
+    },
+    "diego": {
+      "nome": "Diego",
+      "voz": "Algenib",
+      "seed": 31002,
+      "fixo": "same man: fair skin, clean-shaven, black hair slicked back, navy blue blazer over a plain white open-collar shirt, no tie, no watch, no jewelry",
+      "visual": "brazilian man, 35 years old, fair skin, clean-shaven, strong jaw, black hair slicked back with gel, navy blue blazer over a plain white open-collar shirt, no tie, no watch",
+      "voz_tts": "Portuguese_ToughBoss"
+    },
+    "lucas": {
+      "nome": "Lucas",
+      "voz": "Charon",
+      "seed": 31003,
+      "fixo": "same man: light brown skin, short dark wavy hair, short neat beard, plain white crew-neck t-shirt, beige apron, small paper notepad in left hand and pen in right hand, no phone",
+      "visual": "brazilian man, 32 years old, light brown skin, short dark wavy neat hair, short trimmed beard, calm eyes, plain white crew-neck t-shirt, beige apron tied at neck and waist",
+      "voz_tts": "Portuguese_ReliableMan"
+    }
+  },
+  "musica": "slow dramatic telenovela underscore, tense low strings, soft piano, emotional, cinematic, no vocals",
+  "planos": [
+    {
+      "tipo": "acao",
+      "duracao": 4,
+      "personagens": [
+        "vanessa",
+        "diego"
+      ],
+      "seed": 32001,
+      "ordem_rostos": [
+        "vanessa",
+        "diego"
+      ],
+      "imagem": "MASTER wide frontal shot, 35mm lens: the couple seated side by side at the small round table against the front window, facing the camera; the woman on the LEFT of the frame, the man on the RIGHT; on the table only two closed paper menus, nothing else; the man holds one menu",
+      "movimento": "the woman slowly looks around the cafe with disdain and then turns her head to the man on her right; the man calmly leafs through the menu; nobody stands up; camera static",
+      "sfx": "quiet empty cafe ambience, distant espresso machine hiss, soft clinking far away"
+    },
+    {
+      "tipo": "fala",
+      "quem": "vanessa",
+      "personagens": [
+        "vanessa"
+      ],
+      "seed": 32002,
+      "ref_cenario": 1,
+      "texto": "Olha só, esse lugar aqui só tem pé-rapado, né?",
+      "imagem": "close-up, 50mm lens, only the woman in frame, seated at the table, the front window and windowsill plants softly blurred behind her, she looks toward the right of the frame with a disgusted, mocking expression, mouth clearly visible",
+      "emocao": "disgusted"
+    },
+    {
+      "tipo": "acao",
+      "duracao": 5,
+      "personagens": [
+        "vanessa",
+        "diego"
+      ],
+      "primeiro_quadro_de": 1,
+      "ordem_rostos": [
+        "vanessa",
+        "diego"
+      ],
+      "imagem": "same master wide frontal shot",
+      "movimento": "a waiter enters from the RIGHT edge of the frame and stops standing at the right side of the table next to the seated man; only his torso is visible: white t-shirt, beige apron, hands holding a small paper notepad and a pen; his head and face stay OUT OF FRAME above the top edge; both seated people stop what they are doing and clearly LOOK UP at him: the man lowers his menu and raises his eyes to the waiter, the woman turns her face up toward the waiter; the couple stay seated in exactly the same places and poses; camera static",
+      "sfx": "footsteps on a wooden floor approaching and stopping, quiet cafe ambience"
+    },
+    {
+      "tipo": "fala",
+      "quem": "lucas",
+      "personagens": [
+        "lucas"
+      ],
+      "seed": 32004,
+      "ref_cenario": 1,
+      "texto": "Boa tarde. O que vocês vão querer?",
+      "imagem": "close-up, 50mm lens, only the waiter in frame, standing, seen in three-quarter view facing the LEFT of the frame and looking slightly down toward the seated couple out of frame, holding a small notepad and pen at chest height, the front window and windowsill plants softly blurred behind him, polite calm expression, mouth clearly visible",
+      "espelhar": true,
+      "emocao": "calm"
+    },
+    {
+      "tipo": "fala",
+      "quem": "vanessa",
+      "personagens": [
+        "vanessa"
+      ],
+      "seed": 32005,
+      "ref_cenario": 1,
+      "pico": true,
+      "texto": "Lucas? Não acredito. Você ainda tá servindo mesa? Eu te falei, amor. Ele nunca ia passar disso.",
+      "imagem": "close-up, 50mm lens, only the woman in frame, seated at the table, looking UP and to the RIGHT of the frame at someone standing, surprised then mocking expression, the front window blurred behind her, mouth clearly visible",
+      "partes": [
+        {
+          "texto": "Lucas? Não acredito.",
+          "emocao": "surprised"
+        },
+        {
+          "texto": "Você ainda tá servindo mesa? Eu te falei, amor. Ele nunca ia passar disso.",
+          "emocao": "disgusted"
+        }
+      ]
+    },
+    {
+      "tipo": "fala",
+      "quem": "diego",
+      "personagens": [
+        "diego"
+      ],
+      "seed": 32006,
+      "ref_cenario": 1,
+      "texto": "Então esse é o ex? Olha o avental dele.",
+      "imagem": "close-up, 50mm lens, only the man in frame, seated at the table, looking UP and to the RIGHT of the frame at someone standing, condescending smirk, the front window blurred behind him, mouth clearly visible",
+      "emocao": "happy"
+    },
+    {
+      "tipo": "acao",
+      "duracao": 3,
+      "personagens": [
+        "lucas"
+      ],
+      "primeiro_quadro_de": 4,
+      "pico": true,
+      "imagem": "same close-up of the waiter",
+      "movimento": "the waiter calmly writes on his small notepad with the pen, then gives a subtle confident smile, still looking down to the left; he does not speak; camera static",
+      "sfx": "pen writing on paper, quiet cafe ambience"
+    }
+  ],
+  "card_final": {
+    "duracao": 8
+  },
+  "tts": {
+    "modelo": "minimax:speech@2.8",
+    "idioma": "pt",
+    "acelerar": 1.0,
+    "velocidade": 1.12,
+    "pausa_max": 0.25
+  },
+  "modelos": {
+    "fala": "bytedance:5@2",
+    "acao": "klingai:kling-video@2.6-pro",
+    "duracoes_acao": [
+      5,
+      10
+    ],
+    "provider_acao": {
+      "klingai": {
+        "sound": false
+      }
+    }
+  },
+  "preco_s": {
+    "fala": 0.16,
+    "acao": 0.07
+  }
+}

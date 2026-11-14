@@ -36,8 +36,10 @@ TETO_RETENTATIVAS = 0.60
 # --------------------------------------------------------------------------- utilidades de imagem
 
 def quadro(video, onde, destino):
-    """onde: 'primeiro' | 'meio' | 'ultimo' -> PNG."""
-    if onde == "ultimo":
+    """onde: 'primeiro' | 'meio' | 'ultimo' | fração 0..1 -> PNG."""
+    if isinstance(onde, float):
+        args = ["-ss", f"{nv.duracao(video) * onde:.2f}", "-i", str(video)]
+    elif onde == "ultimo":
         args = ["-sseof", "-0.1", "-i", str(video), "-update", "1"]
     elif onde == "meio":
         args = ["-ss", f"{nv.duracao(video) / 2:.2f}", "-i", str(video)]
@@ -181,23 +183,61 @@ def produzir(pasta, limite, so_mestres=False, aceitos=None):
             mestres[i] = esp
     (cache_arq).write_text(json.dumps(cache))
 
-    # 3) vozes
+    # 3) vozes (MiniMax com emoção por trecho, se configurado no roteiro)
+    tts = rot.get("tts", {})
     falas = {}
     pend = []
     for i, pl in enumerate(planos, 1):
         if pl["tipo"] == "fala":
-            voz = pers[pl["quem"]]["voz"]
-            arq = pasta / "audio" / f"f{i:02d}_{nv.h8(pl['texto'], voz, mn.CFG['velocidade_fala'])}.mp3"
+            voz = pers[pl["quem"]].get("voz_tts") or pers[pl["quem"]]["voz"]
+            partes = pl.get("partes") or [{"texto": pl["texto"], "emocao": pl.get("emocao")}]
+            arq = pasta / "audio" / f"f{i:02d}_{nv.h8(json.dumps(partes, ensure_ascii=False), voz, json.dumps(tts, sort_keys=True))}.mp3"
             falas[i] = arq
             if not arq.exists():
-                pend.append((pl, voz, arq))
+                pend.append((partes, voz, arq))
+
+    def tts_trecho(texto, voz, emocao, destino):
+        if tts.get("modelo", "").startswith("minimax:"):
+            speech = {"text": texto, "voice": voz}
+            if emocao:
+                speech["emotion"] = emocao
+            if tts.get("velocidade"):
+                speech["speed"] = tts["velocidade"]
+            item = nv.runware({"taskType": "audioInference", "model": tts["modelo"], "speech": speech,
+                               "settings": {"languageBoost": tts.get("idioma", "pt")},
+                               "outputType": "base64Data", "outputFormat": "MP3"}, "audioBase64Data",
+                              {"espera_maxima_s": 240})
+            destino.write_bytes(__import__("base64").b64decode(item["audioBase64Data"]))
+            return item.get("cost")
+        nv.tts_runware(texto, voz, destino, mn.CFG, tom=None)
+        return None
 
     def gera_voz(it):
-        pl, voz, arq = it
-        bruto = arq.with_suffix(".bruto.mp3")
-        pago("vozes", est["voz"], lambda: nv.tts_runware(pl["texto"], voz, bruto, mn.CFG, tom=None))
-        mn.processar_voz(bruto, arq, mn.CFG["velocidade_fala"])
-    nv.paralelo(gera_voz, pend, 4, "voz")
+        partes, voz, arq = it
+        pedacos = []
+        for k, pt in enumerate(partes):
+            bruto = arq.with_name(f"{arq.stem}_p{k}.bruto.mp3")
+            pago("vozes", est["voz"], lambda: tts_trecho(pt["texto"], voz, pt.get("emocao"), bruto))
+            proc = arq.with_name(f"{arq.stem}_p{k}.mp3")
+            mn.processar_voz(bruto, proc, tts.get("acelerar", 1.0))
+            if tts.get("pausa_max"):  # encurta pausas internas longas (ritmo de novela)
+                tmp = proc.with_name(proc.stem + "_c.mp3")
+                nv.rodar(["ffmpeg", "-v", "error", "-y", "-i", str(proc), "-af",
+                          f"silenceremove=stop_periods=-1:stop_duration={tts['pausa_max']}:stop_threshold=-40dB:"
+                          f"stop_silence={tts['pausa_max']}", "-c:a", "libmp3lame", "-q:a", "2", str(tmp)])
+                tmp.replace(proc)
+            pedacos.append(proc)
+        if len(pedacos) == 1:
+            pedacos[0].rename(arq)
+        else:  # junta os trechos com uma pausa curta
+            ent, filt = [], []
+            for k, p in enumerate(pedacos):
+                ent += ["-i", str(p)]
+                filt.append(f"[{k}:a]aresample=48000,apad=pad_dur=0.18[a{k}]")
+            nv.rodar(["ffmpeg", "-v", "error", "-y", *ent, "-filter_complex",
+                      ";".join(filt) + ";" + "".join(f"[a{k}]" for k in range(len(pedacos)))
+                      + f"concat=n={len(pedacos)}:v=0:a=1[o]", "-map", "[o]", "-c:a", "libmp3lame", "-q:a", "2", str(arq)])
+    nv.paralelo(gera_voz, pend, 3, "voz")
 
     # limiares de rosto: distância entre a referência e as próprias imagens-mestras (close de 1 pessoa)
     rec = treinar_individuais(refs)
@@ -217,35 +257,42 @@ def produzir(pasta, limite, so_mestres=False, aceitos=None):
     # 4) vídeos em ordem de dependência, com checagem e nova tentativa
     videos = {}
     urls = {}
+    medidas = {}
 
     def checar(i, video):
+        """5 quadros. Reprova se algum rosto detectado passa do limiar, ou se o rosto
+        (close de 1 pessoa) aparece em menos de 3 dos 5 quadros."""
         pl = planos[i - 1]
         res = {"rosto": [], "ok": True}
-        for onde in ("primeiro", "meio", "ultimo"):
-            img = quadro(video, onde, pasta / "checagem" / f"p{i:02d}_{onde}.png")
+        achados = 0
+        posicoes = [0.02, 0.25, 0.5, 0.75, 0.97]
+        for k, f in enumerate(posicoes):
+            img = quadro(video, f, pasta / "checagem" / f"p{i:02d}_q{k}.png")
             if len(pl.get("personagens", [])) == 1:
                 n = pl["personagens"][0]
                 r = maior_rosto(img)
                 if r is None:
-                    res["rosto"].append((onde, n, None, "sem rosto detectado"))
-                    if onde != "primeiro" or pl["tipo"] == "fala":
-                        res["ok"] = False
+                    res["rosto"].append((f, n, None, "sem rosto (cabeça virada?)"))
                     continue
+                achados += 1
                 d = dist_rosto(rec, n, r)
                 ok = n not in limiar or d <= limiar[n]
-                res["rosto"].append((onde, n, round(d, 1), "ok" if ok else "REPROVADO"))
+                res["rosto"].append((f, n, round(d, 1), "ok" if ok else "REPROVADO"))
                 res["ok"] &= ok
             else:
                 ach = rostos(img)
                 ordem = pl.get("ordem_rostos", [])
                 if len(ach) != len(ordem) or not ordem:
-                    res["rosto"].append((onde, "plano aberto", len(ach), f"inconclusivo ({len(ach)} rostos)"))
+                    res["rosto"].append((f, "plano aberto", len(ach), f"inconclusivo ({len(ach)} rostos)"))
                     continue
                 for (x, r), n in zip(ach, ordem):
                     d = dist_rosto(rec, n, r)
-                    ok = n not in limiar or d <= limiar[n] * 1.15  # rostos pequenos: margem extra
-                    res["rosto"].append((onde, n, round(d, 1), "ok" if ok else "REPROVADO"))
+                    ok = n not in limiar or d <= limiar[n] * 1.15
+                    res["rosto"].append((f, n, round(d, 1), "ok" if ok else "REPROVADO"))
                     res["ok"] &= ok
+        if len(pl.get("personagens", [])) == 1 and achados < 3:
+            res["ok"] = False
+            res["motivo"] = f"rosto em só {achados} de 5 quadros"
         return res
 
     def gerar_video(i, tentativa):
@@ -257,28 +304,34 @@ def produzir(pasta, limite, so_mestres=False, aceitos=None):
             ini = mestres[i]
         img = mn.subir_imagem(ini, cache)
         fixos = " ".join(f"{pers[p]['nome']} MUST NOT CHANGE: {pers[p]['fixo']}." for p in pl.get("personagens", []))
+        modelos = rot.get("modelos", {})
         if pl["tipo"] == "fala":
-            o = mn.CFG["fala"]
+            o = {**mn.CFG["fala"], "modelo": modelos.get("fala", mn.CFG["fala"]["modelo"])}
             tarefa = {"taskType": "videoInference", "model": o["modelo"],
                       "positivePrompt": (f"{pl['imagem']}. The person speaks naturally, lips perfectly in sync. "
                                          f"Keep the same framing, eye-line, clothes, hair and background. {fixos}")[:1400],
                       "inputs": {"image": img, "audio": mn.data_uri(falas[i], "audio/mpeg")},
                       "outputType": "URL", "outputFormat": "MP4"}
-            estimado = (nv.duracao(falas[i]) + 1.5) * est["fala_s"]
+            estimado = (nv.duracao(falas[i]) + 1.5) * rot.get("preco_s", {}).get("fala", est["fala_s"])
         else:
-            o = mn.CFG["acao"]
+            o = {**mn.CFG["acao"], "modelo": modelos.get("acao", mn.CFG["acao"]["modelo"])}
             dur = max(2, min(15, math.ceil(pl["duracao"])))
+            if modelos.get("duracoes_acao"):  # modelos com durações fixas (ex.: Kling 5/10 s)
+                dur = min(d for d in modelos["duracoes_acao"] if d >= pl["duracao"])
             tarefa = {"taskType": "videoInference", "model": o["modelo"],
                       "positivePrompt": (f"{pl['movimento']}. {rot['cenario']}. {fixos} "
                                          f"Realistic natural motion, nothing appears or disappears, no other people, "
                                          f"no talking, no text")[:2900],
                       "inputs": {"frameImages": [{"image": img, "frame": "first"}]},
-                      "duration": dur, "outputType": "URL", "outputFormat": "MP4"}
-            estimado = dur * est["acao_s"]
+                      "duration": dur, "outputType": "URL", "outputFormat": "MP4",
+                      **({"providerSettings": modelos["provider_acao"]} if modelos.get("provider_acao") else {})}
+            if "kling" in o["modelo"]:
+                tarefa["inputs"] = {"frameImages": [{"image": img, "frame": "first"}]}
+            estimado = dur * rot.get("preco_s", {}).get("acao", est["acao_s"])
         if tentativa > 0:
             if custos["retentativas"] + estimado > TETO_RETENTATIVAS:
                 return None, "teto de novas tentativas atingido"
-            if pl["tipo"] == "acao":
+            if pl["tipo"] == "acao" and "kling" not in o["modelo"]:
                 tarefa["seed"] = 777 + i * 10 + tentativa
         arq = pasta / "videos" / f"v{i:02d}_t{tentativa}.mp4"
         if not arq.exists():
@@ -288,6 +341,9 @@ def produzir(pasta, limite, so_mestres=False, aceitos=None):
                 res["item"] = nv.runware(tarefa, "videoURL", o)
                 return res["item"].get("cost")
             real = pago("vídeo " + pl["tipo"], estimado, chama)
+            seg = nv.duracao(falas[i]) if pl["tipo"] == "fala" else dur
+            medidas.setdefault(pl["tipo"], []).append((real or 0) / max(seg, 0.1))
+            nv.log(f"plano {i}: custo real US$ {real:.3f} (~US$ {(real or 0) / max(seg, 0.1):.3f}/s)")
             if tentativa > 0:
                 custos["retentativas"] += real
             mn.baixar(res["item"]["videoURL"], arq)
@@ -310,6 +366,22 @@ def produzir(pasta, limite, so_mestres=False, aceitos=None):
 
     feitos = set()
     restantes = list(range(1, len(planos) + 1))
+    # plano-piloto: a primeira fala sozinha, para medir o custo real por segundo e projetar o total
+    piloto = next((i for i in restantes if planos[i - 1]["tipo"] == "fala" and not planos[i - 1].get("primeiro_quadro_de")), None)
+    if piloto:
+        produzir_plano(piloto)
+        feitos.add(piloto)
+        restantes.remove(piloto)
+        taxa = (medidas.get("fala") or [rot.get("preco_s", {}).get("fala", est["fala_s"])])[0]
+        seg_falas = sum(nv.duracao(falas[i]) + 0.5 for i in restantes if planos[i - 1]["tipo"] == "fala")
+        seg_acao = sum(5 if rot.get("modelos", {}).get("duracoes_acao") else planos[i - 1]["duracao"]
+                       for i in restantes if planos[i - 1]["tipo"] == "acao")
+        proj = orc.gasto + seg_falas * taxa + seg_acao * rot.get("preco_s", {}).get("acao", est["acao_s"]) + 0.15
+        nv.log(f"projeção após o piloto: gasto {orc.gasto:.2f} + resto ≈ total US$ {proj:.2f} (limite {limite:.2f})")
+        if limite is not None and proj > limite:
+            nv.log("PARADO: a projeção passa do limite. Nada mais será gerado.")
+            (pasta / "checagem" / "relatorio.json").write_text(json.dumps(rel, indent=1, ensure_ascii=False, default=str))
+            return
     while restantes:
         nivel = [i for i in restantes if not planos[i - 1].get("primeiro_quadro_de")
                  or planos[i - 1]["primeiro_quadro_de"] in feitos]
