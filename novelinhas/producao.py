@@ -108,7 +108,7 @@ def dist_rosto(rec, nome, rosto):
 
 # --------------------------------------------------------------------------- produção
 
-def produzir(pasta, limite, so_mestres=False):
+def produzir(pasta, limite, so_mestres=False, aceitos=None):
     pasta = Path(pasta).resolve()
     rot = json.loads((pasta / "roteiro.json").read_text(encoding="utf-8"))
     for sub in ("refs", "mestres", "audio", "videos", "quadros_extra", "sfx", "segmentos", "checagem"):
@@ -316,10 +316,14 @@ def produzir(pasta, limite, so_mestres=False):
         nv.paralelo(produzir_plano, nivel, mn.CFG.get("paralelo_video", 2), "plano")
         feitos |= set(nivel)
         restantes = [i for i in restantes if i not in feitos]
-    falhos = [i for i, r in rel["planos"].items() if not r.get("ok")]
+    falhos = [i for i, r in rel["planos"].items() if not r.get("ok") and i not in (aceitos or [])]
+    aceitar = False
     (pasta / "checagem" / "relatorio.json").write_text(json.dumps(rel, indent=1, ensure_ascii=False, default=str))
-    if falhos:
-        nv.log(f"ATENÇÃO: planos reprovados na checagem mesmo após nova tentativa: {falhos} (ver checagem/relatorio.json)")
+    if falhos and not aceitar:
+        nv.log(f"PARADO: planos reprovados na checagem mesmo após nova tentativa: {falhos} "
+               f"(ver checagem/relatorio.json). Montagem não executada, conforme o briefing. "
+               f"Para montar mesmo assim, só com aprovação: --aceitar {','.join(map(str, falhos))}")
+        return
 
     # 5) efeitos sonoros (pelo link do vídeo, sincronizados)
     sfx = {}
@@ -478,8 +482,9 @@ def main():
     ap.add_argument("pasta")
     ap.add_argument("--limite", type=float, required=True)
     ap.add_argument("--so-mestres", action="store_true")
+    ap.add_argument("--aceitar", default="", help="planos reprovados aceitos após revisão humana (ex.: 6)")
     a = ap.parse_args()
-    produzir(a.pasta, a.limite, a.so_mestres)
+    produzir(a.pasta, a.limite, a.so_mestres, [int(x) for x in a.aceitar.split(",") if x.strip()])
 
 
 if __name__ == "__main__":

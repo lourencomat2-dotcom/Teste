@@ -1,0 +1,233 @@
+{
+ "limiares_rosto": {
+  "vanessa": 142.82207861523037,
+  "diego": 114.87469400329546,
+  "lucas": 124.95459274167447
+ },
+ "planos": {
+  "1": {
+   "tentativas": 1,
+   "rosto": [
+    [
+     "primeiro",
+     "vanessa",
+     82.6,
+     "ok"
+    ],
+    [
+     "primeiro",
+     "diego",
+     81.3,
+     "ok"
+    ],
+    [
+     "meio",
+     "vanessa",
+     110.4,
+     "ok"
+    ],
+    [
+     "meio",
+     "diego",
+     97.6,
+     "ok"
+    ],
+    [
+     "ultimo",
+     "plano aberto",
+     4,
+     "inconclusivo (4 rostos)"
+    ]
+   ],
+   "ok": true
+  },
+  "2": {
+   "tentativas": 1,
+   "rosto": [
+    [
+     "primeiro",
+     "vanessa",
+     99.9,
+     "ok"
+    ],
+    [
+     "meio",
+     "vanessa",
+     93.0,
+     "ok"
+    ],
+    [
+     "ultimo",
+     "vanessa",
+     88.1,
+     "ok"
+    ]
+   ],
+   "ok": true
+  },
+  "4": {
+   "tentativas": 1,
+   "rosto": [
+    [
+     "primeiro",
+     "lucas",
+     117.4,
+     "ok"
+    ],
+    [
+     "meio",
+     "lucas",
+     105.7,
+     "ok"
+    ],
+    [
+     "ultimo",
+     "lucas",
+     106.0,
+     "ok"
+    ]
+   ],
+   "ok": true
+  },
+  "5": {
+   "tentativas": 1,
+   "rosto": [
+    [
+     "primeiro",
+     "vanessa",
+     102.4,
+     "ok"
+    ],
+    [
+     "meio",
+     "vanessa",
+     97.3,
+     "ok"
+    ],
+    [
+     "ultimo",
+     "vanessa",
+     96.3,
+     "ok"
+    ]
+   ],
+   "ok": true
+  },
+  "6": {
+   "tentativas": 2,
+   "rosto": [
+    [
+     "primeiro",
+     "diego",
+     103.2,
+     "ok"
+    ],
+    [
+     "meio",
+     "diego",
+     106.9,
+     "ok"
+    ],
+    [
+     "ultimo",
+     "diego",
+     null,
+     "sem rosto detectado"
+    ]
+   ],
+   "ok": false
+  },
+  "3": {
+   "tentativas": 1,
+   "rosto": [
+    [
+     "primeiro",
+     "plano aberto",
+     4,
+     "inconclusivo (4 rostos)"
+    ],
+    [
+     "meio",
+     "plano aberto",
+     1,
+     "inconclusivo (1 rostos)"
+    ],
+    [
+     "ultimo",
+     "vanessa",
+     102.6,
+     "ok"
+    ],
+    [
+     "ultimo",
+     "diego",
+     100.8,
+     "ok"
+    ]
+   ],
+   "ok": true
+  },
+  "7": {
+   "tentativas": 2,
+   "rosto": [
+    [
+     "primeiro",
+     "lucas",
+     111.9,
+     "ok"
+    ],
+    [
+     "meio",
+     "lucas",
+     null,
+     "sem rosto detectado"
+    ],
+    [
+     "ultimo",
+     "lucas",
+     108.8,
+     "ok"
+    ]
+   ],
+   "ok": false
+  }
+ },
+ "cor_entre_cortes": [
+  {
+   "corte": 1,
+   "tempo_s": 4.0,
+   "deltaE": 5.5,
+   "ok": true
+  },
+  {
+   "corte": 2,
+   "tempo_s": 8.14,
+   "deltaE": 5.0,
+   "ok": true
+  },
+  {
+   "corte": 3,
+   "tempo_s": 13.14,
+   "deltaE": 4.9,
+   "ok": true
+  },
+  {
+   "corte": 4,
+   "tempo_s": 15.4,
+   "deltaE": 5.5,
+   "ok": true
+  },
+  {
+   "corte": 5,
+   "tempo_s": 25.16,
+   "deltaE": 2.5,
+   "ok": true
+  },
+  {
+   "corte": 6,
+   "tempo_s": 28.96,
+   "deltaE": 10.9,
+   "ok": true
+  }
+ ]
+}
