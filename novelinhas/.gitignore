@@ -12,3 +12,4 @@ episodios/*/videos/
 episodios/*/sfx/
 episodios/*/segmentos/
 episodios/*/uploads.json
+__pycache__/
