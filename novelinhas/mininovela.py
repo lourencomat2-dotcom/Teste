@@ -207,7 +207,7 @@ def produzir(caminho, ate=None, so_quadros=False):
     sfx, pend = {}, []
     for i, pl in enumerate(planos, 1):
         if pl["tipo"] == "acao" and pl.get("sfx"):
-            arq = pasta / "sfx" / f"s{i:03d}_{nv.h8(videos[i].name, pl['sfx'])}.mp3"
+            arq = pasta / "sfx" / f"s{i:03d}_{nv.h8(videos[i].name, pl['sfx'])}.mp4"
             sfx[i] = arq
             if not arq.exists():
                 pend.append((i, pl, arq))
@@ -216,12 +216,11 @@ def produzir(caminho, ate=None, so_quadros=False):
         i, pl, arq = it
         o = CFG["sfx"]
         url = videos[i].with_suffix(".url").read_text().strip()
-        dur = max(1, min(10, math.ceil(pl.get("duracao", 3))))
         item = nv.runware({"taskType": "audioInference", "model": o["modelo"], "positivePrompt": pl["sfx"],
-                           "inputs": {"video": url}, "duration": dur,
-                           "outputType": "URL", "outputFormat": "MP3"}, "audioURL", o)
+                           "inputs": {"video": url},
+                           "outputType": "URL", "outputFormat": "mp4"}, "videoURL", o)
         soma("efeitos", item.get("cost"))
-        baixar(item["audioURL"], arq)
+        baixar(item.get("audioURL") or item.get("videoURL"), arq)
     nv.paralelo(gera_sfx, pend, CFG["paralelo"], "efeito")
 
     # 6) trilha
@@ -230,7 +229,7 @@ def produzir(caminho, ate=None, so_quadros=False):
         nv.log("gerando trilha...")
         o = CFG["musica"]
         item = nv.runware({"taskType": "audioInference", "model": o["modelo"], "positivePrompt": rot["musica"],
-                           "settings": {"instrumental": True, "lyrics": "[Instrumental]"},
+                           "settings": {"instrumental": True},
                            "outputType": "URL", "outputFormat": "MP3"}, "audioURL", o)
         soma("trilha", item.get("cost"))
         baixar(item["audioURL"], musica)
