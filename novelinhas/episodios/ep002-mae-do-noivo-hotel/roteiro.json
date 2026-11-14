@@ -1,0 +1,706 @@
+{
+  "titulo": "Mandaram a mãe do noivo comer na cozinha… sem saber que o hotel era dela",
+  "formato": "horizontal",
+  "estilo_visual": "cinematic photo, dramatic warm lighting, shallow depth of field, Brazilian people, realistic, 35mm film look, telenovela atmosphere",
+  "personagens": {
+    "heroina": {
+      "nome": "Rosângela",
+      "visual": "brazilian woman, 58 years old, brown skin, short curly greying hair, kind eyes, simple plain blue dress, small gold cross necklace"
+    },
+    "vila": {
+      "nome": "Patrícia",
+      "visual": "brazilian woman, 55 years old, fair skin, sleek blonde bob haircut, pearl necklace, emerald green gala gown, arrogant expression"
+    },
+    "noiva": {
+      "nome": "Juliana",
+      "visual": "young brazilian woman, 27 years old, long wavy brown hair, white lace wedding dress"
+    },
+    "filho": {
+      "nome": "Thiago",
+      "visual": "young brazilian man, 29 years old, brown skin, short black hair, black tuxedo"
+    },
+    "aliada": {
+      "nome": "Letícia",
+      "visual": "young brazilian woman, 22 years old, black hair in a bun, black and white waitress uniform"
+    },
+    "gerente": {
+      "nome": "Renato",
+      "visual": "brazilian man, 40 years old, slicked back hair, thin mustache, grey slim suit with event staff earpiece"
+    },
+    "diretor": {
+      "nome": "Henrique",
+      "visual": "distinguished brazilian man, 60 years old, grey hair and beard, dark navy suit"
+    },
+    "pai": {
+      "nome": "Sérgio",
+      "visual": "brazilian man, 58 years old, fair skin, balding, expensive tuxedo, worried face"
+    }
+  },
+  "vozes": {
+    "edge": {
+      "vila": "pt-BR-FranciscaNeural",
+      "heroina": "pt-BR-ThalitaMultilingualNeural"
+    }
+  },
+  "musica": null,
+  "cenas": [
+    {
+      "narracao": "Ela mandou a mãe do noivo comer na cozinha, junto com os funcionários. No mesmo casamento que, sem ela saber, estava sendo pago com o dinheiro dessa mulher.",
+      "imagem": "luxurious wedding reception in a five star hotel ballroom, elegant woman pointing a simple older woman towards the kitchen door",
+      "personagens": [
+        "vila",
+        "heroina"
+      ],
+      "capitulo": "O casamento"
+    },
+    {
+      "narracao": "Antes da meia-noite, a família mais rica da festa ia descobrir quem era, de verdade, a mulher de vestido simples sentada perto da lata de lixo.",
+      "imagem": "simple older woman sitting alone at a small table near the hotel kitchen door, wedding party lights in the background",
+      "personagens": [
+        "heroina"
+      ],
+      "pausa": 0.8
+    },
+    {
+      "narracao": "O nome dela era Rosângela. Cinquenta e oito anos, mãos de quem trabalhou a vida inteira, e um sorriso que não combinava com tudo que ela já tinha passado.",
+      "imagem": "portrait of a brazilian woman in her late fifties, warm smile, tired hands, simple floral dress, soft window light",
+      "personagens": [
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Ela criou o Thiago sozinha. Começou vendendo marmita na porta de uma obra, com o filho dormindo dentro de uma caixa de papelão do lado do isopor.",
+      "imagem": "1990s brazilian street, young mother selling lunch boxes from a styrofoam cooler next to a construction site, baby sleeping in a cardboard box, nostalgic film photo"
+    },
+    {
+      "narracao": "A marmita virou restaurante. O restaurante virou pousada. E a pousada, vinte e cinco anos depois, virou uma rede de hotéis espalhada pelo país.",
+      "imagem": "montage feeling, small brazilian restaurant becoming a seaside inn, then a modern luxury hotel tower at dusk"
+    },
+    {
+      "narracao": "Mas Rosângela tinha uma regra. Nunca contou para ninguém o tamanho do que construiu. Nem para o próprio filho.",
+      "imagem": "older woman looking at an old photo of herself with a baby, quiet modest living room, nostalgic light",
+      "personagens": [
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Para o Thiago, a mãe era só gerente de um hotel. Uma funcionária dedicada, que trabalhava demais e vivia de forma simples.",
+      "imagem": "young man hugging his mother in a modest kitchen, warm family moment",
+      "personagens": [
+        "filho",
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Ela fazia isso de propósito. Queria que o filho fosse amado pelo que ele era, não pelo dinheiro que um dia ia herdar.",
+      "imagem": "mother watching her adult son from a doorway with pride, soft evening light",
+      "personagens": [
+        "heroina",
+        "filho"
+      ]
+    },
+    {
+      "narracao": "E deu certo. Thiago virou engenheiro, honesto e trabalhador. E se apaixonou pela Juliana.",
+      "imagem": "young brazilian couple laughing together in a park, engagement ring visible",
+      "personagens": [
+        "filho",
+        "noiva"
+      ]
+    },
+    {
+      "narracao": "Juliana era doce, educada, e tratava a sogra como mãe. O problema era a família dela. Principalmente a mãe.",
+      "imagem": "young bride-to-be hugging an older simple woman warmly, both smiling",
+      "personagens": [
+        "noiva",
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Patrícia Vasconcelos. A mulher que fazia questão de dizer o sobrenome inteiro em toda conversa.",
+      "imagem": "elegant arrogant brazilian woman in her fifties, pearl necklace, designer dress, looking down at the camera, luxury mansion background",
+      "personagens": [
+        "vila"
+      ],
+      "capitulo": "A família Vasconcelos"
+    },
+    {
+      "narracao": "Desde o noivado, ela não escondia o desprezo. Achava que a filha estava se casando com o filho de uma qualquer.",
+      "imagem": "arrogant rich woman whispering with disdain to another wealthy woman at an engagement dinner, looking at someone off camera",
+      "personagens": [
+        "vila"
+      ]
+    },
+    {
+      "narracao": "Uma mulher como você não precisa se preocupar com nada da festa, viu? Deixa que a gente resolve. Gente do nosso nível sabe como essas coisas funcionam.",
+      "imagem": "rich woman with fake smile talking down to a simple older woman at a fancy dinner table",
+      "personagens": [
+        "vila",
+        "heroina"
+      ],
+      "voz": "vila"
+    },
+    {
+      "narracao": "Rosângela só sorriu. Ofereceu ajuda com os custos, e Patrícia riu na cara dela.",
+      "imagem": "rich woman laughing mockingly, simple older woman smiling politely, elegant dining room",
+      "personagens": [
+        "vila",
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Ajudar? Com o quê, querida? Com o salário de gerente? Guarda esse dinheirinho, que você vai precisar.",
+      "imagem": "rich woman laughing with a glass of champagne in hand, condescending gesture",
+      "personagens": [
+        "vila"
+      ],
+      "voz": "vila"
+    },
+    {
+      "narracao": "O que ninguém sabia é que a família Vasconcelos não estava tão bem assim. A empresa deles estava afundada em dívidas.",
+      "imagem": "worried wealthy man in a suit looking at financial papers late at night in a dark office",
+      "personagens": [
+        "pai"
+      ]
+    },
+    {
+      "narracao": "E o casamento no hotel mais caro da cidade estava sendo pago com um empréstimo. Um empréstimo que eles torciam para ninguém descobrir.",
+      "imagem": "exterior of a grand luxury hotel at night, golden lights, red carpet entrance"
+    },
+    {
+      "narracao": "Mas isso ainda não era o pior. Guarda o nome desse hotel, porque daqui a pouco ele vai mudar tudo.",
+      "imagem": "grand hotel ballroom being decorated with white flowers and crystal chandeliers",
+      "pausa": 0.6
+    },
+    {
+      "narracao": "No dia do casamento, Rosângela chegou cedo. Vestido azul simples, sapato baixo, e uma bolsa que tinha a mesma idade do filho.",
+      "imagem": "simple older woman in a plain blue dress arriving at a luxury hotel entrance, holding an old handbag",
+      "personagens": [
+        "heroina"
+      ],
+      "capitulo": "A primeira humilhação"
+    },
+    {
+      "narracao": "Na entrada, o gerente do evento olhou ela de cima a baixo. A entrada dos fornecedores é pelos fundos, senhora.",
+      "imagem": "hotel event manager in a sharp suit blocking a simple older woman at the entrance, looking at her with disdain",
+      "personagens": [
+        "gerente",
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Eu sou a mãe do noivo, ela respondeu, com calma. O gerente, Renato, deu uma risadinha e olhou para a lista com má vontade.",
+      "imagem": "event manager reluctantly checking a guest list on a tablet, smirking",
+      "personagens": [
+        "gerente"
+      ]
+    },
+    {
+      "narracao": "Quando encontrou o nome, chamou a Patrícia pelo rádio. E foi a própria Patrícia que veio buscar a consogra.",
+      "imagem": "elegant arrogant woman walking through a hotel lobby with an irritated expression",
+      "personagens": [
+        "vila"
+      ]
+    },
+    {
+      "narracao": "Meu Deus, você veio assim? Eu falei que era traje de gala. Você vai me envergonhar na frente de todo mundo.",
+      "imagem": "rich woman in a gala dress looking with disgust at a simple older woman's plain blue dress, hotel lobby",
+      "personagens": [
+        "vila",
+        "heroina"
+      ],
+      "voz": "vila"
+    },
+    {
+      "narracao": "Rosângela respirou fundo. Era o dia do filho. Ela não ia estragar nada por orgulho.",
+      "imagem": "close-up of an older woman closing her eyes and breathing deeply, holding her emotions",
+      "personagens": [
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Mas Patrícia estava só começando. Lá dentro, a mesa da família do noivo tinha sumido.",
+      "imagem": "wedding ballroom with elegant round tables, place cards, one empty spot where a table should be"
+    },
+    {
+      "narracao": "No lugar, colocaram uma mesinha de plástico, perto da porta da cozinha. Do lado dos carrinhos de louça suja.",
+      "imagem": "small plastic table near a hotel kitchen swinging door, carts of dirty dishes next to it",
+      "capitulo": "A mesa da cozinha"
+    },
+    {
+      "narracao": "É que não deu lugar para todo mundo, Patrícia disse, sem nem disfarçar. E você vai se sentir mais à vontade aqui. Perto do seu pessoal.",
+      "imagem": "rich woman gesturing dismissively towards a table near the kitchen, guests in the background smiling",
+      "personagens": [
+        "vila"
+      ],
+      "voz": "vila"
+    },
+    {
+      "narracao": "Duas amigas da Patrícia riram alto. Uma delas cochichou: deve ser a empregada da família.",
+      "imagem": "two wealthy women in gowns laughing and whispering behind their hands"
+    },
+    {
+      "narracao": "Rosângela sentou. Ajeitou o vestido. E ficou ali, quieta, olhando o salão que ela conhecia como a palma da mão.",
+      "imagem": "older woman sitting alone at a plastic table, looking around a grand ballroom with a calm knowing look",
+      "personagens": [
+        "heroina"
+      ],
+      "pausa": 0.8
+    },
+    {
+      "narracao": "Ela conhecia cada lustre daquele salão. Porque foi ela que escolheu cada um deles.",
+      "imagem": "close-up of a huge crystal chandelier sparkling in a ballroom",
+      "movimento": "pan_cima"
+    },
+    {
+      "narracao": "Só uma pessoa tratou Rosângela com carinho naquela noite. A garçonete Letícia, de vinte e dois anos, no primeiro mês de trabalho.",
+      "imagem": "young brazilian waitress in a black and white uniform smiling kindly, holding a tray",
+      "personagens": [
+        "aliada"
+      ],
+      "capitulo": "A garçonete"
+    },
+    {
+      "narracao": "A senhora aceita uma água? Eu trouxe também um pratinho do buffet, antes que acabe. Não é justo a senhora ficar aqui sem nada.",
+      "imagem": "young waitress gently placing a plate of food and a glass of water in front of an older woman",
+      "personagens": [
+        "aliada",
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Rosângela perguntou o nome dela. Perguntou da família, do sonho, da faculdade. Letícia contou que estudava administração à noite.",
+      "imagem": "older woman and young waitress talking warmly, waitress shyly smiling, kitchen door in background",
+      "personagens": [
+        "heroina",
+        "aliada"
+      ]
+    },
+    {
+      "narracao": "E que trabalhava ali para pagar a faculdade e o remédio da mãe. Rosângela guardou cada palavra.",
+      "imagem": "close-up of older woman listening attentively with emotion in her eyes",
+      "personagens": [
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Mas o gerente Renato viu a cena e ficou furioso. Puxou Letícia pelo braço para o corredor.",
+      "imagem": "angry event manager pulling a young waitress aside into a service corridor",
+      "personagens": [
+        "gerente",
+        "aliada"
+      ]
+    },
+    {
+      "narracao": "Você está aqui para servir convidado, não para perder tempo com a mulher da mesa da cozinha. Mais uma dessa e você está na rua.",
+      "imagem": "event manager scolding a young waitress who looks down, about to cry, dim service corridor",
+      "personagens": [
+        "gerente",
+        "aliada"
+      ]
+    },
+    {
+      "narracao": "Rosângela ouviu tudo. E pela primeira vez na noite, o sorriso dela sumiu.",
+      "imagem": "older woman's face turning serious, sharp gaze, dramatic side lighting",
+      "personagens": [
+        "heroina"
+      ],
+      "pausa": 0.8
+    },
+    {
+      "narracao": "Na hora da cerimônia, Thiago procurou a mãe pelo salão inteiro. Quando achou ela perto da cozinha, ficou sem entender.",
+      "imagem": "groom in a tuxedo looking confused, searching across a crowded wedding ballroom",
+      "personagens": [
+        "filho"
+      ],
+      "capitulo": "O brinde"
+    },
+    {
+      "narracao": "Mãe, por que a senhora está aqui? Ela segurou a mão dele. Hoje é o seu dia, filho. Não se preocupa comigo.",
+      "imagem": "groom holding his mother's hands near the kitchen table, emotional moment",
+      "personagens": [
+        "filho",
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Mas Patrícia não ia deixar a noite passar sem um último golpe. Ela pegou o microfone para o brinde.",
+      "imagem": "elegant woman holding a microphone and a glass of champagne in front of a wedding crowd",
+      "personagens": [
+        "vila"
+      ]
+    },
+    {
+      "narracao": "Quero agradecer a todos que vieram. Essa festa foi um presente da família Vasconcelos, porque a gente sabe que o outro lado, coitado, não tinha condições.",
+      "imagem": "rich woman giving a speech with a smug smile, guests laughing, ballroom lights",
+      "personagens": [
+        "vila"
+      ],
+      "voz": "vila"
+    },
+    {
+      "narracao": "E quero agradecer também à mãe do noivo, que veio. Mesmo vestida para limpar o salão.",
+      "imagem": "wedding guests laughing loudly, some covering their mouths, mocking atmosphere",
+      "voz": "vila"
+    },
+    {
+      "narracao": "O salão inteiro riu. Thiago ficou vermelho de raiva. Juliana largou o buquê e olhou para a mãe sem acreditar.",
+      "imagem": "shocked bride dropping her bouquet, angry groom clenching his fists, laughing guests behind",
+      "personagens": [
+        "noiva",
+        "filho"
+      ]
+    },
+    {
+      "narracao": "Mãe, para com isso! Ela é a mulher que eu mais respeito nessa festa!",
+      "imagem": "bride confronting her mother in the middle of the ballroom, tears in her eyes",
+      "personagens": [
+        "noiva",
+        "vila"
+      ],
+      "voz": "mulher"
+    },
+    {
+      "narracao": "Patrícia nem ligou. Mandou o gerente levar a consogra para fora, antes que ela estragasse as fotos.",
+      "imagem": "rich woman snapping her fingers at the event manager, pointing to the exit",
+      "personagens": [
+        "vila",
+        "gerente"
+      ]
+    },
+    {
+      "narracao": "Renato foi até a mesa da cozinha. Senhora, vou ter que pedir para a senhora se retirar.",
+      "imagem": "event manager standing over a seated older woman, pointing to the exit with fake politeness",
+      "personagens": [
+        "gerente",
+        "heroina"
+      ],
+      "pausa": 1.0,
+      "capitulo": "O ponto sem volta"
+    },
+    {
+      "narracao": "O salão ficou em silêncio, esperando ela sair de cabeça baixa. Mas Rosângela não abaixou a cabeça.",
+      "imagem": "silent wedding ballroom, all guests turned towards a calm older woman sitting near the kitchen",
+      "personagens": [
+        "heroina"
+      ],
+      "pausa": 0.8
+    },
+    {
+      "narracao": "Ela pegou a bolsa velha. Tirou o celular. E fez uma única ligação.",
+      "imagem": "close-up of an older woman's hand taking an old cellphone out of a worn handbag",
+      "personagens": [
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Doutor Henrique, desce aqui no salão principal, por favor. Agora.",
+      "imagem": "older woman speaking calmly on the phone, determined expression",
+      "personagens": [
+        "heroina"
+      ],
+      "voz": "heroina",
+      "pausa": 1.0
+    },
+    {
+      "narracao": "Patrícia riu. Quem é que ela vai chamar? O porteiro?",
+      "imagem": "rich woman laughing to her friends, champagne glass in hand",
+      "personagens": [
+        "vila"
+      ],
+      "capitulo": "A revelação"
+    },
+    {
+      "narracao": "Dois minutos depois, as portas do salão se abriram. Entrou um homem grisalho, de terno escuro, acompanhado de três diretores.",
+      "imagem": "grand ballroom doors opening, distinguished grey haired man in a dark suit walking in with three executives",
+      "personagens": [
+        "diretor"
+      ]
+    },
+    {
+      "narracao": "Os funcionários do hotel ficaram em posição. Renato ficou pálido. Ele conhecia aquele homem. Era o diretor geral da rede.",
+      "imagem": "hotel staff standing straight in shock, event manager pale and sweating",
+      "personagens": [
+        "gerente"
+      ]
+    },
+    {
+      "narracao": "O doutor Henrique atravessou o salão inteiro. Passou pela mesa dos Vasconcelos sem nem olhar.",
+      "imagem": "executive walking through the ballroom among elegant tables, guests turning heads",
+      "personagens": [
+        "diretor"
+      ]
+    },
+    {
+      "narracao": "E parou na frente da mesinha de plástico. Do lado da cozinha.",
+      "imagem": "executive stopping in front of a small plastic table near a kitchen door",
+      "personagens": [
+        "diretor",
+        "heroina"
+      ],
+      "pausa": 0.8
+    },
+    {
+      "narracao": "Dona Rosângela. Desculpa a demora. A senhora não avisou que vinha hoje no seu hotel.",
+      "imagem": "executive bowing respectfully to an older woman in a simple blue dress, whole ballroom watching",
+      "personagens": [
+        "diretor",
+        "heroina"
+      ],
+      "pausa": 1.2
+    },
+    {
+      "narracao": "O silêncio foi tão grande que dava para ouvir o gelo derretendo nas taças.",
+      "imagem": "close-up of ice melting in champagne glasses, frozen shocked faces blurred in background"
+    },
+    {
+      "narracao": "No seu hotel. Patrícia repetiu baixinho, sem entender. O copo tremendo na mão.",
+      "imagem": "close-up of an arrogant rich woman's face turning pale, champagne glass shaking in her hand",
+      "personagens": [
+        "vila"
+      ]
+    },
+    {
+      "narracao": "Rosângela se levantou devagar. Ajeitou o vestido azul simples. E pela primeira vez, falou alto.",
+      "imagem": "older woman standing up with dignity in the middle of a silent ballroom, dramatic spotlight",
+      "personagens": [
+        "heroina"
+      ],
+      "movimento": "zoom_in"
+    },
+    {
+      "narracao": "Esse hotel é meu. Esse e mais trinta e um pelo Brasil. Comecei vendendo marmita na porta de obra, com meu filho numa caixa de papelão.",
+      "imagem": "dignified older woman speaking to a silent crowd, guests stunned",
+      "personagens": [
+        "heroina"
+      ],
+      "voz": "heroina"
+    },
+    {
+      "narracao": "Thiago olhou para a mãe sem conseguir falar. Mãe, a senhora é a dona? Ela só sorriu. Eu queria que você fosse amado por quem você é, filho. E você foi.",
+      "imagem": "groom with tears in his eyes looking at his mother in disbelief, bride holding his arm",
+      "personagens": [
+        "filho",
+        "heroina",
+        "noiva"
+      ]
+    },
+    {
+      "narracao": "Juliana chorou e abraçou a sogra. Eu sempre soube que a senhora era especial.",
+      "imagem": "bride hugging the older woman tightly, both emotional",
+      "personagens": [
+        "noiva",
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Mas a história ainda não tinha terminado. Porque o doutor Henrique tinha trazido uma pasta.",
+      "imagem": "executive holding a black leather folder with documents",
+      "personagens": [
+        "diretor"
+      ],
+      "pausa": 0.8,
+      "capitulo": "A dívida"
+    },
+    {
+      "narracao": "Dona Rosângela, a senhora pediu para eu verificar quem estava pagando essa festa.",
+      "imagem": "executive opening a folder and showing documents to the older woman",
+      "personagens": [
+        "diretor",
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "O casamento foi pago com um empréstimo do banco. E a dívida da empresa dos Vasconcelos foi comprada no mês passado.",
+      "imagem": "close-up of financial documents and loan contracts on a table"
+    },
+    {
+      "narracao": "Comprada por quem? perguntou o marido de Patrícia, já sabendo a resposta.",
+      "imagem": "worried wealthy man in a tuxedo stepping forward, sweating",
+      "personagens": [
+        "pai"
+      ]
+    },
+    {
+      "narracao": "Pelo grupo da dona Rosângela. Hoje, a empresa de vocês deve tudo para ela.",
+      "imagem": "executive speaking firmly, wealthy couple in shock in the background",
+      "personagens": [
+        "diretor"
+      ],
+      "pausa": 1.2
+    },
+    {
+      "narracao": "As amigas de Patrícia se afastaram dela. Uma por uma. Quem riu da mãe do noivo agora fingia que nem conhecia a família Vasconcelos.",
+      "imagem": "wealthy women in gowns stepping away from an isolated rich woman, social rejection",
+      "personagens": [
+        "vila"
+      ]
+    },
+    {
+      "narracao": "Patrícia tentou falar. Rosângela, querida, foi um mal entendido, eu estava brincando, você sabe como eu sou.",
+      "imagem": "rich woman with a forced nervous smile, reaching out her hands, begging gesture",
+      "personagens": [
+        "vila"
+      ],
+      "voz": "vila",
+      "capitulo": "O acerto de contas"
+    },
+    {
+      "narracao": "Eu sei sim, Patrícia. Eu sei exatamente como você é. Você me mostrou a noite inteira.",
+      "imagem": "calm older woman looking firmly at the humiliated rich woman",
+      "personagens": [
+        "heroina",
+        "vila"
+      ],
+      "voz": "heroina"
+    },
+    {
+      "narracao": "Primeiro, ela olhou para Renato, o gerente. Ele já estava tremendo.",
+      "imagem": "event manager trembling, sweat on his forehead, avoiding eye contact",
+      "personagens": [
+        "gerente"
+      ]
+    },
+    {
+      "narracao": "Renato, um hotel meu não trata nenhum convidado pela roupa. E nunca, nunca humilha funcionário. Você está desligado.",
+      "imagem": "older woman speaking firmly to the event manager, director standing beside her",
+      "personagens": [
+        "heroina",
+        "gerente"
+      ],
+      "voz": "heroina"
+    },
+    {
+      "narracao": "Depois, chamou a Letícia. A garçonete chegou assustada, achando que ia perder o emprego também.",
+      "imagem": "nervous young waitress approaching, holding her tray tightly",
+      "personagens": [
+        "aliada"
+      ]
+    },
+    {
+      "narracao": "A partir de amanhã, você é a nova gerente de eventos. E a sua faculdade e o tratamento da sua mãe ficam por conta da empresa.",
+      "imagem": "older woman holding the hands of the young waitress, waitress crying with joy",
+      "personagens": [
+        "heroina",
+        "aliada"
+      ]
+    },
+    {
+      "narracao": "Letícia caiu no choro. Os funcionários da cozinha, que viram tudo pela porta, começaram a aplaudir.",
+      "imagem": "kitchen staff in white uniforms applauding at the kitchen door, emotional celebration"
+    },
+    {
+      "narracao": "Por último, Rosângela olhou para Patrícia. A família inteira esperava a vingança. A falência. A humilhação de volta.",
+      "imagem": "tense moment, ballroom guests watching, rich woman with head down in fear",
+      "personagens": [
+        "vila"
+      ],
+      "pausa": 0.8
+    },
+    {
+      "narracao": "Mas ela fez algo que ninguém esperava. A dívida da empresa eu vou perdoar. Como presente de casamento. Para a minha nora, não para você.",
+      "imagem": "older woman handing a folder to the bride, bride and groom surprised",
+      "personagens": [
+        "heroina",
+        "noiva"
+      ],
+      "voz": "heroina"
+    },
+    {
+      "narracao": "Só tem uma condição. Hoje, quem vai jantar na mesinha da cozinha é você.",
+      "imagem": "older woman pointing calmly to the small plastic table near the kitchen door",
+      "personagens": [
+        "heroina"
+      ],
+      "voz": "heroina",
+      "pausa": 1.0
+    },
+    {
+      "narracao": "E Patrícia Vasconcelos, a mulher que fazia questão de dizer o sobrenome inteiro, passou o resto da festa sentada do lado dos carrinhos de louça suja.",
+      "imagem": "humiliated elegant rich woman sitting alone at a plastic table near dirty dish carts, party continuing behind her",
+      "personagens": [
+        "vila"
+      ]
+    },
+    {
+      "narracao": "Enquanto isso, Rosângela finalmente ocupou o lugar que era dela. Na mesa principal, do lado do filho.",
+      "imagem": "older woman sitting at the head wedding table between the groom and bride, all smiling, golden lights",
+      "personagens": [
+        "heroina",
+        "filho",
+        "noiva"
+      ],
+      "capitulo": "O final"
+    },
+    {
+      "narracao": "Thiago pegou o microfone e fez o brinde de verdade. Para a mulher que vendeu marmita para me dar tudo. A minha mãe.",
+      "imagem": "groom raising a champagne glass with emotion, guests raising their glasses",
+      "personagens": [
+        "filho"
+      ]
+    },
+    {
+      "narracao": "O salão inteiro aplaudiu de pé. Dessa vez, ninguém estava rindo dela.",
+      "imagem": "whole wedding ballroom giving a standing ovation, warm golden light, emotional atmosphere",
+      "movimento": "zoom_out"
+    },
+    {
+      "narracao": "No fim da noite, Rosângela tirou o sapato baixo, sentou na escada do hotel e olhou a cidade.",
+      "imagem": "older woman sitting barefoot on the steps of a luxury hotel at night, city lights, peaceful",
+      "personagens": [
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Vinte e cinco anos antes, ela estava naquela mesma rua. Com um isopor de marmita e um bebê numa caixa de papelão.",
+      "imagem": "split mood, the same street at night with a ghostly memory of a young mother selling lunch boxes"
+    },
+    {
+      "narracao": "Nunca julgue alguém pela roupa que veste, pela bolsa que carrega ou pela mesa onde colocaram a pessoa para sentar.",
+      "imagem": "close-up of an old worn handbag resting on luxurious marble steps"
+    },
+    {
+      "narracao": "Você nunca sabe quem construiu o salão onde você está dançando.",
+      "imagem": "wide shot of the luxury hotel facade at night, glowing windows",
+      "pausa": 0.8,
+      "movimento": "zoom_out"
+    },
+    {
+      "narracao": "E você, o que faria no lugar da Rosângela? Perdoava a dívida ou não? Comenta aqui embaixo, e me diz de qual cidade você está assistindo.",
+      "imagem": "older woman smiling warmly at the camera, soft evening light",
+      "personagens": [
+        "heroina"
+      ]
+    },
+    {
+      "narracao": "Se inscreve no canal e ativa o sininho, porque amanhã tem outra história que vai mexer com você.",
+      "imagem": "cinematic shot of a hotel hallway with warm lights, door slightly open, mysterious mood",
+      "movimento": "zoom_in"
+    }
+  ],
+  "youtube": {
+    "titulos": [
+      "Mandaram a mãe do noivo comer na cozinha… sem saber que o hotel era dela",
+      "A sogra humilhou a mãe do noivo no casamento. Minutos depois descobriu quem ela era",
+      "Colocaram ela na mesa do lixo no casamento do filho. O final é inacreditável"
+    ],
+    "descricao": "A família rica da noiva achou que a mãe do noivo era uma qualquer. Colocaram ela pra comer do lado da cozinha, riram do vestido simples e tentaram expulsar ela do casamento do próprio filho. Só que ninguém ali sabia de onde vinha aquela mulher.\n\nHistória fictícia, criada para entretenimento.",
+    "hashtags": [
+      "#novelinha",
+      "#historiadevinganca",
+      "#casamento"
+    ],
+    "tags": [
+      "novelinha",
+      "história de vingança",
+      "sogra humilha",
+      "mãe do noivo",
+      "casamento",
+      "humilharam a dona do hotel",
+      "história emocionante",
+      "história narrada",
+      "nunca julgue"
+    ],
+    "thumbnail_texto": "O HOTEL ERA DELA",
+    "thumbnail_cena": 1
+  }
+}
