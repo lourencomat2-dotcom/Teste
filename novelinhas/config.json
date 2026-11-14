@@ -1,0 +1,47 @@
+{
+  "video": {
+    "formato": "horizontal",
+    "fps": 30,
+    "pausa_entre_cenas": 0.35,
+    "intensidade_movimento": 0.12
+  },
+  "tts": {
+    "provedor": "edge",
+    "edge": {
+      "velocidade": "+8%",
+      "tom": "+0Hz",
+      "vozes": {
+        "narrador": "pt-BR-AntonioNeural",
+        "homem": "pt-BR-AntonioNeural",
+        "mulher": "pt-BR-FranciscaNeural",
+        "narradora": "pt-BR-ThalitaMultilingualNeural"
+      }
+    },
+    "elevenlabs": {
+      "modelo": "eleven_multilingual_v2",
+      "ajustes": {"stability": 0.45, "similarity_boost": 0.8, "style": 0.3},
+      "vozes": {
+        "narrador": "COLOQUE_O_VOICE_ID_AQUI"
+      }
+    }
+  },
+  "imagens": {
+    "provedor": "replicate",
+    "replicate": {"modelo": "black-forest-labs/flux-schnell"},
+    "openai": {"modelo": "gpt-image-1", "qualidade": "medium"}
+  },
+  "legendas": {
+    "queimar": true,
+    "fonte": "Arial Black",
+    "cor": "&H0000FFFF",
+    "maiusculas": true,
+    "palavras_por_linha_vertical": 3,
+    "palavras_por_linha_horizontal": 7,
+    "tamanho_vertical": 0.045,
+    "tamanho_horizontal": 0.055
+  },
+  "musica": {
+    "arquivo": null,
+    "volume": 0.18
+  }
+}

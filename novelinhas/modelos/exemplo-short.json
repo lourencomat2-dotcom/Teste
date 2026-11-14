@@ -1,0 +1,105 @@
+{
+  "titulo": "Expulsaram o mecânico da concessionária sem saber que ele era o dono",
+  "formato": "vertical",
+  "estilo_visual": "cinematic photo, dramatic moody lighting, shallow depth of field, Brazilian people, realistic, 35mm film look",
+  "personagens": {
+    "heroi": {"nome": "Otávio", "visual": "brazilian man, 50 years old, grey short hair, kind eyes, blue mechanic overalls stained with grease"},
+    "vila": {"nome": "Bianca", "visual": "brazilian woman, late 20s, sleek black ponytail, tight beige blazer, gold earrings, arrogant expression"},
+    "aliado": {"nome": "Caio", "visual": "young brazilian man, 20 years old, thin, curly hair, simple white polo shirt with name tag"}
+  },
+  "vozes": {"edge": {"vila": "pt-BR-FranciscaNeural"}},
+  "cenas": [
+    {
+      "narracao": "Ela mandou o segurança tirar ele da loja. Vinte minutos depois, era ela quem estava saindo, com uma caixa nas mãos.",
+      "imagem": "luxury car dealership showroom, arrogant saleswoman pointing to the exit, man in greasy mechanic overalls standing calmly",
+      "personagens": ["heroi", "vila"]
+    },
+    {
+      "narracao": "Otávio entrou na concessionária mais cara da cidade direto da oficina, ainda sujo de graxa.",
+      "imagem": "man in greasy mechanic overalls entering a bright glass luxury car showroom, shiny sports cars around",
+      "personagens": ["heroi"]
+    },
+    {
+      "narracao": "Ele parou na frente do carro preto da vitrine e só ficou olhando. Com um sorrisinho de quem conhece cada parafuso.",
+      "imagem": "man in mechanic overalls admiring a black luxury sedan in showroom, soft smile, reflections on car paint",
+      "personagens": ["heroi"]
+    },
+    {
+      "narracao": "Moço, aqui não é oficina não. Não encosta no carro, que você vai sujar.",
+      "imagem": "arrogant saleswoman with crossed arms looking down at someone, luxury showroom background",
+      "personagens": ["vila"],
+      "voz": "vila"
+    },
+    {
+      "narracao": "Bianca, a vendedora, falou alto. Alto o suficiente para os clientes ricos rirem.",
+      "imagem": "wealthy customers in elegant clothes laughing in a luxury car showroom, saleswoman smirking",
+      "personagens": ["vila"]
+    },
+    {
+      "narracao": "Só o Caio, o estagiário, chegou perto. Ofereceu um café e perguntou se podia ajudar.",
+      "imagem": "young intern offering a small cup of coffee to a mechanic in a showroom, kind gesture",
+      "personagens": ["aliado", "heroi"]
+    },
+    {
+      "narracao": "Otávio agradeceu e pediu para fazer um test drive. Foi aí que Bianca perdeu a paciência.",
+      "imagem": "saleswoman angry, raising her hand to call security, mechanic calm in front of her",
+      "personagens": ["vila", "heroi"]
+    },
+    {
+      "narracao": "Segurança! Tira esse homem daqui antes que ele roube alguma coisa.",
+      "imagem": "security guard in black suit walking towards a man in mechanic overalls, tense atmosphere, showroom",
+      "personagens": ["heroi"],
+      "voz": "vila",
+      "pausa": 1.0
+    },
+    {
+      "narracao": "Mas o segurança parou no meio do caminho. Ficou pálido. E disse baixinho: bom dia, seu Otávio.",
+      "imagem": "security guard frozen in shock, respectfully lowering his head, close-up of surprised face",
+      "pausa": 0.8
+    },
+    {
+      "narracao": "Nessa hora, o gerente desceu correndo a escada, quase tropeçando.",
+      "imagem": "nervous manager in suit running down a glass staircase in a luxury showroom",
+      "movimento": "pan_cima"
+    },
+    {
+      "narracao": "Doutor Otávio! Ninguém avisou que o senhor vinha hoje. O dono da rede inteira, aqui, na loja.",
+      "imagem": "manager shaking hands with the mechanic respectfully, saleswoman in background with shocked face",
+      "personagens": ["heroi", "vila"]
+    },
+    {
+      "narracao": "Bianca ficou branca. O carro preto da vitrine? Ele mesmo tinha projetado o motor, trinta anos atrás, numa oficina de fundo de quintal.",
+      "imagem": "close-up of a young woman pale with shock, mouth open, luxury cars blurred behind",
+      "personagens": ["vila"],
+      "pausa": 0.8
+    },
+    {
+      "narracao": "Eu venho assim todo mês, ele disse. Para ver como vocês tratam quem não parece ter dinheiro. Hoje eu vi.",
+      "imagem": "calm mature man in overalls speaking firmly, staff listening in silence, dramatic light",
+      "personagens": ["heroi"]
+    },
+    {
+      "narracao": "Bianca foi desligada na hora. E o Caio, o estagiário do café, saiu dali com a vaga dela.",
+      "imagem": "young intern smiling receiving a new name tag from the manager, in background a woman leaving with a cardboard box",
+      "personagens": ["aliado", "vila"]
+    },
+    {
+      "narracao": "Nunca julgue alguém pela roupa que veste. Se inscreve, que amanhã tem outra história.",
+      "imagem": "mechanic walking away into the sunset next to a black luxury sedan, cinematic wide shot",
+      "personagens": ["heroi"],
+      "movimento": "zoom_out"
+    }
+  ],
+  "youtube": {
+    "titulos": [
+      "Expulsaram o mecânico da concessionária… sem saber que ele era o dono",
+      "Ela chamou o segurança pro mecânico. Minutos depois descobriu quem ele era",
+      "Humilharam o homem sujo de graxa na loja de carros de luxo"
+    ],
+    "descricao": "Ela achou que ele não tinha dinheiro nem pra olhar o carro. Mal sabia quem estava na frente dela.",
+    "hashtags": ["#novelinha", "#historia", "#vinganca", "#shorts"],
+    "tags": ["novelinha", "história de vingança", "humilharam o dono", "ceo disfarçado", "história emocionante", "shorts"],
+    "thumbnail_texto": "ELE ERA O DONO",
+    "thumbnail_cena": 1
+  }
+}
