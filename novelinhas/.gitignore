@@ -14,3 +14,15 @@ episodios/*/segmentos/
 episodios/*/uploads.json
 __pycache__/
 episodios/*/custos.json
+ep*/refs/
+ep*/mestres/
+ep*/audio/
+ep*/videos/
+ep*/quadros_extra/
+ep*/sfx/
+ep*/segmentos/
+ep*/checagem/*.png
+ep*/uploads.json
+ep*/saida/
+ep*/custos.json
+ep*/trilha_*.mp3

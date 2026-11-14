@@ -81,10 +81,12 @@ def subir_imagem(caminho, cache):
     return cache[chave]
 
 
-def gerar_imagem(prompt, destino, refs, w, h):
+def gerar_imagem(prompt, destino, refs, w, h, seed=None):
     o = CFG["imagem"]
     tarefa = {"taskType": "imageInference", "model": o["modelo"], "positivePrompt": prompt[:2900],
               "width": w, "height": h, "numberResults": 1, "outputType": "URL", "outputFormat": "PNG"}
+    if seed is not None:
+        tarefa["seed"] = int(seed)
     if refs:
         tarefa["referenceImages"] = refs
     item = nv.runware(tarefa, "imageURL", o)
