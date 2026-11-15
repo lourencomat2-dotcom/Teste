@@ -20,11 +20,20 @@
 | **Lucas** (32, herói) | ref `ep003/refs/lucas_*`; cabelo escuro curto ondulado, barba curta; **camiseta branca gola redonda, avental bege**; **bloquinho na mão esquerda, caneta na direita**; nunca celular | `man about 32, deep calm baritone, slow and polite, native Brazilian Portuguese (São Paulo accent)` |
 | **Dona Marta** (65, gerente) | **ref nova** (seed fixa); cabelo grisalho curto e cacheado, óculos de leitura num cordão, **cardigã vinho** sobre blusa creme, crachá sem texto | `ELDERLY woman about 65, LOW husky alto voice, slow warm grandmotherly pace, native Brazilian Portuguese (São Paulo accent)` |
 
+## Revisão do Woody (storyboard validado, commit 3dbaa94 → esta revisão)
+- **Aprovados sem regerar:** p01, p04, p09. No prompt Veo do plano 1 acrescentar: `Diego looks down at his menu, never at the camera`.
+- **Diego:** `Diego holds his closed menu at chest height` em todos os quadros/prompts até o plano 9.
+- **Lucas:** `notepad lowered at waist in left hand, pen held away from the pad in right hand, not writing` (no 8 ele guarda a caneta no bolso do avental).
+- **Vanessa:** `visible soft shoulder pads` em todo prompt. **Janela visível:** `boxy 1990s sedans and hatchbacks outside`.
+- **C3 novo:** câmera atrás e à esquerda da Vanessa (entre ela e a parede esquerda), abaixo do eixo; fundo = **balcão** + parede direita; janela atrás da câmera, luz suave vindo do lado da câmera.
+- **Dona Marta:** referência refeita com **1 crachá branco sem texto no lado esquerdo do peito** (`storyboard/ref_marta.jpg`).
+- **Brilho:** quadros C2 igualados aos C1/C3/C4 (luminância média ≈ 92–98).
+
 ## Espaço (ver `planta_cafe.jpg`)
-- Mesa redonda **T1** encostada na **janela da frente** (fundo). **Vanessa** sentada à **esquerda** de T1, **Diego** à **direita** de T1, ambos de frente para o balcão. **2 cardápios fechados** sobre T1, um na frente de cada um. Mais nada na mesa o episódio inteiro (os cafés nunca chegam).
+- Mesa redonda **T1** perto da **janela da frente**, com a **mesa extra T4 entre T1 e a janela**; outras mesas pela sala (T2, T3, T5–T8). **Vanessa** sentada à **esquerda** de T1, **Diego** à **direita** de T1, ambos de frente para o balcão. **2 cardápios fechados** sobre T1, um na frente de cada um. Mais nada na mesa o episódio inteiro (os cafés nunca chegam).
 - **Lucas** vem do balcão (frente/direita) e fica **em pé do lado direito de T1, encostado na mesa, ao lado do Diego**, de frente para o casal.
 - **Dona Marta** vem do balcão pela direita e para **à direita do Lucas** (mais perto do balcão).
-- **Outras mesas (T2, T3):** vazias, sem nada em cima. Sem outros clientes. Porta de entrada na parede esquerda (ninguém usa nesta cena).
+- **Outras mesas:** sem cardápios nem xícaras (saleiros ok). Sem outros clientes. Porta de entrada na parede esquerda (ninguém usa nesta cena).
 - **Eixo 180°:** linha casal ↔ Lucas. **A câmera fica sempre do lado do balcão.** Vanessa e Diego olham **para cima e à direita**; Lucas e Marta olham **para baixo e à esquerda**.
 - **Luz:** uma só, luz natural de fim de tarde pela janela (atrás do casal), **neutra e contida**, preenchimento suave do lado do balcão.
 - **Visual:** cor neutra, saturação reduzida, só um toque de anos 90 (figurino, telefone de fio e registradora no balcão, carros antigos lá fora); acabamento `grade_suave.txt` na edição.
@@ -33,13 +42,13 @@
 | # | Dur. | Enquadramento (câmera) | Quem fala / fala exata | Em quadro e onde | Mãos / mesa | Quadro inicial |
 |---|---|---|---|---|---|---|
 | **1** | 8 s | **MESTRE** aberto frontal (C1): mesa T1 inteira, janela atrás | **VANESSA** (olhando o café, depois para o Diego): *"Nossa, amor... que lugar mais simples, hein? Só tem gente sem dinheiro aqui."* — no fim, o Lucas chega pela direita e para ao lado do Diego (só do peito para baixo; cabeça sai pelo topo) | Vanessa (esq.), Diego (dir.), Lucas entrando (dir.) | Diego segura o cardápio dele; o da Vanessa na mesa. Lucas com bloquinho e caneta | Seedream |
-| **2** | 6 s | **Over-the-shoulder do Lucas** (C2): Vanessa de frente; costas/ombro do Lucas à direita; Diego visível entre os dois, meio encoberto | **VANESSA** (reconhece, deboche): *"Lucas? Não acredito! Você ainda trabalha servindo mesa?"* | Vanessa (esq.), Diego (centro, parcial), Lucas de costas (dir., primeiro plano) | Cardápios em T1 na frente dela | Seedream |
-| **3** | 6 s | **Contraplano over-the-shoulder da Vanessa** (C3): nuca/ombro da Vanessa à esquerda; **T1 na parte de baixo** com os cardápios; Diego sentado de perfil; Lucas em pé encostado na mesa | **LUCAS** (calmo): *"Trabalho, sim. Boa tarde, Vanessa. O que vocês vão querer?"* | Vanessa de costas (esq.), Diego (centro), Lucas (dir.) | Lucas segura bloquinho e caneta **parados** (não escreve) | Seedream |
+| **2** | 6 s | **Over-the-shoulder do Lucas** (C2): Vanessa de frente; costas/ombro do Lucas à direita; Diego visível entre os dois, meio encoberto | **VANESSA** (reconhece, deboche): *"Lucas? Não acredito! Você ainda é garçom?"* | Vanessa (esq.), Diego (centro, parcial), Lucas de costas (dir., primeiro plano) | Cardápio da Vanessa em T1; Diego segura o dele fechado no peito | Seedream |
+| **3** | 6 s | **Contraplano over-the-shoulder da Vanessa** (C3, câmera atrás e à esquerda dela): nuca e ombro esquerdo da Vanessa à esquerda; Diego ao lado dela de três-quartos de costas, olhando para cima e à direita, segurando o cardápio; Lucas em pé encostado na borda direita de T1; **fundo: balcão** (espresso antiga, registradora, telefone de fio) e parede direita; a janela fica atrás da câmera | **LUCAS** (calmo): *"Trabalho, sim. Boa tarde, Vanessa. O que vocês vão querer?"* | Vanessa de costas (esq.), Diego (centro), Lucas (dir.) | Lucas segura bloquinho e caneta **parados** (não escreve) | Seedream |
 | **4** | 6 s | **Close do Diego** (C4): Diego de frente, olhando para cima e à direita; **ombro da Vanessa** na borda esquerda | **DIEGO** (risadinha): *"Então esse é o ex? Olha só o avental, amor."* | Diego (centro), ombro da Vanessa (esq.); Lucas fora de quadro à direita (em pé, acima do enquadramento) | Diego segura o cardápio | Seedream |
 | **5** | 6 s | Igual ao **2** (C2) | **VANESSA** (de cima para baixo): *"Traz dois cafés. E capricha, viu? Pelo menos isso você sabe fazer."* | igual ao 2 | igual ao 2 | **último quadro do 2** (Seedream só como referência) |
-| **6** | 8 s | Igual ao **3** (C3) | **DONA MARTA** entra pela direita, toca o braço do Lucas: *"Seu Lucas, o contador ligou. As doze lojas bateram recorde este mês!"* Lucas sorri, calado | Vanessa de costas (esq.), Diego (centro), Lucas (dir.), Marta entra e para à direita do Lucas | Lucas com bloquinho parado | **último quadro do 3** |
+| **6** | 8 s | Igual ao **3** (C3) | **DONA MARTA** entra vindo do balcão, ao fundo à direita, para ao lado do Lucas e toca o braço dele: *"Seu Lucas, o contador ligou. As doze lojas bateram recorde de venda este mês!"* Lucas sorri, calado | Vanessa de costas (esq.), Diego (centro), Lucas (dir.), Marta entra e para à direita do Lucas | Lucas com bloquinho parado | **último quadro do 3** |
 | **7** | 4 s | Igual ao **2** (C2); Marta aparece **em parte** na borda direita (manga do cardigã vinho), ao lado das costas do Lucas | **VANESSA** (baixinho, chocada): *"Seu Lucas? Doze lojas?"* | Vanessa (esq.), Diego (centro, parcial), Lucas de costas (dir.), manga da Marta (borda dir.) | — | **último quadro do 5** |
-| **8** | 6 s | Igual ao **3/6** (C3) | **LUCAS** (sorriso tranquilo): *"Pois é. Esta aqui foi a primeira. Os cafés de vocês são por conta da casa."* | Vanessa de costas, Diego, Lucas, Marta ao lado dele sorrindo | Lucas guarda a caneta no bolso do avental | **último quadro do 6** |
+| **8** | 6 s | Igual ao **3/6** (C3) | **LUCAS** (sorriso tranquilo): *"Pois é. Essa aqui foi a primeira. O café de vocês é por conta da casa."* | Vanessa de costas, Diego, Lucas, Marta ao lado dele sorrindo | Lucas guarda a caneta no bolso do avental | **último quadro do 6** |
 | **9** | 4 s | Igual ao **4** (C4) | **DIEGO** (sem graça, abaixa o cardápio): *"Amor... vamos embora."* | Diego, ombro da Vanessa (esq.) | Diego larga o cardápio na mesa | **último quadro do 4** |
 
 Card final 4 s (ASSISTA TAMBÉM / INSCREVA-SE / ATIVA O SININHO) sobre o último quadro desfocado.
@@ -67,6 +76,9 @@ Quadros iniciais gerados no Seedream 5.5 com as referências fixas (Vanessa, Die
 - **C4 (4, 9):** close do Diego; ombro da Vanessa na borda esquerda e avental do Lucas na borda direita (coerente: ele está em pé ao lado). ✅
 - Luz neutra pela janela, sempre do mesmo lado; figurino e cabelo iguais às referências. ✅
 - **Pendências conhecidas:** nos quadros C2 o Lucas aparece com a caneta encostada no bloquinho (o prompt de vídeo diz "não escreve"); nas mesas vazias do fundo aparecem saleiros pequenos (não são cardápios nem xícaras).
+
+### Revisão 2 (Woody)
+Regerados: `ref_marta`, p02, p03, p05, p06, p07, p08. Descartados nesta rodada (não versionados): p02/p03 com o Lucas **escrevendo**, p03 com **uma segunda Vanessa** sentada ao lado do Diego (resolvido gerando o C3 sem a referência do rosto dela, que só aparece de costas). p02 e p07 com brilho reduzido na pós (×0,967 e ×0,925).
 
 **Uso na geração de vídeo:** planos 1–4 partem destes quadros; os planos 5–9 partem do **último quadro real** do vídeo anterior do mesmo ângulo (5←2, 6←3, 7←5, 8←6, 9←4). Os quadros 5–9 do storyboard servem de referência visual e de reserva caso um encadeamento saia errado.
 
