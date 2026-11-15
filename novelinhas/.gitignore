@@ -29,3 +29,8 @@ ep*/trilha_*.mp3
 ep*/trabalho/
 ep*/storyboard/*.png
 ep*/storyboard/descartados/
+ep*/trabalho_v2/*
+!ep*/trabalho_v2/prompt_*.txt
+!ep*/trabalho_v2/gasto.json
+!ep*/trabalho_v2/tempos.json
+!ep*/trabalho_v2/montar_v2.py
