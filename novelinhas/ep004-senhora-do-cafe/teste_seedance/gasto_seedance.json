@@ -5,5 +5,9 @@
  "duracao_s": 15,
  "resolucao": "1280x720",
  "estimado": 3.45,
- "taskUUID": "1fd4c7c9-18eb-490c-a19f-1d5e19dda67a"
+ "taskUUID": "1fd4c7c9-18eb-490c-a19f-1d5e19dda67a",
+ "custo_api": 3.47643,
+ "saldo_logo_apos": 14.02672,
+ "saldo_conferido_apos_encode": 13.98754,
+ "obs": "Custo da API (includeCost) = custo_api. At\u00e9 a \u00faltima confer\u00eancia o saldo ainda N\u00c3O refletia a cobran\u00e7a do Seedance: a queda de 14.02672 para 13.98754 (US$ 0,039) corresponde a cobran\u00e7a atrasada do Nano Banana. Saldo esperado ap\u00f3s o d\u00e9bito: ~10.51."
 }
