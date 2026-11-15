@@ -38,3 +38,5 @@ ep004-senhora-do-cafe/refs/*.png
 ep004-senhora-do-cafe/storyboard/*.png
 ep004-senhora-do-cafe/descartados/
 ep004-senhora-do-cafe/uploads.json
+ep*/trabalho_nb/*
+!ep*/trabalho_nb/*_prompt.txt
