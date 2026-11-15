@@ -77,13 +77,15 @@ Gerado no Seedream 5.5 com as referências fixas (`refs/ref_helena.jpg`, `ref_pa
 |---|---|
 | p01 | ✅ posições, objetos (2 xícaras, garrafa, pastas, telefone), figurinos, expressões contidas. A Helena aparece junto à janela (a porta de entrada fica fora do quadro, à esquerda) |
 | p02 | ✅ uma só Helena, de costas, com a garrafa; Paula com o celular; Ana com a pasta; 2 xícaras |
-| p03 | ⚠️ **NÃO perfeito:** uma só Helena servindo a xícara da Paula ✅, mas ela está à **ESQUERDA** das candidatas — quebra a direção de tela (180°) em relação ao p02, onde ela está à direita |
+| p03 | ✅ (refeito por edição do master) uma só Helena, à **DIREITA** da Paula, garrafa na mão direita, servindo a xícara da Paula; a da Ana vazia; Paula no celular; Joice no balcão |
 | p04 | ✅ Ana em pé com a pasta azul, Paula sentada com o celular, Helena na borda direita com a garrafa |
-| p05 | ⚠️ **NÃO perfeito:** Ana de costas com a pasta ✅, mas a Helena está a ~2 m (mesinha entre as duas, não "a um passo") e o **assento da Paula aparece vazio** (a Paula some do sofá) |
+| p05 | ✅ (refeito por edição do master) Ana de costas à esquerda com a pasta azul; Helena **a um passo** dela, à direita, olhando a pasta, com a garrafa; **Paula sentada no lugar dela** ao fundo, com o celular |
 | p06 | ✅ Joice com o fone do telefone de fio, só ela e a parede |
-| p07 | ✅ Paula e Ana no sofá, Helena na borda direita com a garrafa (nítida, não desfocada) |
-| p08 | ✅ Helena põe a garrafa no balcão, Joice atrás, crachá invisível. Recortado 12% à esquerda para tirar a janela que não deveria aparecer nesse ângulo |
-| p09 | ⚠️ **NÃO perfeito:** close da Paula sentada no sofá com o celular no colo ✅, mas o sofá se estende para a **esquerda** da tela (como se ela estivesse no assento direito, que é o da Ana) |
+| p07 | ✅ (refeito por edição do master) Paula e Ana no sofá; xícara da Paula com café, a da Ana vazia; Helena **ao fundo, desfocada**, com a garrafa (desfoque aplicado na pós, que também apagou um broche que poderia parecer o crachá). Obs.: ela está mais ao fundo (perto da porta da diretoria) do que a marca da planta |
+| p08 | ✅ (refeito por edição; **sem recorte**, 16:9 inteiro) Helena põe a garrafa no balcão, Joice atrás olhando para ela, crachá invisível; janela e sofá fora do quadro |
+| p09 | ✅ (refeito por edição do p07) Paula no assento **esquerdo**: braço do sofá e pasta preta à esquerda da tela, sofá seguindo para a direita; celular no colo, olhar para baixo; Ana se levantando na borda direita, desfocada (desfoque na pós) |
 | p10 | ✅ Helena ao lado da porta aberta, crachá branco sem texto no peito, mãos vazias; Ana entrando, de costas |
+
+**Refação (método de edição, teto US$ 0,40):** `storyboard/master.jpg` é o plano mestre aberto (edição do p01 com a Helena na marca dos planos 2/3/5/7, à direita da mesinha). Os quadros p03, p05, p07 e p08 foram gerados por **edição a partir do master** + refs (Seedream 5.5 com o master como imagem 1); o p09 saiu da edição do p07 e o p08 final é uma edição do próprio p08 (só o fundo esquerdo). Custo registrado em `gasto_refacao.json`.
 
 Descartados (não versionados): ref da Helena com caneca de viagem; p02 com **duas Helenas**; p03 com duas Helenas e servindo a xícara errada; vários quadros com o **sofá vazio** ao fundo; p09 espelhado (janela e Ana trocavam de lado).
