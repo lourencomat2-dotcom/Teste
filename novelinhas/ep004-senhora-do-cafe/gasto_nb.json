@@ -2,7 +2,7 @@
  "modelo": "google:nano-banana@2.1",
  "teto": 0.7,
  "saldo_antes": 14.40428,
- "total_registrado": 0.24492,
+ "total_registrado": 0.28612,
  "itens": [
   {
    "quadro": "p01",
@@ -67,6 +67,17 @@
    "imagens": [
     "base_p06.jpg",
     "ref_joice.jpg"
+   ]
+  },
+  {
+   "quadro": "p07",
+   "custo": 0.041199,
+   "prompt_chars": 2453,
+   "imagens": [
+    "base_p07.jpg",
+    "ref_paula.jpg",
+    "ref_ana.jpg",
+    "ref_helena.jpg"
    ]
   }
  ]
