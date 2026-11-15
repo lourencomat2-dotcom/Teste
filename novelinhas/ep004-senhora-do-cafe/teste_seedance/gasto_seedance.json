@@ -1,0 +1,9 @@
+{
+ "modelo": "bytedance:seedance@2.5",
+ "teto": 4.0,
+ "saldo_antes": 14.02672,
+ "duracao_s": 15,
+ "resolucao": "1280x720",
+ "estimado": 3.45,
+ "taskUUID": "1fd4c7c9-18eb-490c-a19f-1d5e19dda67a"
+}

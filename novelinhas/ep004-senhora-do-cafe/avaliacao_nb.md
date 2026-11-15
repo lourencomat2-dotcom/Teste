@@ -4,7 +4,7 @@ Uma tentativa por quadro, 1376×768, sem seed. Imagem-base: `storyboard/master.j
 
 | Quadro | Veredito | Por quê (contra a lista do Woody e a regra do Lucas) |
 |---|---|---|
-| p01 | ✅ aprovado | Helena **entrando pela porta** da parede esquerda, de perfil, garrafa na mão direita; Paula no celular, Ana com a pasta fechada no colo, pasta preta junto ao braço do sofá; xícaras vazias; Joice olhando para a Helena |
+| p01 | ❌ reprovado (corrigido após observação do Lucas) | Helena entra por uma porta de perfil, garrafa na mão direita, xícaras vazias ✅; mas **janela e porta estão invertidas**: a janela aparece mais perto da câmera e a porta de entrada mais ao fundo, ao contrário da planta (janela ao fundo-esquerda, porta na frente-esquerda); e o cabelo da Paula está na altura dos ombros, não passando dos ombros. Eu tinha aprovado por engano |
 | p02 | ❌ reprovado | Câmera atrás da Helena na ponta direita da mesinha ✅, mas a garrafa está na **mão esquerda** (lado esquerdo do corpo, vista de costas), não na direita |
 | p03 | ❌ reprovado | Plano médio 3/4 ✅ e Helena sem cobrir a Ana ✅, mas o café cai na **xícara da Ana** (a da direita), não na da Paula |
 | p04 | ❌ reprovado | Ana de pé à direita da mesinha, olhando para a direita, pasta fechada ✅; mas a **Paula está sentada fora do sofá**, à esquerda do braço, e o assento dela fica vazio; a pasta está na mão direita da Ana (o roteiro pede a esquerda) |
@@ -15,4 +15,4 @@ Uma tentativa por quadro, 1376×768, sem seed. Imagem-base: `storyboard/master.j
 | p09 | ❌ reprovado | Encosto único ✅ e Ana se levantando ✅; mas a **mão da Paula está na xícara**, a xícara e o pires ficam cortados na borda de baixo (não "inteira visível") e o celular está na mão, não deixado no colo |
 | p10 | ✅ aprovado com ressalva | Sala da diretora clara com luz do dia, **sem abajur**; crachá branco no peito, mãos vazias; Ana entrando com a pasta fechada. Ressalvas: a Helena tem um leve sorriso educado (boca fechada) e o crachá tem marcas cinza muito fracas, ilegíveis |
 
-**Resultado:** 4 de 9 aprovados (p01, p06, p07, p10), 5 reprovados (p02, p03, p04, p05, p09). Sem segunda rodada, como pedido.
+**Resultado:** 3 de 9 aprovados (p06, p07, p10), 6 reprovados (p01, p02, p03, p04, p05, p09). Sem segunda rodada, como pedido.
