@@ -2,7 +2,7 @@
  "modelo": "google:nano-banana@2.1",
  "teto": 0.7,
  "saldo_antes": 14.40428,
- "total_registrado": 0.28612,
+ "total_registrado": 0.36474,
  "itens": [
   {
    "quadro": "p01",
@@ -79,6 +79,29 @@
     "ref_ana.jpg",
     "ref_helena.jpg"
    ]
+  },
+  {
+   "quadro": "p09",
+   "custo": 0.0394425,
+   "prompt_chars": 2257,
+   "imagens": [
+    "base_p09.jpg",
+    "ref_paula.jpg",
+    "ref_ana.jpg"
+   ]
+  },
+  {
+   "quadro": "p10",
+   "custo": 0.0391815,
+   "prompt_chars": 1546,
+   "imagens": [
+    "p10.jpg",
+    "ref_helena.jpg",
+    "ref_ana.jpg"
+   ]
   }
- ]
+ ],
+ "saldo_depois": 14.06616,
+ "debitado_pelo_saldo": 0.33812,
+ "obs": "Saldo conferido ~10 min ap\u00f3s a \u00faltima gera\u00e7\u00e3o; cobran\u00e7as atrasadas ainda podem aparecer. Registrado pela API > debitado at\u00e9 agora."
 }
