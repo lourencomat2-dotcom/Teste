@@ -1,0 +1,335 @@
+{
+ "limiares_rosto": {
+  "vanessa": 142.82207861523037,
+  "diego": 114.87469400329546,
+  "lucas": 124.95459274167447
+ },
+ "planos": {
+  "2": {
+   "tentativas": 1,
+   "rosto": [
+    [
+     0.02,
+     "vanessa",
+     85.0,
+     "ok"
+    ],
+    [
+     0.25,
+     "vanessa",
+     103.7,
+     "ok"
+    ],
+    [
+     0.5,
+     "vanessa",
+     88.8,
+     "ok"
+    ],
+    [
+     0.75,
+     "vanessa",
+     97.0,
+     "ok"
+    ],
+    [
+     0.97,
+     "vanessa",
+     80.8,
+     "ok"
+    ]
+   ],
+   "ok": true
+  },
+  "1": {
+   "tentativas": 1,
+   "rosto": [
+    [
+     0.02,
+     "vanessa",
+     74.4,
+     "ok"
+    ],
+    [
+     0.02,
+     "diego",
+     84.2,
+     "ok"
+    ],
+    [
+     0.25,
+     "vanessa",
+     93.3,
+     "ok"
+    ],
+    [
+     0.25,
+     "diego",
+     91.8,
+     "ok"
+    ],
+    [
+     0.5,
+     "vanessa",
+     107.3,
+     "ok"
+    ],
+    [
+     0.5,
+     "diego",
+     101.6,
+     "ok"
+    ],
+    [
+     0.75,
+     "plano aberto",
+     3,
+     "inconclusivo (3 rostos)"
+    ],
+    [
+     0.97,
+     "vanessa",
+     107.8,
+     "ok"
+    ],
+    [
+     0.97,
+     "diego",
+     98.3,
+     "ok"
+    ]
+   ],
+   "ok": true
+  },
+  "5": {
+   "tentativas": 1,
+   "rosto": [
+    [
+     0.02,
+     "vanessa",
+     92.4,
+     "ok"
+    ],
+    [
+     0.25,
+     "vanessa",
+     100.4,
+     "ok"
+    ],
+    [
+     0.5,
+     "vanessa",
+     90.4,
+     "ok"
+    ],
+    [
+     0.75,
+     "vanessa",
+     102.5,
+     "ok"
+    ],
+    [
+     0.97,
+     "vanessa",
+     97.0,
+     "ok"
+    ]
+   ],
+   "ok": true
+  },
+  "4": {
+   "tentativas": 1,
+   "rosto": [
+    [
+     0.02,
+     "lucas",
+     109.2,
+     "ok"
+    ],
+    [
+     0.25,
+     "lucas",
+     108.5,
+     "ok"
+    ],
+    [
+     0.5,
+     "lucas",
+     103.0,
+     "ok"
+    ],
+    [
+     0.75,
+     "lucas",
+     113.9,
+     "ok"
+    ],
+    [
+     0.97,
+     "lucas",
+     110.6,
+     "ok"
+    ]
+   ],
+   "ok": true
+  },
+  "6": {
+   "tentativas": 1,
+   "rosto": [
+    [
+     0.02,
+     "diego",
+     75.2,
+     "ok"
+    ],
+    [
+     0.25,
+     "diego",
+     null,
+     "sem rosto (cabeça virada?)"
+    ],
+    [
+     0.5,
+     "diego",
+     null,
+     "sem rosto (cabeça virada?)"
+    ],
+    [
+     0.75,
+     "diego",
+     82.7,
+     "ok"
+    ],
+    [
+     0.97,
+     "diego",
+     83.9,
+     "ok"
+    ]
+   ],
+   "ok": true
+  },
+  "3": {
+   "tentativas": 1,
+   "rosto": [
+    [
+     0.02,
+     "vanessa",
+     101.8,
+     "ok"
+    ],
+    [
+     0.02,
+     "diego",
+     99.3,
+     "ok"
+    ],
+    [
+     0.25,
+     "vanessa",
+     92.9,
+     "ok"
+    ],
+    [
+     0.25,
+     "diego",
+     120.6,
+     "ok"
+    ],
+    [
+     0.5,
+     "plano aberto",
+     1,
+     "inconclusivo (1 rostos)"
+    ],
+    [
+     0.75,
+     "plano aberto",
+     1,
+     "inconclusivo (1 rostos)"
+    ],
+    [
+     0.97,
+     "plano aberto",
+     1,
+     "inconclusivo (1 rostos)"
+    ]
+   ],
+   "ok": true
+  },
+  "7": {
+   "tentativas": 1,
+   "rosto": [
+    [
+     0.02,
+     "lucas",
+     105.3,
+     "ok"
+    ],
+    [
+     0.25,
+     "lucas",
+     105.7,
+     "ok"
+    ],
+    [
+     0.5,
+     "lucas",
+     109.7,
+     "ok"
+    ],
+    [
+     0.75,
+     "lucas",
+     107.6,
+     "ok"
+    ],
+    [
+     0.97,
+     "lucas",
+     112.9,
+     "ok"
+    ]
+   ],
+   "ok": true
+  }
+ },
+ "cor_entre_cortes": [
+  {
+   "corte": 1,
+   "tempo_s": 4.0,
+   "deltaE": 4.0,
+   "ok": true
+  },
+  {
+   "corte": 2,
+   "tempo_s": 9.07,
+   "deltaE": 8.7,
+   "ok": true
+  },
+  {
+   "corte": 3,
+   "tempo_s": 14.07,
+   "deltaE": 5.4,
+   "ok": true
+  },
+  {
+   "corte": 4,
+   "tempo_s": 16.53,
+   "deltaE": 9.6,
+   "ok": true
+  },
+  {
+   "corte": 5,
+   "tempo_s": 25.16,
+   "deltaE": 4.6,
+   "ok": true
+  },
+  {
+   "corte": 6,
+   "tempo_s": 28.07,
+   "deltaE": 2.3,
+   "ok": true
+  }
+ ]
+}
