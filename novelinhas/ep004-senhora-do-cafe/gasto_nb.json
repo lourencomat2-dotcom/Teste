@@ -2,7 +2,7 @@
  "modelo": "google:nano-banana@2.1",
  "teto": 0.7,
  "saldo_antes": 14.40428,
- "total_registrado": 0.16656,
+ "total_registrado": 0.24492,
  "itens": [
   {
    "quadro": "p01",
@@ -47,6 +47,26 @@
     "ref_ana.jpg",
     "ref_paula.jpg",
     "ref_helena.jpg"
+   ]
+  },
+  {
+   "quadro": "p05",
+   "custo": 0.040986,
+   "prompt_chars": 1787,
+   "imagens": [
+    "p05.jpg",
+    "ref_ana.jpg",
+    "ref_helena.jpg",
+    "ref_paula.jpg"
+   ]
+  },
+  {
+   "quadro": "p06",
+   "custo": 0.0373695,
+   "prompt_chars": 1164,
+   "imagens": [
+    "base_p06.jpg",
+    "ref_joice.jpg"
    ]
   }
  ]
