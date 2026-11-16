@@ -35,7 +35,55 @@
    "tomada": "soraia3",
    "segundos": 4,
    "taskUUID": "1bfd0095-a6c7-4d93-85e7-79f4e144fab4",
-   "custo": null
+   "custo": 0.27181
+  },
+  {
+   "tomada": "soraia4",
+   "segundos": 4,
+   "taskUUID": "2d0fc6a2-e082-43e1-8ee0-b02a510c9160",
+   "custo": 0.27181
+  },
+  {
+   "tomada": "neide2",
+   "segundos": 6,
+   "taskUUID": "4bd2ceba-df83-4271-8fc0-101234fa7894",
+   "custo": 0.406315
+  },
+  {
+   "tomada": "juninho2",
+   "segundos": 8,
+   "taskUUID": "ea335016-4246-4d71-9b1f-c1bfbc2cd585",
+   "custo": 0.54082
+  },
+  {
+   "tomada": "soraia5",
+   "segundos": 5,
+   "taskUUID": "b11d6594-5b6e-45c0-bc46-a12a63c87554",
+   "custo": 0.339059
+  },
+  {
+   "tomada": "neide3",
+   "segundos": 6,
+   "taskUUID": "b798b088-b9ad-47bf-9373-00613c5a88dc",
+   "custo": 0.406315
+  },
+  {
+   "tomada": "soraia6",
+   "segundos": 5,
+   "taskUUID": "030d3edc-bc01-478b-89b7-ad92a03d85ab",
+   "custo": 0.339059
+  },
+  {
+   "tomada": "soraia7",
+   "segundos": 4,
+   "taskUUID": "5338e0db-a3ca-48aa-9f4c-7284059739f1",
+   "custo": 0.27181
+  },
+  {
+   "tomada": "neide4",
+   "segundos": 4,
+   "taskUUID": "386f2ec1-10ef-4b22-b6db-ee46f1121d8d",
+   "custo": 0.27181
   }
  ]
 }
