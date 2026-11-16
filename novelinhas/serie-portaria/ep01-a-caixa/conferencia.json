@@ -1,0 +1,537 @@
+[
+ {
+  "plano": 1,
+  "arquivo": "hall1.mp4",
+  "camera": "C1",
+  "quem": "Juninho, Valdir",
+  "falante": "juninho",
+  "fala": "Entrega pra Dona Neide!",
+  "acao": "Juninho entra pela porta de vidro abraçado a uma caixa enorme que tapa o rosto dele",
+  "status": "falta gerar"
+ },
+ {
+  "plano": 2,
+  "arquivo": "valdir1.mp4",
+  "camera": "C2",
+  "quem": "Valdir",
+  "falante": "valdir",
+  "fala": "Que caixa é essa, Juninho?",
+  "acao": "olha a caixa de cima a baixo",
+  "trecho": [
+   2.39,
+   4.06
+  ],
+  "ouvido": "Que caixa é essa, Juninho?",
+  "palavras": "5/5",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "Que caixa é essa, Juninho?",
+  "voz_sim": 0.59
+ },
+ {
+  "plano": 3,
+  "arquivo": "juninho1.mp4",
+  "camera": "C3",
+  "quem": "Juninho",
+  "falante": "juninho",
+  "fala": "Hoje é bico. Só vim entregar.",
+  "acao": "ofegante, capacete na cabeça",
+  "trecho": [
+   0.45,
+   2.76
+  ],
+  "ouvido": "Hoje é bico, só vim entregar.",
+  "palavras": "6/6",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "Hoje é bico, só vim entregar.",
+  "voz_sim": 0.76
+ },
+ {
+  "plano": 4,
+  "arquivo": "caixa.jpg",
+  "camera": "C6",
+  "quem": "a caixa",
+  "falante": null,
+  "fala": "",
+  "acao": "a caixa parada no chão; baque surdo",
+  "status": "falta gerar"
+ },
+ {
+  "plano": 5,
+  "arquivo": "soraia1.mp4",
+  "camera": "C3",
+  "quem": "Soraia",
+  "falante": "soraia",
+  "fala": "Não que eu queira saber...",
+  "acao": "de roupão e bobes, olho grudado para baixo, na caixa",
+  "trecho": [
+   0.51,
+   3.12
+  ],
+  "ouvido": "Não que eu queira saber.",
+  "palavras": "5/5",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "Não que eu queira saber...",
+  "voz_sim": 0.64
+ },
+ {
+  "plano": 6,
+  "arquivo": "valdir2.mp4",
+  "camera": "C2",
+  "quem": "Valdir",
+  "falante": "valdir",
+  "fala": "Eu não sou de comentar.",
+  "acao": "sem olhar para ela",
+  "trecho": [
+   0.09,
+   2.02
+  ],
+  "ouvido": "Eu não sou de comentar.",
+  "palavras": "5/5",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "Eu não sou de comentar.",
+  "voz_sim": 0.64
+ },
+ {
+  "plano": 7,
+  "arquivo": "soraia1.mp4",
+  "camera": "C3",
+  "quem": "Soraia",
+  "falante": null,
+  "fala": "",
+  "acao": "só encara, sobrancelha erguida",
+  "trecho": [
+   2.82,
+   6.08
+  ]
+ },
+ {
+  "plano": 8,
+  "arquivo": "valdir2.mp4",
+  "camera": "C2",
+  "quem": "Valdir",
+  "falante": "valdir",
+  "fala": "É da Dona Neide.",
+  "acao": "cede, falando baixinho",
+  "trecho": [
+   3.49,
+   5.4
+  ],
+  "ouvido": "é da dona Neide.",
+  "palavras": "4/4",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "é da dona Nade.",
+  "voz_sim": 0.25
+ },
+ {
+  "plano": 9,
+  "arquivo": "soraia2.mp4",
+  "camera": "C3",
+  "quem": "Soraia",
+  "falante": "soraia",
+  "fala": "Da síndica? Pesada assim?",
+  "acao": "animada",
+  "trecho": [
+   0,
+   4.06
+  ],
+  "ouvido": "da síndica pesada sim",
+  "palavras": "3/4",
+  "nota_fala": 0.75,
+  "corte_comeu": false,
+  "ouvido_largo": "da síndica pesada sim",
+  "voz_sim": 0.66
+ },
+ {
+  "plano": 10,
+  "arquivo": "sigilo1.mp4",
+  "camera": "C4",
+  "quem": "Sigilo",
+  "falante": "sigilo",
+  "fala": "Pesada assim! Pesada assim!",
+  "acao": "balança no poleiro",
+  "trecho": [
+   0,
+   4.06
+  ],
+  "ouvido": "pesada assim pesada assim",
+  "palavras": "4/4",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "pesada assim pesada assim",
+  "voz_sim": 0.49
+ },
+ {
+  "plano": 11,
+  "arquivo": "valdir3.mp4",
+  "camera": "C2",
+  "quem": "Valdir",
+  "falante": "valdir",
+  "fala": "Sigilo! Fica quieto.",
+  "acao": "vira para o papagaio",
+  "trecho": [
+   0.49,
+   2.68
+  ],
+  "ouvido": "Sejilo, fica quieto!",
+  "palavras": "2/3",
+  "nota_fala": 0.6666666666666666,
+  "corte_comeu": false,
+  "ouvido_largo": "Sejilo, fica quieto!",
+  "voz_sim": 0.31
+ },
+ {
+  "plano": 12,
+  "arquivo": "hall2.mp4",
+  "camera": "C1",
+  "quem": "Neide, Soraia",
+  "falante": "neide",
+  "fala": "Que reunião é essa na portaria?",
+  "acao": "a porta do elevador abre; Neide sai de prancheta",
+  "status": "falta gerar"
+ },
+ {
+  "plano": 13,
+  "arquivo": "soraia3.mp4",
+  "camera": "C3",
+  "quem": "Soraia",
+  "falante": "soraia",
+  "fala": "Só desci pegar o jornal.",
+  "acao": "disfarça",
+  "trecho": [
+   0.83,
+   2.96
+  ],
+  "ouvido": "só desci pegar o jornal.",
+  "palavras": "5/5",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "Só desci pegar o jornal.",
+  "voz_sim": 0.57
+ },
+ {
+  "plano": 14,
+  "arquivo": "perfil.mp4",
+  "camera": "C5",
+  "quem": "Neide, Soraia",
+  "falante": "neide",
+  "fala": "De roupão? É regra: roupão, não.",
+  "acao": "frente a frente",
+  "status": "falta gerar"
+ },
+ {
+  "plano": 15,
+  "arquivo": "valdir4.mp4",
+  "camera": "C2",
+  "quem": "Valdir",
+  "falante": "valdir",
+  "fala": "Chegou uma caixa pra senhora.",
+  "acao": "prestativo",
+  "trecho": [
+   1.37,
+   4.06
+  ],
+  "ouvido": "Chegou uma caixa para a senhora.",
+  "palavras": "4/5",
+  "nota_fala": 0.8,
+  "corte_comeu": false,
+  "ouvido_largo": "Chegou uma caixa para a senhora.",
+  "voz_sim": 0.61
+ },
+ {
+  "plano": 16,
+  "arquivo": "neide1.mp4",
+  "camera": "C3",
+  "quem": "Neide",
+  "falante": "neide",
+  "fala": "É... material de limpeza.",
+  "acao": "congela antes de responder",
+  "trecho": [
+   1.17,
+   3.9
+  ],
+  "ouvido": "é material de limpeza.",
+  "palavras": "4/4",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "É material de limpeza.",
+  "voz_sim": 0.52
+ },
+ {
+  "plano": 17,
+  "arquivo": "soraia4.mp4",
+  "camera": "C3",
+  "quem": "Soraia",
+  "falante": "soraia",
+  "fala": "Limpeza? Desse tamanho?",
+  "acao": "desconfiada",
+  "trecho": [
+   0.33,
+   4.06
+  ],
+  "ouvido": "limpeza desse tamanho",
+  "palavras": "3/3",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "limpeza desse tamanho",
+  "voz_sim": 0.64
+ },
+ {
+  "plano": 18,
+  "arquivo": "neide2.mp4",
+  "camera": "C3",
+  "quem": "Neide",
+  "falante": "neide",
+  "fala": "É muito detergente.",
+  "acao": "séria",
+  "trecho": [
+   0,
+   2.14
+  ],
+  "ouvido": "É muito detergente!",
+  "palavras": "3/3",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "É muito detergente!",
+  "voz_sim": 0.69
+ },
+ {
+  "plano": 19,
+  "arquivo": "../piloto/clipe2_flash.mp4",
+  "camera": "C3",
+  "quem": "Juninho",
+  "falante": "juninho",
+  "fala": "Ué. Na nota tá escrito karaokê.",
+  "acao": "sincero, sem maldade",
+  "trecho": [
+   1.31,
+   4.06
+  ],
+  "ouvido": "Ué, na nota tá escrito o cara o quê?",
+  "palavras": "5/6",
+  "nota_fala": 0.8333333333333334,
+  "corte_comeu": false,
+  "ouvido_largo": "Ué, na nota tá escrito o cara o quê?",
+  "voz_sim": 0.74
+ },
+ {
+  "plano": 20,
+  "arquivo": "neide2.mp4",
+  "camera": "C3",
+  "quem": "Neide",
+  "falante": null,
+  "fala": "",
+  "acao": "olhos arregalados",
+  "trecho": [
+   1.84,
+   6.08
+  ]
+ },
+ {
+  "plano": 21,
+  "arquivo": "juninho2.mp4",
+  "camera": "C3",
+  "quem": "Juninho",
+  "falante": "juninho",
+  "fala": "Com dois microfones.",
+  "acao": "completa, prestativo",
+  "trecho": [
+   0.15,
+   1.88
+  ],
+  "ouvido": "Com dois microfones.",
+  "palavras": "3/3",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "Com dois microfones.",
+  "voz_sim": 0.51
+ },
+ {
+  "plano": 22,
+  "arquivo": "soraia5.mp4",
+  "camera": "C3",
+  "quem": "Soraia",
+  "falante": "soraia",
+  "fala": "A senhora proibiu barulho depois das oito!",
+  "acao": "encantada com a descoberta",
+  "trecho": [
+   0.01,
+   3.52
+  ],
+  "ouvido": "A senhora proibiu barulho depois das oito?",
+  "palavras": "7/7",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "A senhora proibiu barulho depois das oito.",
+  "voz_sim": 0.58
+ },
+ {
+  "plano": 23,
+  "arquivo": "neide3.mp4",
+  "camera": "C3",
+  "quem": "Neide",
+  "falante": "neide",
+  "fala": "É pra reunião do condomínio.",
+  "acao": "recompõe a postura",
+  "trecho": [
+   0,
+   3.24
+  ],
+  "ouvido": "É pra reunião do condom de Mínio.",
+  "palavras": "4/5",
+  "nota_fala": 0.8,
+  "corte_comeu": false,
+  "ouvido_largo": "É pra reunião do condom de Mínio.",
+  "voz_sim": 0.52
+ },
+ {
+  "plano": 24,
+  "arquivo": "soraia6.mp4",
+  "camera": "C3",
+  "quem": "Soraia",
+  "falante": "soraia",
+  "fala": "Reunião cantada? E o segundo microfone?",
+  "acao": "",
+  "trecho": [
+   0.01,
+   3.6
+  ],
+  "ouvido": "reunião cantada e o segundo microfone.",
+  "palavras": "6/6",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "reunião cantada e o segundo microfone.",
+  "voz_sim": 0.61
+ },
+ {
+  "plano": 25,
+  "arquivo": "valdir5.mp4",
+  "camera": "C2",
+  "quem": "Valdir",
+  "falante": "valdir",
+  "fala": "Eu não sou de comentar...",
+  "acao": "olhando para o teto",
+  "trecho": [
+   1.25,
+   3.36
+  ],
+  "ouvido": "Eu não sou de comentar.",
+  "palavras": "5/5",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "Eu não sou de comentar.",
+  "voz_sim": 0.76
+ },
+ {
+  "plano": 26,
+  "arquivo": "sigilo2.mp4",
+  "camera": "C4",
+  "quem": "Sigilo",
+  "falante": "sigilo",
+  "fala": "O segundo é do Valdir!",
+  "acao": "",
+  "trecho": [
+   0.01,
+   4.06
+  ],
+  "ouvido": "O segundo é do Valdir!",
+  "palavras": "5/5",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "O segundo é do Valdir!",
+  "voz_sim": 0.39
+ },
+ {
+  "plano": 27,
+  "arquivo": "valdir5.mp4",
+  "camera": "C2",
+  "quem": "Valdir",
+  "falante": null,
+  "fala": "",
+  "acao": "congela e ajeita a gravata",
+  "trecho": [
+   3.06,
+   6.08
+  ]
+ },
+ {
+  "plano": 28,
+  "arquivo": "sigilo3.mp4",
+  "camera": "C4",
+  "quem": "Sigilo",
+  "falante": "sigilo",
+  "fala": "Ensaio às nove! Ensaio às nove!",
+  "acao": "",
+  "trecho": [
+   0.4,
+   4.35
+  ],
+  "ouvido": "Ensaiu as nove, ensaiu as nove, é ré...",
+  "palavras": "4/6",
+  "nota_fala": 0.6666666666666666,
+  "corte_comeu": false,
+  "ouvido_largo": "Ensaiu as nove, ensaiu as nove, é regra.",
+  "voz_sim": 0.53
+ },
+ {
+  "plano": 29,
+  "arquivo": "neide4.mp4",
+  "camera": "C3",
+  "quem": "Neide",
+  "falante": "neide",
+  "fala": "Regra nova: papagaio, não!",
+  "acao": "aponta para o papagaio",
+  "trecho": [
+   0.21,
+   3.28
+  ],
+  "ouvido": "Regra nova. Papagaio não.",
+  "palavras": "4/4",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "Regra nova. Papagaio não.",
+  "voz_sim": 0.68
+ },
+ {
+  "plano": 30,
+  "arquivo": "sigilo3.mp4",
+  "camera": "C4",
+  "quem": "Sigilo",
+  "falante": "sigilo",
+  "fala": "É regra! É regra!",
+  "acao": "",
+  "trecho": [
+   4.35,
+   6.08
+  ],
+  "ouvido": "É regra. É regra.",
+  "palavras": "4/4",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "Eregra! Eregra!",
+  "voz_sim": 0.36
+ },
+ {
+  "plano": 31,
+  "arquivo": "juninho3.mp4",
+  "camera": "C3",
+  "quem": "Juninho",
+  "falante": "juninho",
+  "fala": "E aí... alguém assina?",
+  "acao": "esquecido ali desde o começo",
+  "trecho": [
+   0.05,
+   2.4
+  ],
+  "ouvido": "E aí, alguém assina?",
+  "palavras": "4/4",
+  "nota_fala": 1.0,
+  "corte_comeu": false,
+  "ouvido_largo": "E aí, alguém assina?",
+  "voz_sim": 0.58
+ }
+]

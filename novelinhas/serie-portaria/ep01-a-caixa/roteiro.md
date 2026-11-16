@@ -26,7 +26,7 @@ aparece em C1 e C6.
 | 11 | C2 | 3 s | Valdir | VALDIR: "Sigilo! Fica quieto." | vira para o papagaio |
 | | | | | **COMPLICAÇÃO** | |
 | 12 | C1 | 4 s | Neide, Soraia | NEIDE: "Que reunião é essa na portaria?" | a porta do elevador abre; Neide sai de prancheta |
-| 13 | C3 | 3 s | Soraia | SORAIA: "Só desci pegar o jornal." | disfarça |
+| 13 | C3 | 3 s | Soraia | SORAIA: "Só desci pra pegar o jornal." | disfarça |
 | 14 | C5 | 4 s | Neide, Soraia | NEIDE: "De roupão? É regra: roupão, não." | frente a frente |
 | 15 | C2 | 3 s | Valdir | VALDIR: "Chegou uma caixa pra senhora." | prestativo |
 | 16 | C3 | 4 s | Neide | NEIDE: "É... material de limpeza." | congela antes de responder |

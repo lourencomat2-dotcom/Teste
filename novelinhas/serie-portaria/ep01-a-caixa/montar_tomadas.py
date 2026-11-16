@@ -18,18 +18,23 @@ COMUM = ("1990s TV sitcom look, warm studio lighting, rich saturated colors, sub
          "Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other "
          "voices. No subtitles, no text on screen.")
 
+ENTRADA = ("; behind, out of focus, exactly the lobby of @Image2 (the glass street door, the brown leather sofa, the "
+           "fern, the standing fan). At the RIGHT edge of the frame, in the near foreground and very out of focus, the "
+           "back of the shoulder and grey head of the doorman of @Image3 (light blue shirt), facing the speaker")
+VISITANTES = ("neide", "soraia", "juninho")
+
 VISUAL = {
     "valdir": ("the doorman of @Image1: same face, short grey hair, grey mustache, light blue short-sleeve shirt, navy "
                "tie, reading glasses hanging on a cord. He stands behind the dark wooden counter of @Image2; behind him, "
                "out of focus, the metal mailboxes and the intercom panel"),
     "neide": ("the building manager of @Image1: same face, short voluminous teased blonde hair, bright red blazer, pearl "
-              "necklace, holding a plain brown clipboard against her chest. She stands in the lobby of @Image2; behind "
-              "her, out of focus, the elevator door with the gold frame"),
-    "soraia": ("the resident of @Image1: same face, shiny hot pink satin bathrobe, pink hair curlers. She stands in the "
-               "lobby of @Image2 in front of the counter; behind her, out of focus, the brown leather sofa and the fern"),
+              "necklace, holding a plain brown clipboard against her chest. She stands in front of the doorman counter, "
+              "seen from behind the counter" + ENTRADA),
+    "soraia": ("the resident of @Image1: same face, shiny hot pink satin bathrobe, pink hair curlers. She stands in front of the doorman counter, "
+               "seen from behind the counter" + ENTRADA),
     "juninho": ("the young delivery man of @Image1: same face, black motorcycle helmet with the visor raised, bright "
-                "orange jacket, orange delivery backpack straps. He stands in the lobby of @Image2 in front of the "
-                "counter; behind him, out of focus, the glass street door and the fern"),
+                "orange jacket, orange delivery backpack straps. He stands in front of the doorman counter, "
+                "seen from behind the counter" + ENTRADA),
     "sigilo": ("the green parrot with a yellow face and a PALE IVORY BEAK of @Image1, on its curved branch perch at the end "
                "of the dark wooden counter of @Image2; behind it, out of focus, the metal mailboxes"),
 }
@@ -59,6 +64,11 @@ def close(quem, acao, final="", olhar=True):
     plano = "Close-up" if quem == "sigilo" else "Medium close-up at eye level"
     papel = ("@Image1 defines only the identity (face, hair, clothes); @Image2 defines only the place. Do not copy "
              "their framing, poses or lighting.")
+    if quem in VISITANTES:
+        papel = ("@Image1 defines only the identity (face, hair, clothes); @Image2 defines only the background behind "
+                 "the speaker; @Image3 is the doorman, seen only as an out-of-focus shoulder at the frame edge. Do not "
+                 "copy their framing, poses or lighting. The counter top, the phone, the lamp, the TV, the mailboxes, "
+                 "the elevator and the parrot are NOT visible in this shot.")
     partes = [f"{plano} of {VISUAL[quem]}.", papel, olhar and OLHAR[quem] and OLHAR[quem][0].upper() + OLHAR[quem][1:] + ".", acao,
               f"Only {quem.upper()} speaks." if quem != "sigilo" else "Only the parrot speaks; its beak opens and "
               "closes with every syllable.", final, COMUM]
@@ -70,7 +80,8 @@ T = []
 
 def tomada(nome, quem, dur, planos, acao, olhar=True):
     T.append({"tomada": nome, "camera": "C4" if quem == "sigilo" else ("C2" if quem == "valdir" else "C3"),
-              "refs": [f"{quem}.jpg", "portaria.jpg"], "segundos": dur, "planos": planos, "prompt": close(quem, acao, olhar=olhar)})
+              "refs": [f"{quem}_3q.jpg", "entrada.jpg", "valdir.jpg"] if quem in VISITANTES else [f"{quem}.jpg", "portaria.jpg"],
+              "segundos": dur, "planos": planos, "prompt": close(quem, acao, olhar=olhar)})
 
 
 # Tempos marcados em segundos inteiros: o modelo segue (fala começa ~0,8 s); sem eles a fala começa só em 1,5-2,6 s.
@@ -100,7 +111,7 @@ tomada("valdir5", "valdir", 6, [25, 27], "0 to 2 s: looking up at the ceiling, i
 tomada("soraia1", "soraia", 6, [5, 7], "0 to 3 s: eyes glued to something on the floor, pretending not to care, "
        + fala("soraia", "Não que eu queira saber...") + " 3 to 6 s: she looks up toward screen RIGHT and stares, one eyebrow raised, mouth closed.", olhar=False)
 tomada("soraia2", "soraia", 4, [9], curta("excited, leaning in,", fala("soraia", "Da síndica? Pesada assim?")))
-tomada("soraia3", "soraia", 4, [13], curta("caught, pretending to be casual,", fala("soraia", "Só desci pegar o jornal.")))
+tomada("soraia3", "soraia", 4, [13], curta("caught, pretending to be casual,", fala("soraia", "Só desci pra pegar o jornal.")))
 tomada("soraia4", "soraia", 4, [17], curta("suspicious, eyes narrowed,", fala("soraia", "Limpeza? Desse tamanho?")))
 tomada("soraia5", "soraia", 4, [22], "0 to 3 s: delighted with the discovery, " + fala("soraia", "A senhora proibiu barulho depois das oito!")
        + " 3 to 4 s: a delighted little smile, mouth closed.")
@@ -111,7 +122,7 @@ tomada("neide1", "neide", 4, [16], curta("after a split-second hesitation, with 
        + " No cleaning products anywhere in the scene.")
 tomada("neide2", "neide", 6, [18, 20], "0 to 2 s: very serious, " + fala("neide", "É muito detergente.")
        + " 2 to 6 s: a beat, then her eyes suddenly go wide in shock, mouth closed, clutching the clipboard. No detergent or bottles anywhere in the scene.")
-tomada("neide3", "neide", 4, [23], curta("recovering her posture, chin up,", fala("neide", "É pra reunião do condomínio.")))
+tomada("neide3", "neide", 4, [23], curta("recovering her posture, chin up,", fala("neide", "É pra reunião do condumínio.")))
 tomada("neide4", "neide", 4, [29], curta("pointing toward screen RIGHT at the parrot,", fala("neide", "Regra nova: papagaio, não!", "firmly"),
        "she keeps pointing, stern, mouth closed"), olhar=False)
 # ---- Juninho (C3)

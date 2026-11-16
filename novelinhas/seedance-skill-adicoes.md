@@ -48,12 +48,23 @@ Edifício Sossego, 16/11/2026. Segunda parte: dicas de guias de terceiros, ainda
   pausas viram olhares rápidos, duração do clipe próxima da duração da fala.
 
 **Elenco e cenário**
+- **Uma foto de cenário para cada lado da câmera.** Com uma foto só do cenário inteiro, o modelo põe o personagem
+  em qualquer lugar (a síndica apareceu do lado de dentro do balcão em 4 de 4 tomadas). Com uma foto do contraplano
+  (vista de trás do balcão) + ficha 3/4 com fundo cinza + "ombro desfocado do outro personagem na borda", o primeiro
+  teste saiu certo.
+- Diga o que NÃO aparece naquele lado ("the counter, the phone, the lamp, the TV ... are NOT visible in this shot").
 - Uma imagem de referência do personagem + uma do cenário mantêm rosto e figurino iguais entre clipes.
 - O cenário varia entre ângulos (posição de móveis, lâmpada, TV). Esconda com plano fechado e fundo desfocado,
   como fazem as séries de referência no Instagram.
 - O olhar (esquerda/direita da tela) às vezes sai invertido: defina um eixo fixo para a série e escreva em todo prompt.
 
 **Conferência grátis**
+- Voz do mesmo personagem entre clipes: impressão digital de locutor (sherpa-onnx, modelo 3D-Speaker eres2net). Mesmo
+  personagem ficou entre 0,58 e 0,76; a tomada que o Lucas ouviu como "voz diferente" ficou entre 0,05 e 0,30.
+  Usar 0,55 como corte.
+- Fala: transcrever o trecho cortado e comparar palavra por palavra com o roteiro; transcrever também uma janela
+  maior para saber se o corte comeu palavra.
+- Ler a fala do roteiro em voz alta antes de gerar: falta de preposição ("desci pegar") soa como fala comida.
 - Transcrever o áudio localmente (Whisper small via sherpa-onnx) pega nome errado e palavra trocada. Erra em voz
   caricata e em cochicho; confirme de ouvido.
 - Comparar o tom (F0) entre clipes do mesmo personagem só funciona em voz normal, não em cochicho.

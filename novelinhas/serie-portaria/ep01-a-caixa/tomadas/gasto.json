@@ -155,6 +155,18 @@
    "segundos": 6,
    "taskUUID": "056372d7-6d1c-4776-a4f9-8a7e6af0ff52",
    "custo": 0.406315
+  },
+  {
+   "tomada": "neide1",
+   "segundos": 4,
+   "taskUUID": "941abe72-c95a-4da1-910f-2a9be225f77f",
+   "custo": 0.27181
+  },
+  {
+   "tomada": "neide2",
+   "segundos": 6,
+   "taskUUID": "0b702c7a-7026-4aa0-a6f1-59d7bc6d7079",
+   "custo": null
   }
  ]
 }

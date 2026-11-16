@@ -86,3 +86,15 @@ C2, C3 e C4 (um personagem só) devem somar pelo menos dois terços dos planos.
    voz da própria Neide: é ela que dá biscoito para ele escondido toda noite.
 3. **O bilhete.** Aparece no elevador um bilhete anônimo falando mal da síndica. Neide investiga no balcão.
    O Sigilo repete o Seu Valdir ditando o bilhete.
+
+## Lições do ep. 1 (16/11)
+
+- **Cenário por ângulo de câmera.** Uma foto só da portaria deixou o modelo montar o fundo como quis (a Neide saiu do
+  lado de dentro do balcão). Agora: foto `referencias/portaria.jpg` para quem está atrás do balcão (Valdir, Sigilo) e
+  `referencias/entrada.jpg` (vista de trás do balcão, para a entrada) para quem está na frente.
+- **Fichas 3/4 com fundo cinza** para os visitantes (`*_3q.jpg`), como a skill pede.
+- **Ombro do Valdir desfocado na borda** das tomadas dos visitantes mostra onde ele está; funcionou no primeiro teste.
+- **Fala tem de soar natural em voz alta:** "Só desci pegar o jornal" soou comida; o certo é "Só desci pra pegar o jornal".
+- "Condomínio" saiu "condom de Mínio": escrever **"condumínio"**.
+- **Voz do Sigilo:** conferir com `conferir_ep01.py`; semelhança abaixo de 0,55 com o clipe aprovado = refazer.
+

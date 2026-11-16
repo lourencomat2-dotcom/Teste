@@ -40,9 +40,25 @@
   {
    "imagem": "portaria (edição do bico)",
    "custo": 0.036
+  },
+  {
+   "imagem": "neide_3q",
+   "custo": 0.028
+  },
+  {
+   "imagem": "soraia_3q",
+   "custo": 0.028
+  },
+  {
+   "imagem": "juninho_3q",
+   "custo": 0.028
+  },
+  {
+   "imagem": "entrada",
+   "custo": 0.028
   }
  ],
  "saldo_antes": 4.14804,
- "total": 0.176,
+ "total": 0.288,
  "saldo_depois": 3.84804
 }
