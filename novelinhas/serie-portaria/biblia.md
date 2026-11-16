@@ -71,7 +71,10 @@ C2, C3 e C4 (um personagem só) devem somar pelo menos dois terços dos planos.
 - Palavras proibidas por pronúncia (a lista cresce a cada erro achado): **prédio** (usar "aqui", "o condomínio"); **Marlene** (o Seedance fala "Mariu"; a síndica passou a se chamar **Neide**).
 - Palavras testadas e aprovadas: **karaokê**.
 - Nome da síndica nas falas: escrever **"Neidi"** (escrito "Neide", o modelo fala estranho).
-- Nome do papagaio nas falas: escrever **"Sijilo"** (escrito "Sigilo", o modelo fala "segui-lo").
+- Nome do papagaio nas falas: escrever "Sigilo" e explicar, fora das aspas, que é a palavra "sigilo" (segredo)
+  (sem a explicação o modelo falou "segui-lo").
+- Ritmo: pedir ritmo de sitcom em tempo real, fala começando no primeiro meio segundo, sem câmera lenta e sem
+  pausas longas (com "voz sem pressa" e pausas de 2 s o Lucas achou robótico, "parece que está esperando").
 - Objeto citado numa fala aparece em cena (a fala "Pizza desse tamanho" gerou uma pizza no balcão). Quando a fala cita
   algo que não está ali, o prompt diz que aquilo não aparece ("there is NO pizza anywhere").
 
