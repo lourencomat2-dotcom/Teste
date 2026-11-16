@@ -12,7 +12,8 @@ PRECO_S = 0.068  # Seedance 2.5 Flash 480p com áudio, medido no piloto
 
 COMUM = ("1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out "
          "of focus. Static camera, one continuous shot, no cuts. PACE: lively sitcom timing in real time; the "
-         "character starts talking within the first half second, moves, turns and gestures at normal everyday speed, "
+         "character starts talking within the first half second, moves, turns and gestures at normal everyday speed "
+         "(real-time motion, no slow motion), with natural blinking and reactions a half-beat late, "
          "with lively intonation; no slow motion, no long silent pauses, nobody stands still waiting. Speech in Brazilian Portuguese with a natural Rio de "
          "Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other "
          "voices. No subtitles, no text on screen.")
@@ -56,7 +57,9 @@ def fala(quem, texto, jeito=""):
 
 def close(quem, acao, final="", olhar=True):
     plano = "Close-up" if quem == "sigilo" else "Medium close-up at eye level"
-    partes = [f"{plano} of {VISUAL[quem]}.", olhar and OLHAR[quem] and OLHAR[quem][0].upper() + OLHAR[quem][1:] + ".", acao,
+    papel = ("@Image1 defines only the identity (face, hair, clothes); @Image2 defines only the place. Do not copy "
+             "their framing, poses or lighting.")
+    partes = [f"{plano} of {VISUAL[quem]}.", papel, olhar and OLHAR[quem] and OLHAR[quem][0].upper() + OLHAR[quem][1:] + ".", acao,
               f"Only {quem.upper()} speaks." if quem != "sigilo" else "Only the parrot speaks; its beak opens and "
               "closes with every syllable.", final, COMUM]
     return " ".join(p for p in partes if p)
