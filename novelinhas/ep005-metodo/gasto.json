@@ -1,0 +1,35 @@
+{
+ "total": 0.18649,
+ "itens": [
+  {
+   "etapa": "quadro",
+   "plano": "p2",
+   "custo": 0.0373,
+   "obs": ""
+  },
+  {
+   "etapa": "quadro",
+   "plano": "p3",
+   "custo": 0.03729,
+   "obs": ""
+  },
+  {
+   "etapa": "quadro",
+   "plano": "p4",
+   "custo": 0.03728,
+   "obs": ""
+  },
+  {
+   "etapa": "quadro",
+   "plano": "p5",
+   "custo": 0.03727,
+   "obs": ""
+  },
+  {
+   "etapa": "quadro",
+   "plano": "p3",
+   "custo": 0.03735,
+   "obs": ""
+  }
+ ]
+}

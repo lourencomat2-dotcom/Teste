@@ -1,0 +1,44 @@
+{
+ "titulo": "A senhora do café (versão método: câmeras fixas, 1 pessoa por plano)",
+ "teto_usd": 2.0,
+ "estilo": "1990s Brazilian TV drama, photorealistic, natural neutral colors, low saturation, soft overcast daylight from a window at screen left, realistic skin, subtle film texture. No text, no logos.",
+ "atuacao": "Restrained, realistic TV drama acting, subtle micro-expressions only, no smiles, no grimaces, mouth closed when not speaking.",
+ "cenario": {
+  "imagem": "cenario.jpg",
+  "texto": "small 1990s office reception, light beige walls, grey sofa, wooden door, light wooden counter. Keep its colors and light; background softly out of focus."
+ },
+ "elenco": {
+  "Helena": {"ref": "elenco/ref_helena.jpg",
+   "visual": "woman about 60, grey hair in a low bun, grey knit cardigan over a cream blouse.",
+   "voz": "woman about 60, low, calm, warm, unhurried, native Brazilian Portuguese, São Paulo accent"},
+  "Paula": {"ref": "elenco/ref_paula.jpg",
+   "visual": "woman about 28, straight dark brown hair, navy pantsuit over a white blouse, small gold earrings.",
+   "voz": "young woman about 28, clear medium-high voice, bored and dismissive, low volume, native Brazilian Portuguese, São Paulo accent"},
+  "Ana": {"ref": "elenco/ref_ana.jpg",
+   "visual": "woman about 24, dark curly hair in a ponytail, open light blue shirt over a white t-shirt.",
+   "voz": "young woman about 24, soft, friendly, warm, native Brazilian Portuguese, São Paulo accent"},
+  "Joice": {"ref": "elenco/ref_joice.jpg",
+   "visual": "woman about 30, short black bob, burgundy short-sleeve blouse.",
+   "voz": "woman about 30, neutral, professional, quiet, native Brazilian Portuguese, São Paulo accent"}
+ },
+ "planos": [
+  {"id": "p1", "dur": 3, "motor": "parado", "quadro_pronto": "cenario.jpg"},
+  {"id": "p2", "dur": 4, "quem": ["Paula"], "falante": "Paula", "fala": "Enche aí. E não demora, tá?",
+   "quadro": "Close-up at eye level of PAULA, alone in frame, seated on a grey sofa, head tilted down, eyes on a small dark 1990s mobile phone with a short antenna that she holds low in front of her. Bored. Shoulders and head fill the frame.",
+   "movimento": "Paula keeps her eyes down on the phone the whole time and speaks without looking up, barely moving."},
+  {"id": "p3", "dur": 4, "quem": ["Helena"], "falante": "Helena", "fala": "Fica à vontade.",
+   "quadro": "Medium close-up from a slightly low angle of HELENA, alone in frame, standing on the right half of the frame, body and face turned toward screen LEFT in three-quarter view (her nose points to the left edge of the image), eyes looking down to the lower left at someone seated off-screen. She holds a tall stainless steel coffee thermos with a black cap by its handle at chest height. Calm. The closed wooden door is out of focus behind her.",
+   "movimento": "Helena looks down toward screen left, pauses for a moment, then speaks calmly. She stays in place."},
+  {"id": "p4", "dur": 4, "quem": ["Ana"], "falante": "Ana", "fala": "Deixa que eu ajudo a senhora.",
+   "quadro": "Close-up at eye level of ANA, alone in frame, seated on a grey sofa, face turned up toward screen right, looking at someone standing off-screen. Kind and attentive. Shoulders and head fill the frame.",
+   "movimento": "Ana looks up toward screen right and speaks gently. She stays seated."},
+  {"id": "p5", "dur": 4, "quem": ["Joice"], "falante": "Joice", "fala": "Diretora, a sala já está pronta.",
+   "quadro": "Medium close-up of JOICE, alone in frame, seated behind a light wooden reception counter with a beige corded desk phone on it, her hands resting on the counter, looking toward screen left. Neutral, professional.",
+   "movimento": "Joice looks toward screen left and speaks in a respectful tone. She stays seated."},
+  {"id": "p6", "dur": 4, "quem": ["Paula"], "quadro_pronto": "quadros/p2.jpg",
+   "movimento": "Paula freezes, then slowly lifts her eyes from the phone and looks up toward screen right, tense, and swallows. She lowers the phone a little."},
+  {"id": "p7", "dur": 6, "quem": ["Helena"], "falante": "Helena", "fala": "Ana, pode entrar. Paula, o café estava do seu gosto?",
+   "quadro_pronto": "quadros/p3.jpg",
+   "movimento": "Helena first looks toward screen left and says the first sentence; short pause; then she lowers her gaze a little and says the second sentence in a polite, neutral tone. She stays in place."}
+ ]
+}
