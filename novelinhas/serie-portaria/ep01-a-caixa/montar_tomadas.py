@@ -88,9 +88,9 @@ tomada("valdir1", "valdir", 4, [2], curta("glancing down over the counter at som
        "eyebrows raised, amused,", fala("valdir", "Que caixa é essa, Juninho?")))
 tomada("valdir2", "valdir", 6, [6, 8], "0 to 2 s: not looking at anyone, playing innocent, " + fala("valdir", "Eu não sou de comentar.")
        + " 2 to 3 s: a quick glance toward screen left, as if someone is staring at him. 3 to 5 s: he leans forward and "
-       + fala("valdir", "É da Dona Neidi.", "quietly, almost whispering") + " 5 to 6 s: he straightens up, mouth closed.", olhar=False)
+       + fala("valdir", "É da Dona Nêidji.", "quietly, almost whispering") + " 5 to 6 s: he straightens up, mouth closed.", olhar=False)
 tomada("valdir3", "valdir", 4, [11], curta("turning his head toward screen RIGHT, toward the parrot at the end of the counter,",
-       fala("valdir", "Sigilo! Fica quieto.", "in a scolding whisper") + SIGILO_NOME, "he turns back toward screen left, mouth closed"),
+       fala("valdir", "Sijilo! Fica quieto.", "in a scolding whisper"), "he turns back toward screen left, mouth closed"),
        olhar=False)
 tomada("valdir4", "valdir", 4, [15], curta("helpful and polite, gesturing down toward the floor in front of the counter (out of frame),",
        fala("valdir", "Chegou uma caixa pra senhora.")) + " No box is visible in this shot; the counter top holds only the phone, the lamp and the small TV.")
@@ -132,7 +132,7 @@ T.append({"tomada": "hall1", "camera": "C1", "refs": ["juninho.jpg", "valdir.jpg
           "prompt": "Wide shot of the lobby of @Image3, camera at eye level, the whole counter visible. The doorman of @Image2 "
           "(grey mustache, light blue shirt, navy tie) stands behind the counter. The glass street door opens and the delivery "
           "man of @Image1 (orange jacket, black helmet) walks in hugging a huge plain brown cardboard box with no text that "
-          "hides his face, and puts it down on the floor in front of the counter. " + fala("juninho", "Entrega pra Dona Neidi!", "out of breath")
+          "hides his face, and puts it down on the floor in front of the counter. " + fala("juninho", "Entrega pra Dona Nêidji!", "out of breath")
           + " Only JUNINHO speaks. " + COMUM})
 T.append({"tomada": "hall2", "camera": "C1", "refs": ["neide.jpg", "soraia.jpg", "portaria.jpg"], "segundos": 4, "planos": [12],
           "prompt": "Wide shot of the lobby of @Image3, camera facing the elevator door with the gold frame; the counter is out "

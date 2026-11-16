@@ -70,9 +70,9 @@ C2, C3 e C4 (um personagem só) devem somar pelo menos dois terços dos planos.
 - Números por extenso ("trezentos e dois"), sem sigla, sem palavra estrangeira.
 - Palavras proibidas por pronúncia (a lista cresce a cada erro achado): **prédio** (usar "aqui", "o condomínio"); **Marlene** (o Seedance fala "Mariu"; a síndica passou a se chamar **Neide**).
 - Palavras testadas e aprovadas: **karaokê**.
-- Nome da síndica nas falas: escrever **"Neidi"** (escrito "Neide", o modelo fala estranho).
-- Nome do papagaio nas falas: escrever "Sigilo" e explicar, fora das aspas, que é a palavra "sigilo" (segredo)
-  (sem a explicação o modelo falou "segui-lo").
+- Nomes nas falas: escrever **como soa**, com letras que o modelo não lê errado (testado de ouvido pelo Lucas):
+  - síndica: "Neide" saiu estranho, "Neidi" saiu "Neida" → escrever **"Nêidji"**;
+  - papagaio: "Sigilo" saiu "segui-lo" e "Siguelho", mesmo explicando que é a palavra "sigilo" → escrever **"Sijilo"**.
 - Ritmo: pedir ritmo de sitcom em tempo real, fala começando no primeiro meio segundo, sem câmera lenta e sem
   pausas longas (com "voz sem pressa" e pausas de 2 s o Lucas achou robótico, "parece que está esperando").
 - Objeto citado numa fala aparece em cena (a fala "Pizza desse tamanho" gerou uma pizza no balcão). Quando a fala cita
