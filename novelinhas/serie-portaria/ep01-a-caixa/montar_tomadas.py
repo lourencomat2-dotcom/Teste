@@ -70,13 +70,15 @@ def tomada(nome, quem, dur, planos, acao, olhar=True):
 
 # ---- Valdir (C2)
 tomada("valdir1", "valdir", 4, [2], "He looks down at something big on the floor in front of the counter, raises his "
-       "eyebrows and says, amused: " + fala("valdir", "Pizza desse tamanho, Juninho?"))
+       "eyebrows and says, amused: " + fala("valdir", "Pizza desse tamanho, Juninho?")
+       + " There is NO pizza anywhere in the scene: the counter top holds only the phone, the lamp and the small TV.")
 tomada("valdir2", "valdir", 8, [6, 8], "0 to 3 s: without looking at anyone, straight face, " + fala("valdir", "Eu não sou de comentar.")
        + " 3 to 5 s: silence; he glances once toward screen left, as if someone is staring at him. 5 to 8 s: he leans a "
        "little forward and " + fala("valdir", "É da Dona Neide.", "quietly, almost whispering"), olhar=False)
 tomada("valdir3", "valdir", 4, [11], "He turns his head toward screen RIGHT, toward the parrot at the end of the counter, "
        "and " + fala("valdir", "Sigilo! Fica quieto.", "in a scolding whisper"), olhar=False)
-tomada("valdir4", "valdir", 4, [15], "Helpful and polite, " + fala("valdir", "Chegou uma caixa pra senhora."))
+tomada("valdir4", "valdir", 4, [15], "Helpful and polite, he gestures down toward the floor in front of the counter (out of frame) and "
+       + fala("valdir", "Chegou uma caixa pra senhora.") + " No box is visible in this shot; the counter top holds only the phone, the lamp and the small TV.")
 tomada("valdir5", "valdir", 6, [25, 27], "0 to 3 s: he looks up at the ceiling, innocent, and " + fala("valdir", "Eu não sou de comentar...")
        + " 3 to 6 s: silence; he freezes, then straightens his tie with both hands, embarrassed, mouth closed.", olhar=False)
 # ---- Soraia (C3)
@@ -86,10 +88,10 @@ tomada("soraia2", "soraia", 4, [9], "Excited, leaning in, " + fala("soraia", "Da
 tomada("soraia3", "soraia", 4, [13], "Caught, pretending to be casual, " + fala("soraia", "Só desci pegar o jornal."))
 tomada("soraia4", "soraia", 4, [17], "Suspicious, eyes narrowed, " + fala("soraia", "Limpeza? Desse tamanho?"))
 tomada("soraia5", "soraia", 4, [22], "Delighted with the discovery, " + fala("soraia", "A senhora proibiu barulho depois das oito!"))
-tomada("soraia6", "soraia", 4, [24], "Teasing, " + fala("soraia", "Reunião cantada? E o segundo microfone?"))
+tomada("soraia6", "soraia", 4, [24], "Teasing, " + fala("soraia", "Reunião cantada? E o segundo microfone?") + " No microphone anywhere in the scene.")
 # ---- Neide (C3)
-tomada("neide1", "neide", 4, [16], "She freezes for a moment, then " + fala("neide", "É... material de limpeza.", "with forced calm"))
-tomada("neide2", "neide", 6, [18, 20], "0 to 3 s: very serious, " + fala("neide", "É muito detergente.")
+tomada("neide1", "neide", 4, [16], "She freezes for a moment, then " + fala("neide", "É... material de limpeza.", "with forced calm") + " No cleaning products anywhere in the scene.")
+tomada("neide2", "neide", 6, [18, 20], "0 to 3 s: very serious, " + fala("neide", "É muito detergente.") + " No detergent or bottles anywhere in the scene."
        + " 3 to 6 s: silence; her eyes go wide in shock, mouth closed, clutching the clipboard.")
 tomada("neide3", "neide", 4, [23], "She recovers her posture, chin up, " + fala("neide", "É pra reunião do condomínio."))
 tomada("neide4", "neide", 4, [29], "She points toward screen RIGHT at the parrot and " + fala("neide", "Regra nova: papagaio, não!", "firmly"), olhar=False)
@@ -97,7 +99,7 @@ tomada("neide4", "neide", 4, [29], "She points toward screen RIGHT at the parrot
 tomada("juninho1", "juninho", 4, [3], "Out of breath, " + fala("juninho", "Hoje é bico. Só vim entregar."))
 # plano 19 ("Ué. Na nota tá escrito karaokê.") reaproveita o clipe 2 do piloto (piloto/clipe2_flash.mp4), aprovado
 tomada("juninho2", "juninho", 4, [21], "He holds a small blank paper slip in his hand and, helpful and naive, "
-       + fala("juninho", "Com dois microfones."))
+       + fala("juninho", "Com dois microfones.") + " No microphone anywhere in the scene.")
 tomada("juninho3", "juninho", 4, [31], "Forgotten there, he lifts the blank paper slip and " + fala("juninho", "E aí... alguém assina?", "hesitantly"))
 # ---- Sigilo (C4)
 tomada("sigilo1", "sigilo", 4, [10], "The parrot bobs its head and " + fala("sigilo", "Pesada assim! Pesada assim!", "fast and mocking"))

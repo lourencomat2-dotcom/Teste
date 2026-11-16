@@ -46,6 +46,31 @@ def main():
     gasto_leva = 0.0
     cache_f = OUT / "uploads.json"
     cache = json.loads(cache_f.read_text()) if cache_f.exists() else {}
+    # recupera pedidos já aceitos que ficaram sem download (ex.: processo interrompido); nunca reenvia
+    for item in log["itens"]:
+        if item.get("custo") is None and not item.get("falhou") and not (OUT / f"{item['tomada']}.mp4").exists():
+            fim = time.time() + 45 * 60
+            while time.time() < fim:
+                try:
+                    st, j = chamar([{"taskType": "getResponse", "taskUUID": item["taskUUID"]}])
+                except (requests.RequestException, ValueError):
+                    time.sleep(10)
+                    continue
+                res = next((d for d in j.get("data", []) if d.get("taskUUID") == item["taskUUID"]), {})
+                if res.get("videoURL"):
+                    mn.baixar(res["videoURL"], OUT / f"{item['tomada']}.mp4")
+                    (OUT / f"{item['tomada']}_prompt.txt").write_text(T[item["tomada"]]["prompt"])
+                    item["custo"] = res.get("cost") or item["segundos"] * PRECO_S
+                    gasto_ep += item["custo"]
+                    lf.write_text(json.dumps(log, indent=1, ensure_ascii=False))
+                    print(f"{item['tomada']}: recuperado, US$ {item['custo']:.3f}", flush=True)
+                    break
+                if res.get("status") in ("error", "failed") or j.get("errors"):
+                    item["falhou"] = json.dumps(res or j.get("errors"), ensure_ascii=False)[:400]
+                    lf.write_text(json.dumps(log, indent=1, ensure_ascii=False))
+                    print(f"{item['tomada']}: FALHOU (nada reenviado)", flush=True)
+                    break
+                time.sleep(10)
     for nome in nomes:
         t = T[nome]
         if (OUT / f"{nome}.mp4").exists():
