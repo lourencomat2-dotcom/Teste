@@ -13,7 +13,7 @@ aparece em C1 e C6.
 |---|---|---|---|---|---|
 | | | | | **GANCHO** | |
 | 1 | C1 | 4 s | Juninho, Valdir | JUNINHO: "Entrega pra Dona Neide!" | Juninho entra pela porta de vidro abraçado a uma caixa enorme que tapa o rosto dele |
-| 2 | C2 | 3 s | Valdir | VALDIR: "Pizza desse tamanho, Juninho?" | olha a caixa de cima a baixo |
+| 2 | C2 | 3 s | Valdir | VALDIR: "Que caixa é essa, Juninho?" | olha a caixa de cima a baixo |
 | 3 | C3 | 4 s | Juninho | JUNINHO: "Hoje é bico. Só vim entregar." | ofegante, capacete na cabeça |
 | 4 | C6 | 2 s | a caixa | (sem fala) | a caixa parada no chão; baque surdo |
 | | | | | **PROBLEMA** | |
