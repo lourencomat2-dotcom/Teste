@@ -17,6 +17,24 @@
    "tomada": "juninho1",
    "segundos": 6,
    "taskUUID": "0181a6e2-340f-4d3f-b05b-3b03d87c1072",
+   "custo": 0.406315
+  },
+  {
+   "tomada": "soraia1",
+   "segundos": 6,
+   "taskUUID": "c4441d2d-9940-4237-92fc-c2d9151e6f11",
+   "custo": 0.406315
+  },
+  {
+   "tomada": "soraia2",
+   "segundos": 4,
+   "taskUUID": "1b6d814e-0b96-4dd5-aaf2-0c2a64de1e87",
+   "custo": 0.27181
+  },
+  {
+   "tomada": "soraia3",
+   "segundos": 4,
+   "taskUUID": "1bfd0095-a6c7-4d93-85e7-79f4e144fab4",
    "custo": null
   }
  ]
