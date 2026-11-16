@@ -70,6 +70,8 @@ C2, C3 e C4 (um personagem só) devem somar pelo menos dois terços dos planos.
 - Números por extenso ("trezentos e dois"), sem sigla, sem palavra estrangeira.
 - Palavras proibidas por pronúncia (a lista cresce a cada erro achado): **prédio** (usar "aqui", "o condomínio"); **Marlene** (o Seedance fala "Mariu"; a síndica passou a se chamar **Neide**).
 - Palavras testadas e aprovadas: **karaokê**.
+- Objeto citado numa fala aparece em cena (a fala "Pizza desse tamanho" gerou uma pizza no balcão). Quando a fala cita
+  algo que não está ali, o prompt diz que aquilo não aparece ("there is NO pizza anywhere").
 
 ## Três episódios possíveis
 
