@@ -23,8 +23,10 @@ Edifício Sossego, 16/11/2026. Segunda parte: dicas de guias de terceiros, ainda
 **Pronúncia**
 - Nomes próprios saem errados com frequência: "Marlene" saiu "Mariu", "Sigilo" saiu "segui-lo", "Neide" soou estranho.
   - Prefira nomes curtos e comuns e teste o nome no primeiro clipe.
-  - Escreva como se fala ("Dona Neidi").
-  - Se o nome é uma palavra comum, explique fora das aspas: (Sigilo is the Portuguese word 'sigilo', meaning secrecy).
+  - Escreva como se fala, com letras que o modelo não tem como ler errado: "Neidi" ainda saiu "Neida", mas
+    **"Nêidji"** saiu "Neide"; "Sigilo" saiu "Siguelho" mesmo com explicação, mas **"Sijilo"** saiu "Sigilo"
+    (transcrição automática; confirmar de ouvido).
+  - Explicar fora das aspas que o nome é uma palavra comum ("Sigilo is the Portuguese word 'sigilo'") não funcionou.
 - Palavra estrangeira ("karaokê") saiu certa. "Prédio" saiu "pédio".
 
 **O que aparece em cena**
