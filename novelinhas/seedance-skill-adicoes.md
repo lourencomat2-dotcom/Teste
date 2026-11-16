@@ -82,3 +82,16 @@ Edifício Sossego, 16/11/2026. Segunda parte: dicas de guias de terceiros, ainda
 Fontes: higgsfield.ai/blog/seedance-2-5-prompting-guide, grailogic.com/articles/seedance-2-5-prompt-guide,
 seedance.tv/blog/seedance-2-5-prompt-guide, venice.ai/blog/seedance-2-5-prompt-tips,
 github.com/Anil-matcha/awesome-seedance-2.5-api-prompts, higgsfield.ai/academy/how-to-use/how-to-make-ultra-realistic-ai-ads.
+
+## Acréscimos do fim do projeto (16/11/2026)
+
+- **Travar cenário**: imagem-base do ângulo SEM rosto como @Image1 com "is the EXACT set, camera position, framing and
+  lighting: copy it faithfully" + ficha do personagem como @Image2. 5 de 5 tomadas no mesmo cenário.
+- Imagem com rosto fotorrealista como **primeiro quadro** é recusada pela moderação; como referência passa na maioria
+  das vezes (uma ficha 3/4 foi recusada, a foto original do mesmo personagem passou).
+- Com `frameImages` o Runware não aceita `width`/`height`; usar `resolution: "480p"`.
+- Recusas de moderação parecem gerar cobrança parcial (saldo caiu ~US$ 0,19 além do somado).
+- Cena com vários personagens presentes: definir posição fixa e gerar planos de conjunto; tomada individual com o
+  personagem sozinho no meio do cenário quebra a lógica da cena.
+- Revisão visual: 1 quadro por SEGUNDO do vídeo montado, não 1 por plano.
+
