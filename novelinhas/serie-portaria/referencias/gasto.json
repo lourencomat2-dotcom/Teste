@@ -31,9 +31,14 @@
    "imagem": "portaria",
    "custo": 0.02,
    "taskUUID": "8d358ce5-57af-4e13-9ca1-470b03086e0d"
+  },
+  {
+   "imagem": "portaria",
+   "custo": 0.02,
+   "taskUUID": "cafb1d99-d3a8-4209-bc2d-da688775b4c3"
   }
  ],
  "saldo_antes": 4.14804,
- "total": 0.12,
- "saldo_depois": 3.88804
+ "total": 0.14,
+ "saldo_depois": 3.84804
 }
