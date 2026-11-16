@@ -190,6 +190,12 @@
    "tomada": "sigilo3",
    "segundos": 6,
    "taskUUID": "4174c65c-f27f-47f6-bab1-262f26a6ebbd",
+   "custo": 0.406315
+  },
+  {
+   "tomada": "soraia1",
+   "segundos": 6,
+   "taskUUID": "d1c3d826-46e5-4ed7-a408-114874016389",
    "custo": null
   }
  ]
