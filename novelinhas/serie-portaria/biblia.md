@@ -71,6 +71,7 @@ C2, C3 e C4 (um personagem só) devem somar pelo menos dois terços dos planos.
 - Palavras proibidas por pronúncia (a lista cresce a cada erro achado): **prédio** (usar "aqui", "o condomínio"); **Marlene** (o Seedance fala "Mariu"; a síndica passou a se chamar **Neide**).
 - Palavras testadas e aprovadas: **karaokê**.
 - Nome da síndica nas falas: escrever **"Neidi"** (escrito "Neide", o modelo fala estranho).
+- Nome do papagaio nas falas: escrever **"Sijilo"** (escrito "Sigilo", o modelo fala "segui-lo").
 - Objeto citado numa fala aparece em cena (a fala "Pizza desse tamanho" gerou uma pizza no balcão). Quando a fala cita
   algo que não está ali, o prompt diz que aquilo não aparece ("there is NO pizza anywhere").
 

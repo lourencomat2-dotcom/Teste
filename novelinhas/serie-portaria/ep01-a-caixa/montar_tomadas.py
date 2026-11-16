@@ -75,7 +75,7 @@ tomada("valdir2", "valdir", 8, [6, 8], "0 to 3 s: without looking at anyone, str
        + " 3 to 5 s: silence; he glances once toward screen left, as if someone is staring at him. 5 to 8 s: he leans a "
        "little forward and " + fala("valdir", "É da Dona Neidi.", "quietly, almost whispering"), olhar=False)
 tomada("valdir3", "valdir", 4, [11], "He turns his head toward screen RIGHT, toward the parrot at the end of the counter, "
-       "and " + fala("valdir", "Sigilo! Fica quieto.", "in a scolding whisper"), olhar=False)
+       "and " + fala("valdir", "Sijilo! Fica quieto.", "in a scolding whisper"), olhar=False)
 tomada("valdir4", "valdir", 4, [15], "Helpful and polite, he gestures down toward the floor in front of the counter (out of frame) and "
        + fala("valdir", "Chegou uma caixa pra senhora.") + " No box is visible in this shot; the counter top holds only the phone, the lamp and the small TV.")
 tomada("valdir5", "valdir", 6, [25, 27], "0 to 3 s: he looks up at the ceiling, innocent, and " + fala("valdir", "Eu não sou de comentar...")
