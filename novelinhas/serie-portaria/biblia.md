@@ -18,7 +18,7 @@ cerca de 2 minutos, elenco e cenário fixos. A história se passa nos anos 90: s
 | **Dona Neide**, 62 | síndica | inventa uma regra por dia e quebra todas escondido | mulher branca, cabelo loiro curto armado, blazer **vermelho**, colar de pérolas, prancheta na mão | aguda, firme, rápida | "É regra." |
 | **Soraia**, 40 | moradora do trezentos e dois | fofoqueira que finge não querer saber | mulher morena, **roupão rosa-choque** de cetim, bobes no cabelo, chinelo | rouca, arrastada, debochada | "Não que eu queira saber..." |
 | **Juninho**, 22 | entregador da pizzaria | sincero demais, fala a verdade na hora errada | rapaz pardo e magro, jaqueta **laranja**, capacete preto com a viseira levantada, mochila térmica laranja | jovem, acelerada | "Só vim entregar." |
-| **Sigilo** | papagaio da portaria | repete o que ouviu, sempre na pior hora | papagaio **verde** de testa amarela, num poleiro de madeira na ponta do balcão | esganiçada, de papagaio | repete a última frase comprometedora |
+| **Sigilo** | papagaio da portaria | repete o que ouviu, sempre na pior hora | papagaio **verde** de cara amarela e **bico claro, cor de marfim**, num poleiro de galho na ponta do balcão | esganiçada, de papagaio | repete a última frase comprometedora |
 
 Cada personagem tem uma cor só. O cenário é neutro e quente para as cores saltarem.
 
