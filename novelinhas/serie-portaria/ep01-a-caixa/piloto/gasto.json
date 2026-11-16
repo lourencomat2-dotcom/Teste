@@ -23,7 +23,8 @@
    "modelo": "bytedance:seedance@2.5-flash",
    "segundos": 8,
    "taskUUID": "fa233afe-6481-4423-94cb-4dc80e388ea3",
-   "custo": null
+   "custo": 0.54082,
+   "preco_s": 0.0676
   }
  ]
 }
