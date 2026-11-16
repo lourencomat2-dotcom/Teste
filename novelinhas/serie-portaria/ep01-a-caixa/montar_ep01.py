@@ -125,7 +125,7 @@ def main():
         d = b - a
         tabela.append((n, arq, round(a, 2), round(b, 2)))
         ff("-ss", f"{a:.2f}", "-t", f"{d:.2f}", "-i", f, "-vf", "scale=854:480,setsar=1,fps=24,format=yuv420p",
-           "-af", f"aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-16:TP=-2,afade=t=in:d=0.03,afade=t=out:st={max(0, d - 0.05):.2f}:d=0.05",
+           "-af", f"aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-16:TP=-2,aresample=48000,afade=t=in:d=0.03,afade=t=out:st={max(0, d - 0.05):.2f}:d=0.05",
            "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-c:a", "pcm_s16le", s)
         segs.append(s)
     (TRAB / "lista.txt").write_text("".join(f"file '{p.resolve()}'\n" for p in segs))
