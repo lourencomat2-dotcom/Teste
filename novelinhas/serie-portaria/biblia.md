@@ -36,7 +36,7 @@ de filme. Figurino e cabelo da época.
 |---|---|---|
 | C1 | hall inteiro, aberto | abre o episódio, entradas e saídas |
 | C2 | Seu Valdir atrás do balcão, close | falas e reações dele |
-| C3 | quem está na frente do balcão, close | Marlene, Soraia ou Juninho, um por vez |
+| C3 | quem está na frente do balcão, close | Neide, Soraia ou Juninho, um por vez |
 | C4 | Sigilo no poleiro, close | comentários e piada de fecho |
 | C5 | dois personagens de perfil, frente a frente | confronto |
 | C6 | o objeto do episódio, sem gente | pausa cômica |
