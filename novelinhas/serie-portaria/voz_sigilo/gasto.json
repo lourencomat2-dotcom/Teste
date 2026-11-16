@@ -1,0 +1,30 @@
+{
+ "teto": 0.1,
+ "itens": [
+  {
+   "teste": "A",
+   "modelo": "alibaba:qwen@3-tts-1.7b-voicedesign",
+   "custo": 0.0003,
+   "taskUUID": "ad299e32-2948-4183-a565-e50c627b5f70"
+  },
+  {
+   "teste": "B",
+   "modelo": "alibaba:qwen@3-tts-1.7b-voicedesign",
+   "custo": 0.0003,
+   "taskUUID": "03751ca0-cfaa-49de-8a34-5cd3c0cd126a"
+  },
+  {
+   "teste": "C",
+   "modelo": "google:gemini@3.1-flash-tts",
+   "custo": 0.001668,
+   "taskUUID": "e428ed47-9219-4a41-9322-398d4937ce70"
+  },
+  {
+   "teste": "D",
+   "modelo": "google:gemini@3.1-flash-tts",
+   "custo": 0.00144,
+   "taskUUID": "09cc797f-070d-4f54-b6b2-4881353e44a0"
+  }
+ ],
+ "total": 0.00371
+}

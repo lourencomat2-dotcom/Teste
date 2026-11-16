@@ -1,0 +1,44 @@
+[
+ [
+  "A",
+  {
+   "model": "alibaba:qwen@3-tts-1.7b-voicedesign",
+   "positivePrompt": "A real Amazon parrot imitating human speech. Small bird voice: high-pitched, nasal and tinny, raspy, slightly metallic and buzzy, words clipped and a little slurred, short squawky sing-song phrasing, like a talking bird repeating a phrase it overheard.",
+   "speech": {
+    "text": "O segundo é do Valdir!"
+   }
+  }
+ ],
+ [
+  "B",
+  {
+   "model": "alibaba:qwen@3-tts-1.7b-voicedesign",
+   "positivePrompt": "A talking pet parrot mimicking a middle-aged man's voice: the words are recognizable but squeezed and shrill, harsh throaty rasp, whistly overtones, choppy rhythm, loud and excited.",
+   "speech": {
+    "text": "O segundo é do Valdir!"
+   }
+  }
+ ],
+ [
+  "C",
+  {
+   "model": "google:gemini@3.1-flash-tts",
+   "speech": {
+    "text": "[like a real talking parrot: shrill, raspy, nasal, clipped, squawky] O segundo é do Valdir!",
+    "voice": "Puck",
+    "language": "pt-BR"
+   }
+  }
+ ],
+ [
+  "D",
+  {
+   "model": "google:gemini@3.1-flash-tts",
+   "speech": {
+    "text": "[high-pitched screechy parrot imitation of a human voice] O segundo é do Valdir!",
+    "voice": "Fenrir",
+    "language": "pt-BR"
+   }
+  }
+ ]
+]
