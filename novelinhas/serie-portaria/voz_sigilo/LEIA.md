@@ -23,3 +23,17 @@ Custo: US$ 0,0044. Escuta: `../sigilo_vozes_v3.mp4`. Descrições em `testes_r3.
 | F | Qwen3-TTS VoiceDesign | 2,0 s | Ah, segundo é do Valdear! |
 | G | Gemini 3.1 Flash TTS, voz Puck | 1,9 s | O segundo é do Faldir. |
 | H | Gemini 3.1 Flash TTS, voz Algenib | 3,5 s | O segundo é do Valdir! |
+
+# Teste 4 (variações da H, Gemini 3.1 Flash TTS), 16/11
+
+O Lucas escolheu a H (voz Algenib) como a melhor da rodada 3. Seis variações. Custo: US$ 0,0117.
+Escuta: `../sigilo_vozes_v4.mp4` (H primeiro, depois I a N). Textos completos em `testes_r4.json`.
+
+| Versão | Voz | Mudança em relação à H | Fala dura | Transcritor |
+|---|---|---|---|---|
+| I | Algenib | mais aguda e esganiçada, mais rápida | 3,0 s | O segundo é do Valdir! |
+| J | Algenib | mais rouca e de garganta, gargalhada | 3,7 s | O segundo é do Valdir! [risos] |
+| K | Algenib | mais nasal, sem risada | 2,5 s | O segundo é do Valgui! |
+| L | Sadachbia | mesma direção da H | 4,5 s | O segundo é do Valdir! |
+| M | Fenrir | mesma direção da H | 3,3 s | Do segundo é do Valdi! |
+| N | Zubenelgenubi | mesma direção da H | 3,0 s | O segundo é do Valdir! |

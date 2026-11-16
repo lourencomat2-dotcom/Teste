@@ -1,0 +1,42 @@
+{
+ "teto": 0.02,
+ "itens": [
+  {
+   "teste": "I",
+   "modelo": "google:gemini@3.1-flash-tts",
+   "custo": 0.001756,
+   "taskUUID": "1d2b19dc-0a31-43df-8d0c-74b4732c8c7e"
+  },
+  {
+   "teste": "J",
+   "modelo": "google:gemini@3.1-flash-tts",
+   "custo": 0.002138,
+   "taskUUID": "6b01dfa9-cda8-4d7f-9616-7b16e99bfebf"
+  },
+  {
+   "teste": "K",
+   "modelo": "google:gemini@3.1-flash-tts",
+   "custo": 0.00161,
+   "taskUUID": "a5a12355-bde3-4036-8d16-68b1a81a0a12"
+  },
+  {
+   "teste": "L",
+   "modelo": "google:gemini@3.1-flash-tts",
+   "custo": 0.002552,
+   "taskUUID": "5ef53fd5-0ade-41e2-94b1-72bdc15528ef"
+  },
+  {
+   "teste": "M",
+   "modelo": "google:gemini@3.1-flash-tts",
+   "custo": 0.001872,
+   "taskUUID": "737d68f9-9e1d-42f4-9290-eeba6f25abda"
+  },
+  {
+   "teste": "N",
+   "modelo": "google:gemini@3.1-flash-tts",
+   "custo": 0.001792,
+   "taskUUID": "1a7db190-7b52-4c41-844c-dc35c5446120"
+  }
+ ],
+ "total": 0.01172
+}

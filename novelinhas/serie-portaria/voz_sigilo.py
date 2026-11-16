@@ -3,6 +3,7 @@
 
 Uso: python voz_sigilo.py            (rodada 2, papagaio de verdade, teto US$ 0,10)
      python voz_sigilo.py 3 0.02     (rodada 3, papagaio de TV, teto US$ 0,02)
+     python voz_sigilo.py 4 0.02     (rodada 4, variações da H no Gemini, teto US$ 0,02)
 
 Gera só o áudio e coloca por cima do clipe 3 do piloto (o bico já abre no tempo da fala).
 """
@@ -45,6 +46,23 @@ RODADA3 = [
     ("H", {"model": "google:gemini@3.1-flash-tts",
            "speech": {"text": f"[cartoon parrot puppet voice: gravelly, nasal, squeaky, fast and mocking, carioca accent] {FALA} [laughs]",
                       "voice": "Algenib", "language": "pt-BR"}}),
+]
+
+H_TAG = "cartoon parrot puppet voice: gravelly, nasal, squeaky, fast and mocking, carioca accent"
+
+
+def gemini(voz, tag, rir=True):
+    return {"model": "google:gemini@3.1-flash-tts",
+            "speech": {"text": f"[{tag}] {FALA}" + (" [laughs]" if rir else ""), "voice": voz, "language": "pt-BR"}}
+
+
+RODADA4 = [
+    ("I", gemini("Algenib", "cartoon parrot puppet voice: gravelly, nasal, higher and squeakier, very fast and mocking, carioca accent")),
+    ("J", gemini("Algenib", "cartoon parrot puppet voice: very raspy and throaty, nasal, cheeky, fast, carioca accent, cackling laugh")),
+    ("K", gemini("Algenib", "cartoon parrot puppet voice: gravelly, very nasal, squeaky, fast and mocking, carioca accent", rir=False)),
+    ("L", gemini("Sadachbia", H_TAG)),
+    ("M", gemini("Fenrir", H_TAG)),
+    ("N", gemini("Zubenelgenubi", H_TAG)),
 ]
 
 TESTES = [
@@ -91,11 +109,12 @@ def enviar(nome, corpo, log):
 
 def main():
     P.mkdir(exist_ok=True)
-    r3 = len(sys.argv) > 1 and sys.argv[1] == "3"
-    lf = P / ("gasto_r3.json" if r3 else "gasto.json")
+    rodada = sys.argv[1] if len(sys.argv) > 1 else "2"
+    r3 = rodada in ("3", "4")
+    lf = P / ("gasto.json" if rodada == "2" else f"gasto_r{rodada}.json")
     log = json.loads(lf.read_text()) if lf.exists() else {"teto": TETO, "itens": []}
     gasto = sum(i.get("custo") or 0 for i in log["itens"])
-    testes = RODADA3 if r3 else TESTES
+    testes = {"2": TESTES, "3": RODADA3, "4": RODADA4}[rodada]
     for nome, corpo in testes:
         if (P / f"{nome}.mp3").exists():
             continue
@@ -106,7 +125,7 @@ def main():
         log["total"] = round(gasto, 5)
         lf.write_text(json.dumps(log, indent=1, ensure_ascii=False))
         print(f"{nome}: US$ {c} | acumulado US$ {gasto:.4f}", flush=True)
-    (P / f"testes_{'r3' if testes is RODADA3 else 'r2'}.json").write_text(json.dumps(testes, indent=1, ensure_ascii=False))
+    (P / f"testes_r{rodada}.json").write_text(json.dumps(testes, indent=1, ensure_ascii=False))
 
 
 if __name__ == "__main__":

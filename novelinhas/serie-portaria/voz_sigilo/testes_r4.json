@@ -1,0 +1,68 @@
+[
+ [
+  "I",
+  {
+   "model": "google:gemini@3.1-flash-tts",
+   "speech": {
+    "text": "[cartoon parrot puppet voice: gravelly, nasal, higher and squeakier, very fast and mocking, carioca accent] O segundo é do Valdir! [laughs]",
+    "voice": "Algenib",
+    "language": "pt-BR"
+   }
+  }
+ ],
+ [
+  "J",
+  {
+   "model": "google:gemini@3.1-flash-tts",
+   "speech": {
+    "text": "[cartoon parrot puppet voice: very raspy and throaty, nasal, cheeky, fast, carioca accent, cackling laugh] O segundo é do Valdir! [laughs]",
+    "voice": "Algenib",
+    "language": "pt-BR"
+   }
+  }
+ ],
+ [
+  "K",
+  {
+   "model": "google:gemini@3.1-flash-tts",
+   "speech": {
+    "text": "[cartoon parrot puppet voice: gravelly, very nasal, squeaky, fast and mocking, carioca accent] O segundo é do Valdir!",
+    "voice": "Algenib",
+    "language": "pt-BR"
+   }
+  }
+ ],
+ [
+  "L",
+  {
+   "model": "google:gemini@3.1-flash-tts",
+   "speech": {
+    "text": "[cartoon parrot puppet voice: gravelly, nasal, squeaky, fast and mocking, carioca accent] O segundo é do Valdir! [laughs]",
+    "voice": "Sadachbia",
+    "language": "pt-BR"
+   }
+  }
+ ],
+ [
+  "M",
+  {
+   "model": "google:gemini@3.1-flash-tts",
+   "speech": {
+    "text": "[cartoon parrot puppet voice: gravelly, nasal, squeaky, fast and mocking, carioca accent] O segundo é do Valdir! [laughs]",
+    "voice": "Fenrir",
+    "language": "pt-BR"
+   }
+  }
+ ],
+ [
+  "N",
+  {
+   "model": "google:gemini@3.1-flash-tts",
+   "speech": {
+    "text": "[cartoon parrot puppet voice: gravelly, nasal, squeaky, fast and mocking, carioca accent] O segundo é do Valdir! [laughs]",
+    "voice": "Zubenelgenubi",
+    "language": "pt-BR"
+   }
+  }
+ ]
+]
