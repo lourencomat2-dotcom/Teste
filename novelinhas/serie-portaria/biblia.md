@@ -60,7 +60,8 @@ C2, C3 e C4 (um personagem só) devem somar pelo menos dois terços dos planos.
 - A graça vem do defeito do personagem, não de ofensa.
 - Nenhum objeto que mude de estado, nada que dependa de mão esquerda ou direita, nenhum texto legível em cena.
 - Números por extenso ("trezentos e dois"), sem sigla, sem palavra estrangeira.
-- Palavras proibidas por pronúncia (a lista cresce a cada erro achado): **prédio** (usar "aqui", "o condomínio").
+- Palavras proibidas por pronúncia (a lista cresce a cada erro achado): **prédio** (usar "aqui", "o condomínio"); **Marlene** (o Seedance fala "Mariu").
+- Palavras testadas e aprovadas: **karaokê**.
 
 ## Três episódios possíveis
 

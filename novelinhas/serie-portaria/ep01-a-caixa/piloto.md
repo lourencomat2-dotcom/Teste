@@ -83,3 +83,8 @@ Referências: @Image1 = `valdir.jpg`, @Image2 = `portaria.jpg`.
 - Total: **US$ 1,08**, a **US$ 0,068 por segundo** (Flash, 854×480, com áudio).
 - Duas falas com pausa no mesmo clipe de 8 s: funcionou, na ordem certa.
 - Pendente: ouvido do Lucas em "karaokê" e "Marlene"; voz do Sigilo (teste de voz gerada à parte).
+
+### Escuta do Lucas (16/11)
+- Clipe 2: **"karaokê" sai certo** (o transcritor errou). A palavra fica no roteiro.
+- Clipe 4: **"Dona Marlene" sai "Mariu"** (confirmado de ouvido). O nome da síndica precisa mudar ou ser escrito de outro jeito.
+- Sigilo: as duas rodadas de voz foram reprovadas. Direção do Lucas: voz cômica de papagaio de programa de TV (boneco), não de papagaio real.
