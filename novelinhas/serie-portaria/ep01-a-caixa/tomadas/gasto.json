@@ -88,6 +88,12 @@
    "tomada": "soraia5",
    "segundos": 4,
    "taskUUID": "3168d3f1-796b-4dd6-87e6-ac772629b8a0",
+   "custo": 0.27181
+  },
+  {
+   "tomada": "soraia6",
+   "segundos": 4,
+   "taskUUID": "c3cf222e-8cfd-4b23-87a3-ac132c0c2ccf",
    "custo": null
   }
  ]
