@@ -64,3 +64,16 @@ um quadro por plano conferido a olho. Áudio não foi ouvido.
 - Nenhum close de rosto; a Paula passa o vídeo inteiro olhando o celular, sem plano de reação.
 - A geometria da sala muda entre ângulos (janela e balcão aparecem só a partir de 24 s).
 - Visual: sala bege, luz chapada, cor neutra.
+
+### Falas do vídeo, transcritas automaticamente (`novelinhas/conferir_fala.py`)
+
+| Trecho | Roteiro | O que o transcritor ouviu |
+|---|---|---|
+| 0–7,6 s | Enche aí. E não demora, tá? / Fica à vontade. | igual |
+| 7,6–15,7 s | Deixa que eu **ajudo** a senhora. Como é o seu nome? / Helena. **Esse aí é** o seu projeto? | Deixa que eu **ajude** a senhora. [...] **E se é eu** o seu projeto? |
+| 15,7–20,3 s | Ela já está no **prédio**, sim. Pode deixar comigo. | Ela já está no **pédio**, sim. |
+| 20,3–23,8 s | Diretora que atrasa **assim** nem deve ler currículo. | Diretora que atrasa **sim** nem deve ler currículo. |
+| 23,8–31,8 s | Ana, pode entrar. A gente conversa lá dentro. | igual |
+| 35,6–42,6 s | O café estava do seu gosto? | igual |
+
+O "pédio" é o erro que o Lucas ouviu. Os outros três precisam de confirmação de ouvido: o transcritor também erra.
