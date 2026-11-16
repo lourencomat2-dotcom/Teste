@@ -2,3 +2,4 @@
 *.raw
 *.wav
 novelinhas/serie-portaria/**/uploads.json
+novelinhas/serie-portaria/**/tomadas/uploads.json
