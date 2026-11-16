@@ -30,7 +30,7 @@ samambaia grande, sofá de couro gasto, porta de vidro para a rua, porta do elev
 abajur aceso. Visual de sitcom dos anos 90: luz quente de estúdio, cor saturada, fundo desfocado, grão leve
 de filme. Figurino e cabelo da época.
 
-### Cinco posições de câmera, sempre as mesmas
+### Seis posições de câmera, sempre as mesmas
 
 | Câmera | O que mostra | Uso |
 |---|---|---|
@@ -38,7 +38,8 @@ de filme. Figurino e cabelo da época.
 | C2 | Seu Valdir atrás do balcão, close | falas e reações dele |
 | C3 | quem está na frente do balcão, close | Marlene, Soraia ou Juninho, um por vez |
 | C4 | Sigilo no poleiro, close | comentários e piada de fecho |
-| C5 | dois personagens de perfil, um de cada lado do balcão | confronto |
+| C5 | dois personagens de perfil, frente a frente | confronto |
+| C6 | o objeto do episódio, sem gente | pausa cômica |
 
 C2, C3 e C4 (um personagem só) devem somar pelo menos dois terços dos planos.
 
@@ -54,7 +55,7 @@ C2, C3 e C4 (um personagem só) devem somar pelo menos dois terços dos planos.
 
 ## Regras de roteiro
 
-- Um segredo por episódio. No máximo três personagens humanos por episódio, mais o Sigilo.
+- Um segredo por episódio. No máximo dois humanos no mesmo plano.
 - Uma fala por plano, de até 8 palavras. Quem leva a piada sempre ganha um plano de reação.
 - A graça vem do defeito do personagem, não de ofensa.
 - Nenhum objeto que mude de estado, nada que dependa de mão esquerda ou direita, nenhum texto legível em cena.
