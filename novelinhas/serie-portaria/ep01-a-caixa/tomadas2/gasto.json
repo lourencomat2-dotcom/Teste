@@ -1,0 +1,17 @@
+{
+ "itens": [
+  {
+   "tomada": "neide1",
+   "segundos": 4,
+   "taskUUID": "c8c3907e-f0e1-45c1-ad50-1e8d6650fb0d",
+   "custo": null,
+   "falhou": "[{\"code\": \"invalidProviderContent\", \"message\": \"Invalid content detected. The generated content was flagged and rejected by ByteDance's content moderation system.\", \"responseContent\": \"The request failed because the input image 'content[1]' may contain real person. Request id: 021794852022682e04d4405dfa8354a322f6f89cfd01771b7f328\", \"documentation\": \"https://runware.ai/docs/getting-started/introduc"
+  },
+  {
+   "tomada": "neide1",
+   "segundos": 4,
+   "taskUUID": "157d8ed2-9cf2-45ce-971a-7f2d91270656",
+   "custo": 0.27181
+  }
+ ]
+}

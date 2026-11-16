@@ -56,9 +56,21 @@
   {
    "imagem": "entrada",
    "custo": 0.028
+  },
+  {
+   "imagem": "contra_base",
+   "custo": 0.044
+  },
+  {
+   "imagem": "contra_base",
+   "custo": 0.036
+  },
+  {
+   "imagem": "contra_neide",
+   "custo": 0.036
   }
  ],
  "saldo_antes": 4.14804,
- "total": 0.288,
+ "total": 0.404,
  "saldo_depois": 3.84804
 }
