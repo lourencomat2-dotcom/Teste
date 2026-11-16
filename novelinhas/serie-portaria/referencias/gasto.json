@@ -1,0 +1,39 @@
+{
+ "modelo": "bytedance:seedream@5.5",
+ "teto": 0.5,
+ "itens": [
+  {
+   "imagem": "valdir",
+   "custo": 0.02,
+   "taskUUID": "2cb505ba-754b-42ac-9c35-3836d49b3968"
+  },
+  {
+   "imagem": "marlene",
+   "custo": 0.02,
+   "taskUUID": "d02ae995-9198-41c6-9365-19f17475325b"
+  },
+  {
+   "imagem": "soraia",
+   "custo": 0.02,
+   "taskUUID": "f9ec7346-8b2a-4785-a34f-d93fb9bfb50c"
+  },
+  {
+   "imagem": "juninho",
+   "custo": 0.02,
+   "taskUUID": "6cb453bb-bdb2-400d-b008-b7d58417ea3c"
+  },
+  {
+   "imagem": "sigilo",
+   "custo": 0.02,
+   "taskUUID": "340f8e07-d85f-4aa4-95ca-cd9911d693da"
+  },
+  {
+   "imagem": "portaria",
+   "custo": 0.02,
+   "taskUUID": "8d358ce5-57af-4e13-9ca1-470b03086e0d"
+  }
+ ],
+ "saldo_antes": 4.14804,
+ "total": 0.12,
+ "saldo_depois": 3.88804
+}
