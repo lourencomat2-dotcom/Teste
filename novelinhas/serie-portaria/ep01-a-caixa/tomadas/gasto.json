@@ -148,6 +148,12 @@
    "tomada": "sigilo2",
    "segundos": 4,
    "taskUUID": "2aac839b-7591-425c-8ad3-18aeaa81a5b2",
+   "custo": 0.27181
+  },
+  {
+   "tomada": "sigilo3",
+   "segundos": 6,
+   "taskUUID": "056372d7-6d1c-4776-a4f9-8a7e6af0ff52",
    "custo": null
   }
  ]
