@@ -1,0 +1,37 @@
+{
+ "modelo": "mirelo:1@1",
+ "teto": 0.2,
+ "itens": [
+  {
+   "som": "risadinha",
+   "segundos": 2,
+   "custo": 0.02,
+   "prompt": "A short, light chuckle from the whole audience that fades out quickly. Live studio audience of a 1990s TV sitcom, about 150 people in a theater, recorded from the stage, warm and natural. No music, no speech, no words."
+  },
+  {
+   "som": "risada",
+   "segundos": 3,
+   "custo": 0.03,
+   "prompt": "A warm, hearty laugh from the whole audience, rising and then fading out. Live studio audience of a 1990s TV sitcom, about 150 people in a theater, recorded from the stage, warm and natural. No music, no speech, no words."
+  },
+  {
+   "som": "gargalhada",
+   "segundos": 5,
+   "custo": 0.05,
+   "prompt": "A big, long belly laugh from the whole audience, with some people cackling, then fading out. Live studio audience of a 1990s TV sitcom, about 150 people in a theater, recorded from the stage, warm and natural. No music, no speech, no words."
+  },
+  {
+   "som": "uuuh",
+   "segundos": 3,
+   "custo": 0.03,
+   "prompt": "The whole audience reacts with a teasing, surprised 'oooh!' together, then a few laughs. Live studio audience of a 1990s TV sitcom, about 150 people in a theater, recorded from the stage, warm and natural. No music, no speech, no words."
+  },
+  {
+   "som": "aplauso",
+   "segundos": 6,
+   "custo": 0.06,
+   "prompt": "A big laugh from the whole audience that turns into enthusiastic applause and cheering, then fades. Live studio audience of a 1990s TV sitcom, about 150 people in a theater, recorded from the stage, warm and natural. No music, no speech, no words."
+  }
+ ],
+ "total": 0.19
+}
