@@ -52,6 +52,12 @@
    "tomada": "valdir2",
    "segundos": 6,
    "taskUUID": "43910b12-b3b5-47b5-b439-57b366af279d",
+   "custo": 0.406315
+  },
+  {
+   "tomada": "valdir3",
+   "segundos": 4,
+   "taskUUID": "6a4ce6f2-8c75-4a60-adcf-0fc75fbbe223",
    "custo": null
   }
  ]
