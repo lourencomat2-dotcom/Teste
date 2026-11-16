@@ -1,0 +1,44 @@
+[
+ [
+  "E",
+  {
+   "model": "alibaba:qwen@3-tts-1.7b-voicedesign",
+   "positivePrompt": "Original comic puppet parrot character voice for a Brazilian TV show: an adult man performing a raspy, nasal, high-pitched cartoon parrot voice, cheeky, mischievous and mocking, Rio de Janeiro carioca accent, speaks fast, ends with a short cackling laugh.",
+   "speech": {
+    "text": "O segundo é do Valdir!"
+   }
+  }
+ ],
+ [
+  "F",
+  {
+   "model": "alibaba:qwen@3-tts-1.7b-voicedesign",
+   "positivePrompt": "Cartoon puppet parrot voice performed by a playful male comedian: squeaky and gravelly at the same time, strongly nasal, tight throat, very fast clipped delivery, teasing gossipy tone, carioca accent.",
+   "speech": {
+    "text": "O segundo é do Valdir!"
+   }
+  }
+ ],
+ [
+  "G",
+  {
+   "model": "google:gemini@3.1-flash-tts",
+   "speech": {
+    "text": "[comic TV puppet parrot voice: raspy, nasal, high, fast, cheeky, carioca accent] O segundo é do Valdir! [laughs]",
+    "voice": "Puck",
+    "language": "pt-BR"
+   }
+  }
+ ],
+ [
+  "H",
+  {
+   "model": "google:gemini@3.1-flash-tts",
+   "speech": {
+    "text": "[cartoon parrot puppet voice: gravelly, nasal, squeaky, fast and mocking, carioca accent] O segundo é do Valdir! [laughs]",
+    "voice": "Algenib",
+    "language": "pt-BR"
+   }
+  }
+ ]
+]

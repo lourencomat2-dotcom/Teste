@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Teste de voz do Sigilo (papagaio de verdade): 4 versões de uma fala, um envio cada, teto US$ 0,10.
+"""Teste de voz do Sigilo: 4 versões de uma fala, um envio cada.
+
+Uso: python voz_sigilo.py            (rodada 2, papagaio de verdade, teto US$ 0,10)
+     python voz_sigilo.py 3 0.02     (rodada 3, papagaio de TV, teto US$ 0,02)
 
 Gera só o áudio e coloca por cima do clipe 3 do piloto (o bico já abre no tempo da fala).
 """
@@ -18,7 +21,7 @@ P = B / "voz_sigilo"
 CLIPE = B / "ep01-a-caixa" / "piloto" / "clipe3_flash.mp4"
 API = "https://api.runware.ai/v1"
 CAB = {"Authorization": "Bearer proxy-injected"}
-TETO = 0.10
+TETO = 0.10 if len(sys.argv) < 2 else float(sys.argv[2])
 FALA = "O segundo é do Valdir!"
 
 PAPAGAIO_1 = ("A real Amazon parrot imitating human speech. Small bird voice: high-pitched, nasal and tinny, raspy, "
@@ -26,6 +29,23 @@ PAPAGAIO_1 = ("A real Amazon parrot imitating human speech. Small bird voice: hi
               "like a talking bird repeating a phrase it overheard.")
 PAPAGAIO_2 = ("A talking pet parrot mimicking a middle-aged man's voice: the words are recognizable but squeezed and "
               "shrill, harsh throaty rasp, whistly overtones, choppy rhythm, loud and excited.")
+
+TV = ("Original comic puppet parrot character voice for a Brazilian TV show: an adult man performing a raspy, nasal, "
+      "high-pitched cartoon parrot voice, cheeky, mischievous and mocking, Rio de Janeiro carioca accent, "
+      "speaks fast, ends with a short cackling laugh.")
+TV2 = ("Cartoon puppet parrot voice performed by a playful male comedian: squeaky and gravelly at the same time, "
+       "strongly nasal, tight throat, very fast clipped delivery, teasing gossipy tone, carioca accent.")
+
+RODADA3 = [
+    ("E", {"model": "alibaba:qwen@3-tts-1.7b-voicedesign", "positivePrompt": TV, "speech": {"text": FALA}}),
+    ("F", {"model": "alibaba:qwen@3-tts-1.7b-voicedesign", "positivePrompt": TV2, "speech": {"text": FALA}}),
+    ("G", {"model": "google:gemini@3.1-flash-tts",
+           "speech": {"text": f"[comic TV puppet parrot voice: raspy, nasal, high, fast, cheeky, carioca accent] {FALA} [laughs]",
+                      "voice": "Puck", "language": "pt-BR"}}),
+    ("H", {"model": "google:gemini@3.1-flash-tts",
+           "speech": {"text": f"[cartoon parrot puppet voice: gravelly, nasal, squeaky, fast and mocking, carioca accent] {FALA} [laughs]",
+                      "voice": "Algenib", "language": "pt-BR"}}),
+]
 
 TESTES = [
     ("A", {"model": "alibaba:qwen@3-tts-1.7b-voicedesign", "positivePrompt": PAPAGAIO_1,
@@ -71,20 +91,22 @@ def enviar(nome, corpo, log):
 
 def main():
     P.mkdir(exist_ok=True)
-    lf = P / "gasto.json"
+    r3 = len(sys.argv) > 1 and sys.argv[1] == "3"
+    lf = P / ("gasto_r3.json" if r3 else "gasto.json")
     log = json.loads(lf.read_text()) if lf.exists() else {"teto": TETO, "itens": []}
     gasto = sum(i.get("custo") or 0 for i in log["itens"])
-    for nome, corpo in TESTES:
+    testes = RODADA3 if r3 else TESTES
+    for nome, corpo in testes:
         if (P / f"{nome}.mp3").exists():
             continue
-        if gasto + 0.03 > TETO:
+        if gasto + (0.005 if r3 else 0.03) > TETO:  # rodada 2 mediu no máximo US$ 0,0017 por voz
             sys.exit(f"PARADO antes de {nome}: gasto {gasto:.3f} perto do teto {TETO:.2f}")
         c = enviar(nome, corpo, log)
         gasto += c
         log["total"] = round(gasto, 5)
         lf.write_text(json.dumps(log, indent=1, ensure_ascii=False))
         print(f"{nome}: US$ {c} | acumulado US$ {gasto:.4f}", flush=True)
-    (P / "testes.json").write_text(json.dumps(TESTES, indent=1, ensure_ascii=False))
+    (P / f"testes_{'r3' if testes is RODADA3 else 'r2'}.json").write_text(json.dumps(testes, indent=1, ensure_ascii=False))
 
 
 if __name__ == "__main__":

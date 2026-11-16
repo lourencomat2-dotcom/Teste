@@ -15,7 +15,7 @@ cerca de 2 minutos, elenco e cenário fixos. A história se passa nos anos 90: s
 | Personagem | Quem é | Defeito que gera a piada | Visual que nunca muda | Voz | Bordão |
 |---|---|---|---|---|---|
 | **Seu Valdir**, 58 | porteiro | sabe da vida de todos e jura que é discreto | homem negro, cabelo grisalho curto, bigode grisalho, camisa **azul-clara** de manga curta, gravata azul-marinho, óculos de leitura pendurados no pescoço | grave, mansa, sem pressa | "Eu não sou de comentar..." |
-| **Dona Marlene**, 62 | síndica | inventa uma regra por dia e quebra todas escondido | mulher branca, cabelo loiro curto armado, blazer **vermelho**, colar de pérolas, prancheta na mão | aguda, firme, rápida | "É regra." |
+| **Dona Neide**, 62 | síndica | inventa uma regra por dia e quebra todas escondido | mulher branca, cabelo loiro curto armado, blazer **vermelho**, colar de pérolas, prancheta na mão | aguda, firme, rápida | "É regra." |
 | **Soraia**, 40 | moradora do trezentos e dois | fofoqueira que finge não querer saber | mulher morena, **roupão rosa-choque** de cetim, bobes no cabelo, chinelo | rouca, arrastada, debochada | "Não que eu queira saber..." |
 | **Juninho**, 22 | entregador da pizzaria | sincero demais, fala a verdade na hora errada | rapaz pardo e magro, jaqueta **laranja**, capacete preto com a viseira levantada, mochila térmica laranja | jovem, acelerada | "Só vim entregar." |
 | **Sigilo** | papagaio da portaria | repete o que ouviu, sempre na pior hora | papagaio **verde** de testa amarela, num poleiro de madeira na ponta do balcão | esganiçada, de papagaio | repete a última frase comprometedora |
@@ -60,14 +60,14 @@ C2, C3 e C4 (um personagem só) devem somar pelo menos dois terços dos planos.
 - A graça vem do defeito do personagem, não de ofensa.
 - Nenhum objeto que mude de estado, nada que dependa de mão esquerda ou direita, nenhum texto legível em cena.
 - Números por extenso ("trezentos e dois"), sem sigla, sem palavra estrangeira.
-- Palavras proibidas por pronúncia (a lista cresce a cada erro achado): **prédio** (usar "aqui", "o condomínio"); **Marlene** (o Seedance fala "Mariu").
+- Palavras proibidas por pronúncia (a lista cresce a cada erro achado): **prédio** (usar "aqui", "o condomínio"); **Marlene** (o Seedance fala "Mariu"; a síndica passou a se chamar **Neide**).
 - Palavras testadas e aprovadas: **karaokê**.
 
 ## Três episódios possíveis
 
-1. **A caixa.** Juninho entrega uma caixa enorme para a Dona Marlene. Soraia precisa saber o que tem dentro.
-   Seu Valdir "não é de comentar". O Sigilo entrega: é um karaokê, e foi a Marlene que proibiu barulho depois das oito.
-2. **A regra nova.** Dona Marlene proíbe bicho na portaria. Todos escondem o Sigilo. No fim, o Sigilo repete a
-   voz da própria Marlene: é ela que dá biscoito para ele escondido toda noite.
-3. **O bilhete.** Aparece no elevador um bilhete anônimo falando mal da síndica. Marlene investiga no balcão.
+1. **A caixa.** Juninho entrega uma caixa enorme para a Dona Neide. Soraia precisa saber o que tem dentro.
+   Seu Valdir "não é de comentar". O Sigilo entrega: é um karaokê, e foi a Neide que proibiu barulho depois das oito.
+2. **A regra nova.** Dona Neide proíbe bicho na portaria. Todos escondem o Sigilo. No fim, o Sigilo repete a
+   voz da própria Neide: é ela que dá biscoito para ele escondido toda noite.
+3. **O bilhete.** Aparece no elevador um bilhete anônimo falando mal da síndica. Neide investiga no balcão.
    O Sigilo repete o Seu Valdir ditando o bilhete.

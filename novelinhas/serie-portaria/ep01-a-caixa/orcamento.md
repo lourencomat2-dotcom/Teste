@@ -23,10 +23,10 @@ As referências de imagem do elenco e da portaria entram em toda tomada.
 | Soraia 4 | C3 | 17 | 4 |
 | Soraia 5 | C3 | 22 | 4 |
 | Soraia 6 | C3 | 24 | 4 |
-| Marlene 1 | C3 | 16 | 4 |
-| Marlene 2 | C3 | 18 + 20 (fala, depois olhos arregalados) | 6 |
-| Marlene 3 | C3 | 23 | 4 |
-| Marlene 4 | C3 | 29 | 4 |
+| Neide 1 | C3 | 16 | 4 |
+| Neide 2 | C3 | 18 + 20 (fala, depois olhos arregalados) | 6 |
+| Neide 3 | C3 | 23 | 4 |
+| Neide 4 | C3 | 29 | 4 |
 | Juninho 1 | C3 | 3 | 4 |
 | Juninho 2 | C3 | 19 + 21 (duas falas com pausa) | 8 |
 | Juninho 3 | C3 | 31 | 4 |
@@ -68,7 +68,7 @@ o mesmo episódio sairia por cerca de US$ 28 e não caberia no teto. Por isso o 
 
 | Etapa | O que gera | Teto | O que responde |
 |---|---|---|---|
-| A. Referências | 6 imagens: Valdir, Marlene, Soraia, Juninho, Sigilo e a portaria | US$ 0,50 | o visual da série está bom? |
+| A. Referências | 6 imagens: Valdir, Neide, Soraia, Juninho, Sigilo e a portaria | US$ 0,50 | o visual da série está bom? |
 | B. Piloto | 4 clipes: plano 19 no Seedance 2.5 e no Flash; plano 26 (papagaio falando); tomada Valdir 2 com áudio de referência | US$ 2,50 | preço real por segundo, pronúncia de "karaokê", papagaio, voz fixa, 2.5 ou Flash |
 | C. Episódio | as 24 tomadas | US$ 20 no total, contando A e B | |
 

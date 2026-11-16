@@ -28,7 +28,7 @@ IMAGENS = [
      "Brazilian Black man, 58 years old, short grey hair, grey mustache, kind tired eyes. Building doorman: "
      "light blue short-sleeve button-up shirt, navy blue tie, reading glasses hanging on a cord around his neck, "
      "dark grey trousers, black shoes. " + RETRATO),
-    ("marlene", 1024, 1280,
+    ("neide", 1024, 1280,
      "Brazilian white woman, 62 years old, short voluminous teased blonde hair, pearl necklace, small pearl earrings. "
      "Bright red 1990s blazer with shoulder pads over a white blouse, knee-length navy skirt, low heels. "
      "Holds a plain brown clipboard against her chest with blank paper. Stern, upright posture. " + RETRATO),
