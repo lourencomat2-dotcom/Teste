@@ -22,6 +22,14 @@ cerca de 2 minutos, elenco e cenário fixos. A história se passa nos anos 90: s
 
 Cada personagem tem uma cor só. O cenário é neutro e quente para as cores saltarem.
 
+## Voz fixa do Sigilo (escolhida pelo Lucas em 16/11, versão M)
+
+Gerada fora do vídeo, no Gemini 3.1 Flash TTS (Runware `google:gemini@3.1-flash-tts`), voz **Fenrir**, idioma pt-BR,
+com a marcação no começo do texto:
+`[cartoon parrot puppet voice: gravelly, nasal, squeaky, fast and mocking, carioca accent]` + fala + ` [laughs]`.
+Amostra: `voz_sigilo/M.mp3`. Cada fala custa cerca de US$ 0,002. As falas do Sigilo são geradas assim primeiro,
+e o vídeo dele é feito em cima do áudio.
+
 ## Cenário único: a portaria
 
 Hall de edifício nos anos 90: balcão de madeira escura, painel de interfone com botões, telefone de mesa
