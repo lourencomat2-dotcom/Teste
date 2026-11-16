@@ -118,6 +118,12 @@
    "tomada": "neide4",
    "segundos": 4,
    "taskUUID": "d40ef11e-0f39-48c7-820c-4a3b232aff5b",
+   "custo": 0.27181
+  },
+  {
+   "tomada": "juninho1",
+   "segundos": 4,
+   "taskUUID": "cac9430e-7701-41ed-b22e-46c9b7c081a0",
    "custo": null
   }
  ]
