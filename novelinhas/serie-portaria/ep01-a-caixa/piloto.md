@@ -70,3 +70,16 @@ Referências: @Image1 = `valdir.jpg`, @Image2 = `portaria.jpg`.
 |---|---|
 | US$ 0,10 (estimativa em 480p) | US$ 2,00 |
 | US$ 0,19 (o que o vídeo de 42 s custou por segundo aproveitado) | US$ 3,80, para no clipe 3 |
+
+## Resultado do piloto (16/11)
+
+| Clipe | Modelo | Custo | Imagem | Transcritor ouviu |
+|---|---|---|---|---|
+| 1 | Seedance 2.5 | não gerado | — | Runware exige saldo mínimo de US$ 7,43 para este modelo |
+| 2 Juninho | 2.5 Flash, 4 s | US$ 0,27 | igual à referência; olha para a direita (pedido: esquerda) | "Ué, na nota tá escrito o cara o quê?" (karaokê duvidoso) |
+| 3 Sigilo | 2.5 Flash, 4 s | US$ 0,27 | igual à referência, bico sincronizado | "O segundo é do Valdir." (voz reprovada pelo Lucas: não parece papagaio) |
+| 4 Valdir | 2.5 Flash, 8 s | US$ 0,54 | igual à referência; olhar de lado e inclinação nos tempos pedidos | "Eu não sou de comentar." / "É da dona Mariu." (Marlene duvidoso) |
+
+- Total: **US$ 1,08**, a **US$ 0,068 por segundo** (Flash, 854×480, com áudio).
+- Duas falas com pausa no mesmo clipe de 8 s: funcionou, na ordem certa.
+- Pendente: ouvido do Lucas em "karaokê" e "Marlene"; voz do Sigilo (teste de voz gerada à parte).
