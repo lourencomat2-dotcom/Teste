@@ -42,6 +42,12 @@ CLIPES = {
         "wooden counter of @Image2; out of focus behind it, the metal mailboxes. The parrot bobs its head, flaps its "
         "wings once and says loudly, in a squawky parrot voice, in Brazilian Portuguese: \"O segundo é do Valdir!\" "
         "Its beak opens and closes with the words. Only the parrot speaks, once."),
+    5: ("sigilo", 4,
+        "Close-up of the green parrot with a yellow face of @Image1, on its curved branch perch at the end of the dark "
+        "wooden counter of @Image2; out of focus behind it, the metal mailboxes. The parrot bobs its head and says, "
+        "fast and mocking, in Brazilian Portuguese with a carioca accent: \"O segundo é do Valdir!\" and then gives a "
+        "short cackling laugh. Its beak opens and closes with every syllable. VOICE: a cartoon parrot puppet voice "
+        "performed by a man: gravelly, nasal, squeaky, fast and mocking. Only the parrot speaks."),
     4: ("valdir", 8,
         "Close-up at eye level of the doorman of @Image1: same face, grey mustache, light blue short-sleeve shirt, navy "
         "tie, reading glasses hanging on a cord. He stands behind the dark wooden counter of @Image2, seen from the "

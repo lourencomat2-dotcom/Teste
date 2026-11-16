@@ -25,6 +25,13 @@
    "taskUUID": "fa233afe-6481-4423-94cb-4dc80e388ea3",
    "custo": 0.54082,
    "preco_s": 0.0676
+  },
+  {
+   "clipe": 5,
+   "modelo": "bytedance:seedance@2.5-flash",
+   "segundos": 4,
+   "taskUUID": "1d4f399d-e0f8-453f-86b6-cf5dde21f158",
+   "custo": null
   }
  ]
 }
