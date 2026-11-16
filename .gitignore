@@ -1,3 +1,4 @@
 # Scratch audio/video intermediates
 *.raw
 *.wav
+novelinhas/serie-portaria/**/uploads.json

@@ -1,0 +1,13 @@
+{
+ "teto": 2.5,
+ "saldo_inicio": 3.82804,
+ "itens": [
+  {
+   "clipe": 2,
+   "modelo": "bytedance:seedance@2.5-flash",
+   "segundos": 4,
+   "taskUUID": "e6065151-6cb3-487b-93c4-360c4f6add29",
+   "custo": null
+  }
+ ]
+}
