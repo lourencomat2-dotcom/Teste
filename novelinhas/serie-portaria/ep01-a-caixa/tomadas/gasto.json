@@ -100,6 +100,12 @@
    "tomada": "neide1",
    "segundos": 4,
    "taskUUID": "dd336390-d558-4322-bedd-9a878647edd9",
+   "custo": 0.27181
+  },
+  {
+   "tomada": "neide2",
+   "segundos": 6,
+   "taskUUID": "4a1433a3-5c2f-4382-810e-9aea3450178b",
    "custo": null
   }
  ]
