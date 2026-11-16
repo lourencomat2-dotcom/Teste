@@ -136,6 +136,12 @@
    "tomada": "juninho3",
    "segundos": 4,
    "taskUUID": "1adc105b-620a-4748-be6b-b7c42b768a07",
+   "custo": 0.27181
+  },
+  {
+   "tomada": "sigilo1",
+   "segundos": 4,
+   "taskUUID": "0be17567-21cd-4c1b-bf1a-916fbae2095f",
    "custo": null
   }
  ]
