@@ -1,0 +1,346 @@
+[
+ {
+  "tomada": "valdir1",
+  "camera": "C2",
+  "refs": [
+   "valdir.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   2
+  ],
+  "prompt": "Medium close-up at eye level of the doorman of @Image1: same face, short grey hair, grey mustache, light blue short-sleeve shirt, navy tie, reading glasses hanging on a cord. He stands behind the dark wooden counter of @Image2; behind him, out of focus, the metal mailboxes and the intercom panel. Looking toward screen LEFT, at the person in front of the counter just off-screen. He looks down at something big on the floor in front of the counter, raises his eyebrows and says, amused: VALDIR says: \"Pizza desse tamanho, Juninho?\" Voice: deep, calm, unhurried voice of a man about 58. Only VALDIR speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 965
+ },
+ {
+  "tomada": "valdir2",
+  "camera": "C2",
+  "refs": [
+   "valdir.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 8,
+  "planos": [
+   6,
+   8
+  ],
+  "prompt": "Medium close-up at eye level of the doorman of @Image1: same face, short grey hair, grey mustache, light blue short-sleeve shirt, navy tie, reading glasses hanging on a cord. He stands behind the dark wooden counter of @Image2; behind him, out of focus, the metal mailboxes and the intercom panel. 0 to 3 s: without looking at anyone, straight face, VALDIR says: \"Eu não sou de comentar.\" Voice: deep, calm, unhurried voice of a man about 58. 3 to 5 s: silence; he glances once toward screen left, as if someone is staring at him. 5 to 8 s: he leans a little forward and VALDIR says quietly, almost whispering: \"É da Dona Neide.\" Voice: deep, calm, unhurried voice of a man about 58. Only VALDIR speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 1062
+ },
+ {
+  "tomada": "valdir3",
+  "camera": "C2",
+  "refs": [
+   "valdir.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   11
+  ],
+  "prompt": "Medium close-up at eye level of the doorman of @Image1: same face, short grey hair, grey mustache, light blue short-sleeve shirt, navy tie, reading glasses hanging on a cord. He stands behind the dark wooden counter of @Image2; behind him, out of focus, the metal mailboxes and the intercom panel. He turns his head toward screen RIGHT, toward the parrot at the end of the counter, and VALDIR says in a scolding whisper: \"Sigilo! Fica quieto.\" Voice: deep, calm, unhurried voice of a man about 58. Only VALDIR speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 876
+ },
+ {
+  "tomada": "valdir4",
+  "camera": "C2",
+  "refs": [
+   "valdir.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   15
+  ],
+  "prompt": "Medium close-up at eye level of the doorman of @Image1: same face, short grey hair, grey mustache, light blue short-sleeve shirt, navy tie, reading glasses hanging on a cord. He stands behind the dark wooden counter of @Image2; behind him, out of focus, the metal mailboxes and the intercom panel. Looking toward screen LEFT, at the person in front of the counter just off-screen. Helpful and polite, VALDIR says: \"Chegou uma caixa pra senhora.\" Voice: deep, calm, unhurried voice of a man about 58. Only VALDIR speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 878
+ },
+ {
+  "tomada": "valdir5",
+  "camera": "C2",
+  "refs": [
+   "valdir.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 6,
+  "planos": [
+   25,
+   27
+  ],
+  "prompt": "Medium close-up at eye level of the doorman of @Image1: same face, short grey hair, grey mustache, light blue short-sleeve shirt, navy tie, reading glasses hanging on a cord. He stands behind the dark wooden counter of @Image2; behind him, out of focus, the metal mailboxes and the intercom panel. 0 to 3 s: he looks up at the ceiling, innocent, and VALDIR says: \"Eu não sou de comentar...\" Voice: deep, calm, unhurried voice of a man about 58. 3 to 6 s: silence; he freezes, then straightens his tie with both hands, embarrassed, mouth closed. Only VALDIR speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 923
+ },
+ {
+  "tomada": "soraia1",
+  "camera": "C3",
+  "refs": [
+   "soraia.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 6,
+  "planos": [
+   5,
+   7
+  ],
+  "prompt": "Medium close-up at eye level of the resident of @Image1: same face, shiny hot pink satin bathrobe, pink hair curlers. She stands in the lobby of @Image2 in front of the counter; behind her, out of focus, the brown leather sofa and the fern. 0 to 3 s: her eyes are glued to something on the floor; pretending not to care, SORAIA says: \"Não que eu queira saber...\" Voice: husky, drawling, teasing voice of a woman about 40. 3 to 6 s: silence; she looks up toward screen RIGHT and stares, one eyebrow raised, mouth closed. Only SORAIA speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 898
+ },
+ {
+  "tomada": "soraia2",
+  "camera": "C3",
+  "refs": [
+   "soraia.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   9
+  ],
+  "prompt": "Medium close-up at eye level of the resident of @Image1: same face, shiny hot pink satin bathrobe, pink hair curlers. She stands in the lobby of @Image2 in front of the counter; behind her, out of focus, the brown leather sofa and the fern. Looking toward screen RIGHT, at the person just off-screen. Excited, leaning in, SORAIA says: \"Da síndica? Pesada assim?\" Voice: husky, drawling, teasing voice of a woman about 40. Only SORAIA speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 800
+ },
+ {
+  "tomada": "soraia3",
+  "camera": "C3",
+  "refs": [
+   "soraia.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   13
+  ],
+  "prompt": "Medium close-up at eye level of the resident of @Image1: same face, shiny hot pink satin bathrobe, pink hair curlers. She stands in the lobby of @Image2 in front of the counter; behind her, out of focus, the brown leather sofa and the fern. Looking toward screen RIGHT, at the person just off-screen. Caught, pretending to be casual, SORAIA says: \"Só desci pegar o jornal.\" Voice: husky, drawling, teasing voice of a woman about 40. Only SORAIA speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 811
+ },
+ {
+  "tomada": "soraia4",
+  "camera": "C3",
+  "refs": [
+   "soraia.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   17
+  ],
+  "prompt": "Medium close-up at eye level of the resident of @Image1: same face, shiny hot pink satin bathrobe, pink hair curlers. She stands in the lobby of @Image2 in front of the counter; behind her, out of focus, the brown leather sofa and the fern. Looking toward screen RIGHT, at the person just off-screen. Suspicious, eyes narrowed, SORAIA says: \"Limpeza? Desse tamanho?\" Voice: husky, drawling, teasing voice of a woman about 40. Only SORAIA speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 804
+ },
+ {
+  "tomada": "soraia5",
+  "camera": "C3",
+  "refs": [
+   "soraia.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   22
+  ],
+  "prompt": "Medium close-up at eye level of the resident of @Image1: same face, shiny hot pink satin bathrobe, pink hair curlers. She stands in the lobby of @Image2 in front of the counter; behind her, out of focus, the brown leather sofa and the fern. Looking toward screen RIGHT, at the person just off-screen. Delighted with the discovery, SORAIA says: \"A senhora proibiu barulho depois das oito!\" Voice: husky, drawling, teasing voice of a woman about 40. Only SORAIA speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 826
+ },
+ {
+  "tomada": "soraia6",
+  "camera": "C3",
+  "refs": [
+   "soraia.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   24
+  ],
+  "prompt": "Medium close-up at eye level of the resident of @Image1: same face, shiny hot pink satin bathrobe, pink hair curlers. She stands in the lobby of @Image2 in front of the counter; behind her, out of focus, the brown leather sofa and the fern. Looking toward screen RIGHT, at the person just off-screen. Teasing, SORAIA says: \"Reunião cantada? E o segundo microfone?\" Voice: husky, drawling, teasing voice of a woman about 40. Only SORAIA speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 802
+ },
+ {
+  "tomada": "neide1",
+  "camera": "C3",
+  "refs": [
+   "neide.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   16
+  ],
+  "prompt": "Medium close-up at eye level of the building manager of @Image1: same face, short voluminous teased blonde hair, bright red blazer, pearl necklace, holding a plain brown clipboard against her chest. She stands in the lobby of @Image2; behind her, out of focus, the elevator door with the gold frame. Looking toward screen LEFT, at the woman in the pink bathrobe just off-screen. She freezes for a moment, then NEIDE says with forced calm: \"É... material de limpeza.\" Voice: high, firm, fast, bossy voice of a woman about 62. Only NEIDE speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 902
+ },
+ {
+  "tomada": "neide2",
+  "camera": "C3",
+  "refs": [
+   "neide.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 6,
+  "planos": [
+   18,
+   20
+  ],
+  "prompt": "Medium close-up at eye level of the building manager of @Image1: same face, short voluminous teased blonde hair, bright red blazer, pearl necklace, holding a plain brown clipboard against her chest. She stands in the lobby of @Image2; behind her, out of focus, the elevator door with the gold frame. Looking toward screen LEFT, at the woman in the pink bathrobe just off-screen. 0 to 3 s: very serious, NEIDE says: \"É muito detergente.\" Voice: high, firm, fast, bossy voice of a woman about 62. 3 to 6 s: silence; her eyes go wide in shock, mouth closed, clutching the clipboard. Only NEIDE speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 957
+ },
+ {
+  "tomada": "neide3",
+  "camera": "C3",
+  "refs": [
+   "neide.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   23
+  ],
+  "prompt": "Medium close-up at eye level of the building manager of @Image1: same face, short voluminous teased blonde hair, bright red blazer, pearl necklace, holding a plain brown clipboard against her chest. She stands in the lobby of @Image2; behind her, out of focus, the elevator door with the gold frame. Looking toward screen LEFT, at the woman in the pink bathrobe just off-screen. She recovers her posture, chin up, NEIDE says: \"É pra reunião do condomínio.\" Voice: high, firm, fast, bossy voice of a woman about 62. Only NEIDE speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 892
+ },
+ {
+  "tomada": "neide4",
+  "camera": "C3",
+  "refs": [
+   "neide.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   29
+  ],
+  "prompt": "Medium close-up at eye level of the building manager of @Image1: same face, short voluminous teased blonde hair, bright red blazer, pearl necklace, holding a plain brown clipboard against her chest. She stands in the lobby of @Image2; behind her, out of focus, the elevator door with the gold frame. She points toward screen RIGHT at the parrot and NEIDE says firmly: \"Regra nova: papagaio, não!\" Voice: high, firm, fast, bossy voice of a woman about 62. Only NEIDE speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 832
+ },
+ {
+  "tomada": "juninho1",
+  "camera": "C3",
+  "refs": [
+   "juninho.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   3
+  ],
+  "prompt": "Medium close-up at eye level of the young delivery man of @Image1: same face, black motorcycle helmet with the visor raised, bright orange jacket, orange delivery backpack straps. He stands in the lobby of @Image2 in front of the counter; behind him, out of focus, the glass street door and the fern. Looking toward screen RIGHT, at the doorman just off-screen. Out of breath, JUNINHO says: \"Hoje é bico. Só vim entregar.\" Voice: light, quick voice of a young man about 22. Only JUNINHO speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 853
+ },
+ {
+  "tomada": "juninho2",
+  "camera": "C3",
+  "refs": [
+   "juninho.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   21
+  ],
+  "prompt": "Medium close-up at eye level of the young delivery man of @Image1: same face, black motorcycle helmet with the visor raised, bright orange jacket, orange delivery backpack straps. He stands in the lobby of @Image2 in front of the counter; behind him, out of focus, the glass street door and the fern. Looking toward screen RIGHT, at the doorman just off-screen. He holds a small blank paper slip in his hand and, helpful and naive, JUNINHO says: \"Com dois microfones.\" Voice: light, quick voice of a young man about 22. Only JUNINHO speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 899
+ },
+ {
+  "tomada": "juninho3",
+  "camera": "C3",
+  "refs": [
+   "juninho.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   31
+  ],
+  "prompt": "Medium close-up at eye level of the young delivery man of @Image1: same face, black motorcycle helmet with the visor raised, bright orange jacket, orange delivery backpack straps. He stands in the lobby of @Image2 in front of the counter; behind him, out of focus, the glass street door and the fern. Looking toward screen RIGHT, at the doorman just off-screen. Forgotten there, he lifts the blank paper slip and JUNINHO says hesitantly: \"E aí... alguém assina?\" Voice: light, quick voice of a young man about 22. Only JUNINHO speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 893
+ },
+ {
+  "tomada": "sigilo1",
+  "camera": "C4",
+  "refs": [
+   "sigilo.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   10
+  ],
+  "prompt": "Close-up of the green parrot with a yellow face and a PALE IVORY BEAK of @Image1, on its curved branch perch at the end of the dark wooden counter of @Image2; behind it, out of focus, the metal mailboxes. The parrot bobs its head and SIGILO says fast and mocking: \"Pesada assim! Pesada assim!\" Voice: a cartoon parrot puppet voice performed by a man: gravelly, nasal, squeaky, fast and mocking. Only the parrot speaks; its beak opens and closes with every syllable. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 824
+ },
+ {
+  "tomada": "sigilo2",
+  "camera": "C4",
+  "refs": [
+   "sigilo.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   26
+  ],
+  "prompt": "Close-up of the green parrot with a yellow face and a PALE IVORY BEAK of @Image1, on its curved branch perch at the end of the dark wooden counter of @Image2; behind it, out of focus, the metal mailboxes. The parrot bobs its head and SIGILO says fast and mocking: \"O segundo é do Valdir!\" Voice: a cartoon parrot puppet voice performed by a man: gravelly, nasal, squeaky, fast and mocking. Then a short cackling laugh. Only the parrot speaks; its beak opens and closes with every syllable. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 848
+ },
+ {
+  "tomada": "sigilo3",
+  "camera": "C4",
+  "refs": [
+   "sigilo.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 8,
+  "planos": [
+   28,
+   30
+  ],
+  "prompt": "Close-up of the green parrot with a yellow face and a PALE IVORY BEAK of @Image1, on its curved branch perch at the end of the dark wooden counter of @Image2; behind it, out of focus, the metal mailboxes. 0 to 3 s: the parrot flaps its wings once and SIGILO says fast and mocking: \"Ensaio às nove! Ensaio às nove!\" Voice: a cartoon parrot puppet voice performed by a man: gravelly, nasal, squeaky, fast and mocking. 3 to 5 s: silence, head tilted. 5 to 8 s: SIGILO says mocking: \"É regra! É regra!\" Voice: a cartoon parrot puppet voice performed by a man: gravelly, nasal, squeaky, fast and mocking. Only the parrot speaks; its beak opens and closes with every syllable. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 1029
+ },
+ {
+  "tomada": "hall1",
+  "camera": "C1",
+  "refs": [
+   "juninho.jpg",
+   "valdir.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   1
+  ],
+  "prompt": "Wide shot of the lobby of @Image3, camera at eye level, the whole counter visible. The doorman of @Image2 (grey mustache, light blue shirt, navy tie) stands behind the counter. The glass street door opens and the delivery man of @Image1 (orange jacket, black helmet) walks in hugging a huge plain brown cardboard box with no text that hides his face, and puts it down on the floor in front of the counter. JUNINHO says out of breath: \"Entrega pra Dona Neide!\" Voice: light, quick voice of a young man about 22. Only JUNINHO speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 890
+ },
+ {
+  "tomada": "hall2",
+  "camera": "C1",
+  "refs": [
+   "neide.jpg",
+   "soraia.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   12
+  ],
+  "prompt": "Wide shot of the lobby of @Image3, camera facing the elevator door with the gold frame; the counter is out of frame. The resident of @Image2 (hot pink satin bathrobe, pink curlers) stands in the foreground on screen left, her back half turned. The elevator doors open and the building manager of @Image1 (teased blonde hair, red blazer, pearls, clipboard) steps out and NEIDE says bossy: \"Que reunião é essa na portaria?\" Voice: high, firm, fast, bossy voice of a woman about 62. Only NEIDE speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 857
+ },
+ {
+  "tomada": "perfil",
+  "camera": "C5",
+  "refs": [
+   "neide.jpg",
+   "soraia.jpg",
+   "portaria.jpg"
+  ],
+  "segundos": 4,
+  "planos": [
+   14
+  ],
+  "prompt": "Medium two-shot in profile in the lobby of @Image3: the building manager of @Image1 (teased blonde hair, red blazer, pearls, clipboard) on screen RIGHT facing left, and the resident of @Image2 (hot pink satin bathrobe, pink curlers) on screen LEFT facing right, face to face. NEIDE looks the bathrobe up and down and NEIDE says firmly: \"De roupão? É regra: roupão, não.\" Voice: high, firm, fast, bossy voice of a woman about 62. Soraia stays silent. Only NEIDE speaks. 1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out of focus. Static camera, one continuous shot, no cuts. Speech in Brazilian Portuguese with a natural Rio de Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other voices. No subtitles, no text on screen.",
+  "caracteres": 827
+ }
+]
