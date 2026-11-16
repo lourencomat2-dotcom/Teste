@@ -36,6 +36,10 @@ Edifício Sossego, 16/11/2026. Segunda parte: dicas de guias de terceiros, ainda
   decida no prompt.
 
 **Ritmo (o "robótico")**
+- **Marcar tempos em segundos funciona; pedir "comece logo" não.** Em clipes de 4 s sem marcação, a fala começou entre
+  1,5 e 2,6 s (o personagem fica "esperando"); com "0 to 3 s: ... says", começou em 0,8 s. Escrever a fala no começo
+  ("0 to 2 s: ... says ...") e a reação depois ("2 to 4 s: ...").
+- Na montagem, usar só o trecho da fala e da reação; a espera antes da fala é cortada.
 - Voz "calma, sem pressa", "cara séria", pausas de 2 a 3 s e clipe de 4 s para fala de 1 s deixam o personagem lento,
   "parecendo que está esperando alguma coisa" (avaliação do Lucas).
 - Corrigir com: ritmo de sitcom em tempo real, fala começando no primeiro meio segundo, gestos em velocidade normal,

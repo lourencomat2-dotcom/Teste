@@ -13,7 +13,7 @@ PRECO_S = 0.068  # Seedance 2.5 Flash 480p com áudio, medido no piloto
 COMUM = ("1990s TV sitcom look, warm studio lighting, rich saturated colors, subtle film grain, background softly out "
          "of focus. Static camera, one continuous shot, no cuts. PACE: lively sitcom timing in real time; the "
          "character starts talking within the first half second, moves, turns and gestures at normal everyday speed "
-         "(real-time motion, no slow motion), with natural blinking and reactions a half-beat late, "
+         "(real-time motion, no slow motion), with natural blinking, following the timings in seconds exactly, "
          "with lively intonation; no slow motion, no long silent pauses, nobody stands still waiting. Speech in Brazilian Portuguese with a natural Rio de "
          "Janeiro accent. Audio: only the spoken line(s) and soft room tone. No music, no laugh track, no other "
          "voices. No subtitles, no text on screen.")
@@ -73,44 +73,60 @@ def tomada(nome, quem, dur, planos, acao, olhar=True):
               "refs": [f"{quem}.jpg", "portaria.jpg"], "segundos": dur, "planos": planos, "prompt": close(quem, acao, olhar=olhar)})
 
 
+# Tempos marcados em segundos inteiros: o modelo segue (fala começa ~0,8 s); sem eles a fala começa só em 1,5-2,6 s.
+REACAO = "a small natural reaction right after the line (a nod or a glance), mouth closed"
+SIGILO_NOME = " (Sigilo, the parrot's name, is the Portuguese word 'sigilo', meaning secrecy, pronounced like that word.)"
+
+
+def curta(antes, linha, depois=REACAO):
+    """Tomada de 4 s com uma fala: fala nos 2 primeiros segundos, reação depois."""
+    return f"0 to 2 s: {antes} {linha} 2 to 4 s: {depois}."
+
+
 # ---- Valdir (C2)
-tomada("valdir1", "valdir", 4, [2], "He looks down over the counter at something big on the floor (out of frame), raises "
-       "his eyebrows, amused, and " + fala("valdir", "Que caixa é essa, Juninho?"))
-tomada("valdir2", "valdir", 6, [6, 8], "Right away, not looking at anyone, playing innocent, " + fala("valdir", "Eu não sou de comentar.")
-       + " Then a quick glance toward screen left, as if someone is staring at him, and right after he leans forward and "
-       + fala("valdir", "É da Dona Neidi.", "quietly, almost whispering"), olhar=False)
-tomada("valdir3", "valdir", 4, [11], "He turns his head toward screen RIGHT, toward the parrot at the end of the counter, "
-       "and " + fala("valdir", "Sigilo! Fica quieto.", "in a scolding whisper") + " (Sigilo, the parrot's name, is the Portuguese word 'sigilo', meaning secrecy, pronounced like that word.)", olhar=False)
-tomada("valdir4", "valdir", 4, [15], "Helpful and polite, he gestures down toward the floor in front of the counter (out of frame) and "
-       + fala("valdir", "Chegou uma caixa pra senhora.") + " No box is visible in this shot; the counter top holds only the phone, the lamp and the small TV.")
-tomada("valdir5", "valdir", 6, [25, 27], "He looks up at the ceiling, innocent, and right away " + fala("valdir", "Eu não sou de comentar...")
-       + " Right after the line he quickly straightens his tie with both hands, embarrassed, mouth closed.", olhar=False)
+tomada("valdir1", "valdir", 4, [2], curta("glancing down over the counter at something big on the floor (out of frame), "
+       "eyebrows raised, amused,", fala("valdir", "Que caixa é essa, Juninho?")))
+tomada("valdir2", "valdir", 6, [6, 8], "0 to 2 s: not looking at anyone, playing innocent, " + fala("valdir", "Eu não sou de comentar.")
+       + " 2 to 3 s: a quick glance toward screen left, as if someone is staring at him. 3 to 5 s: he leans forward and "
+       + fala("valdir", "É da Dona Neidi.", "quietly, almost whispering") + " 5 to 6 s: he straightens up, mouth closed.", olhar=False)
+tomada("valdir3", "valdir", 4, [11], curta("turning his head toward screen RIGHT, toward the parrot at the end of the counter,",
+       fala("valdir", "Sigilo! Fica quieto.", "in a scolding whisper") + SIGILO_NOME, "he turns back toward screen left, mouth closed"),
+       olhar=False)
+tomada("valdir4", "valdir", 4, [15], curta("helpful and polite, gesturing down toward the floor in front of the counter (out of frame),",
+       fala("valdir", "Chegou uma caixa pra senhora.")) + " No box is visible in this shot; the counter top holds only the phone, the lamp and the small TV.")
+tomada("valdir5", "valdir", 6, [25, 27], "0 to 2 s: looking up at the ceiling, innocent, " + fala("valdir", "Eu não sou de comentar...")
+       + " 2 to 6 s: he freezes for a beat, then quickly straightens his tie with both hands, embarrassed, mouth closed.", olhar=False)
 # ---- Soraia (C3)
-tomada("soraia1", "soraia", 6, [5, 7], "Her eyes are glued to something on the floor; right away, pretending not to care, "
-       + fala("soraia", "Não que eu queira saber...") + " Then she quickly looks up toward screen RIGHT and stares, one eyebrow raised, mouth closed.", olhar=False)
-tomada("soraia2", "soraia", 4, [9], "Excited, leaning in, " + fala("soraia", "Da síndica? Pesada assim?"))
-tomada("soraia3", "soraia", 4, [13], "Caught, pretending to be casual, " + fala("soraia", "Só desci pegar o jornal."))
-tomada("soraia4", "soraia", 4, [17], "Suspicious, eyes narrowed, " + fala("soraia", "Limpeza? Desse tamanho?"))
-tomada("soraia5", "soraia", 4, [22], "Delighted with the discovery, " + fala("soraia", "A senhora proibiu barulho depois das oito!"))
-tomada("soraia6", "soraia", 4, [24], "Teasing, " + fala("soraia", "Reunião cantada? E o segundo microfone?") + " No microphone anywhere in the scene.")
+tomada("soraia1", "soraia", 6, [5, 7], "0 to 3 s: eyes glued to something on the floor, pretending not to care, "
+       + fala("soraia", "Não que eu queira saber...") + " 3 to 6 s: she looks up toward screen RIGHT and stares, one eyebrow raised, mouth closed.", olhar=False)
+tomada("soraia2", "soraia", 4, [9], curta("excited, leaning in,", fala("soraia", "Da síndica? Pesada assim?")))
+tomada("soraia3", "soraia", 4, [13], curta("caught, pretending to be casual,", fala("soraia", "Só desci pegar o jornal.")))
+tomada("soraia4", "soraia", 4, [17], curta("suspicious, eyes narrowed,", fala("soraia", "Limpeza? Desse tamanho?")))
+tomada("soraia5", "soraia", 4, [22], "0 to 3 s: delighted with the discovery, " + fala("soraia", "A senhora proibiu barulho depois das oito!")
+       + " 3 to 4 s: a delighted little smile, mouth closed.")
+tomada("soraia6", "soraia", 4, [24], "0 to 3 s: teasing, " + fala("soraia", "Reunião cantada? E o segundo microfone?")
+       + " 3 to 4 s: she raises an eyebrow, mouth closed. No microphone anywhere in the scene.")
 # ---- Neide (C3)
-tomada("neide1", "neide", 4, [16], "A split-second hesitation, then " + fala("neide", "É... material de limpeza.", "with forced calm") + " No cleaning products anywhere in the scene.")
-tomada("neide2", "neide", 6, [18, 20], "Right away, very serious, " + fala("neide", "É muito detergente.") + " No detergent or bottles anywhere in the scene."
-       + " Then her eyes suddenly go wide in shock, mouth closed, clutching the clipboard.")
-tomada("neide3", "neide", 4, [23], "She recovers her posture, chin up, " + fala("neide", "É pra reunião do condomínio."))
-tomada("neide4", "neide", 4, [29], "She points toward screen RIGHT at the parrot and " + fala("neide", "Regra nova: papagaio, não!", "firmly"), olhar=False)
+tomada("neide1", "neide", 4, [16], curta("after a split-second hesitation, with forced calm,", fala("neide", "É... material de limpeza."))
+       + " No cleaning products anywhere in the scene.")
+tomada("neide2", "neide", 6, [18, 20], "0 to 2 s: very serious, " + fala("neide", "É muito detergente.")
+       + " 2 to 6 s: a beat, then her eyes suddenly go wide in shock, mouth closed, clutching the clipboard. No detergent or bottles anywhere in the scene.")
+tomada("neide3", "neide", 4, [23], curta("recovering her posture, chin up,", fala("neide", "É pra reunião do condomínio.")))
+tomada("neide4", "neide", 4, [29], curta("pointing toward screen RIGHT at the parrot,", fala("neide", "Regra nova: papagaio, não!", "firmly"),
+       "she keeps pointing, stern, mouth closed"), olhar=False)
 # ---- Juninho (C3)
-tomada("juninho1", "juninho", 4, [3], "Out of breath, " + fala("juninho", "Hoje é bico. Só vim entregar."))
+tomada("juninho1", "juninho", 4, [3], curta("out of breath,", fala("juninho", "Hoje é bico. Só vim entregar.")))
 # plano 19 ("Ué. Na nota tá escrito karaokê.") reaproveita o clipe 2 do piloto (piloto/clipe2_flash.mp4), aprovado
-tomada("juninho2", "juninho", 4, [21], "He holds a small blank paper slip in his hand and, helpful and naive, "
-       + fala("juninho", "Com dois microfones.") + " No microphone anywhere in the scene.")
-tomada("juninho3", "juninho", 4, [31], "Forgotten there, he lifts the blank paper slip and " + fala("juninho", "E aí... alguém assina?", "hesitantly"))
+tomada("juninho2", "juninho", 4, [21], curta("holding a small blank paper slip, helpful and naive,", fala("juninho", "Com dois microfones."))
+       + " No microphone anywhere in the scene.")
+tomada("juninho3", "juninho", 4, [31], curta("forgotten there, lifting the blank paper slip, hesitant,", fala("juninho", "E aí... alguém assina?")))
 # ---- Sigilo (C4)
-tomada("sigilo1", "sigilo", 4, [10], "The parrot bobs its head and " + fala("sigilo", "Pesada assim! Pesada assim!", "fast and mocking"))
-tomada("sigilo2", "sigilo", 4, [26], "The parrot bobs its head and " + fala("sigilo", "O segundo é do Valdir!", "fast and mocking")
-       + " Then a short cackling laugh.")
-tomada("sigilo3", "sigilo", 6, [28, 30], "The parrot flaps its wings once and right away " + fala("sigilo", "Ensaio às nove! Ensaio às nove!", "fast and mocking")
-       + " A quick head tilt, then " + fala("sigilo", "É regra! É regra!", "mocking"))
+tomada("sigilo1", "sigilo", 4, [10], curta("bobbing its head,", fala("sigilo", "Pesada assim! Pesada assim!", "fast and mocking"),
+       "it bobs its head once more"))
+tomada("sigilo2", "sigilo", 4, [26], "0 to 3 s: bobbing its head, " + fala("sigilo", "O segundo é do Valdir!", "fast and mocking")
+       + " 3 to 4 s: a short cackling laugh.")
+tomada("sigilo3", "sigilo", 6, [28, 30], "0 to 3 s: it flaps its wings once and " + fala("sigilo", "Ensaio às nove! Ensaio às nove!", "fast and mocking")
+       + " 3 to 4 s: a quick head tilt. 4 to 6 s: " + fala("sigilo", "É regra! É regra!", "mocking"))
 # ---- planos com mais gente
 T.append({"tomada": "hall1", "camera": "C1", "refs": ["juninho.jpg", "valdir.jpg", "portaria.jpg"], "segundos": 4, "planos": [1],
           "prompt": "Wide shot of the lobby of @Image3, camera at eye level, the whole counter visible. The doorman of @Image2 "
