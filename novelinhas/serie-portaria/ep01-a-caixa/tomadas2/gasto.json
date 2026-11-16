@@ -12,6 +12,12 @@
    "segundos": 4,
    "taskUUID": "157d8ed2-9cf2-45ce-971a-7f2d91270656",
    "custo": 0.27181
+  },
+  {
+   "tomada": "juninho1",
+   "segundos": 6,
+   "taskUUID": "0181a6e2-340f-4d3f-b05b-3b03d87c1072",
+   "custo": null
   }
  ]
 }
