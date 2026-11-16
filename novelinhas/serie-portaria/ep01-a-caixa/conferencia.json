@@ -37,15 +37,15 @@
   "fala": "Hoje é bico. Só vim entregar.",
   "acao": "ofegante, capacete na cabeça",
   "trecho": [
-   0.45,
-   2.76
+   0.47,
+   3.02
   ],
-  "ouvido": "Hoje é bico, só vim entregar.",
+  "ouvido": "Hoje é bico. Só vim entregar.",
   "palavras": "6/6",
   "nota_fala": 1.0,
   "corte_comeu": false,
   "ouvido_largo": "Hoje é bico, só vim entregar.",
-  "voz_sim": 0.76
+  "voz_sim": 0.71
  },
  {
   "plano": 4,
@@ -66,15 +66,15 @@
   "fala": "Não que eu queira saber...",
   "acao": "de roupão e bobes, olho grudado para baixo, na caixa",
   "trecho": [
-   0.51,
-   3.12
+   0.07,
+   3.38
   ],
   "ouvido": "Não que eu queira saber.",
   "palavras": "5/5",
   "nota_fala": 1.0,
   "corte_comeu": false,
-  "ouvido_largo": "Não que eu queira saber...",
-  "voz_sim": 0.64
+  "ouvido_largo": "Não que eu queira saber.",
+  "voz_sim": 0.62
  },
  {
   "plano": 6,
@@ -104,7 +104,7 @@
   "fala": "",
   "acao": "só encara, sobrancelha erguida",
   "trecho": [
-   2.82,
+   3.08,
    6.08
   ]
  },
@@ -163,7 +163,7 @@
   "nota_fala": 1.0,
   "corte_comeu": false,
   "ouvido_largo": "pesada assim pesada assim",
-  "voz_sim": 0.49
+  "voz_sim": 0.63
  },
  {
   "plano": 11,
@@ -200,18 +200,18 @@
   "camera": "C3",
   "quem": "Soraia",
   "falante": "soraia",
-  "fala": "Só desci pegar o jornal.",
+  "fala": "Só desci pra pegar o jornal.",
   "acao": "disfarça",
   "trecho": [
-   0.83,
-   2.96
+   0.15,
+   3.44
   ],
-  "ouvido": "só desci pegar o jornal.",
-  "palavras": "5/5",
+  "ouvido": "Só desci pra pegar o jornal.",
+  "palavras": "6/6",
   "nota_fala": 1.0,
   "corte_comeu": false,
-  "ouvido_largo": "Só desci pegar o jornal.",
-  "voz_sim": 0.57
+  "ouvido_largo": "Só desci pra pegar o jornal.",
+  "voz_sim": 0.55
  },
  {
   "plano": 14,
@@ -251,15 +251,15 @@
   "fala": "É... material de limpeza.",
   "acao": "congela antes de responder",
   "trecho": [
-   1.17,
-   3.9
+   0.69,
+   3.54
   ],
   "ouvido": "é material de limpeza.",
   "palavras": "4/4",
   "nota_fala": 1.0,
   "corte_comeu": false,
   "ouvido_largo": "É material de limpeza.",
-  "voz_sim": 0.52
+  "voz_sim": 0.48
  },
  {
   "plano": 17,
@@ -278,7 +278,7 @@
   "nota_fala": 1.0,
   "corte_comeu": false,
   "ouvido_largo": "limpeza desse tamanho",
-  "voz_sim": 0.64
+  "voz_sim": 0.61
  },
  {
   "plano": 18,
@@ -289,15 +289,15 @@
   "fala": "É muito detergente.",
   "acao": "séria",
   "trecho": [
-   0,
-   2.14
+   0.05,
+   2.38
   ],
-  "ouvido": "É muito detergente!",
+  "ouvido": "É muito detergente.",
   "palavras": "3/3",
   "nota_fala": 1.0,
   "corte_comeu": false,
   "ouvido_largo": "É muito detergente!",
-  "voz_sim": 0.69
+  "voz_sim": 0.51
  },
  {
   "plano": 19,
@@ -316,7 +316,7 @@
   "nota_fala": 0.8333333333333334,
   "corte_comeu": false,
   "ouvido_largo": "Ué, na nota tá escrito o cara o quê?",
-  "voz_sim": 0.74
+  "voz_sim": 0.71
  },
  {
   "plano": 20,
@@ -327,7 +327,7 @@
   "fala": "",
   "acao": "olhos arregalados",
   "trecho": [
-   1.84,
+   2.08,
    6.08
   ]
  },
@@ -348,7 +348,7 @@
   "nota_fala": 1.0,
   "corte_comeu": false,
   "ouvido_largo": "Com dois microfones.",
-  "voz_sim": 0.51
+  "voz_sim": 0.53
  },
  {
   "plano": 22,
@@ -359,15 +359,15 @@
   "fala": "A senhora proibiu barulho depois das oito!",
   "acao": "encantada com a descoberta",
   "trecho": [
-   0.01,
-   3.52
+   0.17,
+   3.48
   ],
   "ouvido": "A senhora proibiu barulho depois das oito?",
   "palavras": "7/7",
   "nota_fala": 1.0,
   "corte_comeu": false,
-  "ouvido_largo": "A senhora proibiu barulho depois das oito.",
-  "voz_sim": 0.58
+  "ouvido_largo": "A senhora proibiu barulho depois das oito?",
+  "voz_sim": 0.63
  },
  {
   "plano": 23,
@@ -378,15 +378,15 @@
   "fala": "É pra reunião do condomínio.",
   "acao": "recompõe a postura",
   "trecho": [
-   0,
-   3.24
+   1.13,
+   3.52
   ],
-  "ouvido": "É pra reunião do condom de Mínio.",
+  "ouvido": "É para reunião do condomínio.",
   "palavras": "4/5",
   "nota_fala": 0.8,
   "corte_comeu": false,
-  "ouvido_largo": "É pra reunião do condom de Mínio.",
-  "voz_sim": 0.52
+  "ouvido_largo": "É para reunião do condomínio.",
+  "voz_sim": 0.53
  },
  {
   "plano": 24,
@@ -405,7 +405,7 @@
   "nota_fala": 1.0,
   "corte_comeu": false,
   "ouvido_largo": "reunião cantada e o segundo microfone.",
-  "voz_sim": 0.61
+  "voz_sim": 0.64
  },
  {
   "plano": 25,
@@ -443,7 +443,7 @@
   "nota_fala": 1.0,
   "corte_comeu": false,
   "ouvido_largo": "O segundo é do Valdir!",
-  "voz_sim": 0.39
+  "voz_sim": 0.52
  },
  {
   "plano": 27,
@@ -467,15 +467,15 @@
   "fala": "Ensaio às nove! Ensaio às nove!",
   "acao": "",
   "trecho": [
-   0.4,
-   4.35
+   0.0,
+   3.4
   ],
-  "ouvido": "Ensaiu as nove, ensaiu as nove, é ré...",
+  "ouvido": "Ensaiu as 9! Ensaiu as 9!",
   "palavras": "4/6",
   "nota_fala": 0.6666666666666666,
   "corte_comeu": false,
-  "ouvido_largo": "Ensaiu as nove, ensaiu as nove, é regra.",
-  "voz_sim": 0.53
+  "ouvido_largo": "Ensaiu as 9! Ensaiu as 9! É f...",
+  "voz_sim": 0.63
  },
  {
   "plano": 29,
@@ -486,15 +486,15 @@
   "fala": "Regra nova: papagaio, não!",
   "acao": "aponta para o papagaio",
   "trecho": [
-   0.21,
-   3.28
+   0.23,
+   3.44
   ],
-  "ouvido": "Regra nova. Papagaio não.",
+  "ouvido": "Regra nova, papagaio não!",
   "palavras": "4/4",
   "nota_fala": 1.0,
   "corte_comeu": false,
-  "ouvido_largo": "Regra nova. Papagaio não.",
-  "voz_sim": 0.68
+  "ouvido_largo": "Regra nova, papagaio não!",
+  "voz_sim": 0.66
  },
  {
   "plano": 30,
@@ -505,15 +505,15 @@
   "fala": "É regra! É regra!",
   "acao": "",
   "trecho": [
-   4.35,
+   3.35,
    6.08
   ],
-  "ouvido": "É regra. É regra.",
-  "palavras": "4/4",
-  "nota_fala": 1.0,
-  "corte_comeu": false,
-  "ouvido_largo": "Eregra! Eregra!",
-  "voz_sim": 0.36
+  "ouvido": "Erregra! Erregra!",
+  "palavras": "0/4",
+  "nota_fala": 0.0,
+  "corte_comeu": true,
+  "ouvido_largo": "É regra! É regra!",
+  "voz_sim": 0.52
  },
  {
   "plano": 31,
@@ -524,14 +524,14 @@
   "fala": "E aí... alguém assina?",
   "acao": "esquecido ali desde o começo",
   "trecho": [
-   0.05,
-   2.4
+   0.51,
+   2.72
   ],
   "ouvido": "E aí, alguém assina?",
   "palavras": "4/4",
   "nota_fala": 1.0,
   "corte_comeu": false,
   "ouvido_largo": "E aí, alguém assina?",
-  "voz_sim": 0.58
+  "voz_sim": 0.65
  }
 ]

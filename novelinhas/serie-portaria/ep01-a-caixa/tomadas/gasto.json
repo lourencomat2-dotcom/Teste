@@ -215,7 +215,20 @@
    "tomada": "juninho3",
    "segundos": 4,
    "taskUUID": "fabc0cff-5453-4a7f-9099-ef3416fdaa5b",
-   "custo": null
+   "custo": null,
+   "falhou": "[{\"code\": \"invalidProviderContent\", \"message\": \"Invalid content detected. The generated content was flagged and rejected by ByteDance's content moderation system.\", \"responseContent\": \"The request failed because the input image 'content[1]' may contain real person. Request id: 021794847655239085ce2a5b85bafc715e5d42a46d04551b3ea07\", \"documentation\": \"https://runware.ai/docs/getting-started/introduc"
+  },
+  {
+   "tomada": "juninho1",
+   "segundos": 4,
+   "taskUUID": "a7833157-2712-4449-83b8-8534b17513db",
+   "custo": 0.27181
+  },
+  {
+   "tomada": "juninho3",
+   "segundos": 4,
+   "taskUUID": "a545c273-1c74-4975-8a91-a89007edf1c8",
+   "custo": 0.27181
   }
  ]
 }

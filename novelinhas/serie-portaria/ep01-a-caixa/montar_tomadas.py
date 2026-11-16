@@ -22,6 +22,8 @@ ENTRADA = ("; behind, out of focus, exactly the lobby of @Image2 (the glass stre
            "fern, the standing fan). At the RIGHT edge of the frame, in the near foreground and very out of focus, the "
            "back of the shoulder and grey head of the doorman of @Image3 (light blue shirt), facing the speaker")
 VISITANTES = ("neide", "soraia", "juninho")
+# a ficha 3/4 do Juninho foi recusada pela moderação da ByteDance ("may contain real person"); a foto original passa
+FICHA = {"juninho": "juninho.jpg"}
 
 VISUAL = {
     "valdir": ("the doorman of @Image1: same face, short grey hair, grey mustache, light blue short-sleeve shirt, navy "
@@ -80,7 +82,7 @@ T = []
 
 def tomada(nome, quem, dur, planos, acao, olhar=True):
     T.append({"tomada": nome, "camera": "C4" if quem == "sigilo" else ("C2" if quem == "valdir" else "C3"),
-              "refs": [f"{quem}_3q.jpg", "entrada.jpg", "valdir.jpg"] if quem in VISITANTES else [f"{quem}.jpg", "portaria.jpg"],
+              "refs": [FICHA.get(quem, f"{quem}_3q.jpg"), "entrada.jpg", "valdir.jpg"] if quem in VISITANTES else [f"{quem}.jpg", "portaria.jpg"],
               "segundos": dur, "planos": planos, "prompt": close(quem, acao, olhar=olhar)})
 
 
