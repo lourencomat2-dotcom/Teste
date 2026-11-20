@@ -36,7 +36,15 @@ Este arquivo resume a conversa em que o projeto nasceu, para continuar daqui.
    quem fala (molas), gestos articulados, câmera sobe para a lâmpada na piada. Esqueleto simples por
    pivôs (quadril/pernas/tronco/braços/cabeça), sem rig de ossos. Sem GPU no ambiente: o vídeo é
    capturado quadro a quadro no Chromium (SwiftShader, ~2–3 s/quadro); num PC comum roda ao vivo.
-7. Caminho realista considerado (não feito): imagens no Seedream + lip-sync/OmniHuman 1.5 no
+7. **Personagens realistas (teste, nov/2026)**: Clara e Beto refeitos com o **MakeHuman** (corpo
+   paramétrico, pele, olhos, cabelo e roupas; esqueleto de 163 ossos; 16 unidades de expressão
+   facial como morphs). Os sites do MakeHuman/Blender são bloqueados no ambiente; os dados oficiais
+   vêm do pacote npm `makehuman-data` e do PyPI `makehuman` (setup.sh). A direção da cena é a mesma:
+   o boneco de massinha vira "marionete" invisível e os ossos copiam caminhada, olhar e gestos.
+   Ajustes: camisa do Beto lisa (tirado o logo do MakeHuman), bigode de iogurte 3D, Clara de rabo de
+   cavalo (os chanéis do MakeHuman cobrem um olho). Limites: texturas de pele 512 px (closes ficam
+   moles), mãos/expressões mais duras que o desenho 2D, voz robótica destoa mais.
+8. Caminho realista considerado (não feito): imagens no Seedream + lip-sync/OmniHuman 1.5 no
    Runware (~US$ 0,13/s de fala → ~US$ 12–20 por episódio). Exige o Lucas rodar a geração.
 
 ## Estado atual
@@ -68,7 +76,11 @@ python3 motor/tempo_real.py 0                  # linha do tempo, rostos, legenda
 node tempo_real/capturar.js                    # vídeo -> saida/abertura_threejs.mp4 (sem GPU ~15 min)
 python3 motor/comparar_cena.py 0               # versão Blender da mesma cena + vídeo comparativo
 # ao vivo: cd tempo_real && python3 -m http.server  -> http://localhost:8000
+# personagens realistas: python3 motor/humanos.py -> tempo_real/humanos/ ; página com ?humanos
+PARAMS='&humanos' node tempo_real/capturar.js saida/abertura_realista.mp4
 ```
+- `motor/humanos.py`: monta cada personagem (ELENCO: idade, gênero, peso, etnia, pele, cabelo, roupas
+  com tingimento) e exporta malhas + ossos + morphs; `tempo_real/humano.js` carrega no three.js.
 - `tempo_real/cena.js`: carrega o GLB, refaz texturas procedurais (piso, azulejo, parede, madeira) em
   canvas, contorno toon (casca invertida), rosto = calota esférica com a textura do desenho 2D,
   direção da cena (caminho do Beto, olhares, gestos) e câmeras por plano (`PLANOS`).

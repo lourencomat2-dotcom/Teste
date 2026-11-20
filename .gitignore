@@ -26,3 +26,4 @@ tempo_real/node_modules/
 tempo_real/package-lock.json
 rt_*.png
 !tempo_real/dados/audio.wav
+vendor/

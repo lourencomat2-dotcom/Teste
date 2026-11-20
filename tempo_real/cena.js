@@ -251,6 +251,75 @@ for (const [quem, cfg] of Object.entries(PERS)) {
 // a Dona Neide não está nesta cena
 RIG.neide.raiz.visible = false;
 
+// ------------------------------------------------------------------ versão realista (MakeHuman), com ?humanos
+// O corpo de massinha fica escondido e serve de "marionete": a mesma direção (caminho, olhar, gestos)
+// é copiada para os ossos do personagem realista; o rosto vira expressões 3D (morphs).
+const HUMANOS = new URLSearchParams(location.search).has('humanos');
+const HUM = {};
+if (HUMANOS) {
+  const { carregarHumano } = await import('./humano.js');
+  for (const quem of ['clara', 'beto']) {
+    const h = await carregarHumano('./humanos/', quem); HUM[quem] = h; const R = RIG[quem];
+    R.raiz.add(h.raiz);
+    R.corpo.visible = false; R.pernas[-1].visible = false; R.pernas[1].visible = false;
+    h.raiz.traverse(o => { if (o.isBone) o.userData.p0 = o.position.clone(); });
+    // pose A do MakeHuman -> braços caídos (ângulo medido no próprio esqueleto)
+    const a = h.osso['upperarm01.L'].getWorldPosition(new THREE.Vector3()), b = h.osso['lowerarm01.L'].getWorldPosition(new THREE.Vector3());
+    h.bracoRepouso = Math.atan2(Math.abs(b.x - a.x), a.y - b.y) - 0.1;
+    h.morph = {};
+  }
+}
+// rosto 3D: expressões do roteiro -> unidades de expressão do MakeHuman
+const EXPR = {
+  neutro: {},
+  suspeita: { 'eyebrows-left-down': 0.75, 'eyebrows-right-up': 0.25, 'eye-left-slit': 0.55, 'eye-right-slit': 0.35, 'mouth-compression': 0.35 },
+  seca: { 'eye-left-slit': 0.6, 'eye-right-slit': 0.6, 'mouth-compression': 0.25, 'mouth-depression': 0.15 },
+  inocente: { 'eyebrows-left-up': 0.55, 'eyebrows-right-up': 0.55, 'eyebrows-left-inner-up': 0.45, 'eyebrows-right-inner-up': 0.45, 'mouth-corner-puller': 0.3 },
+  nervoso: { 'eyebrows-left-inner-up': 0.9, 'eyebrows-right-inner-up': 0.9, 'mouth-retraction': 0.45, 'eyebrows-left-up': 0.2, 'eyebrows-right-up': 0.2 },
+  feliz: { 'mouth-corner-puller': 0.75, 'eyebrows-left-up': 0.2, 'eyebrows-right-up': 0.2 },
+  brava: { 'eyebrows-left-down': 0.85, 'eyebrows-right-down': 0.85, 'mouth-depression': 0.45, 'mouth-compression': 0.3 },
+  surpresa: { 'eyebrows-left-up': 0.95, 'eyebrows-right-up': 0.95, 'mouth-open': 0.25 },
+};
+const BOCA = { fechada: {}, pequena: { 'mouth-open': 0.22 }, aberta: { 'mouth-open': 0.55 },
+               larga: { 'mouth-open': 0.3, 'mouth-retraction': 0.35 }, redonda: { 'mouth-open': 0.3, 'mouth-pursing': 0.55 } };
+function aplicarHumano(quem, R, info, t, dt, fase, rotCabeca, olharResto) {
+  const h = HUM[quem], o = h.osso, passo = R.passo || 0;
+  o.root.position.y = o.root.userData.p0.y + (R.corpo.position.y - R.corpo.userData.y0);
+  // pernas (.L = lado +x = lado 1 da marionete); joelho dobra na fase de balanço
+  o['upperleg01.L'].rotation.x = R.pernas[1].rotation.x; o['upperleg01.R'].rotation.x = R.pernas[-1].rotation.x;
+  o['lowerleg01.L'].rotation.x = 0.85 * Math.max(0, Math.cos(fase)) * passo;
+  o['lowerleg01.R'].rotation.x = 0.85 * Math.max(0, -Math.cos(fase)) * passo;
+  for (const s of ['L', 'R']) o['foot.' + s].rotation.x = -0.5 * (o['upperleg01.' + s].rotation.x + o['lowerleg01.' + s].rotation.x);
+  o.spine03.rotation.set(R.tronco.rotation.x * 0.6, 0, R.tronco.rotation.z);
+  // braços: repouso + gestos da marionete; cotovelo conforme o gesto
+  const cot = { aponta: -0.15, ombros: 0.75, cintura: 1.4 }[info.pose] ?? 0;
+  for (const [s, lado] of [[1, 'L'], [-1, 'R']]) {
+    const br = R.bracos[s];
+    o['upperarm01.' + lado].rotation.set(br.rotation.x * 0.85, 0, -s * h.bracoRepouso + (br.rotation.z - s * 0.04) * 0.6);
+    for (let dd = 2; dd <= 5; dd++) for (let k = 1; k <= 3; k++) {          // dedos relaxados (o MakeHuman vem de mão aberta)
+      const f = o[`finger${dd}-${k}.${lado}`]; if (f) f.rotation.z = -s * (k === 1 ? 0.18 : 0.32);
+    }
+    const st = (h.cot ??= {})[lado] ??= { v: 0, a: 0 };
+    o['lowerarm01.' + lado].rotation.x = -mola(st, 0.25 + cot * info.g, dt, 80, 14);
+  }
+  o['clavicle.L'].rotation.z = o['clavicle.R'].rotation.z = 0;
+  if (info.pose === 'ombros') { o['clavicle.L'].rotation.z = 0.12 * info.g; o['clavicle.R'].rotation.z = -0.12 * info.g; }
+  // pescoço e cabeça dividem a rotação; os olhos completam o que a cabeça ainda não virou
+  const [rx, ry, rz] = rotCabeca;
+  o.neck02.rotation.set(rx * 0.35, ry * 0.35, rz * 0.35, 'YXZ'); o.head.rotation.set(rx * 0.65, ry * 0.65, rz * 0.65, 'YXZ');
+  for (const s of ['L', 'R']) o['eye.' + s]?.rotation.set(-clamp(olharResto[1], -0.3, 0.3), clamp(olharResto[0], -0.45, 0.45), 0);
+  // rosto
+  const alvo = { ...EXPR[info.ex] };
+  const vol = clamp(info.vol / 0.8, 0, 1);
+  for (const [k, v] of Object.entries(BOCA[info.forma] || {})) alvo[k] = Math.max(alvo[k] || 0, v * (0.6 + 0.4 * vol));
+  if (info.pisca) alvo['eye-left-closure'] = alvo['eye-right-closure'] = 1;
+  for (const k of new Set([...Object.keys(alvo), ...Object.keys(h.morph)])) {
+    const v0 = h.morph[k] || 0, v1 = alvo[k] || 0;
+    const vel = /closure/.test(k) ? 0.8 : /mouth-open|pursing|retraction/.test(k) ? 0.7 : 0.18;   // piscar e boca rápidos
+    h.morph[k] = v0 + (v1 - v0) * clamp(vel * dt * 30, 0, 1); h.expressao(k, h.morph[k]);
+  }
+}
+
 // ------------------------------------------------------------------ direção da cena
 // Beto vem do balcão até o lugar dele enquanto a Clara pergunta (passos a cada 0,32 s, como no Blender)
 const CAMINHO = linha.caminhada || { t0: 0.0, t1: 2.5, de: [2.85, 0.3], ate: [0.75, 0.0] };
@@ -260,7 +329,8 @@ function posicaoBeto(t) {
   const k = u - Math.sin(2 * Math.PI * u) / (2 * Math.PI);    // acelera e freia
   return { x: lerp(de[0], ate[0], k), y: lerp(de[1], ate[1], k), andando: t > t0 && t < t1, u };
 }
-const cabecaMundo = quem => RIG[quem].cabeca.localToWorld(new THREE.Vector3(0, 0.22, 0));
+const cabecaMundo = quem => HUMANOS ? HUM[quem].osso.head.localToWorld(new THREE.Vector3(0, 0.07, 0.06))
+                                    : RIG[quem].cabeca.localToWorld(new THREE.Vector3(0, 0.22, 0));
 function alvoOlhar(quem, t, q) {
   const outro = quem === 'clara' ? 'beto' : 'clara';
   const ex = q[quem].ex;
@@ -317,8 +387,8 @@ function animar(t, dt) {
     }
     R.tronco.position.y = (R.tronco.userData.y0 ??= R.tronco.position.y) + (pose === 'ombros' ? 0.02 * g : 0);
     // cabeça vira para quem fala (em relação ao corpo), com mola
-    const alvo = alvoOlhar(quem, t, q); const piv = R.cabeca.getWorldPosition(tmp.set(0, 0, 0)).clone();
-    const d = alvo.clone().sub(piv.add(new THREE.Vector3(0, 0.22, 0)));
+    const alvo = alvoOlhar(quem, t, q);
+    const d = alvo.clone().sub(cabecaMundo(quem));
     d.applyAxisAngle(new THREE.Vector3(0, 1, 0), -R.raiz.rotation.y);
     const yaw = clamp(Math.atan2(d.x, d.z), -1.15, 1.15), pitch = clamp(Math.atan2(d.y, Math.hypot(d.x, d.z)), -0.5, 0.55);
     const ol = R.olhar; ol.y ??= { v: 0, a: 0 }; ol.p ??= { v: 0, a: 0 };
@@ -328,6 +398,7 @@ function animar(t, dt) {
     if (info.ex === 'nervoso') tilt = Math.sin(t * 9) * 0.035;
     if (info.vol) nod = info.vol * 0.06 * Math.sin(t * 13);
     R.cabeca.rotation.set(-vp * 0.85 + nod, vy * 0.85, tilt * lado, 'YXZ');
+    if (HUMANOS) aplicarHumano(quem, R, info, t, dt, fase, [-vp * 0.85 + nod, vy * 0.85, tilt * lado], [yaw - vy * 0.85, pitch - vp * 0.85]);
   }
 }
 
@@ -355,6 +426,13 @@ const PLANOS = [
 function posicionarCamera(t) {
   const p = PLANOS.find(p => t >= p.t0 && t < p.t1) || PLANOS.at(-1);
   const u = clamp((t - p.t0) / (Math.min(p.t1, DUR) - p.t0), 0, 1); const r = p.f(u, t);
+  if (HUMANOS) {   // personagens realistas são mais altos (1,60 m e 1,78 m): câmera sobe junto
+    const i = PLANOS.indexOf(p);
+    r.pos.y += [0.15, 0.3, 0.3, 0.32, 0.26, 0.3][i];
+    if (i >= 1 && i <= 4) r.mm *= 1.3;                     // closes mais fechados (rostos menores que os de massinha)
+    if (i === 0) r.alvo.y += 0.25;
+    if (i === 5) r.alvo.y += 0.25 * ease((t - 11.3) / 1.7);
+  }
   camera.position.copy(r.pos); camera.lookAt(r.alvo); camera.fov = lente(r.mm); camera.updateProjectionMatrix();
 }
 

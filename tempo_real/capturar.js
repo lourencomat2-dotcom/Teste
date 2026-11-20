@@ -16,7 +16,7 @@ const srv = http.createServer((q, r) => {
   const b = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
   const pg = await b.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
   pg.on('console', m => console.log('[pág]', m.text())); pg.on('pageerror', e => console.log('[erro]', e.message));
-  await pg.goto(`http://localhost:${srv.address().port}/index.html?captura`);
+  await pg.goto(`http://localhost:${srv.address().port}/index.html?captura${process.env.PARAMS || ''}`);
   await pg.waitForFunction('window.pronto === true', null, { timeout: 90000 });
   const { DUR, FPS } = await pg.evaluate(() => ({ DUR: window.DUR, FPS: window.FPS }));
   const n = Math.floor(DUR * FPS);

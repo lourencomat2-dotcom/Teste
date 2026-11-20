@@ -61,7 +61,8 @@ def main():
                 nome = f"{who}_{len(chaves):03d}.png"; chaves[ch] = nome
                 textura_rosto(*ch).save(os.path.join(OUT, "rostos", nome))
             fala = est.fala_de(cena, who, tt); pose, g, _ = E.pose_de(ex, fala, tt)
-            linha[who] = dict(rosto=chaves[ch], ex=ex, vol=round(float(vol), 3), olha=olha, pose=pose, g=round(float(g), 3))
+            linha[who] = dict(rosto=chaves[ch], ex=ex, vol=round(float(vol), 3), olha=olha, pose=pose, g=round(float(g), 3),
+                              forma=forma, pisca=bool(pisca))
         quadros.append(linha)
     gota().save(os.path.join(OUT, "gota.png"))
     leg = []
