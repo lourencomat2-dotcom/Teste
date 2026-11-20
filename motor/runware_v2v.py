@@ -1,0 +1,60 @@
+"""Passada de IA (vídeo -> vídeo) no Runware: envia um vídeo pronto e pede uma versão realista,
+mantendo cortes, câmera e movimentos. GASTA CRÉDITO do Runware: confira o custo antes.
+
+  python3 motor/runware_v2v.py entrada.mp4 saida.mp4 [--modelo bytedance:seedance@2.0-fast] [--res 1280x720]
+
+Chave: variável RUNWARE_API_KEY (no ambiente do Claude o proxy já autentica).
+Formato do pedido conferido no SDK oficial (pacote PyPI "runware"): o vídeo vai em inputs.video,
+como mediaUUID de um upload (taskType mediaStorage, operation upload, media em base64).
+"""
+import base64, json, os, sys, time, urllib.request, uuid
+
+API = "https://api.runware.ai/v1"
+
+PROMPT = (
+    "Edit @Video1: turn this 3D animated scene into photorealistic live-action footage of a Brazilian "
+    "multi-camera TV sitcom, as if shot on a real studio set with real actors. Keep exactly the same shots, "
+    "cuts, camera movements, framing, timing, actor positions, walking, gestures, head turns and mouth "
+    "movements as @Video1. Same kitchen set and props: butter-yellow walls, white wainscot, patterned "
+    "hydraulic floor tiles, red-and-white checkered tablecloth, teal pendant lamp, coral curtains, white "
+    "fridge, blue-and-white tiles behind the sink, open door to a hallway. Characters: Clara, a Brazilian "
+    "woman around 28, fair skin, brown hair in a ponytail, green blouse and jeans; Beto, a Black Brazilian "
+    "man around 30, short black hair, plain orange t-shirt and jeans, with a white yogurt mustache on his "
+    "upper lip. Bright, soft, even studio sitcom lighting, natural skin texture, TV camera look. "
+    "Avoid: changing the characters' faces or clothes between shots, extra people, text, logos, morphing, "
+    "cartoon look."
+)
+
+def chamar(tarefas):
+    req = urllib.request.Request(API, data=json.dumps(tarefas).encode(), headers={"Content-Type": "application/json"})
+    if os.environ.get("RUNWARE_API_KEY"): req.add_header("Authorization", "Bearer " + os.environ["RUNWARE_API_KEY"])
+    with urllib.request.urlopen(req, timeout=300) as r: resp = json.load(r)
+    if resp.get("errors"): raise SystemExit("Runware recusou: " + json.dumps(resp["errors"], ensure_ascii=False))
+    return resp["data"]
+
+def main():
+    args = sys.argv[1:]
+    modelo = args[args.index("--modelo") + 1] if "--modelo" in args else "bytedance:seedance@2.0-fast"
+    w, h = map(int, (args[args.index("--res") + 1] if "--res" in args else "1280x720").split("x"))
+    entrada, saida = [a for a in args if not a.startswith("--") and a not in (modelo, f"{w}x{h}")][:2]
+    dur = max(4, min(30, round(float(os.popen(f'ffprobe -v error -show_entries format=duration -of csv=p=0 "{entrada}"').read()))))
+    print(f"enviando {entrada} ({os.path.getsize(entrada) / 1e6:.1f} MB)...", flush=True)
+    up = chamar([{"taskType": "mediaStorage", "taskUUID": str(uuid.uuid4()), "operation": "upload",
+                  "media": base64.b64encode(open(entrada, "rb").read()).decode()}])[0]
+    print("mediaUUID", up["mediaUUID"], flush=True)
+    tid = str(uuid.uuid4())
+    chamar([{"taskType": "videoInference", "taskUUID": tid, "model": modelo, "positivePrompt": PROMPT,
+             "width": w, "height": h, "duration": dur, "deliveryMethod": "async", "includeCost": True,
+             "outputFormat": "MP4", "inputs": {"video": up["mediaUUID"]}}])
+    print(f"tarefa {tid} enviada ({modelo}, {w}x{h}, {dur}s); aguardando...", flush=True)
+    t0 = time.time()
+    while True:
+        time.sleep(10)
+        r = chamar([{"taskType": "getResponse", "taskUUID": tid}])[0]
+        if r.get("status") == "success":
+            print(f"pronto em {time.time() - t0:.0f}s · custo US$ {r.get('cost')}", flush=True)
+            urllib.request.urlretrieve(r["videoURL"], saida); print("salvo:", saida); return
+        if r.get("status") not in (None, "processing"): raise SystemExit("falhou: " + json.dumps(r))
+
+if __name__ == "__main__":
+    main()
