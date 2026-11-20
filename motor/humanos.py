@@ -243,16 +243,23 @@ def montar(nome, cfg, base, alvos):
         mat["map"], mat["alfa"] = tex
         partes.append(ent)
     # pele escondida embaixo da roupa (evita a pele "atravessar" a camisa quando o personagem anda):
-    # vértices usados de referência pelas roupas, menos um anel na borda (o decote e as mangas continuam com pele)
-    cob = np.zeros(len(V), bool)
+    # some a pele a menos de 3,5 cm da roupa e a mais de 4,5 cm das bordas dela (decote, mangas, barra)
+    from scipy.spatial import cKDTree
+    pv = np.unique(org[tris]); dist_roupa = np.full(len(V), np.inf); dist_borda = np.full(len(V), np.inf)
     for roupa, _ in cfg["roupas"]:
         dr = json.load(open(os.path.join(DADOS, "proxies", "clothes", roupa, roupa + ".json")))
-        r = np.array(dr["ref_vIdxs"]).ravel(); w = np.array(dr["weights"]).ravel(); cob[r[w > 0.05]] = True
-    tri_o = org[tris]; tri_cob = cob[tri_o].all(1)
-    fundo = np.ones(len(V), bool)
-    for k in range(3): np.logical_and.at(fundo, tri_o[:, k], tri_cob)
-    fundo &= cob
-    tris = tris[~fundo[tri_o].all(1)]
+        r = np.minimum(np.array(dr["ref_vIdxs"]), len(V) - 1); w = np.array(dr["weights"], np.float32)
+        Pc = (V[r] * w[..., None]).sum(1) + np.array(dr["offsets"], np.float32)
+        arestas = {}
+        for vs, _, _ in faces_legado(dr["faces"]):
+            for k in range(len(vs)):
+                e = tuple(sorted((vs[k], vs[(k + 1) % len(vs)]))); arestas[e] = arestas.get(e, 0) + 1
+        borda = np.unique([v for e, n in arestas.items() if n == 1 for v in e])
+        dist_roupa[pv] = np.minimum(dist_roupa[pv], cKDTree(Pc).query(V[pv])[0])
+        if len(borda): dist_borda[pv] = np.minimum(dist_borda[pv], cKDTree(Pc[borda]).query(V[pv])[0])
+    pescoco = V[jp["neck01____head"]].mean(0)[1] - 0.25                  # dm: do ombro para cima a pele nunca some (golas)
+    escondido = (dist_roupa < 0.35) & (dist_borda > 0.45) & (V[:, 1] < pescoco)
+    tris = tris[~escondido[org[tris]].all(1)]
     # pele
     si, sw = pele_ossos(base["skinIndices"], base["skinWeights"], len(base["vertices"]) // 3)
     pele_nome, escuro = cfg["pele"]
