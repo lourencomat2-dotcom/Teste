@@ -52,7 +52,15 @@ Este arquivo resume a conversa em que o projeto nasceu, para continuar daqui.
    Texturas pintadas em canvas e luz de estúdio (clara, sombras suaves) em `tempo_real/cenario.js`.
    **Decisão do Lucas: a versão three.js é a principal.** A versão Blender (sprites) ficou com o cenário
    antigo (os renders em `render/` não foram refeitos; refazer custa ~2 h de CPU).
-9. Caminho realista considerado (não feito): imagens no Seedream + lip-sync/OmniHuman 1.5 no
+9. **Passada de IA vídeo→vídeo no Runware (teste, nov/2026)**: abertura sem legenda (720p, 13 s) enviada ao
+   Seedance 2.0 Fast (`motor/runware_v2v.py`). Custo real US$ 1,69 (+ US$ 1,69 perdidos num pedido de teste
+   aceito por engano). Resultado: visual de sitcom real muito convincente e personagens coerentes dentro do
+   clipe (Clara de verde, Beto de laranja com bigode de iogurte), MAS o modelo usou o vídeo só como
+   referência: inventou os planos, inverteu as posições, deixou a câmera parada e criou falas próprias em
+   português (não as do roteiro). Saldo da conta abaixo do mínimo do Seedance 2.5 (7,43) e 2.0 (6);
+   o 2.0 Fast aceita só 720p (854/864×480 recusados). Próximos testes possíveis: Seedance 2.5 (edição de
+   verdade, precisa recarga) ou pôr falas, posições e marcações no prompt.
+10. Caminho realista considerado (não feito): imagens no Seedream + lip-sync/OmniHuman 1.5 no
    Runware (~US$ 0,13/s de fala → ~US$ 12–20 por episódio). Exige o Lucas rodar a geração.
 
 ## Estado atual
