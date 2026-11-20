@@ -144,10 +144,11 @@ def camisa_lisa(img, geo, limiar_y, cor):
     for t in geo["tris"]:
         if P[t, 1].mean() < limiar_y: continue
         d.polygon([(uv[i, 0] * W, (1 - uv[i, 1]) * H) for i in t], fill=255)
-    m = m.filter(ImageFilter.MaxFilter(5))
+    m = m.filter(ImageFilter.MaxFilter(3))
     a = np.asarray(im).astype(np.float32)
     lum = np.asarray(im.convert("L").filter(ImageFilter.GaussianBlur(6))).astype(np.float32) / 255.0
-    sel = (np.asarray(m) > 0) & ~((a[..., 2] - a[..., 0]) > 30)        # o jeans (azul) fica de fora
+    m = m.filter(ImageFilter.MaxFilter(9))
+    sel = (np.asarray(m) > 0) & ~((a[..., 2] - a[..., 0]) > 30)          # o jeans (azul) fica de fora
     ref = np.percentile(lum[sel], 80) if sel.any() else 1.0
     lum = np.clip(lum / max(ref, 1e-3), 0.8, 1.04)
     for c in range(3): a[..., c] = np.where(sel, lum * cor[c], a[..., c])
@@ -241,6 +242,17 @@ def montar(nome, cfg, base, alvos):
             ent["morph"][k] = buf.add(dm.astype(np.float32))
         mat["map"], mat["alfa"] = tex
         partes.append(ent)
+    # pele escondida embaixo da roupa (evita a pele "atravessar" a camisa quando o personagem anda):
+    # vértices usados de referência pelas roupas, menos um anel na borda (o decote e as mangas continuam com pele)
+    cob = np.zeros(len(V), bool)
+    for roupa, _ in cfg["roupas"]:
+        dr = json.load(open(os.path.join(DADOS, "proxies", "clothes", roupa, roupa + ".json")))
+        r = np.array(dr["ref_vIdxs"]).ravel(); w = np.array(dr["weights"]).ravel(); cob[r[w > 0.05]] = True
+    tri_o = org[tris]; tri_cob = cob[tri_o].all(1)
+    fundo = np.ones(len(V), bool)
+    for k in range(3): np.logical_and.at(fundo, tri_o[:, k], tri_cob)
+    fundo &= cob
+    tris = tris[~fundo[tri_o].all(1)]
     # pele
     si, sw = pele_ossos(base["skinIndices"], base["skinWeights"], len(base["vertices"]) // 3)
     pele_nome, escuro = cfg["pele"]

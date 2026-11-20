@@ -8,6 +8,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import * as CEN from './cenario.js';
 
 const CAPTURA = new URLSearchParams(location.search).has('captura');
 if (CAPTURA) document.body.classList.add('captura');
@@ -39,99 +40,8 @@ scene.environmentIntensity = 0.32;
 const camera = new THREE.PerspectiveCamera(27, W / H, 0.05, 80);
 const lente = mm => THREE.MathUtils.radToDeg(2 * Math.atan(10.125 / mm));   // sensor 36 mm, 16:9
 
-// luzes (as mesmas posições do Blender: chave, preenchimento, recorte, sol pela janela, lâmpada)
-const hemi = new THREE.HemisphereLight(lin(232, 238, 248), lin(150, 110, 84), 0.9); scene.add(hemi);
-const chave = new THREE.DirectionalLight(lin(255, 237, 214), 2.3);
-chave.position.copy(B(-2.6, -4.2, 3.4)); chave.target.position.copy(B(0, 0, 1.0));
-chave.castShadow = true; chave.shadow.mapSize.set(2048, 2048); chave.shadow.radius = 6; chave.shadow.bias = -0.0004;
-chave.shadow.normalBias = 0.02;
-Object.assign(chave.shadow.camera, { left: -5, right: 5, top: 4, bottom: -2, near: 0.5, far: 14 });
-scene.add(chave, chave.target);
-const preenche = new THREE.DirectionalLight(lin(219, 234, 255), 0.7);
-preenche.position.copy(B(3.4, -3.6, 2.2)); preenche.target.position.copy(B(0.5, 0, 1)); scene.add(preenche, preenche.target);
-const recorte = new THREE.DirectionalLight(lin(255, 214, 168), 1.1);
-recorte.position.copy(B(0.4, 1.2, 2.7)); recorte.target.position.copy(B(0.4, -0.5, 1.2)); scene.add(recorte, recorte.target);
-const lampada = new THREE.PointLight(lin(255, 226, 170), 1.6, 5, 1.6);
-lampada.position.copy(B(0.05, 0.6, 2.0)); scene.add(lampada);
-
-// ------------------------------------------------------------------ texturas procedurais (as do Blender eram nós)
-function tela(w, h, desenha) {
-  const c = document.createElement('canvas'); c.width = w; c.height = h; desenha(c.getContext('2d'), w, h);
-  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping;
-  t.anisotropy = 8; return t;
-}
-let semente = 7; const rnd = () => (semente = (semente * 16807) % 2147483647) / 2147483647;
-const rgb = (c, k = 1) => `rgb(${c.map(v => clamp(Math.round(v * k), 0, 255)).join(',')})`;
-function ruido(g, w, h, n, cor0, cor1, esticaX = 1, esticaY = 1, alfa = 0.08) {
-  for (let i = 0; i < n; i++) {
-    const c = rnd() < 0.5 ? cor0 : cor1; g.fillStyle = rgb(c); g.globalAlpha = alfa * rnd();
-    const x = rnd() * w, y = rnd() * h, r = 2 + rnd() * 10;
-    g.beginPath(); g.ellipse(x, y, r * esticaX, r * esticaY, 0, 0, 7); g.fill();
-  }
-  g.globalAlpha = 1;
-}
-// piso: tábuas 1,3 m x 0,2 m, deslocamento 0,37 (textura = 2,6 m x 1,0 m)
-const TX_PISO = tela(2048, 788, (g, w, h) => {
-  const c1 = [178, 122, 86], c2 = [160, 104, 72], arg = [96, 60, 42];
-  g.fillStyle = rgb(arg); g.fillRect(0, 0, w, h);
-  const lh = h / 5, bw = w / 2;
-  for (let r = 0; r < 5; r++) {
-    const off = ((r * 0.37) % 1) * bw;
-    for (let k = -1; k < 3; k++) {
-      const x = off + k * bw; g.fillStyle = rgb(rnd() < 0.5 ? c1 : c2, 0.95 + rnd() * 0.1);
-      g.fillRect(x + 2, r * lh + 2, bw - 4, lh - 4);
-      for (let s = 0; s < 26; s++) {     // veios
-        g.strokeStyle = rgb(c2, 0.82); g.globalAlpha = 0.18 * rnd(); g.lineWidth = 1 + rnd() * 3; g.beginPath();
-        const y = r * lh + 6 + rnd() * (lh - 12); g.moveTo(x, y);
-        g.bezierCurveTo(x + bw * 0.3, y + (rnd() - 0.5) * 8, x + bw * 0.6, y + (rnd() - 0.5) * 8, x + bw, y + (rnd() - 0.5) * 6); g.stroke();
-      }
-      g.globalAlpha = 1;
-    }
-  }
-});
-TX_PISO.userData.metros = [2.6, 1.0];
-// "azulejo": no Blender, a textura de tijolo usa só X e Y do objeto; na face da parede (Y constante)
-// vira ripas verticais de 0,15 m com frisos de 8 mm (lambri). Reproduz isso.
-const TX_AZUL = tela(512, 64, (g, w, h) => {
-  const n = 4, s = w / n, friso = Math.max(3, Math.round(0.008 / 0.6 * w));
-  for (let i = 0; i < n; i++) {
-    g.fillStyle = rgb(i % 2 ? [240, 220, 190] : [234, 212, 180]); g.fillRect(i * s, 0, s, h);
-    const gr = g.createLinearGradient(i * s, 0, i * s + s, 0);     // leve relevo da ripa
-    gr.addColorStop(0, 'rgba(255,255,255,0.18)'); gr.addColorStop(0.5, 'rgba(255,255,255,0)'); gr.addColorStop(1, 'rgba(0,0,0,0.06)');
-    g.fillStyle = gr; g.fillRect(i * s, 0, s, h);
-    g.fillStyle = rgb([210, 186, 152]); g.fillRect(i * s, 0, friso, h);
-    g.fillStyle = 'rgba(80,60,40,0.18)'; g.fillRect(i * s + friso, 0, 2, h);
-  }
-});
-TX_AZUL.userData.metros = [0.6, 0.6];  // 4 ripas por textura
-const TX_PAREDE = tela(1024, 1024, (g, w, h) => {
-  g.fillStyle = rgb([242, 224, 196]); g.fillRect(0, 0, w, h); ruido(g, w, h, 3000, [236, 216, 186], [250, 236, 210], 4, 4, 0.12);
-});
-TX_PAREDE.userData.metros = [2.5, 2.5];
-const TX_MADEIRA = tela(1024, 1024, (g, w, h) => {
-  g.fillStyle = rgb([149, 103, 71]); g.fillRect(0, 0, w, h);
-  for (let i = 0; i < 260; i++) {
-    g.strokeStyle = rgb(rnd() < 0.5 ? [136, 92, 62] : [168, 120, 84]); g.globalAlpha = 0.35 * rnd(); g.lineWidth = 1 + rnd() * 5;
-    const y = rnd() * h; g.beginPath(); g.moveTo(0, y);
-    g.bezierCurveTo(w * 0.3, y + (rnd() - 0.5) * 20, w * 0.7, y + (rnd() - 0.5) * 20, w, y); g.stroke();
-  }
-  g.globalAlpha = 1;
-});
-TX_MADEIRA.userData.metros = [1.2, 1.2];
-
-// coordenadas de textura "de caixa" (como as Object coords do Blender), no espaço do mundo
-function uvCaixa(mesh, metros) {
-  const geo = mesh.geometry, p = geo.attributes.position, n = geo.attributes.normal, m = mesh.matrixWorld;
-  const nm = new THREE.Matrix3().getNormalMatrix(m); const uv = new Float32Array(p.count * 2);
-  const v = new THREE.Vector3(), nn = new THREE.Vector3();
-  for (let i = 0; i < p.count; i++) {
-    v.fromBufferAttribute(p, i).applyMatrix4(m); nn.fromBufferAttribute(n, i).applyMatrix3(nm);
-    const ax = Math.abs(nn.x), ay = Math.abs(nn.y), az = Math.abs(nn.z); let a, b;
-    if (ay >= ax && ay >= az) { a = v.x; b = v.z; } else if (az >= ax) { a = v.x; b = v.y; } else { a = v.z; b = v.y; }
-    uv[2 * i] = a / metros[0]; uv[2 * i + 1] = b / metros[1];
-  }
-  geo.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
-}
+// luz de estúdio de sitcom (cenario.js); a lâmpada fica em cima da mesa
+const LUZ = CEN.luzes(scene, B, B(0.05, 0.95, 2.0));
 
 const CONTORNO = new THREE.MeshBasicMaterial({ color: lin(48, 32, 30), side: THREE.BackSide });
 function contorno(mesh, esp = 0.009) {
@@ -174,25 +84,9 @@ for (const ob of objetos) {
   const malhas = []; ob.traverse(m => { if (m.isMesh) malhas.push(m); });
   for (const m of malhas) {
     const mn = m.material.name.split('.')[0];
-    m.castShadow = !['ceu', 'predios', 'lampada', 'teto'].includes(mn) && ob.name !== 'teto';
+    m.castShadow = !['ceu', 'lampada', 'teto'].includes(mn) && ob.name !== 'teto';
     m.receiveShadow = true;
-    if (mn === 'piso') { m.material = new THREE.MeshStandardMaterial({ map: TX_PISO, roughness: 0.42, envMapIntensity: 1.4 }); uvCaixa(m, TX_PISO.userData.metros); m.castShadow = false; }
-    else if (mn === 'azulejo') { m.material = new THREE.MeshStandardMaterial({ map: TX_AZUL, roughness: 0.3 }); uvCaixa(m, TX_AZUL.userData.metros); }
-    else if (mn === 'parede') { m.material = new THREE.MeshStandardMaterial({ map: TX_PAREDE, roughness: 0.9 }); uvCaixa(m, TX_PAREDE.userData.metros); }
-    else if (mn === 'armario') { m.material = new THREE.MeshStandardMaterial({ map: TX_MADEIRA, roughness: 0.5 }); uvCaixa(m, TX_MADEIRA.userData.metros); }
-    else if (mn === 'ceu') {
-      m.material = new THREE.MeshBasicMaterial({ map: tela(16, 256, (g, w, h) => { const gr = g.createLinearGradient(0, h, 0, 0);
-        gr.addColorStop(0.0, 'rgb(222,238,250)'); gr.addColorStop(0.3, 'rgb(222,238,250)'); gr.addColorStop(0.75, 'rgb(86,156,228)'); gr.addColorStop(1, 'rgb(86,156,228)');
-        g.fillStyle = gr; g.fillRect(0, 0, w, h); }) });
-      const geo = m.geometry, p = geo.attributes.position; const uv = new Float32Array(p.count * 2);
-      const ys = []; const v = new THREE.Vector3();
-      for (let i = 0; i < p.count; i++) ys.push(v.fromBufferAttribute(p, i).applyMatrix4(m.matrixWorld).y);
-      const y0 = Math.min(...ys), y1 = Math.max(...ys);
-      for (let i = 0; i < p.count; i++) { uv[2 * i] = 0.5; uv[2 * i + 1] = (ys[i] - y0) / (y1 - y0 || 1); }
-      geo.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
-    }
-    else if (mn === 'predios') m.material = new THREE.MeshBasicMaterial({ color: lin(150, 176, 206) });
-    else if (mn === 'lampada') m.material = new THREE.MeshBasicMaterial({ color: lin(255, 246, 220) });
+    if (CEN.vestir(m, mn)) { /* textura pintada do cenário */ }
     else if (m.material.isMeshStandardMaterial) {
       const nome = mn;
       if (/^(pele|roupa|calca|cabelo|sapato|meia)/.test(nome)) m.material.envMapIntensity = 0.6;
@@ -419,11 +313,16 @@ const PLANOS = [
       const a = ease((t - 10.3) / 1.0), b = ease((t - 11.3) / 1.7);
       const perto = B(0.35, -1.75, 1.32), longe = B(-0.1, -4.2, 1.45);
       const pos = new THREE.Vector3().lerpVectors(perto, longe, b);
-      const alvoB = H_BETO().add(B(0, 0, -0.05)), alvoL = B(0.05, 0.6, 2.05), alvoG = B(-0.1, 0.4, 1.15);
+      const alvoB = H_BETO().add(B(0, 0, -0.05)), alvoL = B(0.05, 0.95, 2.05), alvoG = B(-0.1, 0.4, 1.15);
       let alvo = alvoB.clone().lerp(alvoL, a * (1 - b) * 0.42); alvo.lerp(alvoG, b);
       return { pos, alvo, mm: lerp(36, 34, b) }; } },
 ];
+const CAM_DEBUG = new URLSearchParams(location.search).get('cam')?.split(',').map(Number);
 function posicionarCamera(t) {
+  if (CAM_DEBUG) {
+    const [x, y, z, ax, ay, az, mm] = CAM_DEBUG; camera.position.copy(B(x, y, z)); camera.lookAt(B(ax, ay, az));
+    camera.fov = lente(mm || 35); camera.updateProjectionMatrix(); return;
+  }
   const p = PLANOS.find(p => t >= p.t0 && t < p.t1) || PLANOS.at(-1);
   const u = clamp((t - p.t0) / (Math.min(p.t1, DUR) - p.t0), 0, 1); const r = p.f(u, t);
   if (HUMANOS) {   // personagens realistas são mais altos (1,60 m e 1,78 m): câmera sobe junto

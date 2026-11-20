@@ -44,7 +44,15 @@ Este arquivo resume a conversa em que o projeto nasceu, para continuar daqui.
    Ajustes: camisa do Beto lisa (tirado o logo do MakeHuman), bigode de iogurte 3D, Clara de rabo de
    cavalo (os chanéis do MakeHuman cobrem um olho). Limites: texturas de pele 512 px (closes ficam
    moles), mãos/expressões mais duras que o desenho 2D, voz robótica destoa mais.
-8. Caminho realista considerado (não feito): imagens no Seedream + lip-sync/OmniHuman 1.5 no
+8. **Cenário de sitcom (nov/2026)**: cozinha refeita em `sala()` (cena3d.py) — porta com corredor ao fundo
+   atrás da marca da Dona Neide (entradas), mesa com toalha xadrez, cadeiras e o pote de iogurte vazio
+   ("prova do crime") sob a janela, bancada com pia/escorredor/fogão/coifa e azulejos decorados, aparador
+   com filtro de barro, calendário, quadros, telefone de parede, planta, relógio fora do varão da cortina,
+   vista pintada da cidade na janela. Paredes amarelo-manteiga, lambri branco, ladrilho hidráulico.
+   Texturas pintadas em canvas e luz de estúdio (clara, sombras suaves) em `tempo_real/cenario.js`.
+   **Decisão do Lucas: a versão three.js é a principal.** A versão Blender (sprites) ficou com o cenário
+   antigo (os renders em `render/` não foram refeitos; refazer custa ~2 h de CPU).
+9. Caminho realista considerado (não feito): imagens no Seedream + lip-sync/OmniHuman 1.5 no
    Runware (~US$ 0,13/s de fala → ~US$ 12–20 por episódio). Exige o Lucas rodar a geração.
 
 ## Estado atual
@@ -67,7 +75,9 @@ blender -b -noaudio -P motor/cena3d.py -- jobs render/jobs.json   # retomável
 python3 motor/lote_denoise.py
 ```
 
-- Versão three.js da abertura: `saida/abertura_threejs.mp4`; comparação `saida/abertura_comparacao.mp4`.
+- Versão three.js da abertura: `saida/abertura_threejs.mp4`; comparação `saida/abertura_comparacao.mp4`;
+  realista `saida/abertura_realista.mp4`; com o cenário novo `saida/abertura_cenario_novo.mp4`.
+- Ainda em aberto: personagens estilizados (padrão) ou realistas (`?humanos`) como versão oficial.
 
 ## Versão three.js (tempo_real/)
 ```bash
@@ -77,6 +87,7 @@ node tempo_real/capturar.js                    # vídeo -> saida/abertura_threej
 python3 motor/comparar_cena.py 0               # versão Blender da mesma cena + vídeo comparativo
 # ao vivo: cd tempo_real && python3 -m http.server  -> http://localhost:8000
 # personagens realistas: python3 motor/humanos.py -> tempo_real/humanos/ ; página com ?humanos
+# inspecionar o cenário: ?cam=x,y,z,alvo_x,alvo_y,alvo_z,mm (coordenadas do Blender)
 PARAMS='&humanos' node tempo_real/capturar.js saida/abertura_realista.mp4
 ```
 - `motor/humanos.py`: monta cada personagem (ELENCO: idade, gênero, peso, etnia, pele, cabelo, roupas

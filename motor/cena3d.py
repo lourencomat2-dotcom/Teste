@@ -187,35 +187,46 @@ def contorno(ob, esp=0.009):
     return dup
 
 # ------------------------------------------------------------------ cozinha
+# Cenário de sitcom: três paredes, porta com corredor ao fundo (entradas), mesa sob a janela,
+# bancada com pia e fogão, objetos de cena. Coordenadas: x direita, y fundo, z cima; parede em y=1.6.
+JX0, JX1, JZ0, JZ1 = -0.55, 0.65, 1.15, 2.05          # janela
+DX0, DX1, DZ1 = 1.5, 2.4, 2.12                         # porta (atrás da marca da Dona Neide)
+BX0 = 2.55                                             # início da bancada
+MESA = (0.05, 0.95)                                    # centro da mesa (x, y)
+LUMINARIA = (0.05, 0.95)                               # pendente em cima da mesa
+
 def sala():
     mp, mt = mat_procedural("parede", "parede"), mat_procedural("azulejo", "azulejo")
     piso = mat_procedural("piso", "piso"); arm = mat_procedural("armario", "armario")
     branco = material("branco", (250, 246, 238), 0.4); geladeira = material("geladeira", (238, 242, 246), 0.22, coat=0.3)
     metal = material("metal", (180, 186, 196), 0.25, metal=1.0); tampo = material("tampo", (228, 226, 220), 0.2)
-    # piso, paredes, teto
-    pl = plano("piso", 11, 8, (0.2, -1.0, 0), (0, 0, 0), piso)
-    for nome, x0, x1, z0, z1, m in (("parede_alta", -4.6, 5.2, 1.0, 3.0, mp), ("parede_baixa", -4.6, 5.2, 0, 1.0, mt)):
-        pass
-    # parede do fundo com abertura da janela (4 partes)
-    JX0, JX1, JZ0, JZ1 = -0.55, 0.65, 1.15, 2.05
-    for nome, x0, x1, z0, z1 in (("p_esq", -4.6, JX0, 1.0, 3.0), ("p_dir", JX1, 5.2, 1.0, 3.0),
-                                 ("p_baixo", JX0, JX1, 1.0, JZ0), ("p_cima", JX0, JX1, JZ1, 3.0)):
+    inox = material("inox", (196, 200, 206), 0.18, metal=1.0); preto = material("preto", (30, 30, 34), 0.15, coat=0.6)
+    plano("piso", 11, 8, (0.2, -1.0, 0), (0, 0, 0), piso)
+    # parede do fundo com os vãos da janela e da porta
+    for nome, x0, x1, z0, z1 in (("p_esq", -4.6, JX0, 1.0, 3.0), ("p_baixo", JX0, JX1, 1.0, JZ0), ("p_cima", JX0, JX1, JZ1, 3.0),
+                                 ("p_dir", JX1, DX0, 1.0, 3.0), ("p_porta_cima", DX0, DX1, DZ1, 3.0), ("p_dir2", DX1, 5.2, 1.0, 3.0)):
         caixa(nome, x0, x1, 1.6, 1.75, z0, z1, mp)
-    caixa("azulejos", -4.6, 5.2, 1.6, 1.75, 0, 1.0, mt)
-    caixa("friso", -4.6, 5.2, 1.57, 1.62, 0.97, 1.03, branco, bevel=0.008)
-    caixa("rodape", -4.6, 5.2, 1.56, 1.62, 0, 0.1, branco, bevel=0.006)
+    for suf, x0, x1 in (("", -4.6, DX0), ("2", DX1, 5.2)):
+        caixa("azulejos" + suf, x0, x1, 1.6, 1.75, 0, 1.0, mt)
+        xf = min(x1, BX0) if suf else x1                                 # atrás da bancada não tem friso
+        caixa("friso" + suf, x0, xf, 1.57, 1.62, 0.97, 1.03, branco, bevel=0.008)
+        caixa("rodape" + suf, x0, xf, 1.56, 1.62, 0, 0.1, branco, bevel=0.006)
     caixa("parede_e", -4.75, -4.6, -4, 1.75, 0, 3, mp); caixa("parede_d", 5.2, 5.35, -4, 1.75, 0, 3, mp)
-    caixa("teto", -4.75, 5.35, -4, 1.75, 2.95, 3.05, branco)
-    # janela
+    # lambri, friso e rodapé também nas paredes laterais (a da direita fica atrás da bancada)
+    caixa("lambri_e", -4.6, -4.58, -4, 1.6, 0, 1.0, mt)
+    caixa("friso_e", -4.6, -4.55, -4, 1.57, 0.97, 1.03, branco, bevel=0.008)
+    caixa("rodape_e", -4.6, -4.56, -4, 1.56, 0, 0.1, branco, bevel=0.006)
+    caixa("lambri_d", 5.18, 5.2, -4, 0.95, 0, 1.0, mt)
+    caixa("friso_d", 5.15, 5.2, -4, 0.95, 0.97, 1.03, branco, bevel=0.008)
+    caixa("rodape_d", 5.16, 5.2, -4, 0.95, 0, 0.1, branco, bevel=0.006)
+    caixa("teto", -4.75, 5.35, -4, 3.6, 2.95, 3.05, branco)
+    # janela, cortinas e vista pintada (o three.js pinta a cidade no plano do "céu")
     for nome, x0, x1, z0, z1 in (("jan_e", JX0 - 0.06, JX0 + 0.02, JZ0 - 0.06, JZ1 + 0.06), ("jan_d", JX1 - 0.02, JX1 + 0.06, JZ0 - 0.06, JZ1 + 0.06),
                                  ("jan_c", JX0 - 0.06, JX1 + 0.06, JZ1 - 0.02, JZ1 + 0.06), ("jan_b", JX0 - 0.06, JX1 + 0.06, JZ0 - 0.06, JZ0 + 0.02),
                                  ("jan_m", (JX0 + JX1) / 2 - 0.025, (JX0 + JX1) / 2 + 0.025, JZ0, JZ1)):
         caixa(nome, x0, x1, 1.58, 1.66, z0, z1, branco, bevel=0.01)
     caixa("peitoril", JX0 - 0.12, JX1 + 0.12, 1.5, 1.66, JZ0 - 0.09, JZ0 - 0.04, branco, bevel=0.01)
     plano("ceu", 14, 8, (0.0, 4.5, 1.5), (math.radians(90), 0, 0), mat_ceu())
-    predio = mat_emissao("predios", (140, 165, 195), 1.3)
-    for i, (bx, bw, bh) in enumerate(((-0.9, 0.5, 0.9), (-0.25, 0.4, 1.5), (0.25, 0.55, 0.7), (0.8, 0.45, 1.8), (1.35, 0.5, 1.1))):
-        caixa(f"predio{i}", bx, bx + bw, 4.0, 4.3, 0.6, 0.6 + bh, predio)
     tecido = material("cortina", (226, 112, 92), 0.8, sheen=0.6)
     for s, cx in ((-1, JX0 - 0.12), (1, JX1 + 0.12)):
         me = bpy.data.meshes.new("cortina"); bm = bmesh.new()
@@ -227,53 +238,185 @@ def sala():
         md = ob.modifiers.new("s", "SOLIDIFY"); md.thickness = 0.01
         for p in me.polygons: p.use_smooth = True
     cilindro("varao", 0.018, 0.018, 1.9, ((JX0 + JX1) / 2, 1.48, 2.2), metal, "sala", rot=(0, math.radians(90), 0))
-    # geladeira
+    for vx in ((JX0 + JX1) / 2 - 0.95, (JX0 + JX1) / 2 + 0.95): esfera("ponteira", 0.03, (vx, 1.48, 2.2), metal, "sala")
+    # geladeira (mesmo lugar: as etiquetas, o cadeado e o quadro dependem dela)
     caixa("gel_corpo", -3.0, -2.3, 0.9, 1.6, 0.0, 1.29, geladeira, bevel=0.05, seg=4)
     caixa("gel_freezer", -3.0, -2.3, 0.9, 1.6, 1.31, 1.86, geladeira, bevel=0.05, seg=4)
     caixa("gel_vao", -2.98, -2.32, 0.92, 1.58, 1.28, 1.32, material("vao", (70, 70, 76), 0.6))
     for nome, z0, z1 in (("gel_puxador1", 1.42, 1.72), ("gel_puxador2", 0.78, 1.18)):
         caixa(nome, -2.42, -2.37, 0.82, 0.86, z0, z1, metal, bevel=0.012)
         for zz in (z0 + 0.02, z1 - 0.02): caixa(nome + "_p", -2.42, -2.38, 0.85, 0.9, zz - 0.012, zz + 0.012, metal)
-    # prateleira (acima da Clara)
-    caixa("prateleira", -1.6, -0.55, 1.33, 1.6, 1.84, 1.88, arm, bevel=0.006)
-    for i, (bx, c, bh) in enumerate(((-1.52, (200, 80, 70), 0.24), (-1.45, (80, 110, 170), 0.27), (-1.38, (230, 190, 80), 0.21))):
-        caixa(f"livro{i}", bx, bx + 0.065, 1.38, 1.56, 1.88, 1.88 + bh, material(f"livro{i}", c, 0.6), bevel=0.006)
-    vaso = material("vaso", (204, 112, 70), 0.6); folha = material("folha", (86, 158, 88), 0.5)
-    cilindro("vaso", 0.07, 0.09, 0.16, (-0.75, 1.46, 1.96), vaso, "sala")
-    for i, (dx, dz, ang) in enumerate(((0, 0.17, 0), (-0.08, 0.12, -40), (0.08, 0.12, 40), (-0.05, 0.2, -20), (0.05, 0.2, 20))):
-        esfera(f"folha{i}", 0.06, (-0.75 + dx, 1.46, 1.96 + dz), folha, "sala", escala=(0.6, 0.35, 1.3)).rotation_euler = (0, math.radians(ang), 0)
-    # relógio (acima do Beto)
-    cilindro("relogio", 0.17, 0.17, 0.04, (0.8, 1.57, 2.2), material("relogio", (252, 250, 244), 0.3), "sala", rot=(math.radians(90), 0, 0))
-    toro("relogio_aro", 0.17, 0.018, (0.8, 1.55, 2.2), material("aro", (60, 50, 50), 0.4), "sala", rot=(math.radians(90), 0, 0))
-    ponteiro = material("ponteiro", (40, 36, 36), 0.5)
-    caixa("ponteiro_h", 0.79, 0.81, 1.54, 1.545, 2.2, 2.29, ponteiro); caixa("ponteiro_m", 0.8, 0.9, 1.538, 1.543, 2.17, 2.19, ponteiro)
-    for k in range(12):
-        a = math.radians(k * 30); cx, cz = 0.8 + 0.14 * math.sin(a), 2.2 + 0.14 * math.cos(a)
-        caixa(f"marca{k}", cx - 0.006, cx + 0.006, 1.545, 1.55, cz - 0.012, cz + 0.012, ponteiro)
-    # armários e balcão
-    caixa("balcao", 1.55, 4.8, 0.95, 1.6, 0.0, 0.88, arm, bevel=0.01)
-    caixa("tampo", 1.5, 4.8, 0.9, 1.6, 0.88, 0.94, tampo, bevel=0.008)
-    for i, x in enumerate([1.6 + 0.55 * k for k in range(6)]):
-        caixa(f"porta{i}", x, x + 0.5, 0.92, 0.95, 0.08, 0.8, arm, bevel=0.012)
-        caixa(f"pux{i}", x + 0.2, x + 0.3, 0.9, 0.92, 0.7, 0.72, metal, bevel=0.004)
-    caixa("armario_alto", 1.55, 4.8, 1.25, 1.6, 1.55, 2.3, arm, bevel=0.01)
-    for i, x in enumerate([1.6 + 0.55 * k for k in range(6)]):
-        caixa(f"porta_a{i}", x, x + 0.5, 1.22, 1.25, 1.6, 2.25, arm, bevel=0.012)
-        caixa(f"pux_a{i}", x + 0.44, x + 0.46, 1.2, 1.22, 1.62, 1.75, metal, bevel=0.004)
-    caneca = material("caneca", (222, 88, 70), 0.3, coat=0.5)
-    cilindro("caneca", 0.05, 0.05, 0.11, (2.6, 1.2, 0.995), caneca, "sala")
-    toro("caneca_alca", 0.035, 0.011, (2.66, 1.2, 1.0), caneca, "sala", rot=(math.radians(90), 0, 0))
+    # aparador com filtro de barro e fruteira (entre a geladeira e a Clara)
+    caixa("aparador", -2.15, -1.45, 1.22, 1.6, 0.08, 0.86, arm, bevel=0.01)
+    caixa("aparador_tampo", -2.18, -1.42, 1.19, 1.6, 0.86, 0.9, arm, bevel=0.006)
+    for i, x in enumerate((-2.13, -1.8)):
+        caixa(f"aparador_porta{i}", x, x + 0.32, 1.2, 1.22, 0.14, 0.8, arm, bevel=0.008)
+        esfera(f"aparador_pux{i}", 0.014, (x + (0.28 if i == 0 else 0.04), 1.19, 0.6), metal, "sala")
+    barro = material("barro", (176, 92, 58), 0.85)
+    cilindro("filtro_base", 0.12, 0.11, 0.2, (-1.98, 1.42, 1.0), barro, "sala")
+    cilindro("filtro_cima", 0.125, 0.12, 0.2, (-1.98, 1.42, 1.21), barro, "sala")
+    esfera("filtro_tampa", 0.12, (-1.98, 1.42, 1.31), barro, "sala", escala=(1, 1, 0.45))
+    esfera("filtro_pegador", 0.025, (-1.98, 1.42, 1.37), barro, "sala")
+    cilindro("filtro_torneira", 0.012, 0.012, 0.07, (-1.98, 1.28, 0.97), material("torneira_branca", (240, 240, 236), 0.3), "sala", rot=(math.radians(90), 0, 0))
     tigela = material("tigela", (240, 240, 234), 0.25)
-    esf = esfera("tigela", 0.15, (3.3, 1.25, 1.02), tigela, "sala", escala=(1, 1, 0.55)); cortar(esf, Vector((3.3, 1.25, 1.02)), Vector((0, 0, -1)))
+    esf = esfera("tigela", 0.13, (-1.66, 1.4, 0.95), tigela, "sala", escala=(1, 1, 0.5)); cortar(esf, Vector((-1.66, 1.4, 0.95)), Vector((0, 0, -1)))
     esf.modifiers.new("s", "SOLIDIFY").thickness = 0.01
-    for i, (fx, fy, c) in enumerate(((3.22, 1.24, (230, 70, 60)), (3.32, 1.2, (250, 200, 60)), (3.4, 1.28, (120, 180, 80)))):
-        esfera(f"fruta{i}", 0.05, (fx, fy, 1.05), material(f"fruta{i}", c, 0.35), "sala")
-    # luminária
-    cilindro("fio", 0.006, 0.006, 0.7, (0.05, 0.6, 2.6), material("fio", (40, 40, 40), 0.5), "sala")
+    for i, (fx, fy, c) in enumerate(((-1.72, 1.39, (230, 70, 60)), (-1.62, 1.35, (250, 200, 60)), (-1.6, 1.44, (120, 180, 80)), (-1.69, 1.45, (240, 150, 50)))):
+        esfera(f"fruta{i}", 0.045, (fx, fy, 0.99), material(f"fruta{i}", c, 0.35), "sala")
+    # prateleira com livros e planta (longe da cortina) e calendário
+    caixa("prateleira", -2.15, -1.05, 1.36, 1.6, 1.86, 1.9, arm, bevel=0.006)
+    for i, (bx, c, bh) in enumerate(((-2.08, (200, 80, 70), 0.24), (-2.01, (80, 110, 170), 0.27), (-1.94, (230, 190, 80), 0.21), (-1.86, (110, 150, 110), 0.25))):
+        caixa(f"livro{i}", bx, bx + 0.065, 1.4, 1.57, 1.9, 1.9 + bh, material(f"livro{i}", c, 0.6), bevel=0.006)
+    vaso = material("vaso", (204, 112, 70), 0.6); folha = material("folha", (86, 158, 88), 0.5)
+    cilindro("vaso", 0.07, 0.09, 0.16, (-1.3, 1.47, 1.98), vaso, "sala")
+    for i, (dx, dz, ang) in enumerate(((0, 0.17, 0), (-0.08, 0.12, -40), (0.08, 0.12, 40), (-0.05, 0.2, -20), (0.05, 0.2, 20))):
+        esfera(f"folha{i}", 0.06, (-1.3 + dx, 1.47, 1.98 + dz), folha, "sala", escala=(0.6, 0.35, 1.3)).rotation_euler = (0, math.radians(ang), 0)
+    plano("calendario", 0.3, 0.42, (-1.62, 1.595, 1.42), (math.radians(90), 0, 0), material("calendario", (250, 250, 245), 0.7))
+    # relógio entre a janela e a porta (antes ficava atrás do varão da cortina)
+    RX, RZ = 1.1, 2.4
+    cilindro("relogio", 0.15, 0.15, 0.04, (RX, 1.57, RZ), material("relogio", (252, 250, 244), 0.3), "sala", rot=(math.radians(90), 0, 0))
+    toro("relogio_aro", 0.15, 0.016, (RX, 1.55, RZ), material("aro", (60, 50, 50), 0.4), "sala", rot=(math.radians(90), 0, 0))
+    ponteiro = material("ponteiro", (40, 36, 36), 0.5)
+    caixa("ponteiro_h", RX - 0.01, RX + 0.01, 1.54, 1.545, RZ, RZ + 0.08, ponteiro); caixa("ponteiro_m", RX, RX + 0.09, 1.538, 1.543, RZ - 0.01, RZ + 0.01, ponteiro)
+    for k in range(12):
+        a = math.radians(k * 30); cx, cz = RX + 0.125 * math.sin(a), RZ + 0.125 * math.cos(a)
+        caixa(f"marca{k}", cx - 0.006, cx + 0.006, 1.545, 1.55, cz - 0.011, cz + 0.011, ponteiro)
+    # porta com batente e corredor ao fundo (de onde os personagens entram)
+    for nome, x0, x1, z0, z1 in (("batente_e", DX0 - 0.08, DX0, 0, DZ1 + 0.08), ("batente_d", DX1, DX1 + 0.08, 0, DZ1 + 0.08),
+                                 ("batente_c", DX0 - 0.08, DX1 + 0.08, DZ1, DZ1 + 0.08)):
+        caixa(nome, x0, x1, 1.56, 1.62, z0, z1, branco, bevel=0.008)
+    for nome, x0, x1, z0, z1 in (("forra_e", DX0, DX0 + 0.02, 0, DZ1), ("forra_d", DX1 - 0.02, DX1, 0, DZ1), ("forra_c", DX0, DX1, DZ1 - 0.02, DZ1)):
+        caixa(nome, x0, x1, 1.6, 1.75, z0, z1, branco)
+    porta = material("porta", (122, 168, 176), 0.5)                        # porta pintada (azul-acinzentado)
+    caixa("porta_folha", DX0 + 0.02, DX0 + 0.06, 1.76, 2.62, 0.01, DZ1 - 0.03, porta, bevel=0.006)
+    for zz in (0.25, 1.15):
+        caixa(f"porta_almofada{zz}", DX0 + 0.06, DX0 + 0.07, 1.86, 2.52, zz, zz + 0.75, porta, bevel=0.004)
+    esfera("macaneta", 0.028, (DX0 + 0.09, 2.5, 1.0), material("latao", (200, 160, 80), 0.25, metal=1.0), "sala")
+    CX0, CX1, CY1 = 1.15, 2.95, 3.5
+    corr = material("corredor", (214, 226, 232), 0.85); piso_c = material("piso_corredor", (150, 104, 72), 0.45)
+    caixa("corredor_piso", CX0, CX1, 1.75, CY1, -0.02, 0.0, piso_c)
+    caixa("corredor_pe", CX0 - 0.1, CX0, 1.75, CY1, 0, 2.95, corr); caixa("corredor_pd", CX1, CX1 + 0.1, 1.75, CY1, 0, 2.95, corr)
+    caixa("corredor_fundo", CX0 - 0.1, CX1 + 0.1, CY1, CY1 + 0.1, 0, 2.95, corr)
+    caixa("corredor_rodape", CX0, CX1, CY1 - 0.02, CY1, 0, 0.1, branco)
+    plano("quadro_corredor", 0.7, 0.5, ((CX0 + CX1) / 2 + 0.15, CY1 - 0.01, 1.55), (math.radians(90), 0, 0), material("pintura2", (200, 200, 200), 0.6))
+    caixa("quadro_corredor_moldura", (CX0 + CX1) / 2 - 0.23, (CX0 + CX1) / 2 + 0.53, CY1 - 0.005, CY1, 1.27, 1.83, material("moldura_madeira", (90, 60, 40), 0.5))
+    caixa("aparador_corredor", CX1 - 0.6, CX1 - 0.05, CY1 - 0.35, CY1, 0.75, 0.8, arm, bevel=0.006)
+    for lx in (CX1 - 0.55, CX1 - 0.1):
+        caixa(f"aparador_corredor_pe{lx}", lx, lx + 0.04, CY1 - 0.33, CY1 - 0.29, 0, 0.75, arm)
+    cilindro("abajur_pe", 0.012, 0.012, 0.3, (CX1 - 0.3, CY1 - 0.18, 0.95), metal, "sala")
+    cilindro("abajur_cupula", 0.13, 0.08, 0.16, (CX1 - 0.3, CY1 - 0.18, 1.15), material("abajur", (250, 232, 196), 0.6), "sala", tampa=False).modifiers.new("s", "SOLIDIFY").thickness = 0.005
+    cilindro("cabideiro", 0.015, 0.015, 1.7, (CX0 + 0.2, CY1 - 0.25, 0.85), arm, "sala")
+    esfera("cabideiro_chapeu", 0.14, (CX0 + 0.2, CY1 - 0.25, 1.72), material("chapeu", (150, 70, 60), 0.7), "sala", escala=(1, 1, 0.45))
+    massa("casaco", [capsula_el((CX0 + 0.2, CY1 - 0.18, 1.55), (CX0 + 0.22, CY1 - 0.12, 0.95), 0.11)], material("casaco", (92, 110, 150), 0.8), "sala")
+    # mesa com toalha xadrez e cadeiras, sob a janela; o pote de iogurte vazio é a "prova"
+    mx, my = MESA; mw, md, mh = 0.45, 0.35, 0.76
+    madeira_mesa = material("mesa", (176, 128, 86), 0.5)
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            caixa(f"mesa_pe{sx}{sy}", mx + sx * (mw - 0.06) - 0.025, mx + sx * (mw - 0.06) + 0.025, my + sy * (md - 0.06) - 0.025, my + sy * (md - 0.06) + 0.025, 0, mh - 0.03, madeira_mesa)
+    caixa("mesa_tampo", mx - mw, mx + mw, my - md, my + md, mh - 0.03, mh, madeira_mesa, bevel=0.006)
+    toalha = material("toalha", (220, 60, 60), 0.85)
+    caixa("toalha", mx - mw - 0.04, mx + mw + 0.04, my - md - 0.04, my + md + 0.04, mh, mh + 0.006, toalha)
+    for nome, x0, x1, y0, y1 in (("toalha_f", mx - mw - 0.04, mx + mw + 0.04, my - md - 0.045, my - md - 0.04),
+                                 ("toalha_t", mx - mw - 0.04, mx + mw + 0.04, my + md + 0.04, my + md + 0.045),
+                                 ("toalha_e", mx - mw - 0.045, mx - mw - 0.04, my - md - 0.04, my + md + 0.04),
+                                 ("toalha_d", mx + mw + 0.04, mx + mw + 0.045, my - md - 0.04, my + md + 0.04)):
+        caixa(nome, x0, x1, y0, y1, mh - 0.2, mh + 0.006, toalha)
+    cadeira = material("cadeira", (200, 84, 70), 0.55)
+    for lado in (-1, 1):
+        cx = mx + lado * (mw + 0.22)
+        caixa(f"cadeira_assento{lado}", cx - 0.21, cx + 0.21, my - 0.21, my + 0.21, 0.43, 0.47, cadeira, bevel=0.008)
+        for sx in (-1, 1):
+            for sy in (-1, 1):
+                caixa(f"cadeira_pe{lado}{sx}{sy}", cx + sx * 0.17 - 0.02, cx + sx * 0.17 + 0.02, my + sy * 0.17 - 0.02, my + sy * 0.17 + 0.02, 0, 0.43, cadeira)
+        ex = cx + lado * 0.19                                         # encosto do lado de fora
+        for sy in (-1, 1): caixa(f"cadeira_poste{lado}{sy}", ex - 0.02, ex + 0.02, my + sy * 0.17 - 0.02, my + sy * 0.17 + 0.02, 0.47, 0.95, cadeira)
+        for zz in (0.68, 0.85): caixa(f"cadeira_ripa{lado}{zz}", ex - 0.015, ex + 0.015, my - 0.17, my + 0.17, zz, zz + 0.07, cadeira, bevel=0.006)
+    pote = material("pote_iogurte", (250, 248, 240), 0.35)
+    cilindro("pote_iogurte", 0.042, 0.034, 0.1, (mx - 0.1, my - 0.12, mh + 0.056), pote, "sala")
+    cilindro("pote_rotulo", 0.0425, 0.036, 0.05, (mx - 0.1, my - 0.12, mh + 0.06), material("rotulo_iogurte", (240, 120, 150), 0.5), "sala", tampa=False)
+    caixa("colher", mx - 0.02, mx + 0.11, my - 0.16, my - 0.15, mh + 0.006, mh + 0.012, inox, bevel=0.003)
+    cilindro("garrafa_termica", 0.055, 0.055, 0.28, (mx + 0.22, my + 0.12, mh + 0.146), material("garrafa", (220, 70, 60), 0.3, coat=0.5), "sala")
+    cilindro("garrafa_tampa", 0.03, 0.04, 0.05, (mx + 0.22, my + 0.12, mh + 0.31), material("preto_fosco", (40, 40, 40), 0.5), "sala")
+    cilindro("vasinho", 0.045, 0.035, 0.1, (mx - 0.02, my + 0.15, mh + 0.056), material("vaso_azul", (70, 110, 170), 0.3, coat=0.4), "sala")
+    for i, (dx, dz) in enumerate(((0, 0.17), (-0.04, 0.15), (0.04, 0.155))):
+        cilindro(f"flor_haste{i}", 0.004, 0.004, 0.12, (mx - 0.02 + dx * 0.5, my + 0.15, mh + 0.15), folha, "sala")
+        esfera(f"flor{i}", 0.026, (mx - 0.02 + dx, my + 0.15, mh + dz + 0.06), material(f"flor{i}", ((250, 200, 60), (240, 110, 130), (250, 250, 245))[i], 0.6), "sala")
+    # luminária pendente em cima da mesa
+    lx, ly = LUMINARIA
+    cilindro("fio", 0.006, 0.006, 0.7, (lx, ly, 2.6), material("fio", (40, 40, 40), 0.5), "sala")
     cupula = material("cupula", (70, 122, 112), 0.35)
-    cp = cilindro("cupula", 0.24, 0.07, 0.22, (0.05, 0.6, 2.15), cupula, "sala", tampa=False)
+    cp = cilindro("cupula", 0.24, 0.07, 0.22, (lx, ly, 2.15), cupula, "sala", tampa=False)
     cp.modifiers.new("s", "SOLIDIFY").thickness = 0.01
-    esfera("lampada", 0.05, (0.05, 0.6, 2.08), mat_emissao("lampada", (255, 236, 190), 25.0), "sala")
+    esfera("lampada", 0.05, (lx, ly, 2.08), mat_emissao("lampada", (255, 236, 190), 25.0), "sala")
+    # bancada: pia com escorredor, fogão com coifa, azulejos decorados atrás
+    BX1 = 5.18
+    caixa("balcao", BX0, BX1, 0.95, 1.6, 0.0, 0.88, arm, bevel=0.01)
+    caixa("rodape_balcao", BX0 + 0.02, BX1, 0.99, 1.6, 0.0, 0.08, material("rodape_escuro", (70, 52, 40), 0.6))
+    PX0, PX1 = 3.0, 3.6                                                       # cuba
+    for nome, x0, x1, y0, y1 in (("tampo", BX0 - 0.05, PX0, 0.9, 1.6), ("tampo2", PX1, BX1, 0.9, 1.6),
+                                 ("tampo_f", PX0, PX1, 0.9, 1.0), ("tampo_t", PX0, PX1, 1.48, 1.6)):
+        caixa(nome, x0, x1, y0, y1, 0.88, 0.94, tampo, bevel=0.006)
+    cuba = material("cuba", (170, 176, 184), 0.3, metal=1.0)
+    caixa("cuba_fundo", PX0, PX1, 1.0, 1.48, 0.74, 0.75, cuba)
+    for nome, x0, x1, y0, y1 in (("cuba_f", PX0, PX1, 1.0, 1.01), ("cuba_t", PX0, PX1, 1.47, 1.48), ("cuba_e", PX0, PX0 + 0.01, 1.0, 1.48), ("cuba_d", PX1 - 0.01, PX1, 1.0, 1.48)):
+        caixa(nome, x0, x1, y0, y1, 0.74, 0.94, cuba)
+    tm = (PX0 + PX1) / 2
+    cilindro("torneira", 0.016, 0.016, 0.28, (tm, 1.54, 1.08), inox, "sala")
+    cilindro("torneira_bico", 0.013, 0.013, 0.18, (tm, 1.46, 1.21), inox, "sala", rot=(math.radians(90), 0, 0))
+    cilindro("torneira_registro", 0.02, 0.02, 0.05, (tm + 0.07, 1.54, 0.97), inox, "sala")
+    caixa("escorredor", 3.68, 4.0, 1.12, 1.46, 0.94, 0.95, inox)
+    for k in range(5): caixa(f"escorredor_grade{k}", 3.68, 4.0, 1.12 + k * 0.08, 1.125 + k * 0.08, 0.95, 1.06, inox)
+    prato = material("prato", (248, 248, 244), 0.2, coat=0.6)
+    for k, x in enumerate((3.74, 3.8, 3.86)):
+        pr = cilindro(f"prato{k}", 0.11, 0.11, 0.012, (x, 1.29, 1.06), prato, "sala", rot=(0, math.radians(75), 0))
+    cilindro("copo_escorredor", 0.035, 0.03, 0.1, (3.95, 1.4, 1.0), material("copo", (180, 210, 230), 0.1, coat=0.8), "sala")
+    FX0, FX1 = 4.2, 4.8                                                       # fogão (cooktop + forno)
+    caixa("cooktop", FX0, FX1, 0.98, 1.55, 0.94, 0.95, preto)
+    for k, (bx, by, r) in enumerate(((FX0 + 0.15, 1.12, 0.07), (FX0 + 0.43, 1.12, 0.06), (FX0 + 0.15, 1.4, 0.06), (FX0 + 0.43, 1.4, 0.08))):
+        toro(f"boca{k}", r, 0.008, (bx, by, 0.955), material("boca", (70, 70, 74), 0.4), "sala")
+    caixa("forno", FX0, FX1, 0.93, 0.95, 0.12, 0.82, preto)
+    caixa("forno_vidro", FX0 + 0.06, FX1 - 0.06, 0.925, 0.93, 0.22, 0.6, material("vidro_forno", (20, 22, 26), 0.05, coat=1.0))
+    caixa("forno_puxador", FX0 + 0.08, FX1 - 0.08, 0.89, 0.91, 0.66, 0.68, inox, bevel=0.004)
+    for k in range(4): cilindro(f"botao_fogao{k}", 0.018, 0.018, 0.025, (FX0 + 0.12 + k * 0.12, 0.915, 0.76), inox, "sala", rot=(math.radians(90), 0, 0))
+    panela = material("panela", (200, 60, 50), 0.3, coat=0.5)
+    cilindro("panela", 0.1, 0.1, 0.12, (FX0 + 0.15, 1.12, 1.015), panela, "sala")
+    esfera("panela_tampa", 0.1, (FX0 + 0.15, 1.12, 1.075), panela, "sala", escala=(1, 1, 0.25))
+    cilindro("chaleira", 0.08, 0.06, 0.13, (FX0 + 0.43, 1.4, 1.02), inox, "sala")
+    caixa("coifa", FX0 - 0.05, FX1 + 0.05, 1.15, 1.6, 1.68, 1.82, inox, bevel=0.01)
+    caixa("coifa_chamine", FX0 + 0.15, FX1 - 0.15, 1.35, 1.6, 1.82, 2.95, inox)
+    caixa("azulejo_dec", BX0 - 0.05, BX1, 1.594, 1.6, 0.94, 1.55, material("azulejo_dec", (230, 236, 244), 0.25))
+    for i, x in enumerate([BX0 + 0.04 + 0.52 * k for k in range(3)]):     # portas de baixo (até a cuba)
+        caixa(f"porta{i}", x, x + 0.48, 0.92, 0.95, 0.1, 0.82, arm, bevel=0.012)
+        caixa(f"pux{i}", x + 0.19, x + 0.29, 0.9, 0.92, 0.72, 0.74, metal, bevel=0.004)
+    caixa("porta3", FX1 + 0.03, BX1 - 0.02, 0.92, 0.95, 0.1, 0.82, arm, bevel=0.012)
+    caixa("armario_alto", BX0, FX0 - 0.1, 1.25, 1.6, 1.62, 2.35, arm, bevel=0.01)
+    for i, x in enumerate([BX0 + 0.04 + 0.52 * k for k in range(3)]):
+        caixa(f"porta_a{i}", x, x + 0.48, 1.22, 1.25, 1.66, 2.31, arm, bevel=0.012)
+        caixa(f"pux_a{i}", x + (0.42 if i % 2 == 0 else 0.04), x + (0.44 if i % 2 == 0 else 0.06), 1.2, 1.22, 1.68, 1.8, metal, bevel=0.004)
+    # coisas em cima da bancada: cafeteira, caneca, potes, tábua
+    caixa("cafeteira", BX0 + 0.08, BX0 + 0.3, 1.3, 1.5, 0.94, 1.26, material("cafeteira", (40, 40, 44), 0.3), bevel=0.02)
+    cilindro("cafeteira_jarra", 0.06, 0.07, 0.12, (BX0 + 0.19, 1.25, 1.0), material("jarra", (120, 80, 50), 0.1, coat=1.0), "sala")
+    caneca = material("caneca", (222, 88, 70), 0.3, coat=0.5)
+    cilindro("caneca", 0.045, 0.045, 0.1, (BX0 + 0.42, 1.15, 0.99), caneca, "sala")
+    toro("caneca_alca", 0.03, 0.01, (BX0 + 0.475, 1.15, 0.995), caneca, "sala", rot=(math.radians(90), 0, 0))
+    for k, (c, h) in enumerate((((240, 236, 226), 0.2), ((236, 200, 120), 0.17), ((210, 230, 236), 0.14))):
+        cilindro(f"pote{k}", 0.06, 0.06, h, (BX0 + 0.12 + k * 0.14, 1.52, 0.94 + h / 2), material(f"pote{k}", c, 0.3, coat=0.4), "sala")
+        cilindro(f"pote_tampa{k}", 0.062, 0.062, 0.02, (BX0 + 0.12 + k * 0.14, 1.52, 0.95 + h), material("tampa_madeira", (150, 104, 70), 0.5), "sala")
+    caixa("tabua", 4.02, 4.17, 1.05, 1.42, 0.94, 0.96, material("tabua", (196, 150, 100), 0.6), bevel=0.004)
+    # parede da esquerda: quadro grande, telefone de parede e planta (aparece nos closes da Clara)
+    plano("quadro_esq", 0.9, 0.65, (-4.585, -0.1, 1.68), (math.radians(90), 0, math.radians(90)), material("pintura1", (200, 200, 200), 0.6))
+    caixa("quadro_esq_moldura", -4.6, -4.59, -0.6, 0.4, 1.31, 2.05, material("moldura_madeira", (90, 60, 40), 0.5))
+    caixa("telefone", -4.6, -4.52, 1.0, 1.14, 1.3, 1.52, material("telefone", (230, 220, 200), 0.35), bevel=0.015)
+    massa("telefone_fone", [capsula_el((-4.5, 1.03, 1.47), (-4.5, 1.03, 1.33), 0.022)], material("telefone", (230, 220, 200), 0.35), "sala")
+    cilindro("planta_vaso", 0.17, 0.13, 0.36, (-4.25, 0.95, 0.18), material("vaso_grande", (230, 226, 216), 0.5), "sala")
+    folha_g = material("folha_grande", (60, 128, 70), 0.55)
+    for k in range(9):
+        a = math.radians(k * 40); r = 0.28 + 0.06 * (k % 3); h = 0.55 + 0.12 * (k % 4)
+        esfera(f"planta_folha{k}", 0.14, (-4.25 + r * math.cos(a) * 0.7, 0.95 + r * math.sin(a) * 0.7, 0.36 + h), folha_g, "sala",
+               escala=(1.0, 0.1, 0.42)).rotation_euler = (math.radians(35), 0, a + math.radians(90))
+        cilindro(f"planta_caule{k}", 0.006, 0.006, h, (-4.25 + r * math.cos(a) * 0.3, 0.95 + r * math.sin(a) * 0.3, 0.36 + h / 2), folha_g, "sala",
+                 rot=(math.radians(14) * math.sin(a), math.radians(14) * math.cos(a), 0))
 
 # ------------------------------------------------------------------ adereços (geladeira)
 ETIQ = [(-2.92, 1.02, "CLARA"), (-2.86, 0.82, "CLARA"), (-2.93, 0.6, "CLARA"), (-2.75, 0.38, "beto")]
@@ -507,7 +650,8 @@ def mostrar(sala_on=True, sombra=False, pers=(), poses=None, props=(), mover=Non
         ob.hide_render = sombra and not apanha
     sc.render.film_transparent = sombra or not sala_on
 
-APANHA_SOMBRA = {"piso", "p_esq", "p_dir", "p_baixo", "p_cima", "azulejos", "rodape", "friso", "balcao", "tampo",
+APANHA_SOMBRA = {"piso", "p_esq", "p_dir", "p_dir2", "p_porta_cima", "p_baixo", "p_cima", "azulejos", "azulejos2", "rodape", "rodape2",
+                 "friso", "friso2", "balcao", "tampo", "tampo2", "aparador", "mesa_tampo", "toalha", "parede_e", "lambri_e",
                  "gel_corpo", "gel_freezer"}
 
 def mover_personagens(pos):
