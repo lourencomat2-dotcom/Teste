@@ -21,3 +21,8 @@ render/*/*_ombros.png
 render/*/*_cintura.png
 render/*/prop_*[!o].png
 render/log.txt
+# versão three.js
+tempo_real/node_modules/
+tempo_real/package-lock.json
+rt_*.png
+!tempo_real/dados/audio.wav

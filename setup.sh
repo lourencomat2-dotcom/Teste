@@ -7,7 +7,7 @@ SUDO=""; [ "$(id -u)" != "0" ] && SUDO="sudo"
 
 if command -v apt-get >/dev/null 2>&1; then
   $SUDO apt-get update
-  $SUDO apt-get install -y ffmpeg espeak-ng
+  $SUDO apt-get install -y ffmpeg espeak-ng python3-numpy   # numpy do sistema: o exportador glTF do Blender precisa
   $SUDO apt-get install -y --no-install-recommends blender || echo "Blender não instalado (só é preciso para re-renderizar o 3D)."
 fi
 
@@ -21,4 +21,11 @@ cd vozes
 [ -d sherpa-onnx-whisper-small ] || { curl -L -o w.tar.bz2 $REL/asr-models/sherpa-onnx-whisper-small.tar.bz2 && tar -xjf w.tar.bz2 && rm w.tar.bz2; }
 # classificador de sons, só para recalibrar a risada (opcional)
 [ -d sherpa-onnx-ced-small-audio-tagging-2024-04-19 ] || { curl -L -o c.tar.bz2 $REL/audio-tagging-models/sherpa-onnx-ced-small-audio-tagging-2024-04-19.tar.bz2 && tar -xjf c.tar.bz2 && rm c.tar.bz2; }
+cd ..
+# versão three.js (tempo real): precisa de Node.js 18+
+if command -v npm >/dev/null 2>&1; then
+  (cd tempo_real && npm install --no-audit --no-fund && { npx playwright install chromium || echo "Chromium do Playwright não instalado (só é preciso para capturar o vídeo)."; })
+else
+  echo "npm não encontrado: instale o Node.js para usar a versão three.js (tempo_real/)."
+fi
 echo "Pronto. Teste com: python3 motor/episodio3d.py preview 10"

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geladeira Dividida — tempo real</title>
+<style>
+  :root { --fundo: #111; --texto: #f4efe6; }
+  html, body { margin: 0; height: 100%; background: var(--fundo); color: var(--texto); font-family: system-ui, sans-serif; overflow: hidden; }
+  #palco { position: relative; width: 100vw; height: 56.25vw; max-height: 100vh; max-width: 177.78vh; margin: auto; top: 50%; transform: translateY(-50%); }
+  #palco canvas { width: 100% !important; height: 100% !important; display: block; }
+  #legenda { position: absolute; left: 50%; bottom: 4.6%; transform: translateX(-50%); width: auto; height: auto; pointer-events: none; }
+  #legenda img { display: block; }
+  #play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.35);
+          font-size: 22px; cursor: pointer; border: 0; color: var(--texto); width: 100%; }
+  body.captura #play { display: none; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./node_modules/three/build/three.module.js",
+               "three/addons/": "./node_modules/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div id="palco"><div id="legenda"></div><button id="play">▶ tocar a cena</button></div>
+<script type="module" src="./cena.js"></script>
+</body>
+</html>

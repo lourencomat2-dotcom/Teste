@@ -6,3 +6,4 @@ Sitcom curta feita por código: roteiro em texto → vozes neurais → animaçã
 - Edite as piadas em `roteiro.txt` (o formato está explicado no topo do arquivo).
 - `./setup.sh` instala tudo; `python3 motor/episodio3d.py` gera o vídeo em `saida/`.
 - Contexto completo, decisões e próximos passos: `CLAUDE.md`.
+- Versão em tempo real (three.js), por enquanto só a abertura: pasta `tempo_real/` (como rodar no `CLAUDE.md`).

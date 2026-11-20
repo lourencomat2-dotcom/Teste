@@ -30,7 +30,13 @@ Este arquivo resume a conversa em que o projeto nasceu, para continuar daqui.
    **sprites pré-renderizados** (técnica do Donkey Kong Country) por câmera e pose, sombras por
    shadow catcher, contorno toon (inverted hull), correção de cor AgX, filtro de ruído Intel OIDN.
    Rostos desenhados em 2D por cima da cabeça 3D (troca de textura, como em Animal Crossing).
-6. Caminho realista considerado (não feito): imagens no Seedream + lip-sync/OmniHuman 1.5 no
+6. **three.js em tempo real (teste, nov/2026)**: só a abertura fria (13 s) refeita com os mesmos modelos
+   (exportados do Blender em GLB), cores, rostos, vozes e legendas. Movimento de verdade: grua/câmera
+   passeando, Beto andando do balcão até o lugar (pernas, braços, passos no áudio), cabeças virando para
+   quem fala (molas), gestos articulados, câmera sobe para a lâmpada na piada. Esqueleto simples por
+   pivôs (quadril/pernas/tronco/braços/cabeça), sem rig de ossos. Sem GPU no ambiente: o vídeo é
+   capturado quadro a quadro no Chromium (SwiftShader, ~2–3 s/quadro); num PC comum roda ao vivo.
+7. Caminho realista considerado (não feito): imagens no Seedream + lip-sync/OmniHuman 1.5 no
    Runware (~US$ 0,13/s de fala → ~US$ 12–20 por episódio). Exige o Lucas rodar a geração.
 
 ## Estado atual
@@ -53,6 +59,22 @@ blender -b -noaudio -P motor/cena3d.py -- jobs render/jobs.json   # retomável
 python3 motor/lote_denoise.py
 ```
 
+- Versão three.js da abertura: `saida/abertura_threejs.mp4`; comparação `saida/abertura_comparacao.mp4`.
+
+## Versão three.js (tempo_real/)
+```bash
+blender -b -noaudio -P motor/exportar_glb.py   # modelos -> tempo_real/cena.glb (só se mudar cena3d.py)
+python3 motor/tempo_real.py 0                  # linha do tempo, rostos, legendas e áudio da cena 0 -> tempo_real/dados/
+node tempo_real/capturar.js                    # vídeo -> saida/abertura_threejs.mp4 (sem GPU ~15 min)
+python3 motor/comparar_cena.py 0               # versão Blender da mesma cena + vídeo comparativo
+# ao vivo: cd tempo_real && python3 -m http.server  -> http://localhost:8000
+```
+- `tempo_real/cena.js`: carrega o GLB, refaz texturas procedurais (piso, azulejo, parede, madeira) em
+  canvas, contorno toon (casca invertida), rosto = calota esférica com a textura do desenho 2D,
+  direção da cena (caminho do Beto, olhares, gestos) e câmeras por plano (`PLANOS`).
+- Hoje a direção (câmeras, caminhada) está escrita à mão em `cena.js` só para a cena 0; para o
+  episódio inteiro, o próximo passo é tirar isso do roteiro (ex.: `(plano)` virar câmera 3D).
+
 ## Arquitetura
 - `roteiro.txt`: formato próprio (explicado no topo do arquivo): falas com expressão, plano,
   reação, insertos com eventos (etiquetas, cadeado, quadro, sai_neide), risadas e blocos de cena.
@@ -74,9 +96,8 @@ python3 motor/lote_denoise.py
 - Sem GPU no ambiente original: render 3D lento (~50–100 s por sprite).
 
 ## Próximos passos discutidos
-1. Teste em **three.js** (tempo real, técnica de jogo) para ter movimento de verdade: câmera
-   passeando, cabeça virando, personagem andando — comparar com a versão Blender.
-   (Há skills prontas, ex. github.com/cloudai-x/threejs-skills; o Lucas viu um vídeo sobre isso.)
+1. ~~Teste em three.js~~ feito para a abertura (ver acima). Se aprovado: levar para o episódio todo
+   (câmeras/movimentos a partir do roteiro, entrada/saída da Neide andando, adereços da geladeira).
 2. Caprichar nos modelos 3D: cabelo com volume, mãos com dedos, roupas com detalhes.
 3. Vozes com emoção (serviço pago) quando o formato estiver validado.
 4. Episódio 2 reaproveitando cozinha e personagens (montagem leva minutos).
