@@ -350,7 +350,9 @@ const legDiv = document.getElementById('legenda'); const legImgs = {};
 for (const l of linha.legendas) { const im = new Image(); im.src = DADOS + 'legendas/' + l.img; legImgs[l.img] = im; }
 await Promise.all(Object.values(legImgs).map(im => im.decode()));
 let legAtual = null;
+const SEM_LEGENDA = new URLSearchParams(location.search).has('semlegenda');   // vídeo limpo (para pós-produção/IA)
 function legenda(t) {
+  if (SEM_LEGENDA) return;
   const l = linha.legendas.find(l => t >= l.t0 && t < l.t1); const nome = l ? l.img : null;
   if (nome === legAtual) return; legAtual = nome; legDiv.innerHTML = '';
   if (l) { const im = legImgs[nome]; im.style.width = (im.naturalWidth / W * 100) + '%'; legDiv.appendChild(im); }
