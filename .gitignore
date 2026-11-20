@@ -1,0 +1,23 @@
+# modelos baixados pelo setup.sh
+vozes/kokoro-multi-lang-v1_0/
+vozes/sherpa-onnx-whisper-small/
+vozes/sherpa-onnx-ced-small-audio-tagging-2024-04-19/
+vozes/banco_risadas.npz
+# saídas e temporários
+saida/
+planos/
+audio.wav
+video.mp4
+prev_*.png
+teste/
+__pycache__/
+*.tmp.png
+# renders brutos (só os *_limpo.png vão para o repositório)
+render/*/*.exr
+render/*/placa.png
+render/*/*_repouso.png
+render/*/*_aponta*.png
+render/*/*_ombros.png
+render/*/*_cintura.png
+render/*/prop_*[!o].png
+render/log.txt

@@ -1,0 +1,115 @@
+# ============================================================
+#  ROTEIRO — edite aqui e rode:  python3 episodio.py
+# ============================================================
+# Fala:   NOME [expressão] (plano) {reação de outro} <inserto>: texto
+#   Só NOME e texto são obrigatórios. Exemplo mínimo:  BETO: Oi.
+#
+# Personagens:  CLARA, BETO, NEIDE
+# Expressões:   neutro, feliz, brava, surpresa, seca, suspeita, inocente, nervoso
+# Planos:       geral, dois (Clara+Beto), close_clara, close_beto, close_neide, geladeira
+#               (sem plano = close de quem fala; dá para mostrar quem OUVE, para reação)
+# Reação:       {beto=surpresa, clara=feliz}  -> muda o rosto de quem está ouvindo
+# Inserto:      <geladeira 2.4 etiquetas; quadro LINHA 1|LINHA 2>
+#               depois da fala, mostra a geladeira por 2,4 s e dispara os eventos:
+#               etiquetas, cadeado, quadro TEXTO (| quebra a linha), sai_neide
+#               <geladeira 2.2> sem evento = só mostra a geladeira
+# Risada:       uma linha sozinha com (risadinha), (risada) ou (risada forte)
+#               -> a plateia ri depois da fala (ou depois do inserto, se tiver)
+#
+# Blocos:  == CENA nome | elenco: clara, beto | inicio: clara=brava | pre=1.2 | post=1.4
+#                       | entra: neide | bigode: beto, neide   (quem está com bigode de iogurte)
+#          == ABERTURA      == VINHETA texto      == CREDITOS
+# ============================================================
+
+TITULO: Geladeira Dividida
+EPISODIO: Episódio 1: O Iogurte
+CRIACAO: Lucas
+
+== CENA abertura_fria | elenco: clara, beto | inicio: clara=suspeita, beto=inocente | pre=1.0 | post=1.0
+CLARA [suspeita] (geral) {beto=inocente}: Beto, você comeu o meu iogurte?
+BETO [inocente]: Eu? Não.
+CLARA [seca] (close_clara): Tem iogurte no seu bigode.
+BETO [nervoso] (close_beto): É protetor solar.
+CLARA [seca] (close_clara): A gente está dentro de casa.
+BETO [nervoso] (close_beto): A lâmpada é muito forte.
+(risada)
+
+== ABERTURA
+
+== CENA etiquetas | elenco: clara, beto | inicio: clara=feliz, beto=inocente | pre=1.0 | post=0.8
+CLARA [feliz] (geral) {beto=suspeita} <geladeira 2.6 etiquetas>: Pronto. Agora tem o meu nome em tudo.
+BETO [surpresa] (dois): Até no gelo?
+CLARA [feliz] (dois): Até no gelo.
+(risadinha)
+BETO [suspeita] (close_beto): E em mim? Vai colocar etiqueta também?
+CLARA [seca] (close_clara): Em você eu vou colocar uma placa. Não alimente.
+(risada)
+
+== VINHETA Uma hora depois...
+
+== CENA sabor | elenco: clara, beto | inicio: clara=brava, beto=inocente | pre=1.0 | post=0.8
+CLARA [brava] (geral) {beto=inocente}: Beto! O meu iogurte sumiu de novo!
+BETO [inocente]: Mas eu li a etiqueta.
+CLARA [suspeita] (close_clara): E aí?
+BETO [inocente] (close_beto): Eu achei que Clara era o sabor.
+(risada forte)
+CLARA [seca] (close_clara): Clara não é sabor, Beto.
+BETO [feliz] (close_beto): Mas devia. É uma delícia.
+(risadinha)
+CLARA [suspeita] (dois): Tudo bem. Agora eu escondi o iogurte atrás do brócolis.
+BETO [seca] (dois): Ótimo. Eu não suporto brócolis.
+CLARA [feliz] (close_clara): Eu sei.
+
+== VINHETA Meia hora depois...
+
+== CENA brocolis | elenco: clara, beto | inicio: clara=surpresa, beto=feliz | pre=1.0 | post=0.8
+CLARA [surpresa] (geral) {beto=feliz}: Beto... cadê o brócolis?
+BETO [feliz]: Estava no caminho.
+(risada)
+CLARA [brava] (close_clara): Você comeu um brócolis inteiro pra pegar um iogurte?
+BETO [feliz] (close_beto): Eu sou determinado.
+(risada)
+CLARA [suspeita] (close_clara): Mas você não suporta brócolis!
+BETO [nervoso] (close_beto): Não suporto. Mas eu amo iogurte.
+CLARA [brava] (geral) <geladeira 3.2 cadeado; quadro LEMBRETE:|senha do cadeado:|meu aniversário>: Chega. Agora tem cadeado. E a senha, só eu sei.
+(risadinha)
+
+== VINHETA Cinco minutos depois...
+
+== CENA senha | elenco: clara, beto | inicio: clara=brava, beto=feliz | pre=1.0 | post=0.8
+CLARA [brava] (geral) {beto=feliz}: Como você abriu o cadeado?
+BETO [feliz]: A senha era o seu aniversário.
+CLARA [surpresa] (close_clara): Como você sabe o meu aniversário?
+BETO [inocente] (close_beto) <geladeira 2.2>: Você escreveu na geladeira.
+(risada)
+CLARA [nervoso] (close_clara): Mas eu escrevi pra mim!
+(risada)
+
+== CENA neide | elenco: clara, beto, neide | entra: neide | bigode: beto, neide | inicio: clara=brava, beto=inocente, neide=brava | pre=2.3 | post=1.6
+NEIDE [brava] (geral) {clara=surpresa, beto=surpresa}: Que gritaria é essa logo cedo?
+CLARA [nervoso]: Desculpa, Dona Neide. O Beto come tudo que é meu.
+NEIDE [seca] (close_neide): Que feio, Beto. Comer as coisas dos outros.
+BETO [suspeita] (close_beto): Dona Neide... o que é isso no seu bigode?
+NEIDE [nervoso] (close_neide): Protetor solar.
+(risada forte)
+CLARA [brava] (geral) {beto=inocente, neide=inocente}: Vocês dois comeram o meu iogurte?
+NEIDE [inocente]: Eu só comi um pouquinho.
+CLARA [seca] (close_clara): O pote está vazio.
+NEIDE [inocente] (close_neide): Era um pote pequeno.
+CLARA [brava] (close_clara): Era um pote de um quilo!
+NEIDE [inocente] (close_neide): Pequeno pra mim.
+(risada)
+BETO [feliz] (close_beto): E fui eu que ofereci. Eu sou generoso.
+CLARA [brava] (close_clara): Com as minhas coisas!
+(risadinha)
+CLARA [seca] (geral) {beto=feliz, neide=feliz}: Tá bom. Amanhã eu compro iogurte pra todo mundo.
+NEIDE [feliz] (close_neide): Ai, que amor de menina.
+BETO [feliz] (close_beto): Pode deixar que eu guardo na geladeira.
+(risada)
+CLARA [seca] (close_clara): Nem pensar. E eu vou trocar a senha do cadeado.
+NEIDE [suspeita] (close_neide): E qual vai ser a senha nova?
+CLARA [seca] (close_clara): Não vou contar pra ninguém.
+BETO [feliz] (close_beto): Relaxa, Dona Neide. Amanhã ela escreve na geladeira.
+(risada forte)
+
+== CREDITOS

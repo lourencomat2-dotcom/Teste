@@ -1,0 +1,3 @@
+Fontes usadas (todas sob a SIL Open Font License 1.1, livres para uso e redistribuição):
+Archivo Black, Poppins, Comic Relief. Textos da licença: OFL_ArchivoBlack.txt, OFL_ComicRelief.txt
+(a licença da Poppins é a mesma OFL 1.1).

@@ -1,0 +1,578 @@
+[
+ {
+  "tipo": "placa",
+  "setup": "geral2",
+  "saida": "geral2/placa.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "placa",
+  "setup": "geral3",
+  "saida": "geral3/placa.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "placa",
+  "setup": "dois",
+  "saida": "dois/placa.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "placa",
+  "setup": "close_clara",
+  "saida": "close_clara/placa.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "placa",
+  "setup": "close_beto",
+  "saida": "close_beto/placa.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "placa",
+  "setup": "close_neide",
+  "saida": "close_neide/placa.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "placa",
+  "setup": "geladeira",
+  "saida": "geladeira/placa.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral2",
+  "quem": "clara",
+  "pose": "repouso",
+  "saida": "geral2/clara_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral2",
+  "quem": "clara",
+  "pose": "aponta+1",
+  "saida": "geral2/clara_aponta+1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral2",
+  "quem": "clara",
+  "pose": "ombros",
+  "saida": "geral2/clara_ombros.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral2",
+  "quem": "clara",
+  "pose": "cintura",
+  "saida": "geral2/clara_cintura.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral2",
+  "quem": "beto",
+  "pose": "repouso",
+  "saida": "geral2/beto_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral2",
+  "quem": "beto",
+  "pose": "aponta-1",
+  "saida": "geral2/beto_aponta-1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral2",
+  "quem": "beto",
+  "pose": "aponta+1",
+  "saida": "geral2/beto_aponta+1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral2",
+  "quem": "beto",
+  "pose": "ombros",
+  "saida": "geral2/beto_ombros.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral2",
+  "quem": "beto",
+  "pose": "cintura",
+  "saida": "geral2/beto_cintura.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral2",
+  "quem": "neide",
+  "pose": "repouso",
+  "saida": "geral2/neide_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "clara",
+  "pose": "repouso",
+  "saida": "geral3/clara_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "clara",
+  "pose": "aponta+1",
+  "saida": "geral3/clara_aponta+1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "clara",
+  "pose": "ombros",
+  "saida": "geral3/clara_ombros.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "clara",
+  "pose": "cintura",
+  "saida": "geral3/clara_cintura.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "beto",
+  "pose": "repouso",
+  "saida": "geral3/beto_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "beto",
+  "pose": "aponta-1",
+  "saida": "geral3/beto_aponta-1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "beto",
+  "pose": "aponta+1",
+  "saida": "geral3/beto_aponta+1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "beto",
+  "pose": "ombros",
+  "saida": "geral3/beto_ombros.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "beto",
+  "pose": "cintura",
+  "saida": "geral3/beto_cintura.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "neide",
+  "pose": "repouso",
+  "saida": "geral3/neide_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "neide",
+  "pose": "aponta-1",
+  "saida": "geral3/neide_aponta-1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "neide",
+  "pose": "ombros",
+  "saida": "geral3/neide_ombros.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geral3",
+  "quem": "neide",
+  "pose": "cintura",
+  "saida": "geral3/neide_cintura.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "dois",
+  "quem": "clara",
+  "pose": "repouso",
+  "saida": "dois/clara_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "dois",
+  "quem": "clara",
+  "pose": "aponta+1",
+  "saida": "dois/clara_aponta+1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "dois",
+  "quem": "clara",
+  "pose": "ombros",
+  "saida": "dois/clara_ombros.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "dois",
+  "quem": "clara",
+  "pose": "cintura",
+  "saida": "dois/clara_cintura.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "dois",
+  "quem": "beto",
+  "pose": "repouso",
+  "saida": "dois/beto_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "dois",
+  "quem": "beto",
+  "pose": "aponta-1",
+  "saida": "dois/beto_aponta-1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "dois",
+  "quem": "beto",
+  "pose": "aponta+1",
+  "saida": "dois/beto_aponta+1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "dois",
+  "quem": "beto",
+  "pose": "ombros",
+  "saida": "dois/beto_ombros.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "dois",
+  "quem": "beto",
+  "pose": "cintura",
+  "saida": "dois/beto_cintura.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_clara",
+  "quem": "clara",
+  "pose": "repouso",
+  "saida": "close_clara/clara_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_clara",
+  "quem": "clara",
+  "pose": "aponta+1",
+  "saida": "close_clara/clara_aponta+1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_clara",
+  "quem": "clara",
+  "pose": "ombros",
+  "saida": "close_clara/clara_ombros.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_clara",
+  "quem": "clara",
+  "pose": "cintura",
+  "saida": "close_clara/clara_cintura.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_beto",
+  "quem": "beto",
+  "pose": "repouso",
+  "saida": "close_beto/beto_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_beto",
+  "quem": "beto",
+  "pose": "aponta-1",
+  "saida": "close_beto/beto_aponta-1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_beto",
+  "quem": "beto",
+  "pose": "aponta+1",
+  "saida": "close_beto/beto_aponta+1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_beto",
+  "quem": "beto",
+  "pose": "ombros",
+  "saida": "close_beto/beto_ombros.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_beto",
+  "quem": "beto",
+  "pose": "cintura",
+  "saida": "close_beto/beto_cintura.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_beto",
+  "quem": "neide",
+  "pose": "repouso",
+  "saida": "close_beto/neide_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_neide",
+  "quem": "beto",
+  "pose": "repouso",
+  "saida": "close_neide/beto_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_neide",
+  "quem": "neide",
+  "pose": "repouso",
+  "saida": "close_neide/neide_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_neide",
+  "quem": "neide",
+  "pose": "aponta-1",
+  "saida": "close_neide/neide_aponta-1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_neide",
+  "quem": "neide",
+  "pose": "ombros",
+  "saida": "close_neide/neide_ombros.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "close_neide",
+  "quem": "neide",
+  "pose": "cintura",
+  "saida": "close_neide/neide_cintura.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "geladeira",
+  "quem": "clara",
+  "pose": "repouso",
+  "saida": "geladeira/clara_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "abertura",
+  "quem": "clara",
+  "pose": "repouso",
+  "saida": "abertura/clara_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "abertura",
+  "quem": "beto",
+  "pose": "repouso",
+  "saida": "abertura/beto_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "sprite",
+  "setup": "abertura",
+  "quem": "neide",
+  "pose": "repouso",
+  "saida": "abertura/neide_repouso.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geral2",
+  "prop": "etiq0",
+  "saida": "geral2/prop_etiq0.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geral2",
+  "prop": "etiq1",
+  "saida": "geral2/prop_etiq1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geral2",
+  "prop": "etiq2",
+  "saida": "geral2/prop_etiq2.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geral2",
+  "prop": "etiq3",
+  "saida": "geral2/prop_etiq3.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geral2",
+  "prop": "cadeado",
+  "saida": "geral2/prop_cadeado.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geral2",
+  "prop": "quadro",
+  "saida": "geral2/prop_quadro.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geral3",
+  "prop": "etiq0",
+  "saida": "geral3/prop_etiq0.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geral3",
+  "prop": "etiq1",
+  "saida": "geral3/prop_etiq1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geral3",
+  "prop": "etiq2",
+  "saida": "geral3/prop_etiq2.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geral3",
+  "prop": "etiq3",
+  "saida": "geral3/prop_etiq3.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geral3",
+  "prop": "cadeado",
+  "saida": "geral3/prop_cadeado.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geral3",
+  "prop": "quadro",
+  "saida": "geral3/prop_quadro.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geladeira",
+  "prop": "etiq0",
+  "saida": "geladeira/prop_etiq0.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geladeira",
+  "prop": "etiq1",
+  "saida": "geladeira/prop_etiq1.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geladeira",
+  "prop": "etiq2",
+  "saida": "geladeira/prop_etiq2.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geladeira",
+  "prop": "etiq3",
+  "saida": "geladeira/prop_etiq3.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geladeira",
+  "prop": "cadeado",
+  "saida": "geladeira/prop_cadeado.png",
+  "amostras": 16
+ },
+ {
+  "tipo": "prop",
+  "setup": "geladeira",
+  "prop": "quadro",
+  "saida": "geladeira/prop_quadro.png",
+  "amostras": 16
+ }
+]

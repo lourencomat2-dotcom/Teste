@@ -1,0 +1,112 @@
+# ============================================================
+#  ROTEIRO — edite aqui e rode:  python3 episodio.py
+# ============================================================
+# Fala:   NOME [expressão] (plano) {reação de outro} <inserto>: texto
+#   Só NOME e texto são obrigatórios. Exemplo mínimo:  BETO: Oi.
+#
+# Personagens:  CLARA, BETO, NEIDE
+# Expressões:   neutro, feliz, brava, surpresa, seca, suspeita, inocente, nervoso
+# Planos:       geral, dois (Clara+Beto), close_clara, close_beto, close_neide, geladeira
+#               (sem plano = close de quem fala; dá para mostrar quem OUVE, para reação)
+# Reação:       {beto=surpresa, clara=feliz}  -> muda o rosto de quem está ouvindo
+# Inserto:      <geladeira 2.4 etiquetas; quadro LINHA 1|LINHA 2>
+#               depois da fala, mostra a geladeira por 2,4 s e dispara os eventos:
+#               etiquetas, cadeado, quadro TEXTO (| quebra a linha), sai_neide
+# Risada:       uma linha sozinha com (risadinha), (risada) ou (risada forte)
+#               -> plateia ri depois da fala anterior, e a cena espera a risada
+#
+# Blocos:  == CENA nome | elenco: clara, beto | inicio: clara=brava | pre=1.2 | post=1.4 | entra: neide
+#          == ABERTURA      == VINHETA texto      == CREDITOS
+# ============================================================
+
+TITULO: Geladeira Dividida
+EPISODIO: Episódio 1: Juros de Iogurte
+CRIACAO: Lucas
+
+== CENA abertura_fria | elenco: clara, beto | inicio: clara=suspeita, beto=inocente | pre=1.0 | post=1.0
+CLARA [suspeita] (geral) {beto=inocente}: Beto. Cadê o meu iogurte?
+BETO [inocente]: Eu não comi.
+CLARA [seca] (close_clara): Tem iogurte no seu bigode.
+BETO [nervoso] (close_beto): Eu não comi. Eu manifestei.
+(risadinha)
+CLARA [brava] (close_clara): Você manifestou o meu iogurte pra dentro da sua boca.
+BETO [feliz] (dois) {clara=seca}: O universo não reconhece propriedade privada, Clara.
+CLARA [seca] (close_clara): O universo não paga o meu mercado.
+(risada)
+
+== ABERTURA
+
+== CENA ato1 | elenco: clara, beto | inicio: clara=feliz, beto=inocente | pre=1.2 | post=1.2
+CLARA [feliz] (geral) {beto=suspeita}: Bom dia, cliente.
+BETO [suspeita]: Cliente?
+CLARA [feliz] <geladeira 2.8 etiquetas; quadro BANCO DA|GELADEIRA>: Bem-vindo ao Banco da Geladeira.
+BETO [surpresa] (dois): Você transformou a geladeira num banco?
+CLARA [seca] (dois): Eu trabalho com cobrança, Beto. Eu sei reconhecer um caloteiro de longe.
+BETO [nervoso]: Caloteiro, não. Eu sou investidor anjo.
+CLARA [seca]: Investidor de quê?
+BETO [inocente]: Do seu iogurte.
+(risada)
+CLARA [feliz] <geladeira 2.8 quadro BANCO DA|GELADEIRA|Beto deve:|1 iogurte + juros>: A partir de hoje, tudo que você pegar vira dívida. Com juros.
+BETO [surpresa]: Juros de quanto?
+CLARA [feliz]: Juros de cartão de crédito.
+BETO [nervoso]: Isso é crime, Clara!
+CLARA [seca] (close_clara): Não. Isso é o Brasil.
+(risada forte)
+BETO [suspeita] (dois): E se eu não pagar?
+CLARA [seca] <geladeira 2.0 cadeado>: Aí você conversa com o meu advogado.
+BETO [seca]: Clara. Isso é um cadeado.
+CLARA [feliz]: Doutor Cadeado. Especialista em cobrança.
+(risadinha)
+BETO [feliz]: Tudo bem. Eu pago em divulgação. Eu tenho muitos seguidores.
+CLARA [suspeita]: Quantos?
+BETO [nervoso]: Quarenta e dois.
+CLARA [seca]: Quarenta e dois mil?
+BETO [nervoso]: Quarenta e dois. Mas a minha mãe comenta em todos.
+(risada)
+CLARA [brava] (dois) {beto=suspeita}: E a senha do cadeado, só eu sei.
+BETO [feliz] (dois) {clara=surpresa}: É o dia do seu aniversário, né?
+CLARA [nervoso] (close_clara): Claro que não.
+(risada)
+
+== VINHETA Minutos depois...
+
+== CENA ato2 | elenco: clara, beto, neide | entra: neide | inicio: clara=neutro, beto=inocente, neide=brava | pre=2.3 | post=1.0
+NEIDE [brava] (geral) {clara=surpresa, beto=surpresa}: Bom dia. Quem é que está falando de juros às sete da manhã?
+CLARA [nervoso]: Desculpa, Dona Neide. Foi um assunto interno.
+NEIDE [suspeita]: Interno? Eu ouvi tudo lá de casa. Com o copo na parede.
+(risadinha)
+BETO [feliz]: Dona Neide, a senhora é a síndica. Pode cobrar juros de iogurte?
+NEIDE [seca]: Depende. O iogurte foi aprovado em assembleia?
+BETO [surpresa]: Tem assembleia de iogurte?
+NEIDE [seca]: Tem assembleia de tudo, meu filho. No mês passado foram três reuniões pra discutir o barulho.
+CLARA [surpresa]: E resolveram?
+NEIDE [brava] (close_neide): Não. As reuniões fizeram barulho demais.
+(risada)
+NEIDE [feliz] (geral): Vocês precisam de uma solução moderna.
+BETO [suspeita]: Tipo o quê?
+NEIDE [feliz]: Cada um compra o seu iogurte.
+BETO [surpresa] (close_beto): Gente. Que revolucionário.
+(risada)
+NEIDE [feliz] (geral) {clara=surpresa, beto=surpresa} <geral 2.2 sai_neide>: Ótimo. Ah, e obrigada pelo pudim. Estava uma delícia.
+CLARA [surpresa] (close_clara): Pudim? Que pudim?
+(risada)
+
+== VINHETA Logo depois...
+
+== CENA ato3 | elenco: clara, beto | inicio: clara=brava, beto=inocente | pre=1.2 | post=2.0
+CLARA [brava] (geral) {beto=suspeita}: O meu pudim estava trancado. Com o Doutor Cadeado.
+BETO [suspeita]: E você trocou a senha?
+CLARA [nervoso]: Ainda não.
+BETO [feliz]: Então a senha é o seu aniversário. Que a Dona Neide sabe, porque ela multou a sua festa.
+CLARA [surpresa] (close_clara): Ela usou a minha multa pra roubar o meu pudim?
+BETO [inocente] (close_beto): Ela é síndica, Clara. Ela tem acesso a dados.
+(risada)
+CLARA [brava] (dois) <geladeira 2.8 quadro BANCO DA|GELADEIRA|Beto: 1 iogurte|Neide: 1 pudim>: Pois agora ela também é cliente.
+CLARA [suspeita]: E você continua me devendo um iogurte. Com juros.
+BETO [inocente]: E quanto dá isso?
+CLARA [feliz] (close_clara): Até o Natal? Uma geladeira nova.
+(risada)
+BETO [feliz] (geral) {clara=seca}: Perfeito. Aí cada um fica com a sua.
+(risada forte)
+
+== CREDITOS
