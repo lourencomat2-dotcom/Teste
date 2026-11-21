@@ -3,7 +3,7 @@ Characters: Clara, a Brazilian woman around 28, fair skin, brown hair in a ponyt
 Audio: re-perform exactly this dialogue in Brazilian Portuguese with natural, funny sitcom acting, lip-synced, at the same moments as in @Video1, and nothing else:
 0.9 to 3.0 s, Clara, suspicious: "Beto, você comeu o meu iogurte?"
 3.3 to 4.0 s, Beto, playing innocent: "Eu? Não."
-4.3 to 6.0 s, Clara, dry: "Tem iogurte no seu bigode."
+4.3 to 6.0 s, Clara, dry: "Tem iogurte no seu bigóde."
 6.3 to 7.6 s, Beto, nervous: "É protetor solar."
 7.9 to 9.5 s, Clara, dry: "A gente está dentro de casa."
 9.8 to 11.3 s, Beto, nervous, glancing up at the lamp: "A lâmpada é muito forte."

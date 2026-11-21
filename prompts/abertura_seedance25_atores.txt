@@ -4,7 +4,7 @@ Make the kitchen a real built TV studio set with the same layout, colors and pro
 Audio: @Video1 has no sound; create new voices. Brazilian Portuguese, natural, expressive, funny sitcom acting, perfectly lip-synced, at these moments:
 0.9 to 3.0 s, Clara (young woman's voice, suspicious): "Beto, você comeu o meu iogurte?"
 3.3 to 4.0 s, Beto (young man's deep voice, playing innocent): "Eu? Não."
-4.3 to 6.0 s, Clara (dry, unimpressed): "Tem iogurte no seu bigode."
+4.3 to 6.0 s, Clara (dry, unimpressed): "Tem iogurte no seu bigóde."
 6.3 to 7.6 s, Beto (nervous): "É protetor solar."
 7.9 to 9.5 s, Clara (dry): "A gente está dentro de casa."
 9.8 to 11.3 s, Beto (nervous, glancing up at the lamp): "A lâmpada é muito forte."

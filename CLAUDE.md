@@ -74,6 +74,12 @@ Este arquivo resume a conversa em que o projeto nasceu, para continuar daqui.
 10. Caminho realista considerado (não feito): imagens no Seedream + lip-sync/OmniHuman 1.5 no
    Runware (~US$ 0,13/s de fala → ~US$ 12–20 por episódio). Exige o Lucas rodar a geração.
 
+## Vozes geradas pelo Seedance (falas no prompt)
+- Escrever as falas já no formato da pronúncia, com a tônica marcada quando a IA erra
+  (ex.: "bigóde" — no teste 3 saiu sem a tônica no "gó"). Manter a lista aqui:
+  bigode → "bigóde".
+- Mandar o vídeo esqueleto SEM áudio (senão ele imita as vozes da Kokoro).
+
 ## Estado atual
 - Roteiro atual: `roteiro.txt` (Ep. 1 "O Iogurte", versão de piadas simples, ~2min45s).
 - Saídas: `saida/Geladeira_Dividida_3D.mp4` (3D) e `saida/Geladeira_Dividida_2D.mp4` (2D).
