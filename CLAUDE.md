@@ -159,8 +159,16 @@ PARAMS='&humanos' node tempo_real/capturar.cjs saida/abertura_realista.mp4
 - Decisões do Lucas: caminho principal **Unreal Engine 5** (MetaHumans), **GPU alugada** para produção
   (testes curtos aqui), **sem Seedance por enquanto**, corrigir "a cabeça deforma".
 - Design: `docs/plans/2026-11-21-rumo-gta6-design.md`. Execução: `docs/plans/2026-11-21-fase0-fase1.md`.
-- Causa da cabeça deformada: o idle `113_21` tem o pescoço da pessoa capturada inclinado 23–26°, e a malha
-  do MakeHuman estica. Diagnóstico: `?semolhar` desliga o olhar somado ao mocap.
+- Causa da cabeça deformada: no idle `113_21` a pessoa capturada tomba a cabeça até 59° (pescoço 23–26°, e o
+  osso da cabeça gira mais), e na caminhada `16_34` o pescoço entorta 28° para trás; a malha do MakeHuman estica.
+- **Corrigido (tarefa A3):** no mocap, pescoço e cabeça não copiam mais a CMU (`mocap.js`, `olhar()`): a cabeça
+  fica nivelada no mundo e recebe só o olhar da cena (35% no pescoço, 65% na cabeça). `?cabecacmu` volta ao
+  jeito antigo (diagnóstico); `?semolhar` desliga o olhar.
+- Idle: `113_21` segue o melhor dos 11 candidatos medidos (`node tempo_real/escolher_idle.mjs <pasta>`; tronco
+  até 8° para o lado e 3° para a frente, mãos caídas). Trechos que emendam: Beto 0,5–10,7 s, Clara 2,4–10,53 s,
+  com 0,8 s de mistura na emenda (antes a Clara dava um pulo aos 5,7 s: coxa 34°, quadril 15 cm).
+- Testes sem gráficos (Node): `bash tempo_real/testes/rodar.sh` (cabeça, pescoço, olhar, emenda do idle).
+  Rodar antes de cada commit que mexa em animação.
 
 ## Próximos passos discutidos
 1. ~~Teste em three.js~~ feito para a abertura (ver acima). Se aprovado: levar para o episódio todo

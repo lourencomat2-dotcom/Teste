@@ -58,7 +58,9 @@ function alinharOsso(dT, dS) {                 // rotação que leva a base do M
 export async function carregar(url) { return new BVHLoader().loadAsync(url); }
 
 // retarget de um trecho [t0, t1] (segundos da CMU) para o personagem h; alinha a direção para +z
-export function retargetar(h, bvh, { trecho, alinhar = 'deslocamento', fps = 30 }) {
+// cabeca: 'olhar' (padrão da cena) tira do clipe o pescoço e a cabeça, que passam a vir de olhar();
+//         'cmu' copia a pessoa capturada (só para diagnóstico: ?cabecacmu)
+export function retargetar(h, bvh, { trecho, alinhar = 'deslocamento', fps = 30, cabeca = 'olhar' }) {
   const { skeleton, clip } = bvh;
   const raiz = skeleton.bones[0];
   const grupo = raiz.parent?.isGroup ? raiz.parent : new THREE.Group(); if (!raiz.parent) grupo.add(raiz);
@@ -114,6 +116,7 @@ export function retargetar(h, bvh, { trecho, alinhar = 'deslocamento', fps = 30 
   // a translação do quadril sai do clipe e vira dado (root motion)
   const iPos = novo.tracks.findIndex(t => t.name === '.bones[root].position');
   const raizTrilha = novo.tracks.splice(iPos, 1)[0];
+  if (cabeca === 'olhar') novo.tracks = novo.tracks.filter(tr => !Object.keys(PESCOCO).some(n => tr.name === `.bones[${n}].quaternion`));
   return { clip: novo, raiz: raizTrilha, dur: novo.duration, escala, rumo };
 }
 function amostrar(trilha, tempo) {
@@ -123,19 +126,26 @@ function amostrar(trilha, tempo) {
 // ------------------------------------------------------------------ montagem na cena
 // beto: caminhada (16_34 "slow walk, stop": entra andando e para) + idle (113_21 "Standing Still"); clara: idle.
 // (a 133_11 "Walk Stop Walk" foi descartada: a pessoa capturada anda curvada, 25–38° para a frente)
+// Idle: 113_21 continua o melhor dos 11 candidatos medidos por escolher_idle.mjs (tronco reto: até 8° para o
+// lado e 3° para a frente; mãos caídas). O problema dele era só a cabeça, que agora vem de olhar().
+// Trechos escolhidos para o fim emendar no começo (pior osso 7° e quadril 4 cm na emenda, que ainda é
+// misturada em EMENDA segundos).
+export const IDLE = { beto: [0.5, 10.7], clara: [2.4, 10.53] };
+const EMENDA = 0.8;
 // ler: como abrir um BVH (no navegador, fetch; nos testes em Node, leitura do arquivo)
-export async function preparar(HUM, { pasta = './mocap/', ler = carregar } = {}) {
+export async function preparar(HUM, { pasta = './mocap/', ler = carregar, cabeca = 'olhar' } = {}) {
   const andar = await ler(pasta + '16_34.bvh');
   const parado = await ler(pasta + '113_21.bvh');
   const M = {};
   for (const quem of Object.keys(HUM)) {
-    const h = HUM[quem], e = (M[quem] = { h });
+    const h = HUM[quem], e = (M[quem] = { h, cabeca });
     e.mixer = new THREE.AnimationMixer(h.malhas[0]);
-    const idle = retargetar(h, parado, { trecho: quem === 'beto' ? [1.0, 11.0] : [3.0, 11.0], alinhar: 'frente' });
-    e.idle = { ...idle, acao: e.mixer.clipAction(idle.clip) };
-    e.idle.acao.play(); e.idle.r0 = amostrar(idle.raiz, 0);
+    const idle = retargetar(h, parado, { trecho: IDLE[quem], alinhar: 'frente', cabeca });
+    // duas ações do mesmo idle: a segunda toca o fim do trecho enquanto a primeira recomeça (emenda sem pulo)
+    e.idle = { ...idle, acao: e.mixer.clipAction(idle.clip), acao2: e.mixer.clipAction(idle.clip.clone()) };
+    e.idle.acao.play(); e.idle.acao2.play(); e.idle.r0 = amostrar(idle.raiz, 0);
     if (quem === 'beto') {
-      const w = retargetar(h, andar, { trecho: [0.02, 2.88], alinhar: 'deslocamento' });   // quadro 0 é a T-pose
+      const w = retargetar(h, andar, { trecho: [0.02, 2.88], alinhar: 'deslocamento', cabeca });   // quadro 0 é a T-pose
       e.andar = { ...w, acao: e.mixer.clipAction(w.clip) };
       e.andar.acao.setLoop(THREE.LoopOnce); e.andar.acao.clampWhenFinished = true; e.andar.acao.play();
       e.andar.r0 = amostrar(w.raiz, 0); e.andar.rFim = amostrar(w.raiz, w.dur);
@@ -147,10 +157,13 @@ export async function preparar(HUM, { pasta = './mocap/', ler = carregar } = {})
 
 // pose do corpo no instante t (segundos da cena). tAndar: quando o clipe de caminhada começa.
 export function pose(M, quem, t, { tAndar = 0, transicao = 0.5 } = {}) {
-  const e = M[quem], h = e.h, o = h.osso;
-  e.idle.acao.time = (t + (quem === 'clara' ? 2.3 : 0)) % e.idle.dur;
+  const e = M[quem], h = e.h, o = h.osso, I = e.idle;
+  // o idle repete a cada (duração - EMENDA): no começo de cada volta, o fim da volta anterior some aos poucos
+  const per = I.dur - EMENDA, ti = t + (quem === 'clara' ? 2.3 : 0), tau = ((ti % per) + per) % per;
+  const w2 = tau < EMENDA ? 1 - suave(tau / EMENDA) : 0;
+  I.acao.time = tau; I.acao2.time = tau + per;
   let pAndar = 0, raiz;
-  const ri = amostrar(e.idle.raiz, e.idle.acao.time).sub(e.idle.r0);       // balanço do idle (pequeno)
+  const ri = amostrar(I.raiz, tau).lerp(amostrar(I.raiz, tau + per), w2).sub(I.r0);   // balanço do idle (pequeno)
   if (e.andar) {
     const tau = t - tAndar; e.andar.acao.time = clamp(tau, 0, e.andar.dur);
     pAndar = 1 - suave((tau - (e.andar.dur - transicao)) / transicao);
@@ -158,10 +171,32 @@ export function pose(M, quem, t, { tAndar = 0, transicao = 0.5 } = {}) {
     if (tau < e.andar.dur) raiz = ra.clone().lerp(new THREE.Vector3(e.andar.rFim.x + ri.x, e.idle.r0.y + ri.y, e.andar.rFim.z + ri.z), 1 - pAndar);
     else raiz = new THREE.Vector3(e.andar.rFim.x + ri.x, e.idle.r0.y + ri.y, e.andar.rFim.z + ri.z);
   } else raiz = new THREE.Vector3(ri.x, e.idle.r0.y + ri.y, ri.z);
-  e.idle.acao.setEffectiveWeight(1 - pAndar); e.andar?.acao.setEffectiveWeight(pAndar);
+  I.acao.setEffectiveWeight((1 - pAndar) * (1 - w2)); I.acao2.setEffectiveWeight((1 - pAndar) * w2);
+  e.andar?.acao.setEffectiveWeight(pAndar);
   e.mixer.update(0);
   o.root.position.copy(raiz);
   return { andando: pAndar > 0.5, pAndar };
+}
+
+// Pescoço e cabeça não copiam a CMU: no idle 113_21 a pessoa tomba a cabeça até 59° e, na caminhada, o
+// pescoço entorta 28° para trás (o que esticava a malha do MakeHuman: "a cabeça deforma"). Aqui a cabeça
+// fica nivelada no mundo, como a de gente de verdade enquanto o tronco balança, e recebe só o olhar da cena:
+// [rx, ry, rz] em YXZ, relativo à frente do personagem (+z de h.raiz), o mesmo das outras versões.
+// A rotação entre o tronco (spine01) e a cabeça é dividida: 35% nos três ossos do pescoço, 65% na cabeça.
+export const PESCOCO = { neck01: 0.12, neck02: 0.12, neck03: 0.11, head: 0.65 };
+const _qa = new THREE.Quaternion(), _qb = new THREE.Quaternion(), _eu = new THREE.Euler();
+export function olhar(M, quem, [rx, ry, rz] = [0, 0, 0]) {
+  const h = M[quem].h, o = h.osso;
+  if (M[quem].cabeca === 'cmu') {                     // diagnóstico (?cabecacmu): CMU + olhar somado, como antes
+    o.neck02.quaternion.multiply(_qa.setFromEuler(_eu.set(rx * 0.35, ry * 0.35, rz * 0.35, 'YXZ')));
+    o.head.quaternion.multiply(_qa.setFromEuler(_eu.set(rx * 0.65, ry * 0.65, rz * 0.65, 'YXZ')));
+    return;
+  }
+  h.raiz.updateMatrixWorld(true);
+  const alvo = h.raiz.getWorldQuaternion(_qa).multiply(_qb.setFromEuler(_eu.set(rx, ry, rz, 'YXZ')));
+  const rel = o.neck01.parent.getWorldQuaternion(_qb).invert().multiply(alvo);     // do tronco até a cabeça
+  for (const [n, f] of Object.entries(PESCOCO)) o[n].quaternion.identity().slerp(rel, f);
+  h.raiz.updateMatrixWorld(true);
 }
 
 // trava os pés: quando o pé está perto do chão e quase parado no mocap, ele fica preso onde pousou

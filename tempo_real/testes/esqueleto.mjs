@@ -32,10 +32,10 @@ export const dir = (h, a, b) => pos(h, b).sub(pos(h, a)).normalize();
 export const eixo = (h, n, v) => new THREE.Vector3(...v).applyQuaternion(h.osso[n].getWorldQuaternion(new THREE.Quaternion())).normalize();
 export const graus = r => r * 180 / Math.PI;
 
-// mini executor de testes: teste('nome', () => { ... throw se falhar })
+// mini executor de testes: teste('nome', () => { ... throw se falhar; pode devolver um texto com o valor medido })
 const resultados = [];
 export function teste(nome, fn) {
-  try { fn(); resultados.push([nome, true]); console.log('  ok   ', nome); }
+  try { const det = fn(); resultados.push([nome, true]); console.log('  ok   ', nome, typeof det === 'string' ? `(${det})` : ''); }
   catch (e) { resultados.push([nome, false]); console.log('  FALHA', nome, '\n        ', e.message); }
 }
 export function afirmar(cond, msg) { if (!cond) throw new Error(msg); }
