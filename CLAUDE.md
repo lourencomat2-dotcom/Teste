@@ -83,7 +83,7 @@ Este arquivo resume a conversa em que o projeto nasceu, para continuar daqui.
   (a "pose zero" da CMU não é ereta) e alinhando o osso inteiro (direção + frente), senão o cotovelo dobra
   no plano errado. Translação do quadril vira root motion (encaixa a caminhada para terminar na marca).
   O IK de `locomocao.js` só trava os pés apoiados; no fim, dois passinhos para virar para a Clara.
-- Teste: `QUADROS=0-105 PARAMS='&humanos&mocap&semlegenda' node tempo_real/capturar.js saida/entrada_mocap.mp4`
+- Teste: `QUADROS=0-105 PARAMS='&humanos&mocap&semlegenda' node tempo_real/capturar.cjs saida/entrada_mocap.mp4`
   (QUADROS=a-b grava só um trecho). Pendente: gestos de fala por cima do mocap ainda duros.
 
 ## Vozes geradas pelo Seedance (falas no prompt)
@@ -120,12 +120,12 @@ python3 motor/lote_denoise.py
 ```bash
 blender -b -noaudio -P motor/exportar_glb.py   # modelos -> tempo_real/cena.glb (só se mudar cena3d.py)
 python3 motor/tempo_real.py 0                  # linha do tempo, rostos, legendas e áudio da cena 0 -> tempo_real/dados/
-node tempo_real/capturar.js                    # vídeo -> saida/abertura_threejs.mp4 (sem GPU ~15 min)
+node tempo_real/capturar.cjs                    # vídeo -> saida/abertura_threejs.mp4 (sem GPU ~15 min)
 python3 motor/comparar_cena.py 0               # versão Blender da mesma cena + vídeo comparativo
 # ao vivo: cd tempo_real && python3 -m http.server  -> http://localhost:8000
 # personagens realistas: python3 motor/humanos.py -> tempo_real/humanos/ ; página com ?humanos
 # inspecionar o cenário: ?cam=x,y,z,alvo_x,alvo_y,alvo_z,mm (coordenadas do Blender)
-PARAMS='&humanos' node tempo_real/capturar.js saida/abertura_realista.mp4
+PARAMS='&humanos' node tempo_real/capturar.cjs saida/abertura_realista.mp4
 ```
 - `motor/humanos.py`: monta cada personagem (ELENCO: idade, gênero, peso, etnia, pele, cabelo, roupas
   com tingimento) e exporta malhas + ossos + morphs; `tempo_real/humano.js` carrega no three.js.
