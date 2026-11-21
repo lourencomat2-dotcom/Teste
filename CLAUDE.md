@@ -124,6 +124,16 @@ python3 motor/lote_denoise.py
 - Ainda em aberto: personagens estilizados (padrão) ou realistas (`?humanos`) como versão oficial.
 
 ## Versão three.js (tempo_real/)
+**O que é de cada versão** (mudança numa não pode vazar para as outras sem pedido; conferir com a regressão):
+| Versão | URL | É dela | Estado |
+|---|---|---|---|
+| estilizada | (padrão) | marionete de massinha, rostos 2D, curva de caminhada "acelera e freia" de 20/11 | congelada (sem melhorias) |
+| realista | `?humanos` | MakeHuman, pés plantados (`locomocao.js`, velocidade em trapézio), braços por rotação | congelada |
+| mocap | `?humanos&mocap` | CMU (`mocap.js`), cabeça pelo olhar, gestos no mundo (`gestos.js`) | **a que evolui** (base do animatic) |
+- Comum às três (mexer = mexer em todas): cenário (`cenario.js`), câmeras (`PLANOS`), olhar (`alvoOlhar`), linha do tempo.
+- Regressão: `bash tempo_real/testes/regressao.sh` gera os quadros 60/150/200/320 das três versões e compara com
+  `tempo_real/testes/referencia/` (média > 2% ou área > 1% = mudou; prancha em `saida/regressao/`). Rodar antes de
+  cada commit que mexa em `tempo_real/`; `... regressao.sh aprovar` atualiza a referência depois do OK do Lucas.
 ```bash
 blender -b -noaudio -P motor/exportar_glb.py   # modelos -> tempo_real/cena.glb (só se mudar cena3d.py)
 python3 motor/tempo_real.py 0                  # linha do tempo, rostos, legendas e áudio da cena 0 -> tempo_real/dados/

@@ -330,8 +330,12 @@ const PERF = LOC.perfil(DIST, CAMINHO.t1 - CAMINHO.t0);
 const PASSOS = LOC.planejar({ D: DIST, T: CAMINHO.t1 - CAMINHO.t0, yawAnda: Math.atan2(P1[0] - P0[0], P0[1] - P1[1]),
                               yawFim: VIRADA.beto, perf: PERF });
 function posicaoBeto(t) {
-  const { t0, t1 } = CAMINHO; const k = PERF.s(t - t0) / DIST;
-  return { x: lerp(P0[0], P1[0], k), y: lerp(P0[1], P1[1], k), andando: t > t0 && t < t1, u: k };
+  const { t0, t1 } = CAMINHO;
+  // versões realistas: velocidade em trapézio (casa com as pegadas planejadas). Versão estilizada: a curva
+  // aprovada em 20/11 (acelera e freia), que é dela; a troca de 21/11 tinha vazado para ela sem pedido.
+  const u = clamp((t - t0) / (t1 - t0), 0, 1);
+  const k = HUMANOS ? PERF.s(t - t0) / DIST : u - Math.sin(2 * Math.PI * u) / (2 * Math.PI);
+  return { x: lerp(P0[0], P1[0], k), y: lerp(P0[1], P1[1], k), andando: t > t0 && t < t1, u: HUMANOS ? k : u };
 }
 const cabecaMundo = quem => HUMANOS ? HUM[quem].osso.head.localToWorld(new THREE.Vector3(0, 0.07, 0.06))
                                     : RIG[quem].cabeca.localToWorld(new THREE.Vector3(0, 0.22, 0));
