@@ -74,6 +74,18 @@ Este arquivo resume a conversa em que o projeto nasceu, para continuar daqui.
 10. Caminho realista considerado (não feito): imagens no Seedream + lip-sync/OmniHuman 1.5 no
    Runware (~US$ 0,13/s de fala → ~US$ 12–20 por episódio). Exige o Lucas rodar a geração.
 
+## Mocap real (versão ?humanos&mocap, nov/2026)
+- Dados: base da CMU em BVH (conversão 2010 de Bruce Hahne; "free for use in research and commercial
+  projects") vinda de raw.githubusercontent.com/una-dinosauria/cmu-mocap (único caminho liberado na rede).
+  Em `tempo_real/mocap/`: `16_34` ("slow walk, stop": entra andando e para em ~2 m) e `113_21` ("Standing
+  Still", idle). Descartada: `133_11` (a pessoa anda curvada 25–38°). Mixamo: exige login da Adobe.
+- `tempo_real/mocap.js`: `SkeletonUtils.retargetClip` com ajustes por osso calculados na T-pose do quadro 0
+  (a "pose zero" da CMU não é ereta) e alinhando o osso inteiro (direção + frente), senão o cotovelo dobra
+  no plano errado. Translação do quadril vira root motion (encaixa a caminhada para terminar na marca).
+  O IK de `locomocao.js` só trava os pés apoiados; no fim, dois passinhos para virar para a Clara.
+- Teste: `QUADROS=0-105 PARAMS='&humanos&mocap&semlegenda' node tempo_real/capturar.js saida/entrada_mocap.mp4`
+  (QUADROS=a-b grava só um trecho). Pendente: gestos de fala por cima do mocap ainda duros.
+
 ## Vozes geradas pelo Seedance (falas no prompt)
 - Escrever as falas já no formato da pronúncia, com a tônica marcada quando a IA erra
   (ex.: "bigóde" — no teste 3 saiu sem a tônica no "gó"). Manter a lista aqui:

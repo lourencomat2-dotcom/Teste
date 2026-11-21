@@ -76,7 +76,7 @@ function rotacaoNoMundo(osso, qMundo) {
   osso.quaternion.copy(_qp.invert().multiply(qMundo));
 }
 const ALTURA_TORNOZELO = 0.074;
-export function perna(h, lado, chao, yawPe, incl, frente) {
+export function perna(h, lado, chao, yawPe, incl, frente, qPeMundo = null) {
   const o = h.osso, coxa = o['upperleg01.' + lado], canela = o['lowerleg01.' + lado], pe = o['foot.' + lado];
   coxa.quaternion.identity(); canela.quaternion.identity(); pe.quaternion.identity();
   h.raiz.updateMatrixWorld(true);
@@ -95,7 +95,7 @@ export function perna(h, lado, chao, yawPe, incl, frente) {
   const K1 = canela.getWorldPosition(_v[4]).clone(), A1 = pe.getWorldPosition(_v[5]).clone();
   girarNoMundo(canela, A1.sub(K1).normalize(), alvo.clone().sub(K1).normalize());
   h.raiz.updateMatrixWorld(true);
-  const qPe = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), yawPe)
+  const qPe = qPeMundo || new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), yawPe)
     .multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), incl));
   rotacaoNoMundo(pe, qPe);
 }

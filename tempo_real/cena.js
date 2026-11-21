@@ -171,6 +171,10 @@ if (HUMANOS) {
     h.morph = {};
   }
 }
+// versão com mocap real (CMU), com ?humanos&mocap: caminhada e idle capturados; o IK só trava os pés
+const MOCAP = HUMANOS && new URLSearchParams(location.search).has('mocap');
+let MOC = null, MOCS = null;
+if (MOCAP) { MOC = await import('./mocap.js'); MOCS = await MOC.preparar(HUM); }
 // rosto 3D: expressões do roteiro -> unidades de expressão do MakeHuman
 const EXPR = {
   neutro: {},
@@ -199,6 +203,7 @@ function chaoDoPe(quem, lado, t) {
   return { c, yaw, incl: 0, e: { apoio: true } };
 }
 function aplicarHumano(quem, R, info, t, dt, fase, rotCabeca, olharResto) {
+  if (MOCAP) return aplicarMocap(quem, R, info, t, dt, rotCabeca, olharResto);
   const h = HUM[quem], o = h.osso, passo = R.passo || 0;
   const pL = chaoDoPe(quem, 'L', t), pR = chaoDoPe(quem, 'R', t);
   // quadril: desce com os dois pés no chão, sobe no meio do passo, balança para o lado do pé de apoio
@@ -248,6 +253,75 @@ function aplicarHumano(quem, R, info, t, dt, fase, rotCabeca, olharResto) {
   }
 }
 
+// ------------------------------------------------------------------ modo mocap
+const T_ANDAR = 0;                                        // a caminhada capturada começa junto com a cena
+function caminhoMocap() {                                 // começo/fim no mundo para terminar na marca do Beto
+  if (caminhoMocap.c) return caminhoMocap.c;
+  const w = MOCS.beto.andar, fim = B(CAMINHO.ate[0], CAMINHO.ate[1], 0), ini0 = B(CAMINHO.de[0], CAMINHO.de[1], 0);
+  const yaw = Math.atan2(fim.x - ini0.x, fim.z - ini0.z);
+  const d = new THREE.Vector3(w.rFim.x - w.r0.x, 0, w.rFim.z - w.r0.z).applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw);
+  return (caminhoMocap.c = { yaw, fim, inicio: fim.clone().sub(d), dur: w.dur });
+}
+function aplicarMocap(quem, R, info, t, dt, rotCabeca, olharResto) {
+  const h = HUM[quem], o = h.osso;
+  MOC.pose(MOCS, quem, t, { tAndar: T_ANDAR });
+  if (quem === 'beto' && t - T_ANDAR >= MOCS.beto.andar.dur) {              // depois de chegar: âncora na marca
+    o.root.position.x -= MOCS.beto.andar.rFim.x; o.root.position.z -= MOCS.beto.andar.rFim.z;
+  }
+  // gestos de fala por cima do mocap (mesma lógica da marionete), na medida do gesto
+  const g = info.pose ? info.g : 0;
+  if (g > 0.01) {
+    for (const lado of ['L', 'R']) o['clavicle.' + lado].quaternion.slerp(new THREE.Quaternion(), g);   // ombro neutro p/ o gesto
+    const cot = { aponta: -0.15, ombros: 0.75, cintura: 1.4 }[info.pose] ?? 0;
+    for (const [s, lado] of [[1, 'L'], [-1, 'R']]) {
+      const br = R.bracos[s];
+      const qB = new THREE.Quaternion().setFromEuler(new THREE.Euler(br.rotation.x * 0.85, 0, -s * h.bracoRepouso + (br.rotation.z - s * 0.04) * 0.6));
+      o['upperarm01.' + lado].quaternion.slerp(qB, g);
+      const qA = new THREE.Quaternion().setFromAxisAngle(EIXO_X, -(0.2 + cot)).multiply(h.qCotovelo[lado]);
+      o['lowerarm01.' + lado].quaternion.slerp(qA, g);
+    }
+  }
+  for (const [s, lado] of [[1, 'L'], [-1, 'R']]) for (let dd = 2; dd <= 5; dd++) for (let k = 1; k <= 3; k++) {
+    const f = o[`finger${dd}-${k}.${lado}`]; if (f) f.rotation.z = -s * (k === 1 ? 0.18 : 0.32);
+  }
+  // olhar por cima do mocap
+  const [rx, ry, rz] = rotCabeca;
+  o.neck02.quaternion.multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(rx * 0.35, ry * 0.35, rz * 0.35, 'YXZ')));
+  o.head.quaternion.multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(rx * 0.65, ry * 0.65, rz * 0.65, 'YXZ')));
+  for (const s of ['L', 'R']) o['eye.' + s]?.rotation.set(-clamp(olharResto[1], -0.3, 0.3), clamp(olharResto[0], -0.45, 0.45), 0);
+  rostoHumano(h, info, dt);
+  // pés: trava no chão; no fim o Beto dá dois passinhos para virar para a Clara
+  const frente = new THREE.Vector3(Math.sin(R.raiz.rotation.y), 0, Math.cos(R.raiz.rotation.y));
+  let troca = null;
+  if (quem === 'beto') {
+    const cm = caminhoMocap(), tA = T_ANDAR + cm.dur + 0.15;
+    if (t >= tA) {
+      const est = (aplicarMocap.passos ??= {});
+      troca = {};
+      [['L', tA, 1], ['R', tA + 0.24, -1]].forEach(([lado, t0, s]) => {
+        if (t < t0) return;
+        est[lado] ??= (MOCS.beto.pes[lado].trava || o['foot.' + lado].getWorldPosition(new THREE.Vector3()).setY(0)).clone();
+        const novo = cm.fim.clone().add(new THREE.Vector3(s * 0.11, 0, 0).applyAxisAngle(new THREE.Vector3(0, 1, 0), VIRADA.beto));
+        const u = clamp((t - t0) / 0.32, 0, 1), e = u * u * (3 - 2 * u);
+        troca[lado] = est[lado].clone().lerp(novo, e); troca[lado + 'Alto'] = 0.04 * Math.sin(Math.PI * u);
+      });
+    }
+  }
+  h.raiz.updateMatrixWorld(true);
+  MOC.travarPes(MOCS, quem, dt, LOC, frente, troca);
+}
+function rostoHumano(h, info, dt) {
+  const alvo = { ...EXPR[info.ex] };
+  const vol = clamp(info.vol / 0.8, 0, 1);
+  for (const [k, v] of Object.entries(BOCA[info.forma] || {})) alvo[k] = Math.max(alvo[k] || 0, v * (0.6 + 0.4 * vol));
+  if (info.pisca) alvo['eye-left-closure'] = alvo['eye-right-closure'] = 1;
+  for (const k of new Set([...Object.keys(alvo), ...Object.keys(h.morph)])) {
+    const v0 = h.morph[k] || 0, v1 = alvo[k] || 0;
+    const vel = /closure/.test(k) ? 0.8 : /mouth-open|pursing|retraction/.test(k) ? 0.7 : 0.18;
+    h.morph[k] = v0 + (v1 - v0) * clamp(vel * dt * 30, 0, 1); h.expressao(k, h.morph[k]);
+  }
+}
+
 // ------------------------------------------------------------------ direção da cena
 // Beto vem do balcão até o lugar dele enquanto a Clara pergunta (passos a cada 0,32 s, como no Blender)
 const CAMINHO = linha.caminhada || { t0: 0.0, t1: 2.5, de: [2.85, 0.3], ate: [0.75, 0.0] };
@@ -270,7 +344,10 @@ function alvoOlhar(quem, t, q) {
     const leg = linha.legendas.find(l => t >= l.fala0 - 0.2 && t < l.fala1 + 0.6);
     if (leg && /lâmpada/i.test(leg.texto) && t > leg.fala0 + 0.55) return B(0.62, -0.35, 2.9);          // olha para cima, para a lâmpada
     if (ex === 'nervoso' && Math.sin(t * 2.3) > 0.55) return B(1.6, -2.5, HUMANOS ? 1.35 : 1.0);         // desvia o olhar
-    if (posicaoBeto(t).andando) { const p = posicaoBeto(t + 0.4); return B(p.x - 0.9, -0.6, HUMANOS ? 1.55 : 1.15); }
+    if (MOCAP && t - T_ANDAR < caminhoMocap().dur - 0.6) {
+      const cm = caminhoMocap(); return cabecaMundo('beto').add(new THREE.Vector3(Math.sin(cm.yaw), -0.15, Math.cos(cm.yaw)).multiplyScalar(3));
+    }
+    if (!MOCAP && posicaoBeto(t).andando) { const p = posicaoBeto(t + 0.4); return B(p.x - 0.9, -0.6, HUMANOS ? 1.55 : 1.15); }
   }
   return cabecaMundo(outro);
 }
@@ -288,7 +365,11 @@ function animar(t, dt) {
     R.gota.visible = info.ex === 'nervoso';
     // posição e direção do corpo
     let andando = false, fase = 0, yawCorpo = VIRADA[quem];
-    if (quem === 'beto') {
+    if (MOCAP && quem === 'beto') {
+      const cm = caminhoMocap(), fim = t - T_ANDAR >= cm.dur;
+      R.raiz.position.copy(fim ? cm.fim : cm.inicio);
+      if (!fim) { R.giro.v = cm.yaw; R.giro.a = 0; yawCorpo = cm.yaw; }
+    } else if (quem === 'beto') {
       const p = posicaoBeto(t); andando = p.andando;
       R.raiz.position.copy(B(p.x, p.y, 0));
       const viz = posicaoBeto(t + 0.05); const dx = viz.x - p.x, dy = viz.y - p.y;

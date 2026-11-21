@@ -20,6 +20,8 @@ const srv = http.createServer((q, r) => {
   await pg.waitForFunction('window.pronto === true', null, { timeout: 90000 });
   const { DUR, FPS } = await pg.evaluate(() => ({ DUR: window.DUR, FPS: window.FPS }));
   const n = Math.floor(DUR * FPS);
+  // QUADROS=a-b grava só esse trecho (ex.: QUADROS=0-120 para os 4 primeiros segundos)
+  const [qa, qb] = (process.env.QUADROS || `0-${n - 1}`).split('-').map(Number);
   const t0 = Date.now();
   if (so.length) {
     for (let f = 0; f <= Math.max(...so); f++) {
@@ -30,9 +32,10 @@ const srv = http.createServer((q, r) => {
   } else {
     fs.mkdirSync(path.dirname(saida), { recursive: true });
     const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-',
-      '-i', path.join(DIR, 'dados', 'audio.wav'), '-map', '0:v', '-map', '1:a', '-c:v', 'libx264', '-preset', 'medium', '-crf', '18',
+      '-ss', String(qa / FPS), '-i', path.join(DIR, 'dados', 'audio.wav'), '-map', '0:v', '-map', '1:a', '-c:v', 'libx264', '-preset', 'medium', '-crf', '18',
       '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', saida], { stdio: ['pipe', 'inherit', 'inherit'] });
-    for (let f = 0; f < n; f++) {
+    for (let f = 0; f < qa; f++) await pg.evaluate(f => window.simular(f), f);
+    for (let f = qa; f <= Math.min(qb, n - 1); f++) {
       await pg.evaluate(f => window.renderizar(f), f);
       const img = await pg.screenshot({ type: 'jpeg', quality: 95 });
       if (!ff.stdin.write(img)) await new Promise(ok => ff.stdin.once('drain', ok));
