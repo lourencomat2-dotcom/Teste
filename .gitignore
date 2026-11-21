@@ -27,3 +27,4 @@ tempo_real/package-lock.json
 rt_*.png
 !tempo_real/dados/audio.wav
 vendor/
+!tempo_real/testes/referencia/*/rt_*.png
