@@ -9,6 +9,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import * as CEN from './cenario.js';
+import * as LOC from './locomocao.js';
 
 const CAPTURA = new URLSearchParams(location.search).has('captura');
 if (CAPTURA) document.body.classList.add('captura');
@@ -160,6 +161,13 @@ if (HUMANOS) {
     // pose A do MakeHuman -> braços caídos (ângulo medido no próprio esqueleto)
     const a = h.osso['upperarm01.L'].getWorldPosition(new THREE.Vector3()), b = h.osso['lowerarm01.L'].getWorldPosition(new THREE.Vector3());
     h.bracoRepouso = Math.atan2(Math.abs(b.x - a.x), a.y - b.y) - 0.1;
+    // o MakeHuman vem com o antebraço dobrado para a frente: endireita (fica ~15% da dobra, natural)
+    h.qCotovelo = {};
+    for (const lado of ['L', 'R']) {
+      const p = n => h.osso[n + '.' + lado].getWorldPosition(new THREE.Vector3());
+      const dBraco = p('lowerarm01').sub(p('upperarm01')).normalize(), dAnte = p('wrist').sub(p('lowerarm01')).normalize();
+      h.qCotovelo[lado] = new THREE.Quaternion().setFromUnitVectors(dAnte, dBraco.clone().lerp(dAnte, 0.15).normalize());
+    }
     h.morph = {};
   }
 }
@@ -174,27 +182,53 @@ const EXPR = {
   brava: { 'eyebrows-left-down': 0.85, 'eyebrows-right-down': 0.85, 'mouth-depression': 0.45, 'mouth-compression': 0.3 },
   surpresa: { 'eyebrows-left-up': 0.95, 'eyebrows-right-up': 0.95, 'mouth-open': 0.25 },
 };
+const EIXO_X = new THREE.Vector3(1, 0, 0);
 const BOCA = { fechada: {}, pequena: { 'mouth-open': 0.22 }, aberta: { 'mouth-open': 0.55 },
                larga: { 'mouth-open': 0.3, 'mouth-retraction': 0.35 }, redonda: { 'mouth-open': 0.3, 'mouth-pursing': 0.55 } };
+// pés plantados: onde está cada pé no chão (mundo) e para onde aponta
+function chaoDoPe(quem, lado, t) {
+  if (quem === 'beto') {
+    const e = LOC.pe(PASSOS, lado, t - CAMINHO.t0, PERF);
+    const k = e.d / DIST, c = B(lerp(P0[0], P1[0], k), lerp(P0[1], P1[1], k), 0);
+    const lat = (lado === 'L' ? 1 : -1) * 0.105;                 // lado esquerdo do corpo = +x local
+    c.x += Math.cos(e.yaw) * lat; c.z -= Math.sin(e.yaw) * lat; c.y += e.alto;
+    return { c, yaw: e.yaw, incl: e.incl, e };
+  }
+  const R = RIG[quem], yaw = R.raiz.rotation.y, c = R.raiz.position.clone(), lat = (lado === 'L' ? 1 : -1) * 0.12;
+  c.x += Math.cos(yaw) * lat; c.z -= Math.sin(yaw) * lat;
+  return { c, yaw, incl: 0, e: { apoio: true } };
+}
 function aplicarHumano(quem, R, info, t, dt, fase, rotCabeca, olharResto) {
   const h = HUM[quem], o = h.osso, passo = R.passo || 0;
-  o.root.position.y = o.root.userData.p0.y + (R.corpo.position.y - R.corpo.userData.y0);
-  // pernas (.L = lado +x = lado 1 da marionete); joelho dobra na fase de balanço
-  o['upperleg01.L'].rotation.x = R.pernas[1].rotation.x; o['upperleg01.R'].rotation.x = R.pernas[-1].rotation.x;
-  o['lowerleg01.L'].rotation.x = 0.85 * Math.max(0, Math.cos(fase)) * passo;
-  o['lowerleg01.R'].rotation.x = 0.85 * Math.max(0, -Math.cos(fase)) * passo;
-  for (const s of ['L', 'R']) o['foot.' + s].rotation.x = -0.5 * (o['upperleg01.' + s].rotation.x + o['lowerleg01.' + s].rotation.x);
-  o.spine03.rotation.set(R.tronco.rotation.x * 0.6, 0, R.tronco.rotation.z);
+  const pL = chaoDoPe(quem, 'L', t), pR = chaoDoPe(quem, 'R', t);
+  // quadril: desce com os dois pés no chão, sobe no meio do passo, balança para o lado do pé de apoio
+  let bob = 0, ginga = 0;
+  const noAr = !pL.e.apoio ? pL.e : (!pR.e.apoio ? pR.e : null);
+  if (noAr) { bob = 0.016 * Math.sin(Math.PI * noAr.u) - 0.012; ginga = (!pL.e.apoio ? -1 : 1) * 0.02 * Math.sin(Math.PI * noAr.u); }
+  else if (quem === 'beto' && t > CAMINHO.t0 && t < CAMINHO.t1) bob = -0.012;
+  const resp = Math.sin(t * 2.2 + quem.length) * 0.003;                  // respiração / peso
+  o.root.position.set(o.root.userData.p0.x + ginga, o.root.userData.p0.y + bob + resp, o.root.userData.p0.z);
+  const frente = new THREE.Vector3(Math.sin(R.raiz.rotation.y), 0, Math.cos(R.raiz.rotation.y));
+  // passada: braços em oposição às pernas, tronco torce um pouco ao contrário do quadril
+  const dif = clamp(pL.c.clone().sub(pR.c).dot(frente) / 0.6, -1, 1) * passo;
+  o.root.rotation.y = 0.08 * dif; o.spine02.rotation.y = -0.12 * dif;
+  o.spine03.rotation.set(0.05 * passo, 0, -ginga * 1.5);
+  h.balanco = { L: 0.32 * dif, R: -0.32 * dif };
+  h.raiz.updateMatrixWorld(true);
+  LOC.perna(h, 'L', pL.c, pL.yaw, pL.incl, frente); LOC.perna(h, 'R', pR.c, pR.yaw, pR.incl, frente);
   // braços: repouso + gestos da marionete; cotovelo conforme o gesto
   const cot = { aponta: -0.15, ombros: 0.75, cintura: 1.4 }[info.pose] ?? 0;
   for (const [s, lado] of [[1, 'L'], [-1, 'R']]) {
     const br = R.bracos[s];
-    o['upperarm01.' + lado].rotation.set(br.rotation.x * 0.85, 0, -s * h.bracoRepouso + (br.rotation.z - s * 0.04) * 0.6);
+    const andar = R.passo || 0;
+    o['upperarm01.' + lado].rotation.set(br.rotation.x * 0.85 * (1 - andar) + (h.balanco?.[lado] || 0), 0,
+                                         -s * h.bracoRepouso + (br.rotation.z - s * 0.04) * 0.6);
     for (let dd = 2; dd <= 5; dd++) for (let k = 1; k <= 3; k++) {          // dedos relaxados (o MakeHuman vem de mão aberta)
       const f = o[`finger${dd}-${k}.${lado}`]; if (f) f.rotation.z = -s * (k === 1 ? 0.18 : 0.32);
     }
     const st = (h.cot ??= {})[lado] ??= { v: 0, a: 0 };
-    o['lowerarm01.' + lado].rotation.x = -mola(st, 0.25 + cot * info.g, dt, 80, 14);
+    const dobra = mola(st, 0.2 + 0.12 * Math.abs(h.balanco?.[lado] || 0) / 0.32 + cot * info.g, dt, 80, 14);
+    o['lowerarm01.' + lado].quaternion.setFromAxisAngle(EIXO_X, -dobra).multiply(h.qCotovelo[lado]);
   }
   o['clavicle.L'].rotation.z = o['clavicle.R'].rotation.z = 0;
   if (info.pose === 'ombros') { o['clavicle.L'].rotation.z = 0.12 * info.g; o['clavicle.R'].rotation.z = -0.12 * info.g; }
@@ -218,10 +252,14 @@ function aplicarHumano(quem, R, info, t, dt, fase, rotCabeca, olharResto) {
 // Beto vem do balcão até o lugar dele enquanto a Clara pergunta (passos a cada 0,32 s, como no Blender)
 const CAMINHO = linha.caminhada || { t0: 0.0, t1: 2.5, de: [2.85, 0.3], ate: [0.75, 0.0] };
 const VIRADA = { clara: 0.42, beto: -0.42 };          // "cheat" de sitcom: meio de frente para a câmera, meio para o outro
+// caminhada com velocidade de gente (~1,1 m/s): acelera, anda e freia; pegadas planejadas (locomocao.js)
+const P0 = CAMINHO.de, P1 = CAMINHO.ate, DIST = Math.hypot(P1[0] - P0[0], P1[1] - P0[1]);
+const PERF = LOC.perfil(DIST, CAMINHO.t1 - CAMINHO.t0);
+const PASSOS = LOC.planejar({ D: DIST, T: CAMINHO.t1 - CAMINHO.t0, yawAnda: Math.atan2(P1[0] - P0[0], P0[1] - P1[1]),
+                              yawFim: VIRADA.beto, perf: PERF });
 function posicaoBeto(t) {
-  const { t0, t1, de, ate } = CAMINHO; const u = clamp((t - t0) / (t1 - t0), 0, 1);
-  const k = u - Math.sin(2 * Math.PI * u) / (2 * Math.PI);    // acelera e freia
-  return { x: lerp(de[0], ate[0], k), y: lerp(de[1], ate[1], k), andando: t > t0 && t < t1, u };
+  const { t0, t1 } = CAMINHO; const k = PERF.s(t - t0) / DIST;
+  return { x: lerp(P0[0], P1[0], k), y: lerp(P0[1], P1[1], k), andando: t > t0 && t < t1, u: k };
 }
 const cabecaMundo = quem => HUMANOS ? HUM[quem].osso.head.localToWorld(new THREE.Vector3(0, 0.07, 0.06))
                                     : RIG[quem].cabeca.localToWorld(new THREE.Vector3(0, 0.22, 0));
@@ -231,8 +269,8 @@ function alvoOlhar(quem, t, q) {
   if (quem === 'beto') {
     const leg = linha.legendas.find(l => t >= l.fala0 - 0.2 && t < l.fala1 + 0.6);
     if (leg && /lâmpada/i.test(leg.texto) && t > leg.fala0 + 0.55) return B(0.62, -0.35, 2.9);          // olha para cima, para a lâmpada
-    if (ex === 'nervoso' && Math.sin(t * 2.3) > 0.55) return B(1.6, -2.5, 1.0);                         // desvia o olhar
-    if (posicaoBeto(t).andando) { const p = posicaoBeto(t + 0.4); return B(p.x - 0.9, -0.6, 1.15); }
+    if (ex === 'nervoso' && Math.sin(t * 2.3) > 0.55) return B(1.6, -2.5, HUMANOS ? 1.35 : 1.0);         // desvia o olhar
+    if (posicaoBeto(t).andando) { const p = posicaoBeto(t + 0.4); return B(p.x - 0.9, -0.6, HUMANOS ? 1.55 : 1.15); }
   }
   return cabecaMundo(outro);
 }
