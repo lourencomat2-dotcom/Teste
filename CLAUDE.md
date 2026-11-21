@@ -132,7 +132,7 @@ python3 motor/lote_denoise.py
 | mocap | `?humanos&mocap` | CMU (`mocap.js`), cabeça pelo olhar, gestos no mundo (`gestos.js`) | **a que evolui** (base do animatic) |
 - Comum às três (mexer = mexer em todas): cenário (`cenario.js`), câmeras (`PLANOS`), olhar (`alvoOlhar`), linha do tempo.
 - Regressão: `bash tempo_real/testes/regressao.sh` gera os quadros 60/150/200/320 das três versões e compara com
-  `tempo_real/testes/referencia/` (média > 2% ou área > 1% = mudou; prancha em `saida/regressao/`). Rodar antes de
+  `tempo_real/testes/referencia/` (média > 2% ou área > 0,5% = mudou; prancha em `saida/regressao/`). Rodar antes de
   cada commit que mexa em `tempo_real/`; `... regressao.sh aprovar` atualiza a referência depois do OK do Lucas.
 ```bash
 blender -b -noaudio -P motor/exportar_glb.py   # modelos -> tempo_real/cena.glb (só se mudar cena3d.py)
