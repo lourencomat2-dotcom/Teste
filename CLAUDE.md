@@ -155,6 +155,13 @@ PARAMS='&humanos' node tempo_real/capturar.js saida/abertura_realista.mp4
 - Vozes claras mas sem emoção; com visual mais realista isso fica mais evidente.
 - Sem GPU no ambiente original: render 3D lento (~50–100 s por sprite).
 
+## Plano atual (21/11/2026, método Superpowers)
+- Decisões do Lucas: caminho principal **Unreal Engine 5** (MetaHumans), **GPU alugada** para produção
+  (testes curtos aqui), **sem Seedance por enquanto**, corrigir "a cabeça deforma".
+- Design: `docs/plans/2026-11-21-rumo-gta6-design.md`. Execução: `docs/plans/2026-11-21-fase0-fase1.md`.
+- Causa da cabeça deformada: o idle `113_21` tem o pescoço da pessoa capturada inclinado 23–26°, e a malha
+  do MakeHuman estica. Diagnóstico: `?semolhar` desliga o olhar somado ao mocap.
+
 ## Próximos passos discutidos
 1. ~~Teste em three.js~~ feito para a abertura (ver acima). Se aprovado: levar para o episódio todo
    (câmeras/movimentos a partir do roteiro, entrada/saída da Neide andando, adereços da geladeira).

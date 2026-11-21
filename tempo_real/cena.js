@@ -173,6 +173,7 @@ if (HUMANOS) {
 }
 // versão com mocap real (CMU), com ?humanos&mocap: caminhada e idle capturados; o IK só trava os pés
 const MOCAP = HUMANOS && new URLSearchParams(location.search).has('mocap');
+const SEM_OLHAR = new URLSearchParams(location.search).has('semolhar');
 let MOC = null, MOCS = null;
 if (MOCAP) { MOC = await import('./mocap.js'); MOCS = await MOC.preparar(HUM); }
 // rosto 3D: expressões do roteiro -> unidades de expressão do MakeHuman
@@ -284,8 +285,8 @@ function aplicarMocap(quem, R, info, t, dt, rotCabeca, olharResto) {
   for (const [s, lado] of [[1, 'L'], [-1, 'R']]) for (let dd = 2; dd <= 5; dd++) for (let k = 1; k <= 3; k++) {
     const f = o[`finger${dd}-${k}.${lado}`]; if (f) f.rotation.z = -s * (k === 1 ? 0.18 : 0.32);
   }
-  // olhar por cima do mocap
-  const [rx, ry, rz] = rotCabeca;
+  // olhar por cima do mocap (?semolhar desliga, para diagnóstico)
+  const [rx, ry, rz] = SEM_OLHAR ? [0, 0, 0] : rotCabeca;
   o.neck02.quaternion.multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(rx * 0.35, ry * 0.35, rz * 0.35, 'YXZ')));
   o.head.quaternion.multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(rx * 0.65, ry * 0.65, rz * 0.65, 'YXZ')));
   for (const s of ['L', 'R']) o['eye.' + s]?.rotation.set(-clamp(olharResto[1], -0.3, 0.3), clamp(olharResto[0], -0.45, 0.45), 0);
