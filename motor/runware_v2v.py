@@ -3,7 +3,7 @@ mantendo cortes, câmera e movimentos. GASTA CRÉDITO do Runware: confira o cust
 
   python3 motor/runware_v2v.py entrada.mp4 saida.mp4 [--modelo bytedance:seedance@2.0-fast] [--res 1280x720]
                                [--prompt arquivo.txt]   (sem --prompt usa PROMPT abaixo)
-  Seedance 2.5 (edição de verdade): --modelo bytedance:seedance@2.5 --res 480p --auto
+  Seedance 2.5 (edição de verdade): --modelo bytedance:seedance@2.5 --res 480p --auto [--ref foto.png ...]
 
 Chave: variável RUNWARE_API_KEY (no ambiente do Claude o proxy já autentica).
 Formato do pedido conferido no SDK oficial (pacote PyPI "runware"): o vídeo vai em inputs.video,
@@ -43,7 +43,7 @@ def main():
     res = args[args.index("--res") + 1] if "--res" in args else "1280x720"   # "1280x720" ou "480p"/"720p"/"1080p"
     tam = {"width": int(res.split("x")[0]), "height": int(res.split("x")[1])} if "x" in res else {"resolution": res}
     prompt = open(args[args.index("--prompt") + 1]).read().strip() if "--prompt" in args else PROMPT
-    opcoes = {modelo, res} | ({args[args.index("--prompt") + 1]} if "--prompt" in args else set())
+    opcoes = {args[i + 1] for i, a in enumerate(args) if a == "--ref"} | {modelo, res} | ({args[args.index("--prompt") + 1]} if "--prompt" in args else set())
     entrada, saida = [a for a in args if not a.startswith("--") and a not in opcoes][:2]
     dur = max(4, min(30, round(float(os.popen(f'ffprobe -v error -show_entries format=duration -of csv=p=0 "{entrada}"').read()))))
     if "--auto" in args: dur = "auto"          # edição no Seedance 2.5: duração e proporção seguem o vídeo de entrada
@@ -51,10 +51,18 @@ def main():
     up = chamar([{"taskType": "mediaStorage", "taskUUID": str(uuid.uuid4()), "operation": "upload",
                   "media": base64.b64encode(open(entrada, "rb").read()).decode()}])[0]
     print("mediaUUID", up["mediaUUID"], flush=True)
+    refs = []                                       # --ref foto.png (rosto/figurino): viram @Image1, @Image2...
+    for i, a in enumerate(args):
+        if a == "--ref":
+            refs.append(chamar([{"taskType": "mediaStorage", "taskUUID": str(uuid.uuid4()), "operation": "upload",
+                                 "media": base64.b64encode(open(args[i + 1], "rb").read()).decode()}])[0]["mediaUUID"])
+            print("referência", args[i + 1], refs[-1], flush=True)
+    entradas = {"video": up["mediaUUID"]}
+    if refs: entradas["referenceImages"] = refs
     tid = str(uuid.uuid4())
     chamar([{"taskType": "videoInference", "taskUUID": tid, "model": modelo, "positivePrompt": prompt,
              **tam, "duration": dur, "deliveryMethod": "async", "includeCost": True,
-             "outputFormat": "MP4", "inputs": {"video": up["mediaUUID"]}}])
+             "outputFormat": "MP4", "inputs": entradas}])
     print(f"tarefa {tid} enviada ({modelo}, {res}, {dur}s); aguardando...", flush=True)
     t0 = time.time()
     while True:

@@ -1,0 +1,12 @@
+Edit @Video1 into real live-action TV footage. Keep exactly the same shots, hard cuts, camera movements, framing, set layout, actor positions, walking, gestures, head turns and timing as @Video1.
+Replace the 3D characters with real actors: Clara is the real woman in @Image1 (same face, brown ponytail, green button-up blouse, jeans); Beto is the real man in @Image2 (same face, short black hair, plain orange t-shirt, jeans) with the white yogurt mustache on his upper lip in every shot. Real skin, real hair, real fabric.
+Make the kitchen a real built TV studio set with the same layout, colors and props: real painted walls, real wooden cabinets and chairs, real ceramic tiles, real fridge, real checkered tablecloth, and a real city view through the window. Bright, soft multi-camera sitcom lighting. No 3D or video-game look.
+Audio: @Video1 has no sound; create new voices. Brazilian Portuguese, natural, expressive, funny sitcom acting, perfectly lip-synced, at these moments:
+0.9 to 3.0 s, Clara (young woman's voice, suspicious): "Beto, você comeu o meu iogurte?"
+3.3 to 4.0 s, Beto (young man's deep voice, playing innocent): "Eu? Não."
+4.3 to 6.0 s, Clara (dry, unimpressed): "Tem iogurte no seu bigode."
+6.3 to 7.6 s, Beto (nervous): "É protetor solar."
+7.9 to 9.5 s, Clara (dry): "A gente está dentro de casa."
+9.8 to 11.3 s, Beto (nervous, glancing up at the lamp): "A lâmpada é muito forte."
+11.4 s to the end: studio audience laughter.
+Avoid: changing the shots, cuts or positions, extra people, any other dialogue, music, text, logos, morphing.
