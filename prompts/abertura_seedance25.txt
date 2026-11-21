@@ -1,0 +1,11 @@
+Edit @Video1 into photorealistic live-action footage of a Brazilian multi-camera TV sitcom shot on a real studio set with real actors. Preserve @Video1 exactly: the same six shots with hard cuts at the same moments (0.0 s wide crane shot while Beto walks in from the sink area on the right; 3.1 s over-the-shoulder shot on Beto; 4.1 s over-the-shoulder shot on Clara; 6.1 s close-up of Beto; 7.7 s close-up of Clara; 9.6 s close-up of Beto, the camera tilts up toward the teal pendant lamp and then pulls back to a wide shot), the same camera movements, framing, set layout and props, the same actor positions (Clara on the left, Beto on the right), walking, gestures, head turns and timing. Only change the look: real people, real materials, natural skin, bright soft TV sitcom studio lighting.
+Characters: Clara, a Brazilian woman around 28, fair skin, brown hair in a ponytail, green blouse and jeans. Beto, a Black Brazilian man around 30, short black hair, plain orange t-shirt and jeans, with a white yogurt mustache on his upper lip the whole time.
+Audio: re-perform exactly this dialogue in Brazilian Portuguese with natural, funny sitcom acting, lip-synced, at the same moments as in @Video1, and nothing else:
+0.9 to 3.0 s, Clara, suspicious: "Beto, você comeu o meu iogurte?"
+3.3 to 4.0 s, Beto, playing innocent: "Eu? Não."
+4.3 to 6.0 s, Clara, dry: "Tem iogurte no seu bigode."
+6.3 to 7.6 s, Beto, nervous: "É protetor solar."
+7.9 to 9.5 s, Clara, dry: "A gente está dentro de casa."
+9.8 to 11.3 s, Beto, nervous, glancing up at the lamp: "A lâmpada é muito forte."
+11.4 s to the end: studio audience laughter.
+Avoid: changing the shots, cuts or positions, extra people, any other dialogue, music, text, logos, morphing, cartoon look.

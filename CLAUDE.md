@@ -58,8 +58,12 @@ Este arquivo resume a conversa em que o projeto nasceu, para continuar daqui.
    clipe (Clara de verde, Beto de laranja com bigode de iogurte), MAS o modelo usou o vídeo só como
    referência: inventou os planos, inverteu as posições, deixou a câmera parada e criou falas próprias em
    português (não as do roteiro). Saldo da conta abaixo do mínimo do Seedance 2.5 (7,43) e 2.0 (6);
-   o 2.0 Fast aceita só 720p (854/864×480 recusados). Próximos testes possíveis: Seedance 2.5 (edição de
-   verdade, precisa recarga) ou pôr falas, posições e marcações no prompt.
+   o 2.0 Fast aceita só 720p (854/864×480 recusados).
+   **Seedance 2.5 em modo edição** (480p, `--modelo bytedance:seedance@2.5 --res 480p --auto`, prompt em
+   `prompts/abertura_seedance25.txt`, US$ 1,63): manteve 100% a estrutura (planos, cortes, câmera, posições,
+   caminhada, cenário) e refez as VOZES com as falas exatas do roteiro, com atuação. Mas o ganho de realismo
+   foi pequeno: o visual continua o nosso 3D (roupas ficaram mais reais; rostos e cenário quase iguais).
+   No 2.5, a API usa `resolution` (não width/height) e, em edição, duração "auto".
 10. Caminho realista considerado (não feito): imagens no Seedream + lip-sync/OmniHuman 1.5 no
    Runware (~US$ 0,13/s de fala → ~US$ 12–20 por episódio). Exige o Lucas rodar a geração.
 
