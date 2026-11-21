@@ -123,9 +123,10 @@ function amostrar(trilha, tempo) {
 // ------------------------------------------------------------------ montagem na cena
 // beto: caminhada (16_34 "slow walk, stop": entra andando e para) + idle (113_21 "Standing Still"); clara: idle.
 // (a 133_11 "Walk Stop Walk" foi descartada: a pessoa capturada anda curvada, 25–38° para a frente)
-export async function preparar(HUM, { pasta = './mocap/' } = {}) {
-  const andar = await carregar(pasta + '16_34.bvh');
-  const parado = await carregar(pasta + '113_21.bvh');
+// ler: como abrir um BVH (no navegador, fetch; nos testes em Node, leitura do arquivo)
+export async function preparar(HUM, { pasta = './mocap/', ler = carregar } = {}) {
+  const andar = await ler(pasta + '16_34.bvh');
+  const parado = await ler(pasta + '113_21.bvh');
   const M = {};
   for (const quem of Object.keys(HUM)) {
     const h = HUM[quem], e = (M[quem] = { h });
