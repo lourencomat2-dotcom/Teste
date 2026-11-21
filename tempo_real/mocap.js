@@ -151,6 +151,9 @@ export async function preparar(HUM, { pasta = './mocap/', ler = carregar, cabeca
       e.andar.r0 = amostrar(w.raiz, 0); e.andar.rFim = amostrar(w.raiz, w.dur);
     }
     e.pes = { L: { w: 0, trava: null, ult: null }, R: { w: 0, trava: null, ult: null } };
+    // ossos que o mixer controla (ver pose(): o último valor do mocap é guardado para cada um)
+    const nomes = new Set([e.idle.clip, e.andar?.clip].filter(Boolean).flatMap(c => c.tracks.map(tr => tr.name.match(/\[(.+)\]\.quaternion/)?.[1]).filter(Boolean)));
+    e.mocap = [...nomes].map(n => [h.osso[n], new THREE.Quaternion()]);
   }
   return M;
 }
@@ -173,7 +176,13 @@ export function pose(M, quem, t, { tAndar = 0, transicao = 0.5 } = {}) {
   } else raiz = new THREE.Vector3(ri.x, e.idle.r0.y + ri.y, ri.z);
   I.acao.setEffectiveWeight((1 - pAndar) * (1 - w2)); I.acao2.setEffectiveWeight((1 - pAndar) * w2);
   e.andar?.acao.setEffectiveWeight(pAndar);
+  // O mixer do three.js só reescreve um osso quando o valor do mocap muda em relação à última atualização.
+  // Como o olhar, os gestos e o IK dos pés mexem nesses ossos depois, sem isto um valor repetido deixaria o
+  // osso com a pose do quadro anterior (e o gesto seguinte partiria dela, acumulando). Então: devolve aos
+  // ossos o último valor do mocap antes de atualizar, e guarda o novo depois.
+  for (const [b, q] of e.mocap) b.quaternion.copy(q);
   e.mixer.update(0);
+  for (const [b, q] of e.mocap) q.copy(b.quaternion);
   o.root.position.copy(raiz);
   return { andando: pAndar > 0.5, pAndar };
 }

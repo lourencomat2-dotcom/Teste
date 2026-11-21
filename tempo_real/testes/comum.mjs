@@ -12,3 +12,6 @@ export async function cena(opcoes = {}) {
 }
 // ossos do corpo (sem dedos e rosto)
 export const CORPO = h => Object.keys(h.osso).filter(n => !/finger|toe|eye|jaw|tongue|lid|brow|cheek|lip|nose|ear|temple|levator|oris|risorius|orbicularis|special|mandible|metacarpal/.test(n));
+// ângulo entre duas rotações, em graus (normaliza antes: o mixer devolve quaternions com |q| = 0,99999999,
+// e o angleTo do three.js dá 0,02° entre um quaternion desses e ele mesmo)
+export const angulo = (a, b) => a.clone().normalize().angleTo(b.clone().normalize()) * 180 / Math.PI;

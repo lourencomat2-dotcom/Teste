@@ -3,7 +3,7 @@
 // e o Beto aos 10 s (pé 20°). Mede a cena inteira (13 s, 30 fps) enquanto o personagem está parado.
 // Limites por quadro: nenhum osso do corpo gira mais de 6°; o quadril não anda mais de 2 cm.
 import { teste, afirmar } from './esqueleto.mjs';
-import { cena, MOC, CORPO } from './comum.mjs';
+import { cena, MOC, CORPO, angulo } from './comum.mjs';
 
 const { HUM, M } = await cena();
 const fmt = (x, d = 1) => x.toFixed(d).replace('.', ',');
@@ -14,7 +14,7 @@ for (const quem of ['clara', 'beto']) {
     const t = f / 30; MOC.pose(M, quem, t, { tAndar: 0 }); MOC.olhar?.(M, quem, [0, 0, 0]);
     const agora = { q: nomes.map(n => h.osso[n].quaternion.clone()), r: h.osso.root.position.clone() };
     if (ant && parado(t) && parado(t - 1 / 30)) {
-      agora.q.forEach((q, i) => { const a = q.angleTo(ant.q[i]) * 180 / Math.PI; if (a > pior.ang) pior = { ang: a, t, osso: nomes[i] }; });
+      agora.q.forEach((q, i) => { const a = angulo(q, ant.q[i]); if (a > pior.ang) pior = { ang: a, t, osso: nomes[i] }; });
       const d = agora.r.distanceTo(ant.r) * 100; if (d > piorQ.d) piorQ = { d, t };
     }
     ant = agora;

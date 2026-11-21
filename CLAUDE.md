@@ -84,7 +84,14 @@ Este arquivo resume a conversa em que o projeto nasceu, para continuar daqui.
   no plano errado. Translação do quadril vira root motion (encaixa a caminhada para terminar na marca).
   O IK de `locomocao.js` só trava os pés apoiados; no fim, dois passinhos para virar para a Clara.
 - Teste: `QUADROS=0-105 PARAMS='&humanos&mocap&semlegenda' node tempo_real/capturar.cjs saida/entrada_mocap.mp4`
-  (QUADROS=a-b grava só um trecho). Pendente: gestos de fala por cima do mocap ainda duros.
+  (QUADROS=a-b grava só um trecho).
+- Gestos de fala no mocap: `tempo_real/gestos.js` (tarefa A4). Cada gesto (aponta, ombros, cintura) é um alvo
+  para punho, cotovelo e palma no referencial do tronco do mocap, resolvido por IK de duas articulações. A mistura
+  com o mocap é feita nos alvos, e o peso do gesto tem mola. Antes, rotações locais pensadas para a marionete davam
+  braços esticados no "não sei".
+- Pegadinha do three.js: o AnimationMixer só reescreve um osso quando o valor do clipe muda. Quem mexe nos ossos
+  depois do mixer (olhar, gestos, IK dos pés) precisa que o `pose()` devolva o último valor do mocap antes de
+  atualizar (já feito em `mocap.js`), senão o gesto do quadro anterior "sobra" e acumula.
 
 ## Vozes geradas pelo Seedance (falas no prompt)
 - Escrever as falas já no formato da pronúncia, com a tônica marcada quando a IA erra

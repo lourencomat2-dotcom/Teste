@@ -176,7 +176,11 @@ const MOCAP = HUMANOS && new URLSearchParams(location.search).has('mocap');
 const SEM_OLHAR = new URLSearchParams(location.search).has('semolhar');
 const CABECA_CMU = new URLSearchParams(location.search).has('cabecacmu');   // diagnóstico: cabeça copiada da CMU (antes)
 let MOC = null, MOCS = null;
-if (MOCAP) { MOC = await import('./mocap.js'); MOCS = await MOC.preparar(HUM, { cabeca: CABECA_CMU ? 'cmu' : 'olhar' }); }
+let GES = null;
+if (MOCAP) {
+  MOC = await import('./mocap.js'); MOCS = await MOC.preparar(HUM, { cabeca: CABECA_CMU ? 'cmu' : 'olhar' });
+  GES = await import('./gestos.js'); for (const h of Object.values(HUM)) GES.preparar(h);
+}
 // rosto 3D: expressões do roteiro -> unidades de expressão do MakeHuman
 const EXPR = {
   neutro: {},
@@ -270,22 +274,16 @@ function aplicarMocap(quem, R, info, t, dt, rotCabeca, olharResto) {
   if (quem === 'beto' && t - T_ANDAR >= MOCS.beto.andar.dur) {              // depois de chegar: âncora na marca
     o.root.position.x -= MOCS.beto.andar.rFim.x; o.root.position.z -= MOCS.beto.andar.rFim.z;
   }
-  // gestos de fala por cima do mocap (mesma lógica da marionete), na medida do gesto
-  const g = info.pose ? info.g : 0;
-  if (g > 0.01) {
-    for (const lado of ['L', 'R']) o['clavicle.' + lado].quaternion.slerp(new THREE.Quaternion(), g);   // ombro neutro p/ o gesto
-    const cot = { aponta: -0.15, ombros: 0.75, cintura: 1.4 }[info.pose] ?? 0;
-    for (const [s, lado] of [[1, 'L'], [-1, 'R']]) {
-      const br = R.bracos[s];
-      const qB = new THREE.Quaternion().setFromEuler(new THREE.Euler(br.rotation.x * 0.85, 0, -s * h.bracoRepouso + (br.rotation.z - s * 0.04) * 0.6));
-      o['upperarm01.' + lado].quaternion.slerp(qB, g);
-      const qA = new THREE.Quaternion().setFromAxisAngle(EIXO_X, -(0.2 + cot)).multiply(h.qCotovelo[lado]);
-      o['lowerarm01.' + lado].quaternion.slerp(qA, g);
-    }
-  }
   for (const [s, lado] of [[1, 'L'], [-1, 'R']]) for (let dd = 2; dd <= 5; dd++) for (let k = 1; k <= 3; k++) {
-    const f = o[`finger${dd}-${k}.${lado}`]; if (f) f.rotation.z = -s * (k === 1 ? 0.18 : 0.32);
+    const f = o[`finger${dd}-${k}.${lado}`]; if (f) f.rotation.z = -s * (k === 1 ? 0.18 : 0.32);   // dedos relaxados
   }
+  // gestos de fala no espaço do mundo (gestos.js): alvos para mão, cotovelo e palma no referencial do tronco
+  // do mocap. O peso tem mola, como os braços da marionete (sem ela a mão chegava a andar 23 cm num quadro).
+  const st = (R.gesto.h ??= { v: 0, a: 0, pose: null });
+  if (info.pose) st.pose = info.pose;
+  const g = clamp(mola(st, info.pose ? info.g : 0, dt, 90, 15), 0, 1);
+  const outro = quem === 'clara' ? 'beto' : 'clara';
+  GES.aplicar(h, st.pose, g, { lado: quem === 'clara' ? 'L' : 'R', alvo: cabecaMundo(outro).add(new THREE.Vector3(0, -0.25, 0)) });
   // pescoço e cabeça: nivelados e guiados só pelo olhar (mocap.js, olhar); ?semolhar desliga o olhar
   MOC.olhar(MOCS, quem, SEM_OLHAR ? [0, 0, 0] : rotCabeca);
   for (const s of ['L', 'R']) o['eye.' + s]?.rotation.set(-clamp(olharResto[1], -0.3, 0.3), clamp(olharResto[0], -0.45, 0.45), 0);
